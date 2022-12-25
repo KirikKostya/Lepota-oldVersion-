@@ -1,0 +1,6 @@
+.DiscriptionContainer{
+    width: 100%;
+    height: calc(100vh - 97px);
+    background: url('../Photos/Picture.png');
+    background-size: cover;
+}

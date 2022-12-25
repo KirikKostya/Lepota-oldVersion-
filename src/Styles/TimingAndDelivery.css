@@ -1,0 +1,52 @@
+.ContainerForTimingAndDelivery{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-top: 100px;
+}
+.ContainerForTimingAndDelivery h1{
+    width: 100%;
+    text-align: center !important;
+}
+.ContainerForTimingAndDelivery .GraphicPath{
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: center;
+    margin: 20px;
+}
+.GraphicPath .hr{
+    width: 260px;
+    height: 2px;
+    /* transform: rotate(90deg); */
+    color: black;
+    background: #000;
+}
+.GraphicPath .Circle{
+    width: 50px;
+    height: 50px;
+    background: rgb(201, 64, 64);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+.ContainerForTimingAndDelivery .TextPath{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+.TextPath .PartOfPath{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 7px;
+}
+.PartOfPath p{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}

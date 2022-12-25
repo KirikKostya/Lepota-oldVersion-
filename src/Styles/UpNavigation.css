@@ -1,0 +1,24 @@
+.UpNavContainer{
+    width: 97%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    padding: 0 10px;
+    top: 0;
+    background-color: rgb(164, 193, 250);
+}
+.UpNavContainer .Logo{
+    width: 150px;
+    height: 75px;
+}
+.UpNavContainer .NavLinks{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.NavLinks p{
+    margin: 0 23px;
+}

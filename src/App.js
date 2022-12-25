@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react';
 import './App.css';
+import UpNavigation from './Components/UpNavigation';
+import Discription from './Components/Discription';
+import AboutCompany from './Components/AboutCompany';
+import WorkCatalog from './Components/WorkCatalog';
+import TimingAndDelivery from './Components/TimingAndDelivery';
+import AboutKashpo from './Components/AboutKashpo';
+import ContactWithUs from './Components/ContactWithUs';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <UpNavigation />
+      <Discription />
+      <AboutCompany />
+      <WorkCatalog />
+      <TimingAndDelivery />
+      <AboutKashpo />
+      <ContactWithUs />
     </div>
   );
 }

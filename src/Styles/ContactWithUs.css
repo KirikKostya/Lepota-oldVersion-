@@ -1,0 +1,26 @@
+.ContainerForContactWithUs{
+    width: 100%;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+    background: url('../Photos/BackGroundForContact.png');
+    background-size: cover;
+    color: aliceblue;
+}
+.ContainerForContactWithUs h1{
+    color: white;
+    margin-bottom: 50px;
+}
+.MassagerIcons svg{
+    width: 50px;
+    height: 50px;
+    margin: 30px 30px;
+    cursor: pointer;
+}
+.ContainerForContactWithUs .MobilePhone{
+    font-weight: bold;
+    font-size: larger;
+    color: aliceblue;
+}
