@@ -1,0 +1,25 @@
+.BackButton{
+    width: 70px;
+    height: 30px;
+    position: absolute;
+    border-radius: 10px ;
+    background-color: #d5d514;
+    opacity: 70%;
+    margin-top: -520px;
+    margin-left: -1120px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+.BackButton .NavLink{
+    text-decoration:none ;
+    color: black;
+    font-weight: 600;
+    font-size: larger;
+}
+.BackButton:hover{
+    opacity: 100%;
+    border: 2px solid #d5d514;
+}

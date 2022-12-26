@@ -1,7 +1,7 @@
 .UpNavContainer{
     width: 97%;
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     align-items: center;
     justify-content: space-between;
     position: sticky;
@@ -18,6 +18,9 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+}
+.UpNavContainer svg{
+    cursor: pointer;
 }
 .NavLinks p{
     margin: 0 23px;

@@ -12,12 +12,14 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
 }
 .ContainerForAboutKashpo p{
     width: 500px;
     font-family:monospace;
     font-size: larger;
     font-weight: bold;
+    text-align: center;
 }
 .ContainerForAboutKashpo h3{
     color: rgb(183, 32, 32);
@@ -29,7 +31,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 40px;
+    margin: 40px 0 ;
     
 }
 .Item .Img{

@@ -1,0 +1,37 @@
+.ContainerForMyAccount{
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    position: absolute;
+    margin: 220px 25px 0 0;
+    border-radius: 10px 0 10px 10px;
+    background: rgb(188, 188, 188);
+    padding: 5px;
+}
+.ContainerForMyAccount .ListItem{
+    width: 150px;
+    height: 30px;
+    margin: 10px;
+    border-radius: 0 0 5px 5px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    border-bottom: 2px solid rgb(0, 0, 0);
+    cursor: pointer;
+}
+.ContainerForMyAccount .ListItem:hover{
+    background: linear-gradient(rgb(148, 148, 148), rgb(40, 36, 36) ) ;
+    border-radius: 10px 0 0 10px ;
+    color: aliceblue;
+}
+.ContainerForMyAccount .Link{
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.ContainerForMyAccount .Link:hover{
+    color: rgb(151, 19, 19);
+}

@@ -1,0 +1,23 @@
+.ContainerForRegistration{
+    width: 100%;
+    height: 100vh;
+    background: url('../Photos/Registration.png');
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.ContainerForRegistration .FieldEffect{
+    width: 900px;
+    height: 380px;
+    background-color: rgba(45, 45, 206, 0.728);
+}
+.ContainerForRegistration .RegistrField{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+}

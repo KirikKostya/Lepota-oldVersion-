@@ -1,0 +1,121 @@
+
+.ContainerForSignIn{
+    width: 1000px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-evenly;
+    position: absolute;
+    margin-left: 85px;
+    
+}
+.ContainerForSignIn .SignIn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 380px;
+    height: 420px;
+    background-color: rgb(188, 216, 224);
+    border-radius: 10px;
+}
+.SignIn .StatusValidateForm{
+    width: 350px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    font-weight: lighter;
+    font-size: small;
+    padding: 0;
+    /* position: absolute; */
+}
+.good{
+    color: green;
+}
+.bad{
+    color: red;
+}
+.SignIn .ForInputs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.ForInputs .PasswordField{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.PasswordField .EyeBtn{
+    position: absolute;
+    margin-left: 300px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+.SignIn .Input{
+    width: 350px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid #191d1a !important;
+    color: black;
+    text-shadow: 2px 2px 3px rgb(255, 255, 255);
+    font-size: larger;
+    padding-left: 15px;
+    margin: 10px 0;
+    outline: none;
+}
+.SignIn .Input::-webkit-input-placeholder { 
+    color: black;
+}
+.SignIn .SignInBTN{
+    width: 140px;
+    height: 50px;
+    background-color: #3d6170;
+    opacity: 70%;
+    border-radius: 20px;
+    font-size: large;
+    color: rgb(21, 21, 21);
+    font-weight: 500;
+    font-family: AdventPro;
+}
+.SignIn .SignInBTN:hover{
+    opacity: 100%;
+    color: black;
+    cursor: pointer;
+}
+.ActiveInput{
+    border-bottom:3px solid red !important ;
+}
+.ContainerForSignIn .SignInChangeBtn{
+    position: relative;
+    display: block;
+    color: rgb(0, 0, 0);
+    font-size: 22px;
+    font-family: "montserrat";
+    text-decoration: none;
+    border: 2px solid #ff7675;
+    padding: 14px 20px;
+    cursor: pointer;
+  }
+  .ContainerForSignIn .SignInChangeBtn:hover{
+    background-color: #ff7675;
+    border: 2px solid #e8e8e8;
+    color: #e8e8e8;
+  }
+  .ContainerForSignIn .ChangeField{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .ChangeField p{
+    color: #eceeef;
+    font-weight: bold;
+    font-size: larger;
+    margin: 20px;
+    width: 200px;
+    text-align: center;
+  }
