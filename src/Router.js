@@ -39,7 +39,9 @@ export default function Router() {
                 <Route path='/' element={<ContactWithUs />} />
             </Routes>
             <Routes>
-                <Route path='/Registration' element={<Registration setIsAuthorizate = {setIsAuthorizate}/>}/>
+                <Route path='/Registration' element={<Registration setIsAuthorizate = {setIsAuthorizate}
+                                                                    
+                                                                    />}/>
             </Routes>
             
         </BrowserRouter>

@@ -57,17 +57,6 @@ export default function SignUp({setRegistr, setIsAuthorizate}) {
                                  email: LoginInputValue,
                                  password: PasswordInputValue
                               })
-
-        // let response = await fetch('https://api.hlofiys.tk/auth/refresh', {
-        //           method: 'POST',
-        //           mode: 'cors',
-        //           // credentials: 'include',
-        //           body: JSON.stringify({
-        //             'email': LoginInputValue,
-        //             'password': PasswordInputValue
-        //           })
-                
-        //       })
         localStorage.setItem('accessToken', response.data.accessToken)
           setPasswordInputValue('');
           setLoginInputValue('');

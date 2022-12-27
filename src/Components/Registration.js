@@ -12,13 +12,11 @@ export default function Registration({ setIsAuthorizate }) {
     <div className='ContainerForRegistration'>
         <BackButton />
         <div className='FieldEffect'></div>
-        {/* <div className='RegistrField'> */}
             {
             (Registr)
-                ? <SignUp setRegistr={setRegistr} setIsAuthorizate = {setIsAuthorizate}/>
+                ? <SignUp setRegistr={setRegistr} setIsAuthorizate = {setIsAuthorizate} />
                   :<SignIn setRegistr={setRegistr} setIsAuthorizate = {setIsAuthorizate}/>
             }
-        {/* </div> */}
         
         
     </div>
