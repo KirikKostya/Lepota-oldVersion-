@@ -7,7 +7,12 @@
     justify-content: space-evenly;
     position: absolute;
     margin-left: 85px;
-    
+    opacity: 65%;
+    transition: 2s ease-in;
+}
+.ContainerForSignIn:hover{
+    opacity: 100%;
+    transition: 0.5s ease-in;
 }
 .ContainerForSignIn .SignIn{
     display: flex;

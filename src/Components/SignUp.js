@@ -50,13 +50,25 @@ export default function SignUp({setRegistr, setIsAuthorizate}) {
   const Registration = async ()=> {
     let status = await statusValidate();
     if(PasswordInputValue === SecondPasswordInputValue && status){
+        axios.defaults.withCredentials = true;
         let response = await axios
                               .post('https://api.hlofiys.tk/auth/register', 
                               {
                                  email: LoginInputValue,
                                  password: PasswordInputValue
                               })
-        localStorage.setItem('accessToken', response.data.accessToken);
+
+        // let response = await fetch('https://api.hlofiys.tk/auth/refresh', {
+        //           method: 'POST',
+        //           mode: 'cors',
+        //           // credentials: 'include',
+        //           body: JSON.stringify({
+        //             'email': LoginInputValue,
+        //             'password': PasswordInputValue
+        //           })
+                
+        //       })
+        localStorage.setItem('accessToken', response.data.accessToken)
           setPasswordInputValue('');
           setLoginInputValue('');
           setSecondPasswordInputValue('');

@@ -1,13 +1,15 @@
 .UpNavContainer{
-    width: 97%;
+    width: 100%;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
     justify-content: space-between;
     position: sticky;
-    padding: 0 10px;
+    padding: 0 0;
     top: 0;
+    /* flex: 10; */
     background-color: rgb(164, 193, 250);
+    z-index: 1;
 }
 .UpNavContainer .Logo{
     width: 150px;

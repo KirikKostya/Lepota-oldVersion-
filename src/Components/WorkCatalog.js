@@ -32,7 +32,7 @@ export default function WorkCatalog() {
         <div className='ListOfWorks'>
             {
               CARDS.map(card => (
-                <CardOfWork card={card} />
+                <CardOfWork key={card.id} card={card} />
               ))
             }
             {/* <CardOfWork card={CARDS[0]} /> */}
