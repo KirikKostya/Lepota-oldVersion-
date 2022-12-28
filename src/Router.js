@@ -1,49 +1,54 @@
 import React, {useState} from 'react'
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
-import UpNavigation from './Components/UpNavigation';
-import Discription from './Components/Discription';
-import AboutCompany from './Components/AboutCompany';
-import WorkCatalog from './Components/WorkCatalog';
-import TimingAndDelivery from './Components/TimingAndDelivery';
-import AboutKashpo from './Components/AboutKashpo';
-import ContactWithUs from './Components/ContactWithUs';
+import NavAboutKashpo from './NavigationOnPage/NavAboutKashpo';
+import NavContact from './NavigationOnPage/NavContact';
 import Registration from './Components/Registration';
+import Profile from './MyAccountComponents/Profile'
+import MyBasket from './MyAccountComponents/MyBasket'
+import PurchaseArchive from './MyAccountComponents/PurchaseArchive';
+import TypeCatalog from './CatalogOfWorks/TypeCatalog'
+import Main from './Main';
+import NavTimming from './NavigationOnPage/NavTimming';
+import NavCatalog from './NavigationOnPage/NavCatalog';
 
 
 export default function Router() {
     
-    const [isAuthorizate, setIsAuthorizate] = useState(false)
+    const [isAuthorizate, setIsAuthorizate] = useState(localStorage.getItem('accessToken'))
 
   return (
         <BrowserRouter>
             <Routes>
-                <Route path='/' element={<UpNavigation  isAuthorizate = {isAuthorizate} 
-                                                        setIsAuthorizate = {setIsAuthorizate}/>} />
+                <Route path='/' element={<Main isAuthorizate = {isAuthorizate} 
+                                               setIsAuthorizate = {setIsAuthorizate}/>} />
             </Routes>
             <Routes>
-                <Route path='/' element={<Discription />} />
+                <Route path='/WorkCatalog' element={<NavCatalog />} />
             </Routes>
             <Routes>
-                <Route path='/' element={<AboutCompany />} />
+                <Route path='/TimingAndDelivery' element={<NavTimming />} />
             </Routes>
             <Routes>
-                <Route path='/' element={<WorkCatalog />} />
+                <Route path='/AboutKashpo' element={<NavAboutKashpo />} />
             </Routes>
             <Routes>
-                <Route path='/' element={<TimingAndDelivery />} />
+                <Route path='/ContactWithUs' element={<NavContact />} />
+            </Routes> 
+            <Routes>
+                <Route path='/Registration' element={<Registration setIsAuthorizate = {setIsAuthorizate} />}/>
             </Routes>
             <Routes>
-                <Route path='/' element={<AboutKashpo />} />
+                <Route path='/Profile' element={<Profile />} />
             </Routes>
             <Routes>
-                <Route path='/' element={<ContactWithUs />} />
+                <Route path='/MyBasket' element={<MyBasket />} />
             </Routes>
             <Routes>
-                <Route path='/Registration' element={<Registration setIsAuthorizate = {setIsAuthorizate}
-                                                                    
-                                                                    />}/>
+                <Route path='/PurchaseArchive' element={<PurchaseArchive />} />
             </Routes>
-            
+            <Routes>
+                <Route path='/TypeCatalog' element={<TypeCatalog />} />
+            </Routes>
         </BrowserRouter>
   )
 }

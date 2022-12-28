@@ -7,12 +7,14 @@
     justify-content: space-evenly;
     position: absolute;
     margin-right: 85px;
-    opacity: 65%;
-    transition: 2s ease-in;
+    animation-iteration-count: 1;
+    animation-duration: 1s;
+    animation-name: SlideSignUp;
+    animation-fill-mode:both;
 }
-.ContainerForSignUp:hover{
-    opacity: 100%;
-    transition: 0.5s ease-in;
+@keyframes SlideSignUp {
+    0% { width: 50px; }
+    100% { width: 1000px; }
 }
 .ContainerForSignUp .SignUp{
     display: flex;
@@ -31,7 +33,10 @@
     align-items: flex-start;
     font-weight: lighter;
     font-size: small;
-    padding: 0;
+    padding: 0; 
+    border-radius: 20px;
+    padding: 10px;
+    font-weight: bold;
     /* position: absolute; */
 }
 .good{
@@ -39,6 +44,11 @@
 }
 .bad{
     color: red;
+}
+.yellow{
+    color: black;
+    background-color: yellow;
+   
 }
 .SignUp .ForInputs{
     display: flex;

@@ -12,7 +12,7 @@
     z-index: 1;
 }
 .UpNavContainer .Logo{
-    width: 150px;
+    width: 220px;
     height: 75px;
 }
 .UpNavContainer .NavLinks{
@@ -26,4 +26,11 @@
 }
 .NavLinks p{
     margin: 0 23px;
+}
+.NavLinks .NavLink{
+    text-decoration: none;
+    color: black;
+}
+.NavLinks .NavLink:hover{
+    color: blue;
 }

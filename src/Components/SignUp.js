@@ -30,7 +30,7 @@ export default function SignUp({setRegistr, setIsAuthorizate}) {
   }
 
   function validateEmail(email) {
-    var re = /\S+@\S+\.\S+/;
+    var re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
     return (re.test(email));
   }
 
@@ -61,7 +61,12 @@ export default function SignUp({setRegistr, setIsAuthorizate}) {
           setPasswordInputValue('');
           setLoginInputValue('');
           setSecondPasswordInputValue('');
-          setStatusValidateForm('');
+          setStatusValidateForm('Вы успеешно зарегистрированы!');
+          setColorOfValidateForm('yellow')
+          setTimeout(()=>{
+            setColorOfValidateForm('');
+            setStatusValidateForm('')
+          },4000)
           setIsAuthorizate(true)
     } else {
       console.log('1')

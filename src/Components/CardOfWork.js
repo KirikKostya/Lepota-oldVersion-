@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import '../Styles/CardOfWork.css'
 
 export default function CardOfWork({card}) {
@@ -10,7 +11,7 @@ export default function CardOfWork({card}) {
           <h4>{card.Name}</h4>
           <h5>{card.price}</h5>
         </div>
-        <button className='CatalogBTN'>Каталог</button>
+        <NavLink to='/TypeCatalog' className='CatalogBTN'>Каталог</NavLink>
     </div>
   )
 }

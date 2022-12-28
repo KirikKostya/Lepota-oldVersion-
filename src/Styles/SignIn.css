@@ -9,6 +9,14 @@
     margin-left: 85px;
     opacity: 65%;
     transition: 2s ease-in;
+    animation-iteration-count: 1;
+    animation-duration: 1s;
+    animation-name: SlideSignIn;
+    animation-fill-mode:both;
+}
+@keyframes SlideSignIn {
+    0% { width: 50px; }
+    100% { width: 1000px; }
 }
 .ContainerForSignIn:hover{
     opacity: 100%;
@@ -31,7 +39,10 @@
     align-items: flex-start;
     font-weight: lighter;
     font-size: small;
-    padding: 0;
+    padding: 0; 
+    border-radius: 20px;
+    padding: 10px;
+    font-weight: bold;
     /* position: absolute; */
 }
 .good{
@@ -39,6 +50,10 @@
 }
 .bad{
     color: red;
+}
+.yellow{
+    color: black;
+    background-color: yellow;
 }
 .SignIn .ForInputs{
     display: flex;

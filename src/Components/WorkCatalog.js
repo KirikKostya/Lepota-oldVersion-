@@ -5,23 +5,19 @@ import CardOfWork from './CardOfWork'
 const CARDS = [
     {
       id: 0,
-      Name: 'ALLIUM',
-      price: '120$'
+      Name: 'Лила',
     },
     {
       id: 1,
-      Name: 'ALOE TRASKI',
-      price: '130$'
+      Name: 'Подсвечники',
     },
     {
       id: 2,
-      Name: 'ALSROEMERIA',
-      price: '140$'
+      Name: 'Пазлы',
     },
     {
       id: 3,
-      Name: 'AMARYLLIS',
-      price: '100$'
+      Name: 'Кличницы',
     }
 ]
 

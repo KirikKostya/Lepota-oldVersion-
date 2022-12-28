@@ -5,8 +5,9 @@
     border-radius: 10px ;
     background-color: #d5d514;
     opacity: 70%;
-    margin-top: -520px;
-    margin-left: -1120px;
+    left: 0;
+    top: 0;
+    margin: 30px;
     display: flex;
     flex-direction: row;
     align-items: center;

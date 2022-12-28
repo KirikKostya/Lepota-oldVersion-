@@ -55,6 +55,12 @@ export default function SignIn({setRegistr, setIsAuthorizate}) {
           setPasswordInputValue('');
           setLoginInputValue('');
           setStatusValidateForm('');
+          setStatusValidateForm('Вы вошли в свой аккаунт!');
+          setColorOfValidateForm('yellow')
+          setTimeout(()=>{
+            setColorOfValidateForm('');
+            setStatusValidateForm('')
+          },4000)
           setIsAuthorizate(true)
     } else {
       console.log('123')
