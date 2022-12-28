@@ -7,8 +7,6 @@
     justify-content: space-evenly;
     position: absolute;
     margin-left: 85px;
-    opacity: 65%;
-    transition: 2s ease-in;
     animation-iteration-count: 1;
     animation-duration: 1s;
     animation-name: SlideSignIn;
@@ -17,10 +15,6 @@
 @keyframes SlideSignIn {
     0% { width: 50px; }
     100% { width: 1000px; }
-}
-.ContainerForSignIn:hover{
-    opacity: 100%;
-    transition: 0.5s ease-in;
 }
 .ContainerForSignIn .SignIn{
     display: flex;
@@ -90,6 +84,14 @@
 .SignIn .Input::-webkit-input-placeholder { 
     color: black;
 }
+.RegistrBtn{
+    color: black;
+    display: none;
+}
+.RegistrBtn:hover{
+    color: blue;
+    cursor: pointer;
+}
 .SignIn .SignInBTN{
     width: 140px;
     height: 50px;
@@ -139,3 +141,58 @@
     width: 200px;
     text-align: center;
   }
+  @media screen and (max-width: 890px) {
+    .ContainerForSignIn{
+        display: flex;
+        flex-direction: column;
+    }
+    .ContainerForSignIn .SignIn{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 350px;
+        height: 320px;
+        background-color: rgb(188, 216, 224);
+        border-radius: 10px;
+    }
+    .ContainerForSignIn h1{
+        margin-top: 20px;
+        font-size: smaller;
+    }
+    .SignIn .Input{
+        width: 250px;
+        height: 40px;
+        background-color: transparent;
+        border: none;
+        border-bottom: 3px solid #191d1a !important;
+        color: black;
+        text-shadow: 2px 2px 3px rgb(255, 255, 255);
+        font-size:medium;
+        padding-left: 15px;
+        outline: none;
+    }
+    .RegistrBtn{
+        display: block;
+    }
+    .SignIn .SignInBTN{
+        width: 140px;
+        height: 50px;
+        background-color: #3d6170;
+        opacity: 70%;
+        border-radius: 20px;
+        font-size: large;
+        color: rgb(21, 21, 21);
+        font-weight: 500;
+        font-family: AdventPro;
+    }
+    .SignIn .SignInBTN:hover{
+        opacity: 100%;
+        color: black;
+        cursor: pointer;
+    }
+    .ContainerForSignIn .ChangeField{
+        display: none;
+    }
+    
+}

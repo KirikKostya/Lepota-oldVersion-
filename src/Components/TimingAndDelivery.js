@@ -30,24 +30,26 @@ export default function TimingAndDelivery() {
 
         <h1>Время и Доставка</h1>
 
-        <div className='GraphicPath'>
-            <div className='Circle'>1</div>
-            <hr className='hr'></hr>
-            <div className='Circle'>2</div>
-            <hr className='hr'></hr>
-            <div className='Circle'>3</div>
-            <hr className='hr'></hr>
-            <div className='Circle'>4</div>
-        </div>
-        <div className='TextPath'>
-            {
-                Path.map(part=>(
-                    <div className='PartOfPath' key={part.id}>
-                        <h2>{part.tittle}</h2>
-                        <p>{part.discription}</p>
-                    </div>
-                ))
-            }
+        <div className='Steps'>
+            <div className='GraphicPath'>
+                <div className='Circle'>1</div>
+                <hr className='hr'></hr>
+                <div className='Circle'>2</div>
+                <hr className='hr'></hr>
+                <div className='Circle'>3</div>
+                <hr className='hr'></hr>
+                <div className='Circle'>4</div>
+            </div>
+            <div className='TextPath'>
+                {
+                    Path.map(part=>(
+                        <div className='PartOfPath' key={part.id}>
+                            <h2>{part.tittle}</h2>
+                            <p>{part.discription}</p>
+                        </div>
+                    ))
+                }
+            </div>
         </div>
     </div>
   )

@@ -109,6 +109,7 @@ export default function SignUp({setRegistr, setIsAuthorizate}) {
                 </div>
 
             </div>
+            <p className='SignIn' onClick={()=>{setRegistr(false)}}>Войти</p>
             <button className='SignUpBTN' 
                     onClick={Registration}>Создать аккаунт</button>
         </div>

@@ -42,3 +42,12 @@
 .Item h3{
     color: black;
 }
+@media screen and (max-width: 500px){
+    .ContainerForAboutKashpo p{
+        width: 100%;
+        font-family:monospace;
+        font-size: larger;
+        font-weight: bold;
+        text-align: center;
+    }
+}

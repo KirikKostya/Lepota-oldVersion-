@@ -17,6 +17,12 @@
     justify-content: center;
     margin: 20px;
 }
+.ContainerForTimingAndDelivery .Steps{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .GraphicPath .hr{
     width: 260px;
     height: 2px;
@@ -49,4 +55,53 @@
 }
 .PartOfPath p{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+@media screen and (max-width:1240px) {
+    .ContainerForTimingAndDelivery .GraphicPath{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0;
+    }
+    .ContainerForTimingAndDelivery .Steps{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    .GraphicPath .hr{
+        display: none
+    }
+    .GraphicPath .Circle{
+        width: 50px;
+        height: 50px;
+        background: rgb(201, 64, 64);
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        margin: 0 0 150px 0;
+    }
+    .ContainerForTimingAndDelivery .TextPath{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .TextPath .PartOfPath{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 0;
+    }
+}
+@media screen and (max-width:400px){
+    .GraphicPath .Circle{
+        display: none;
+    }
 }
