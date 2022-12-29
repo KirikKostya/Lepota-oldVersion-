@@ -1,9 +1,17 @@
 .CatalogContainer{
     width: 100%;
+    /* height: 100vh; */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+}
+.CatalogContainer .p{
+    width: 600px;
+    text-align: center;
+    font-family:'Courier New', Courier, monospace;
+    font-size: large;
+    font-weight: 400;
 }
 .CatalogContainer ul{
     display: flex;
@@ -17,10 +25,11 @@
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
 }
 .CatalogContainer .SearchMore{
     width: 120px;
-    height: 30px;
+    height: 40px;
     background-color: rgb(125, 6, 6);
     border-radius: 30px;
     border: none;

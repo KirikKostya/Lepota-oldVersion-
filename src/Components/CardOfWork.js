@@ -1,17 +1,18 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { NavLink } from 'react-router-dom'
 import '../Styles/CardOfWork.css'
 
-export default function CardOfWork({card}) {
+export default function CardOfWork({card, setOpenID}) {
   return (
     <div className='Card'>
         {/* <img className='IMG' src={}/> */}
         <div className='InfoOfCard' key={card.id}>
-          <p>Photo</p>
-          <h4>{card.Name}</h4>
-          <h5>{card.price}</h5>
+          <img src={card.icon} className='IMG'></img>
+          <p>~{card.price} Br</p>
+          <h4>{card.name}</h4>
+        
+        <NavLink to='/TypeCatalog' className='CatalogBTN' onClick={()=>setOpenID(card.id)}>Каталог</NavLink>
         </div>
-        <NavLink to='/TypeCatalog' className='CatalogBTN'>Каталог</NavLink>
     </div>
   )
 }

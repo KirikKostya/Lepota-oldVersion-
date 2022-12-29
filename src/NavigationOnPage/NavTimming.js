@@ -5,7 +5,7 @@ import TimingAndDelivery from '../Components/TimingAndDelivery'
 export default function NavTimming() {
   return (
     <>
-        <BackButton />
+        <BackButton Link='/'/>
         <TimingAndDelivery />
     </>
   )

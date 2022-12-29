@@ -10,7 +10,7 @@ export default function Registration({ setIsAuthorizate }) {
 
   return (
     <div className='ContainerForRegistration'>
-        <BackButton />
+        <BackButton Link='/'/>
         <div className='FieldEffect'></div>
             {
             (Registr)

@@ -1,3 +1,4 @@
+import  axios  from 'axios'
 import React,{useEffect} from 'react'
 import '../Styles/Discription.css'
 
@@ -30,6 +31,11 @@ import '../Styles/Discription.css'
  ]
 
 export default function Discription() {
+
+  // useEffect(()=>{
+  //   axios.get('https://api.hlofiys.tk/types/items/get/1')
+  //   .then(res=> console.log(res))
+  // },[])
 
   return (
     <div className='DiscriptionContainer'>

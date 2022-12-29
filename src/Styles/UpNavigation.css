@@ -87,7 +87,7 @@
         border-bottom: 2px solid black;
     }
     .UpNavContainer .Logo{
-        display: none
+        display: block
     }
     .UpNavContainer .NavLinks{
         display: none;
@@ -114,12 +114,12 @@
     .false{
         display: none;
     }
-    .NavLinks .NavLink{
+    .HamburgerNavLinks .NavLink{
         width: 100%;
         text-decoration: none;
         color: black;
     }
-    .NavLinks .NavLink:hover{
+    .HamburgerNavLinks .NavLink:hover{
         color: blue;
     }
 }

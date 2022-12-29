@@ -11,19 +11,19 @@ import Main from './Main';
 import NavTimming from './NavigationOnPage/NavTimming';
 import NavCatalog from './NavigationOnPage/NavCatalog';
 
-
 export default function Router() {
     
     const [isAuthorizate, setIsAuthorizate] = useState(localStorage.getItem('accessToken'))
-
+    const [OpenID, setOpenID] = useState(0)
   return (
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Main isAuthorizate = {isAuthorizate} 
-                                               setIsAuthorizate = {setIsAuthorizate}/>} />
+                                               setIsAuthorizate = {setIsAuthorizate}
+                                               setOpenID={setOpenID}/>} />
             </Routes>
             <Routes>
-                <Route path='/WorkCatalog' element={<NavCatalog />} />
+                <Route path='/WorkCatalog' element={<NavCatalog  setOpenID={setOpenID}/>} />
             </Routes>
             <Routes>
                 <Route path='/TimingAndDelivery' element={<NavTimming />} />
@@ -47,7 +47,7 @@ export default function Router() {
                 <Route path='/PurchaseArchive' element={<PurchaseArchive />} />
             </Routes>
             <Routes>
-                <Route path='/TypeCatalog' element={<TypeCatalog />} />
+                <Route path='/TypeCatalog' element={<TypeCatalog OpenID={OpenID}/>} />
             </Routes>
         </BrowserRouter>
   )

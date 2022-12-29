@@ -5,7 +5,7 @@ import BackButton from '../Components/BackButton'
 export default function NavAboutKashpo() {
   return (
     <>
-        <BackButton />
+        <BackButton Link='/'/>
         <AboutKashpo />
     </>
   )

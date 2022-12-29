@@ -28,6 +28,16 @@ export default function UpNavigation({isAuthorizate, setIsAuthorizate,setOpacity
               </svg>
         </div>
         
+        <div className='NavLinks'>
+            <NavLink className='NavLink' to='/'><p>ГЛАВНАЯ</p></NavLink>
+            <NavLink className='NavLink' to='/WorkCatalog'><p>КАТАЛОГ</p></NavLink>
+            <NavLink className='NavLink' to='/TimingAndDelivery'><p>СРОКИ И ДОСТАКА</p></NavLink>
+            <NavLink className='NavLink' to='/AboutKashpo'><p>О КАШПО</p></NavLink>
+            <NavLink className='NavLink' to='/ContactWithUs'><p>КОНТАКТЫ</p></NavLink>
+        </div>
+        
+        <img src={require('../Photos/LOGO.png')} className='Logo' />
+
         <div className='Hamburger' 
              onClick={()=>{
               if(openMenu){
@@ -39,16 +49,6 @@ export default function UpNavigation({isAuthorizate, setIsAuthorizate,setOpacity
               // refreshFunction();
               // }}
           }}>☰</div>
-        
-        <div className='NavLinks'>
-            <NavLink className='NavLink' to='/'><p>ГЛАВНАЯ</p></NavLink>
-            <NavLink className='NavLink' to='/WorkCatalog'><p>КАТАЛОГ</p></NavLink>
-            <NavLink className='NavLink' to='/TimingAndDelivery'><p>СРОКИ И ДОСТАКА</p></NavLink>
-            <NavLink className='NavLink' to='/AboutKashpo'><p>О КАШПО</p></NavLink>
-            <NavLink className='NavLink' to='/ContactWithUs'><p>КОНТАКТЫ</p></NavLink>
-        </div>
-        
-        <img src={require('../Photos/LOGO.png')} className='Logo' />
         {
           (!isOpen)
             ?<></>

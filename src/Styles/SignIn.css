@@ -141,10 +141,14 @@
     width: 200px;
     text-align: center;
   }
-  @media screen and (max-width: 890px) {
+
+@media screen and (max-width: 890px) {
     .ContainerForSignIn{
+        width: 100%;
         display: flex;
         flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
     .ContainerForSignIn .SignIn{
         display: flex;
@@ -152,13 +156,23 @@
         align-items: center;
         justify-content: space-evenly;
         width: 350px;
-        height: 320px;
+        height: 350px;
         background-color: rgb(188, 216, 224);
         border-radius: 10px;
     }
-    .ContainerForSignIn h1{
-        margin-top: 20px;
-        font-size: smaller;
+    .SignIn .StatusValidateForm{
+        width: 250px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        font-weight: lighter;
+        font-size: small;
+        padding: 0; 
+        border-radius: 20px;
+        padding: 10px;
+        font-weight: bold;
+        margin: 0;
     }
     .SignIn .Input{
         width: 250px;
@@ -185,6 +199,7 @@
         color: rgb(21, 21, 21);
         font-weight: 500;
         font-family: AdventPro;
+        margin-bottom: 10px;
     }
     .SignIn .SignInBTN:hover{
         opacity: 100%;

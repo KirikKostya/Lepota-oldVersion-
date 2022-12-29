@@ -6,7 +6,7 @@ export default function NavContact() {
   return (
     // <div>
     <>
-        <BackButton />
+        <BackButton Link='/'/>
         <ContactWithUs/>
     </>
     // </div>
