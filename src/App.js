@@ -30,9 +30,12 @@ export const refreshFunction = async()=>{
 
 function App() {
 
+  const [isAuthorizate, setIsAuthorizate] = useState(localStorage.getItem('accessToken'))
+  console.log(isAuthorizate)
   return (
     <div className="App">
-      <Router/>
+      <Router isAuthorizate = {isAuthorizate} 
+              setIsAuthorizate = {setIsAuthorizate}/>
     </div>
   );
 }

@@ -10,29 +10,21 @@ export default function TypeCatalog({OpenID}) {
   const [AddedOrder, setAddedOrder] = useState(false)
 
   const AddItemToCart = async (cardId) =>{
-    // axios.post('https://api.hlofiys.tk/cart/add', {
-    //   id: cardId,
-    //   amount: 1
-    // }, {
-    //   header:{'x-access-token': localStorage.getItem('accessToken')}     
-    // })
-    fetch('https://api.hlofiys.tk/cart/add', {
-      method: 'POST', 
-      body: {
-        id: cardId,
-        amount: 1
-      },
-      header:{'x-access-token': localStorage.getItem('accessToken')}
+    axios.post('https://api.hlofiys.tk/cart/add', {
+      id: cardId.id,
+      amount: 1 //
+    }, {
+      headers:{'x-access-token': localStorage.getItem('accessToken')}     
     })
-    .then(res=>console.log(res))
-    .catch(err=>console.log(err))
-       
+    .catch(err => console.log(err))
   }
+  
   useEffect(()=>{
     fetch(`https://api.hlofiys.tk/types/items/get/${OpenID}`)
     .then(res=>res.json())
     .then(res=>setCatalogOrders(res))
   },[])
+
   return (
     <div className='ContainerForTypeCatalog'>
       {
@@ -50,14 +42,14 @@ export default function TypeCatalog({OpenID}) {
                       catalogOrders.map(order =>(
                         <div key={order.id} className='Card'> 
                           <img className='IMG' src={order.icon}></img>
-                          <p>{order.price} Br</p> 
+                          <h4>{order.price} Br</h4> 
                           <h3>{order.name}</h3>
                           <button className='AddToCartBTN' 
                                   onClick={()=>{
                                     if(localStorage.getItem('accessToken')){
                                       setAddedOrder(true);
                                       setTimeout(()=>setAddedOrder(false), 3000);
-                                      AddItemToCart(order.id)
+                                      AddItemToCart(order)
                                     } else {
                                       setWarningMessageIsOpen(true)
                                     }
