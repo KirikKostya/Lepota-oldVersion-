@@ -5,14 +5,18 @@ import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 
 export default function TypeCatalog({OpenID}) {
+
   const [catalogOrders, setCatalogOrders] = useState([]);
+  const [idOfAddedOrder, setIdOfAddedOrder] = useState(Number)
+  const [countOfOrders, setCountOfOrders] = useState(1)
   const [WarningMessageIsOpen, setWarningMessageIsOpen] = useState(false);
+  const [openCount, setOpenCount] = useState(false)
   const [AddedOrder, setAddedOrder] = useState(false)
 
   const AddItemToCart = async (cardId) =>{
     axios.post('https://api.hlofiys.tk/cart/add', {
-      id: cardId.id,
-      amount: 1 //
+      id: cardId,
+      amount: countOfOrders 
     }, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
     })
@@ -38,7 +42,7 @@ export default function TypeCatalog({OpenID}) {
                   <h1>Каталог товаров по выбранному типу</h1>
                   <BackButton Link='/WorkCatalog'/>
                   <div className='ContainerForCards'>
-                    {
+                  {
                       catalogOrders.map(order =>(
                         <div key={order.id} className='Card'> 
                           <img className='IMG' src={order.icon}></img>
@@ -47,17 +51,34 @@ export default function TypeCatalog({OpenID}) {
                           <button className='AddToCartBTN' 
                                   onClick={()=>{
                                     if(localStorage.getItem('accessToken')){
-                                      setAddedOrder(true);
-                                      setTimeout(()=>setAddedOrder(false), 3000);
-                                      AddItemToCart(order)
+                                      setOpenCount(true)
+                                      setIdOfAddedOrder(order.id)
                                     } else {
                                       setWarningMessageIsOpen(true)
                                     }
                                   }}>В корзину &#128722;</button>
                         </div>
                       ))
-                    }
+                  }
                     </div>
+                    {
+                        (openCount)
+                          ?<div className='modelCountWindow'>
+                            <h3>Количество выбранного товара</h3>
+                              <input className='countInput' 
+                                    type='number'
+                                    min={0}
+                                    onChange={e=>setCountOfOrders(e.target.value)} 
+                                    placeholder={countOfOrders}/>
+                              <button className='AddBtn' 
+                                      onClick={()=>{
+                                        AddItemToCart(idOfAddedOrder);
+                                        setOpenCount(false);
+                                        setAddedOrder(true)
+                                      }}>Добавить</button>
+                          </div>
+                            :<></>
+                      }
                     {
                       (AddedOrder)
                         ?<div className='AddedOrder'>
@@ -68,7 +89,10 @@ export default function TypeCatalog({OpenID}) {
                 </>
       }
       
+      <div className='ToOrder'>
         
+      </div>
+      
     </div>
   )
 }

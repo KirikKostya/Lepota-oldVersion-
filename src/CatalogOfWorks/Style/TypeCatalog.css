@@ -70,3 +70,27 @@
 .AddedOrder h1{
     margin: 0;
 }
+.ContainerForTypeCatalog .modelCountWindow{
+    width: 200px;
+    height: 150px;
+    position: absolute;
+    border-radius: 10px;
+    background-color: rgb(211, 208, 208);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.modelCountWindow h3{
+    text-align: center;
+}
+.modelCountWindow .countInput{
+    width: 100px;
+}
+.modelCountWindow .AddBtn{
+    width: 70px;
+    height: 30px;
+    background-color: rgba(210, 9, 2, 0.651);
+    border: none;
+    border-radius: 15px;
+    margin-top: 10px;
+}

@@ -1,10 +1,9 @@
 .MainFielfForBasket{
     width: 97%;
-    min-height: 100px;
+    min-height: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     margin: 5px;
     border: 1px solid black;
     border-radius: 10px;
@@ -14,10 +13,11 @@
     width: 90%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     border: 1px solid black;
     margin: 10px;
+    padding: 0 10px;
 }
 .Item .Img{
     width: 50px;
@@ -36,21 +36,14 @@
     height: 20px;
     outline: auto;
 }
-.Item .BTNS{
-    width: 30px;
-    height: 35px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.BTNS button {
-    width: 20px;
-    height: 15px;
+.Item .deleteItem {
+    width: 25px;
+    height: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-top: 1px;
+    background: red;
 }
 

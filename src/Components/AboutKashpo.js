@@ -33,7 +33,7 @@ export default function AboutKashpo() {
         <div className='ExamplesOfUsing'>
             {
                 UsingSuchUs.map(Item=>(
-                    <div key={Item.id} className='Item'>
+                    <div key={Item.id} className='Fact'>
                         <img className='Img' src={Item.img} />
                         <h3>{Item.tittle}</h3>
                     </div>
