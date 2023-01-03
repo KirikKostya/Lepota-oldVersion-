@@ -4,7 +4,7 @@ import './Style/TypeCatalog.css'
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 
-export default function TypeCatalog({OpenID}) {
+export default function TypeCatalog({OpenID, setIsBasketEmpty}) {
 
   const [catalogOrders, setCatalogOrders] = useState([]);
   const [idOfAddedOrder, setIdOfAddedOrder] = useState(Number)
@@ -20,6 +20,7 @@ export default function TypeCatalog({OpenID}) {
     }, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
     })
+    .then(res=>res.status === 200?setIsBasketEmpty(false):'')
     .catch(err => console.log(err))
   }
   
@@ -45,7 +46,7 @@ export default function TypeCatalog({OpenID}) {
                   {
                       catalogOrders.map(order =>(
                         <div key={order.id} className='Card'> 
-                          <img className='IMG' src={order.icon}></img>
+                          {/* <img className='IMG' src={order.icon}></img> */}
                           <h4>{order.price} Br</h4> 
                           <h3>{order.name}</h3>
                           <button className='AddToCartBTN' 

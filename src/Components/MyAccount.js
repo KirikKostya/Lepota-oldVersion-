@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
+import { refreshFunction } from '../App';
 import '../Styles/MyAccount.css'
 
 export default function MyAccount({isAuthorizate, setIsAuthorizate}) {
@@ -17,8 +18,10 @@ export default function MyAccount({isAuthorizate, setIsAuthorizate}) {
       mode: 'cors',
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
-    .then(res=>res.json())
-    .then(res=>setAmountOrderInBasket(res))
+    .then(res=>(res.status === 401)?refreshFunction():'')
+    // .then(res=>res.json())
+    // .then(res=>setAmountOrderInBasket(res))
+    .catch(err=>console.log(err))
   })
 
   return (

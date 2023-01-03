@@ -14,6 +14,7 @@ import NavCatalog from './NavigationOnPage/NavCatalog';
 export default function Router({ isAuthorizate, setIsAuthorizate }) {
     
     const [OpenID, setOpenID] = useState(0)
+    const [isBasketEmpty, setIsBasketEmpty] = useState(true)
 
   return (
         <BrowserRouter>
@@ -42,13 +43,14 @@ export default function Router({ isAuthorizate, setIsAuthorizate }) {
             </Routes>
             <Routes>
                 <Route path='/MyBasket' element={<MyBasket isAuthorizate={isAuthorizate} 
-                                                           setIsAuthorizate = {setIsAuthorizate}/>} />
+                                                           setIsAuthorizate = {setIsAuthorizate}
+                                                           setIsBasketEmpty = {setIsBasketEmpty}/>} />
             </Routes>
             <Routes>
                 <Route path='/GoodsArchive' element={<GoodsArchive />} />
             </Routes>
             <Routes>
-                <Route path='/TypeCatalog' element={<TypeCatalog OpenID={OpenID}/>} />
+                <Route path='/TypeCatalog' element={<TypeCatalog OpenID={OpenID} setIsBasketEmpty = {setIsBasketEmpty}/>} />
             </Routes>
         </BrowserRouter>
   )

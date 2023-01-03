@@ -6,22 +6,23 @@ import axios from 'axios'
 export default function MyBasket({isAuthorizate, setIsAuthorizate }) {
 
   const [ItemsInBasket, setItemsInBasket] = useState([])
+  const [isBasketEmpty, setIsBasketEmpty] = useState(true)
 
-  const deleteItem = (id) => {
-    axios.post('https://api.hlofiys.tk/cart/delete', {
-      id: id
-    }, {
-      headers:{'x-access-token': localStorage.getItem('accessToken')}
+  const deleteItem = async (id) => {{
+    let deleteResponce = await axios.delete('https://api.hlofiys.tk/cart/delete', {
+      headers:{'x-access-token': localStorage.getItem('accessToken')},
+      data:{ id: id}
     })
-    .catch(err => console.log(err))
-    console.log('123')
-  }
+    
+    let updateResponce = await requestBasketFunc()
+  }}
 
   const requestBasketFunc = async () => {
   axios.get('https://api.hlofiys.tk/cart/all', {
     headers:{'x-access-token': localStorage.getItem('accessToken')}
   })
   .then(res=>setItemsInBasket(res.data))
+  .catch(err => {if(err.response.status === 404) setIsBasketEmpty(true)})
   }
 
   useEffect(()=>{
@@ -32,21 +33,21 @@ export default function MyBasket({isAuthorizate, setIsAuthorizate }) {
     <>
       <UpNavigation isAuthorizate={isAuthorizate} setIsAuthorizate = {setIsAuthorizate}/>
       <div className='MainFielfForBasket'>
-          {
-            ItemsInBasket.map(item => (
-              <div className='Item' key={item.id}>
-                <img src={item.icon} className='Icon'/>
-                <h4>{item.name}</h4>
-                <div className='ChangeAmount'>
-                  <input id='ChangeInput'
+          {isBasketEmpty
+            ?<>Sorry</>
+              :ItemsInBasket.map(item => (
+                <div className='Item' key={item.id}>
+                  <h4>{item.name}</h4>
+                  <div className='ChangeAmount'>
+                    <input id='ChangeInput'
                          type='number'
                          className='ChangeInput' 
                          min={0} 
                          placeholder={item.amount}/>
+                  </div>
+                  <h3>{item.price*item.amount} Br</h3>
+                  <button className='deleteItem' onClick={()=>deleteItem(item.id)}>&times;</button>
                 </div>
-                <h3>{item.price*item.amount} Br</h3>
-                <button className='deleteItem' onClick={()=>deleteItem(item.id)}>&times;</button>
-              </div>
             ))
           }
       </div>

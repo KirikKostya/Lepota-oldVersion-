@@ -8,7 +8,7 @@ export default function WorkCatalog( {setOpenID} ) {
   const [CARDS, setCARDS] = useState([])
 
   const fetchFanc = async () =>{
-    let response = await axios('https://api.hlofiys.tk/types/get');
+    let response = await axios.get('https://api.hlofiys.tk/types/get');
     // console.log(response.data)
     setCARDS(response.data)
   }
