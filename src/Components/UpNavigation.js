@@ -1,12 +1,9 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import { refreshFunction } from '../App'
 import '../Styles/UpNavigation.css'
 import MyAccount from './MyAccount'
-import { refreshFunction } from '../App'
-import { BrowserRouter } from 'react-router-dom'
-import { HashLink as Link } from 'react-router-hash-link'
-import { NavLink } from 'react-router-dom'
 
-export default function UpNavigation({isAuthorizate, setIsAuthorizate}) {
+export default function UpNavigation({ isAuthorizate, setIsAuthorizate}) {
 
   const [isOpen, setIsOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(false)
@@ -29,11 +26,11 @@ export default function UpNavigation({isAuthorizate, setIsAuthorizate}) {
         </div>
         
         <div className='NavLinks'>
-            <NavLink className='NavLink' to='/'><p>ГЛАВНАЯ</p></NavLink>
-            <NavLink className='NavLink' to='/WorkCatalog'><p>КАТАЛОГ</p></NavLink>
-            <NavLink className='NavLink' to='/TimingAndDelivery'><p>СРОКИ И ДОСТАКА</p></NavLink>
-            <NavLink className='NavLink' to='/AboutKashpo'><p>О КАШПО</p></NavLink>
-            <NavLink className='NavLink' to='/ContactWithUs'><p>КОНТАКТЫ</p></NavLink>
+            <p className='NavLink' >ГЛАВНАЯ</p>
+            <p className='NavLink'  onClick={()=>RefForAboutCompony.current.focus()}>КАТАЛОГ</p>
+            <p className='NavLink'  onClick={()=>RefForDiscription.current.focus()}>СРОКИ И ДОСТАКА</p>
+            <p className='NavLink'  onClick={()=>RefForDiscription.current.focus()}>О КАШПО</p>
+            <p className='NavLink'  onClick={()=>RefForDiscription.current.focus()}>КОНТАКТЫ</p>
         </div>
         
         <img src={require('../Photos/LOGO.png')} className='Logo' />
@@ -57,11 +54,11 @@ export default function UpNavigation({isAuthorizate, setIsAuthorizate}) {
 
     </div>
     <div className={`HamburgerNavLinks ${openMenu}`} >
-            <NavLink className='NavLink' to='/'><p>ГЛАВНАЯ</p></NavLink>
-            <NavLink className='NavLink' to='/WorkCatalog'><p>КАТАЛОГ</p></NavLink>
-            <NavLink className='NavLink' to='/TimingAndDelivery'><p>СРОКИ И ДОСТАКА</p></NavLink>
-            <NavLink className='NavLink' to='/AboutKashpo'><p>О КАШПО</p></NavLink>
-            <NavLink className='NavLink' to='/ContactWithUs'><p>КОНТАКТЫ</p></NavLink>
+    <p className='NavLink' >ГЛАВНАЯ</p>
+            <p className='NavLink'  onClick={()=>RefForAboutCompony.current.focus()}>КАТАЛОГ</p>
+            <p className='NavLink'  onClick={()=>RefForDiscription.current.focus()}>СРОКИ И ДОСТАКА</p>
+            <p className='NavLink'  onClick={()=>RefForDiscription.current.focus()}>О КАШПО</p>
+            <p className='NavLink'  onClick={()=>RefForDiscription.current.focus()}>КОНТАКТЫ</p>
     </div>
     </>
   )
