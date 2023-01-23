@@ -3,21 +3,21 @@ import './App.css';
 import Router from './Router';
 
 export const refreshFunction = async()=>{
-  let response = await fetch ('https://api.hlofiys.tk/test/user', {
-      method: 'GET',
+  let response = await fetch('http://129.159.242.47:8081/Auth/checkToken', {
       mode: 'cors',
-          headers:{'x-access-token': localStorage.getItem('accessToken')}
+      headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
     .then(async res => {
+      console.log('accessToken will be add')
       if(res.status === 401){
-        let response2 = await fetch('https://api.hlofiys.tk/auth/refresh', {
+        let response2 = await fetch('http://129.159.242.47:8081/Auth/Refresh', {
             method: 'POST',
             mode: 'cors',
             credentials: 'include'
           })
     .then(res=>{
         if(res.status === 401){
-          console.log('You must login one more time!')
+          alert('You must login one more time!') // dialog window to update
         } else {
           return res
         }
@@ -31,7 +31,6 @@ export const refreshFunction = async()=>{
 function App() {
 
   const [isAuthorizate, setIsAuthorizate] = useState(localStorage.getItem('accessToken'))
-  console.log(isAuthorizate)
   return (
     <div className="App">
       <Router isAuthorizate = {isAuthorizate} 

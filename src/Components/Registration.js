@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import '../Styles/Registration.css'
+import './Styles/Registration.css'
 import BackButton from './BackButton';
 import SignIn from './SignIn'
 import SignUp from './SignUp'

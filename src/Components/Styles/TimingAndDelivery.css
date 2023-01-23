@@ -10,19 +10,27 @@
     width: 100%;
     text-align: center !important;
 }
-.ContainerForTimingAndDelivery .GraphicPath{
-    display: flex;
-    flex-direction: row;
-    align-items:center;
-    justify-content: center;
-    margin: 10px;
-}
 .ContainerForTimingAndDelivery .Steps{
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+.Steps .containerForGraphicRath{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+.ContainerForTimingAndDelivery .GraphicPath{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    /* justify-content: center; */
+    margin: 10px;
+}
+
 .GraphicPath .hr{
     width: 260px;
     height: 2px;
@@ -100,8 +108,19 @@
         margin: 0;
     }
 }
-@media screen and (max-width:400px){
-    .GraphicPath .Circle{
+@media screen and (max-width:700px){
+    .Steps .containerForGraphicRath{
         display: none;
+    }
+    .ContainerForTimingAndDelivery .TextPath{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .TextPath .PartOfPath{
+        width: 90%;
+        align-items: center !important;
     }
 }

@@ -1,6 +1,6 @@
 import  axios  from 'axios'
 import React,{useEffect} from 'react'
-import '../Styles/Discription.css'
+import './Styles/Discription.css'
 
  const Pictures = [
   {

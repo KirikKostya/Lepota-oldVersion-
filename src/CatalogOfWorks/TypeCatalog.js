@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 
 export default function TypeCatalog({OpenID, setIsBasketEmpty}) {
 
-  const [catalogOrders, setCatalogOrders] = useState([]);
+  const [catalogOrders, setCatalogOrders] = useState(Array);
   const [idOfAddedOrder, setIdOfAddedOrder] = useState(Number)
   const [countOfOrders, setCountOfOrders] = useState(1)
   const [WarningMessageIsOpen, setWarningMessageIsOpen] = useState(false);
@@ -14,7 +14,7 @@ export default function TypeCatalog({OpenID, setIsBasketEmpty}) {
   const [AddedOrder, setAddedOrder] = useState(false)
 
   const AddItemToCart = async (cardId) =>{
-    axios.post('https://api.hlofiys.tk/cart/add', {
+    axios.post(`http://129.159.242.47:8081/Item/GetById?id=${cardId}`, {
       id: cardId,
       amount: countOfOrders 
     }, {
@@ -25,9 +25,15 @@ export default function TypeCatalog({OpenID, setIsBasketEmpty}) {
   }
   
   useEffect(()=>{
-    fetch(`https://api.hlofiys.tk/types/items/get/${OpenID}`)
+    fetch(`http://129.159.242.47:8081/Item/GetById?id=${OpenID}`)
     .then(res=>res.json())
-    .then(res=>setCatalogOrders(res))
+    .then(res=>{
+      if(res.data == null){
+        setCatalogOrders(null)
+      } else {
+        setCatalogOrders([res.data])
+      }
+      })
   },[])
 
   return (
@@ -42,11 +48,14 @@ export default function TypeCatalog({OpenID, setIsBasketEmpty}) {
             : <>
                   <h1>Каталог товаров по выбранному типу</h1>
                   <BackButton Link='/WorkCatalog'/>
+                  <button onClick={()=>console.log(catalogOrders)}></button>
                   <div className='ContainerForCards'>
                   {
-                      catalogOrders.map(order =>(
+                    catalogOrders === null
+                    ? <></>
+                      :catalogOrders.map(order =>(
                         <div key={order.id} className='Card'> 
-                          {/* <img className='IMG' src={order.icon}></img> */}
+                          <img className='IMG' src={order.icon && require('../Photos/somethingWentWrong.png')} />
                           <h4>{order.price} Br</h4> 
                           <h3>{order.name}</h3>
                           <button className='AddToCartBTN' 

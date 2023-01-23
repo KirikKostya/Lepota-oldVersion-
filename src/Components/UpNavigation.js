@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { refreshFunction } from '../App'
-import '../Styles/UpNavigation.css'
+import './Styles/UpNavigation.css'
 import MyAccount from './MyAccount'
 
 export default function UpNavigation({ isAuthorizate, setIsAuthorizate}) {
@@ -26,11 +26,11 @@ export default function UpNavigation({ isAuthorizate, setIsAuthorizate}) {
         </div>
         
         <div className='NavLinks'>
-            <p className='NavLink' >ГЛАВНАЯ</p>
-            <p className='NavLink'  onClick={()=>RefForAboutCompony.current.focus()}>КАТАЛОГ</p>
-            <p className='NavLink'  onClick={()=>RefForDiscription.current.focus()}>СРОКИ И ДОСТАКА</p>
-            <p className='NavLink'  onClick={()=>RefForDiscription.current.focus()}>О КАШПО</p>
-            <p className='NavLink'  onClick={()=>RefForDiscription.current.focus()}>КОНТАКТЫ</p>
+            <p className='NavLink'>ГЛАВНАЯ</p>
+            <p className='NavLink' to='/TypeCatalog'>КАТАЛОГ</p>
+            <p className='NavLink'>СРОКИ И ДОСТАКА</p>
+            <p className='NavLink'>О КАШПО</p>
+            <p className='NavLink'>КОНТАКТЫ</p>
         </div>
         
         <img src={require('../Photos/LOGO.png')} className='Logo' />
@@ -55,10 +55,10 @@ export default function UpNavigation({ isAuthorizate, setIsAuthorizate}) {
     </div>
     <div className={`HamburgerNavLinks ${openMenu}`} >
     <p className='NavLink' >ГЛАВНАЯ</p>
-            <p className='NavLink'  onClick={()=>RefForAboutCompony.current.focus()}>КАТАЛОГ</p>
-            <p className='NavLink'  onClick={()=>RefForDiscription.current.focus()}>СРОКИ И ДОСТАКА</p>
-            <p className='NavLink'  onClick={()=>RefForDiscription.current.focus()}>О КАШПО</p>
-            <p className='NavLink'  onClick={()=>RefForDiscription.current.focus()}>КОНТАКТЫ</p>
+            <p className='NavLink'>КАТАЛОГ</p>
+            <p className='NavLink'>СРОКИ И ДОСТАКА</p>
+            <p className='NavLink'>О КАШПО</p>
+            <p className='NavLink'>КОНТАКТЫ</p>
     </div>
     </>
   )

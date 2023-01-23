@@ -1,5 +1,5 @@
 import React from 'react'
-import '../Styles/TimingAndDelivery.css'
+import './Styles/TimingAndDelivery.css'
 
 const Path = [
     {
@@ -31,14 +31,16 @@ export default function TimingAndDelivery() {
         <h1>Время и Доставка</h1>
 
         <div className='Steps'>
-            <div className='GraphicPath'>
-                <div className='Circle'>1</div>
-                <hr className='hr'></hr>
-                <div className='Circle'>2</div>
-                <hr className='hr'></hr>
-                <div className='Circle'>3</div>
-                <hr className='hr'></hr>
-                <div className='Circle'>4</div>
+            <div className='containerForGraphicRath'>
+                <div className='GraphicPath'>
+                    <div className='Circle'>1</div>
+                    <hr className='hr'></hr>
+                    <div className='Circle'>2</div>
+                    <hr className='hr'></hr>
+                    <div className='Circle'>3</div>
+                    <hr className='hr'></hr>
+                    <div className='Circle'>4</div>
+                </div>
             </div>
             <div className='TextPath'>
                 {

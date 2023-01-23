@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios';
-import '../Styles/SignUp.css'
+import './Styles/SignUp.css'
 
 
 export default function SignUp({setRegistr, setIsAuthorizate}) {
@@ -30,7 +30,7 @@ export default function SignUp({setRegistr, setIsAuthorizate}) {
   }
 
   function validateEmail(email) {
-    var re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+    var re = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
     return (re.test(email));
   }
 
@@ -49,15 +49,16 @@ export default function SignUp({setRegistr, setIsAuthorizate}) {
 
   const Registration = async ()=> {
     let status = await statusValidate();
-    if(PasswordInputValue === SecondPasswordInputValue && status){
+    if(PasswordInputValue === SecondPasswordInputValue && PasswordInputValue != '' && status){
         axios.defaults.withCredentials = true;
         let response = await axios
-                              .post('https://api.hlofiys.tk/auth/register', 
+                              .post('http://129.159.242.47:8081/Auth/Register', 
                               {
-                                 email: LoginInputValue,
-                                 password: PasswordInputValue
+                                 'username': LoginInputValue,
+                                 'password': PasswordInputValue
                               })
-        localStorage.setItem('accessToken', response.data.accessToken)
+        console.log(response)
+        localStorage.setItem('accessToken', response.data.data)
           setPasswordInputValue('');
           setLoginInputValue('');
           setSecondPasswordInputValue('');
@@ -116,10 +117,7 @@ export default function SignUp({setRegistr, setIsAuthorizate}) {
         <div className='ChangeField'>
             <p>Есть аккаунт? Тогда добро пожаловать!</p>
             <button className='SignInChangeBtn' 
-                    onClick={()=>{
-                                  setRegistr(false);
-                                  }
-                    }>Войти</button>
+                    onClick={()=>setRegistr(false)}>Войти</button>
         </div>
     </div>
   )

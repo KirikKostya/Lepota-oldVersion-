@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import '../Styles/SignIn.css'
+import './Styles/SignIn.css'
 
 export default function SignIn({setRegistr, setIsAuthorizate}) {
   
@@ -46,10 +46,10 @@ export default function SignIn({setRegistr, setIsAuthorizate}) {
     let status = await statusValidate();
     if(PasswordInputValue && status){  
       let response = await axios
-                              .post('https://api.hlofiys.tk/auth/login', 
+                              .post('http://129.159.242.47:8081/Auth/Login', 
                               {
-                                 email: LoginInputValue,
-                                 password: PasswordInputValue
+                                 'username': LoginInputValue,
+                                 'password': PasswordInputValue
                               })
         localStorage.setItem('accessToken', response.data.accessToken);
           setPasswordInputValue('');

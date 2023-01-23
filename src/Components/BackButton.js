@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import '../Styles/BackButton.css'
+import './Styles/BackButton.css'
+
 export default function BackButton({Link}) {
   return (
     <div className='BackButton'>

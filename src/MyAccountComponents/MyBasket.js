@@ -11,18 +11,22 @@ export default function MyBasket({isAuthorizate, setIsAuthorizate }) {
   const deleteItem = async (id) => {{
     let deleteResponce = await axios.delete('https://api.hlofiys.tk/cart/delete', {
       headers:{'x-access-token': localStorage.getItem('accessToken')},
-      data:{ id: id}
+      data:{ id: id }
     })
     
     let updateResponce = await requestBasketFunc()
   }}
 
   const requestBasketFunc = async () => {
-  axios.get('https://api.hlofiys.tk/cart/all', {
+  axios.post( 'http://129.159.242.47:8081/Cart/All', {}, {
     headers:{'x-access-token': localStorage.getItem('accessToken')}
   })
   .then(res=>setItemsInBasket(res.data))
-  .catch(err => {if(err.response.status === 404) setIsBasketEmpty(true)})
+  .catch(err=> {
+    if(err.response.status === 404){
+      setIsBasketEmpty(true)
+    }
+  })
   }
 
   useEffect(()=>{

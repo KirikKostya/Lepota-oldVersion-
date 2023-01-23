@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import '../Styles/WorkCatalog.css'
+import './Styles/WorkCatalog.css'
 import CardOfWork from './CardOfWork'
 import axios from 'axios'
 
@@ -7,10 +7,10 @@ export default function WorkCatalog( {setOpenID} ) {
   
   const [CARDS, setCARDS] = useState([])
 
-  const fetchFanc = async () =>{
-    let response = await axios.get('https://api.hlofiys.tk/types/get');
+  const fetchFanc = () =>{
+    axios.get('http://129.159.242.47:8081/Item/GetAll')
+    .then(res=>setCARDS(res.data.data))
     // console.log(response.data)
-    setCARDS(response.data)
   }
 
 useEffect(()=>{
