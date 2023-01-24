@@ -2,11 +2,14 @@ import React, { useState } from 'react'
 import { refreshFunction } from '../App'
 import './Styles/UpNavigation.css'
 import MyAccount from './MyAccount'
+import { Link } from 'react-scroll';
+import { NavLink } from 'react-router-dom';
 
 export default function UpNavigation({ isAuthorizate, setIsAuthorizate}) {
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [openMenu, setOpenMenu] = useState(false)
+  const [myAccountIsOpen, setMyAccountIsOpen] = useState(false);
+  const [openHamburgerMenu, setOpenHamburgerMenu] = useState('close')
+
   return (
     <>
     <div id='UpNav' className='UpNavContainer'>
@@ -15,7 +18,7 @@ export default function UpNavigation({ isAuthorizate, setIsAuthorizate}) {
                    height="40" 
                    viewBox="0 0 16 16" 
                    onClick={()=>{
-                                  (isOpen) ? setIsOpen(false) : setIsOpen(true);
+                                  (myAccountIsOpen) ? setMyAccountIsOpen(false) : setMyAccountIsOpen(true);
                                   if(localStorage.getItem('accessToken')){
                                     refreshFunction();
                                   }
@@ -26,39 +29,41 @@ export default function UpNavigation({ isAuthorizate, setIsAuthorizate}) {
         </div>
         
         <div className='NavLinks'>
-            <p className='NavLink'>ГЛАВНАЯ</p>
-            <p className='NavLink' to='/TypeCatalog'>КАТАЛОГ</p>
-            <p className='NavLink'>СРОКИ И ДОСТАКА</p>
-            <p className='NavLink'>О КАШПО</p>
-            <p className='NavLink'>КОНТАКТЫ</p>
+            <Link activeClass="active" to="Main" spy={true} smooth={true} offset={-90} duration={500} isDynamic={true} className='NavLink'>ГЛАВНАЯ</Link>
+            <Link activeClass="active" to="CatalogOfWorks" spy={true} smooth={true} offset={-60} duration={500} className='NavLink'>КАТАЛОГ</Link>
+            <Link activeClass="active" to="TimingAndDelivery" spy={true} smooth={true} offset={-100} duration={500} className='NavLink'>СРОКИ И ДОСТАКА</Link>
+            <Link activeClass="active" to="AboutCashpo" spy={true} smooth={true} offset={-100} duration={500} className='NavLink'>О КАШПО</Link>
+            <Link activeClass="active" to="ContactWithUs" spy={true} smooth={true} offset={-65} duration={500} className='NavLink'>КОНТАКТЫ</Link>
         </div>
         
-        <img src={require('../Photos/LOGO.png')} className='Logo' />
-
+        <NavLink to='/'>
+          <img src={require('../Photos/LOGO.png')} className='Logo' />
+        </NavLink>
+        
         <div className='Hamburger' 
              onClick={()=>{
-              if(openMenu){
-                setOpenMenu(false)
+              if(openHamburgerMenu === ''){
+                setOpenHamburgerMenu('close')
               } else { 
-                setOpenMenu(true)
+                setOpenHamburgerMenu('')
               }
               if(localStorage.getItem('accessToken')){
-              refreshFunction();
+                refreshFunction();
               }
           }}>☰</div>
         {
-          (!isOpen)
+          (!myAccountIsOpen)
             ?<></>
              :<MyAccount isAuthorizate={isAuthorizate} setIsAuthorizate = {setIsAuthorizate}/>
         }
 
     </div>
-    <div className={`HamburgerNavLinks ${openMenu}`} >
-    <p className='NavLink' >ГЛАВНАЯ</p>
-            <p className='NavLink'>КАТАЛОГ</p>
-            <p className='NavLink'>СРОКИ И ДОСТАКА</p>
-            <p className='NavLink'>О КАШПО</p>
-            <p className='NavLink'>КОНТАКТЫ</p>
+    <div className={`HamburgerNavLinks ${openHamburgerMenu}`} >
+            <Link activeClass="active" to="Main" spy={true} smooth={true} offset={-230} duration={500} isDynamic={true} className='NavLink'>ГЛАВНАЯ</Link>
+            <Link activeClass="active" to="CatalogOfWorks" spy={true} smooth={true} offset={-210} duration={500} className='NavLink'>КАТАЛОГ</Link>
+            <Link activeClass="active" to="TimingAndDelivery" spy={true} smooth={true} offset={-210} duration={500} className='NavLink'>СРОКИ И ДОСТАКА</Link>
+            <Link activeClass="active" to="AboutCashpo" spy={true} smooth={true} offset={-210} duration={500} className='NavLink'>О КАШПО</Link>
+            <Link activeClass="active" to="ContactWithUs" spy={true} smooth={true} offset={-180} duration={500} className='NavLink'>КОНТАКТЫ</Link>
     </div>
     </>
   )

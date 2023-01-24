@@ -19,7 +19,7 @@
 .HamburgerNavLinks{
     width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: column !important;
     align-items: center;
     justify-content: center;
     display: none;
@@ -43,17 +43,18 @@
 .UpNavContainer svg{
     cursor: pointer;
 }
-.NavLinks p{
-    margin: 0 23px;
-}
 .NavLinks .NavLink{
     text-decoration: none;
     color: black;
+    margin: 0 23px;
 }
 .NavLinks .NavLink:hover{
     color: blue;
+    cursor: pointer;
 }
-
+.active{
+    color: blue !important;
+}
 @media screen and (max-width:944px){
     .UpNavContainer{
         width: 100%;
@@ -102,17 +103,16 @@
         background-color: rgb(164, 193, 250);
         position: sticky;
         top: 75px;
+        display: flex !important;
     }
     .HamburgerNavLinks .NavLink{
         text-align: center;
         color: black;
         text-decoration: none;
+        margin: 5px 0;
     }
-    .true{
-        display: block;
-    }
-    .false{
-        display: none;
+    .close{
+        display: none !important;
     }
     .HamburgerNavLinks .NavLink{
         width: 100%;

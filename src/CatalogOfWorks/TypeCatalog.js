@@ -7,16 +7,16 @@ import { NavLink } from 'react-router-dom';
 export default function TypeCatalog({OpenID, setIsBasketEmpty}) {
 
   const [catalogOrders, setCatalogOrders] = useState(Array);
-  const [idOfAddedOrder, setIdOfAddedOrder] = useState(Number)
   const [countOfOrders, setCountOfOrders] = useState(1)
   const [WarningMessageIsOpen, setWarningMessageIsOpen] = useState(false);
   const [openCount, setOpenCount] = useState(false)
   const [AddedOrder, setAddedOrder] = useState(false)
 
   const AddItemToCart = async (cardId) =>{
-    axios.post(`http://129.159.242.47:8081/Item/GetById?id=${cardId}`, {
+    axios.post(`http://129.159.242.47:8081/Cart/Add`, {
       id: cardId,
-      amount: countOfOrders 
+      amount: 1,
+      variants: [ 1 ]
     }, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
     })
@@ -47,7 +47,7 @@ export default function TypeCatalog({OpenID, setIsBasketEmpty}) {
            </div>
             : <>
                   <h1>Каталог товаров по выбранному типу</h1>
-                  <BackButton Link='/WorkCatalog'/>
+                  <BackButton Link='/'/>
                   <button onClick={()=>console.log(catalogOrders)}></button>
                   <div className='ContainerForCards'>
                   {
@@ -59,10 +59,11 @@ export default function TypeCatalog({OpenID, setIsBasketEmpty}) {
                           <h4>{order.price} Br</h4> 
                           <h3>{order.name}</h3>
                           <button className='AddToCartBTN' 
-                                  onClick={()=>{
+                                  onClick={async ()=>{
                                     if(localStorage.getItem('accessToken')){
                                       setOpenCount(true)
-                                      setIdOfAddedOrder(order.id)
+                                      AddItemToCart(order.id)
+                                      console.log(order.id)
                                     } else {
                                       setWarningMessageIsOpen(true)
                                     }
@@ -71,7 +72,7 @@ export default function TypeCatalog({OpenID, setIsBasketEmpty}) {
                       ))
                   }
                     </div>
-                    {
+                    {/* {
                         (openCount)
                           ?<div className='modelCountWindow'>
                             <h3>Количество выбранного товара</h3>
@@ -88,7 +89,7 @@ export default function TypeCatalog({OpenID, setIsBasketEmpty}) {
                                       }}>Добавить</button>
                           </div>
                             :<></>
-                      }
+                      } */}
                     {
                       (AddedOrder)
                         ?<div className='AddedOrder'>

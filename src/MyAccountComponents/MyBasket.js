@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import '../MyAccountComponents/Styles/MyBasket.css'
 import UpNavigation from '../Components/UpNavigation.js'
 import axios from 'axios'
+import Loading from 'react-loading'
 
 export default function MyBasket({isAuthorizate, setIsAuthorizate }) {
 
@@ -21,11 +22,12 @@ export default function MyBasket({isAuthorizate, setIsAuthorizate }) {
   axios.post( 'http://129.159.242.47:8081/Cart/All', {}, {
     headers:{'x-access-token': localStorage.getItem('accessToken')}
   })
-  .then(res=>setItemsInBasket(res.data))
+  .then(res=>setItemsInBasket(res.data.data.cartItems))
   .catch(err=> {
     if(err.response.status === 404){
       setIsBasketEmpty(true)
     }
+    console.log(err)
   })
   }
 
@@ -37,8 +39,15 @@ export default function MyBasket({isAuthorizate, setIsAuthorizate }) {
     <>
       <UpNavigation isAuthorizate={isAuthorizate} setIsAuthorizate = {setIsAuthorizate}/>
       <div className='MainFielfForBasket'>
-          {isBasketEmpty
-            ?<>Sorry</>
+        {
+          ItemsInBasket === []
+            ?<Loading
+                type="spokes"
+                color={"black"}
+                height={"50px"}
+                width={"50px"}
+                padding={"20px"}
+              />
               :ItemsInBasket.map(item => (
                 <div className='Item' key={item.id}>
                   <h4>{item.name}</h4>
@@ -53,7 +62,7 @@ export default function MyBasket({isAuthorizate, setIsAuthorizate }) {
                   <button className='deleteItem' onClick={()=>deleteItem(item.id)}>&times;</button>
                 </div>
             ))
-          }
+        }
       </div>
     </>
   )

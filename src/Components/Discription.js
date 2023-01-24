@@ -32,13 +32,8 @@ import './Styles/Discription.css'
 
 export default function Discription() {
 
-  // useEffect(()=>{
-  //   axios.get('https://api.hlofiys.tk/types/items/get/1')
-  //   .then(res=> console.log(res))
-  // },[])
-
   return (
-    <div className='DiscriptionContainer'>
+    <div className='DiscriptionContainer' id='Main'>
         {
           Pictures.map(work=>(
             <img key={work.id} src={work.img} className = 'Slide' />

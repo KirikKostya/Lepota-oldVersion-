@@ -26,7 +26,7 @@ const Path = [
 
 export default function TimingAndDelivery() {
   return (
-    <div className='ContainerForTimingAndDelivery'>
+    <div className='ContainerForTimingAndDelivery' id='TimingAndDelivery'>
 
         <h1>Время и Доставка</h1>
 

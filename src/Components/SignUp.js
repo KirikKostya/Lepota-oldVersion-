@@ -57,7 +57,6 @@ export default function SignUp({setRegistr, setIsAuthorizate}) {
                                  'username': LoginInputValue,
                                  'password': PasswordInputValue
                               })
-        console.log(response)
         localStorage.setItem('accessToken', response.data.data)
           setPasswordInputValue('');
           setLoginInputValue('');

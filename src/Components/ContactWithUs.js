@@ -9,7 +9,7 @@ export default function ContactWithUs() {
 
   const [isOpen, setIsOpen] = useState(false)
   return (
-    <div className='ContainerForContactWithUs'>
+    <div className='ContainerForContactWithUs' id='ContactWithUs' >
         <h1>Контакты</h1>
         <p>С нами можно связаться через:</p>
             <div className='MassagerIcons'>

@@ -17,7 +17,7 @@ useEffect(()=>{
   fetchFanc()
 },[])
   return (
-    <div className='CatalogContainer'>
+    <div className='CatalogContainer' id='CatalogOfWorks'>
         <h1>Наши Работы</h1>
         <p className='p'>У нас вы можете приобрести разного вида подарки, 
           начиная от выразительных статуэток и заканчивая ключницами и разными подставками. 

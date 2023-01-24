@@ -51,7 +51,8 @@ export default function SignIn({setRegistr, setIsAuthorizate}) {
                                  'username': LoginInputValue,
                                  'password': PasswordInputValue
                               })
-        localStorage.setItem('accessToken', response.data.accessToken);
+
+        localStorage.setItem('accessToken', response.data.data);
           setPasswordInputValue('');
           setLoginInputValue('');
           setStatusValidateForm('');
