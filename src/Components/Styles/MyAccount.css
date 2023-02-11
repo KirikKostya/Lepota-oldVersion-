@@ -54,7 +54,7 @@
 .CountOrders{
     width: 20px;
     height: 20px;
-    background-color: rgb(215, 49, 49);
+    background-color: rgba(239, 24, 24, 0.797);
     color: black;
     position: absolute;
     border-radius: 20px;

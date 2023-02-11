@@ -8,7 +8,7 @@ import TimingAndDelivery from './Components/TimingAndDelivery';
 import AboutKashpo from './Components/AboutKashpo';
 import ContactWithUs from './Components/ContactWithUs';
 
-export default function Main( {isAuthorizate, setIsAuthorizate, setOpenID} ) {
+export default function Main( {isAuthorizate, setIsAuthorizate, setOpenID, fetchProducts} ) {
 
     const [opacity, setOpacity ] = useState('');
 
@@ -19,7 +19,7 @@ export default function Main( {isAuthorizate, setIsAuthorizate, setOpenID} ) {
                            setOpacity={setOpacity}/>
             <Discription />
             <AboutCompany />
-            <WorkCatalog setOpenID={setOpenID}/>
+            <WorkCatalog setOpenID={setOpenID} fetchProducts={fetchProducts}/>
             <TimingAndDelivery />
             <AboutKashpo />
             <ContactWithUs /> 

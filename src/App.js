@@ -1,37 +1,72 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import ReactModal from 'react-modal';
 import './App.css';
 import Router from './Router';
 
-export const refreshFunction = async()=>{
-  let response = await fetch('http://129.159.242.47:8081/Auth/checkToken', {
+export const refreshFunction = async () => {
+  fetch('https://api.native-flora.tk/Auth/checkToken', {
     mode: 'cors',
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
+
     .then(async res => {
       if(res.status === 401){
-        let response2 = await fetch('http://129.159.242.47:8081/Auth/Refresh', {
-            method: 'GET',
-            mode: 'cors',
-          })
-        .then(res=>{
-            if(res.status === 401){
-              alert('You must login one more time!') // dialog window to update
-            } else {
-              return res
-            }
+        fetch('https://api.native-flora.tk/Auth/Refresh', {
+          method: 'GET',
+          mode: 'cors',
+          credentials: 'include'
         })
-        .then(res=>localStorage.setItem('accessToken', res.data.data))
+          .then(res=>{
+            if(res.status === 401){
+              return res // dialog window to update
+            } else {
+              return res.json()
+            }
+          })
+          .then(res=>localStorage.setItem('accessToken', res.data))
       }
-  })
+    })
 }
+      
 
 function App() {
 
-  const [isAuthorizate, setIsAuthorizate] = useState(localStorage.getItem('accessToken'))
+  const [isAuthorizate, setIsAuthorizate] = useState(localStorage.getItem('accessToken'));
+  const [isOpenModal, setIsOpenModal] = useState(!true);
+
+  const customStylesForModal = {
+    content: {
+      width: '40%',
+      height: '50%',
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      color: 'black',
+      display: 'flex',
+      alignItems: 'center',
+      display: "flex",
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      borderRadius: '20px'
+    },
+  } 
+
   return (
     <div className="App">
-      <Router isAuthorizate = {isAuthorizate} 
+      <Router isAuthorizate = {isAuthorizate}
               setIsAuthorizate = {setIsAuthorizate}/>
+      <ReactModal 
+        isOpen={isOpenModal}
+        style={customStylesForModal}
+      >
+        <h2 className='warningHeader'>Вы снова с нами!</h2>
+        <p className='warningMessage'>Вас долго не было с нами, вам необходимо повторно войти в аккаунт! </p>
+        <button className='SignInModalBtn' onClick={()=>setIsOpenModal(!isOpenModal)}>Войти</button>
+      </ReactModal>
     </div>
   );
 }

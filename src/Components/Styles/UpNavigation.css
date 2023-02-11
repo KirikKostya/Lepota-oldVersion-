@@ -3,11 +3,10 @@
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     position: sticky;
     padding: 0 0;
     top: 0;
-    /* flex: 10; */
     background-color: rgb(164, 193, 250);
     z-index: 1;
 }
@@ -31,10 +30,14 @@
     display: none;
 }
 .UpNavContainer .Logo{
-    width: 220px;
-    height: 75px;
+    width: 115px;
+    height: 70px;
+    margin-top: 3px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px rgb(19, 19, 19);
 }
 .UpNavContainer .NavLinks{
+    width: 80%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -43,14 +46,14 @@
 .UpNavContainer svg{
     cursor: pointer;
 }
-.NavLinks .NavLink{
+.NavLink{
     text-decoration: none;
     color: black;
     margin: 0 23px;
 }
-.NavLinks .NavLink:hover{
+.NavLink:hover{
     color: blue;
-    cursor: pointer;
+    cursor: pointer !important;
 }
 .active{
     color: blue !important;
@@ -70,6 +73,7 @@
         display: none
     }
     .UpNavContainer .NavLinks{
+        width: 60%;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -88,7 +92,7 @@
         border-bottom: 2px solid black;
     }
     .UpNavContainer .Logo{
-        display: block
+        display: block;
     }
     .UpNavContainer .NavLinks{
         display: none;

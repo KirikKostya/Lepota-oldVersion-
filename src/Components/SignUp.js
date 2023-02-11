@@ -30,7 +30,7 @@ export default function SignUp({setRegistr, setIsAuthorizate}) {
   }
 
   function validateEmail(email) {
-    var re = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    var re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
     return (re.test(email));
   }
 
@@ -52,7 +52,7 @@ export default function SignUp({setRegistr, setIsAuthorizate}) {
     if(PasswordInputValue === SecondPasswordInputValue && PasswordInputValue != '' && status){
         axios.defaults.withCredentials = true;
         let response = await axios
-                              .post('http://129.159.242.47:8081/Auth/Register', 
+                              .post('https://api.native-flora.tk/Auth/Register', 
                               {
                                  'username': LoginInputValue,
                                  'password': PasswordInputValue

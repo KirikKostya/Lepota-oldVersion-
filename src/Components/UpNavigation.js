@@ -29,9 +29,31 @@ export default function UpNavigation({ isAuthorizate, setIsAuthorizate}) {
         </div>
         
         <div className='NavLinks'>
-            <Link activeClass="active" to="Main" spy={true} smooth={true} offset={-90} duration={500} isDynamic={true} className='NavLink'>ГЛАВНАЯ</Link>
-            <Link activeClass="active" to="CatalogOfWorks" spy={true} smooth={true} offset={-60} duration={500} className='NavLink'>КАТАЛОГ</Link>
-            <Link activeClass="active" to="TimingAndDelivery" spy={true} smooth={true} offset={-100} duration={500} className='NavLink'>СРОКИ И ДОСТАКА</Link>
+            <Link activeClass="active" 
+                  to="Main" 
+                  spy={true} 
+                  smooth={true} 
+                  offset={-90} 
+                  duration={500} 
+                  isDynamic={true} 
+                  onClick={refreshFunction}
+                  className='NavLink'>ГЛАВНАЯ</Link>
+            <Link activeClass="active" 
+                  to="CatalogOfWorks" 
+                  spy={true} 
+                  smooth={true} 
+                  offset={-60} 
+                  duration={500} 
+                  onClick={refreshFunction}
+                  className='NavLink'>КАТАЛОГ</Link>
+            <Link activeClass="active" 
+                  to="TimingAndDelivery" 
+                  spy={true} 
+                  smooth={true} 
+                  offset={-100} 
+                  duration={500}
+                  onClick={refreshFunction}
+                  className='NavLink'>СРОКИ И ДОСТАКА</Link>
             <Link activeClass="active" to="AboutCashpo" spy={true} smooth={true} offset={-100} duration={500} className='NavLink'>О КАШПО</Link>
             <Link activeClass="active" to="ContactWithUs" spy={true} smooth={true} offset={-65} duration={500} className='NavLink'>КОНТАКТЫ</Link>
         </div>
@@ -59,11 +81,47 @@ export default function UpNavigation({ isAuthorizate, setIsAuthorizate}) {
 
     </div>
     <div className={`HamburgerNavLinks ${openHamburgerMenu}`} >
-            <Link activeClass="active" to="Main" spy={true} smooth={true} offset={-230} duration={500} isDynamic={true} className='NavLink'>ГЛАВНАЯ</Link>
-            <Link activeClass="active" to="CatalogOfWorks" spy={true} smooth={true} offset={-210} duration={500} className='NavLink'>КАТАЛОГ</Link>
-            <Link activeClass="active" to="TimingAndDelivery" spy={true} smooth={true} offset={-210} duration={500} className='NavLink'>СРОКИ И ДОСТАКА</Link>
-            <Link activeClass="active" to="AboutCashpo" spy={true} smooth={true} offset={-210} duration={500} className='NavLink'>О КАШПО</Link>
-            <Link activeClass="active" to="ContactWithUs" spy={true} smooth={true} offset={-180} duration={500} className='NavLink'>КОНТАКТЫ</Link>
+            <Link activeClass="active" 
+                  to="Main" 
+                  spy={true} 
+                  smooth={true} 
+                  offset={-230} 
+                  duration={500} 
+                  isDynamic={true} 
+                  onClick={refreshFunction}
+                  className='NavLink'>ГЛАВНАЯ</Link>
+            <Link activeClass="active" 
+                  to="CatalogOfWorks" 
+                  spy={true} 
+                  smooth={true} 
+                  offset={-210} 
+                  duration={500}
+                  onClick={refreshFunction}
+                  className='NavLink'>КАТАЛОГ</Link>
+            <Link activeClass="active" 
+                  to="TimingAndDelivery" 
+                  spy={true} 
+                  smooth={true} 
+                  offset={-210} 
+                  duration={500}
+                  onClick={refreshFunction}
+                  className='NavLink'>СРОКИ И ДОСТАКА</Link>
+            <Link activeClass="active" 
+                  to="AboutCashpo" 
+                  spy={true} 
+                  smooth={true} 
+                  offset={-210} 
+                  duration={500} 
+                  onClick={refreshFunction}
+                  className='NavLink'>О КАШПО</Link>
+            <Link activeClass="active" 
+                  to="ContactWithUs" 
+                  spy={true} 
+                  smooth={true} 
+                  offset={-180} 
+                  duration={500}
+                  onClick={refreshFunction}
+                  className='NavLink'>КОНТАКТЫ</Link>
     </div>
     </>
   )

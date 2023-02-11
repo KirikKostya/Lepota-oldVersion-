@@ -6,7 +6,7 @@
     justify-content: space-around;
 }
 .CatalogContainer .p{
-    width: 600px;
+    max-width: 600px;
     text-align: center;
     font-family:'Courier New', Courier, monospace;
     font-size: large;

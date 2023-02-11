@@ -1,14 +1,96 @@
+.fullContainer{
+    width: 90%;
+    min-width: 77vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+/**/
+.fullContainer .Chek{
+    width: 25%;
+    height: 300px !important; 
+    border-radius: 0 10px 10px 0;
+    border: 1px solid black;
+    background: rgba(164, 193, 250, 0.699);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.Chek .Parametrs{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+.Chek h3{
+    width: 80%;
+    font-weight: 700;
+    font-size: larger;
+    font-family: Arial, Helvetica, sans-serif;    
+}
+.Parametrs h5{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 500;
+    padding: 0;
+    margin: 10px 0;
+}
+.Chek .makeBTN{
+    width: 80%;
+    height: 35px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    background: rgba(104, 7, 216, 0.578);
+    color:antiquewhite;
+    font-weight: bold;
+}
+.Chek .makeBTN:hover{
+    background: rgba(104, 7, 216, 0.899);
+}
+/**/
 .MainFielfForBasket{
-    width: 97%;
-    min-height: 400px;
+    width: 65%;
+    min-height: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 5px;
     border: 1px solid black;
-    border-radius: 10px;
-    background: transparent
+    border-radius: 10px 0 0 10px;
+    background: transparent;
 }
+.MainFielfForBasket .basketParametrs{
+    width: 90%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.MainFielfForBasket .basketParametrs #fullName{
+    width: 30%;
+}
+.backItemBlock{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
+.backItemBlock h4{
+    margin: 0;
+    padding: 10px 0;
+    font-weight: 400;
+    font-size: larger;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+/**/
 .MainFielfForBasket .Item{
     width: 90%;
     display: flex;
@@ -18,6 +100,10 @@
     border: 1px solid black;
     margin: 10px;
     padding: 0 10px;
+}
+.Item h4{
+    width: 30%;
+    margin: 0;
 }
 .Item .Img{
     width: 50px;
@@ -39,11 +125,37 @@
 .Item .deleteItem {
     width: 25px;
     height: 25px;
+    border: none;
+    border-radius: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-weight: bold;
     margin-top: 1px;
-    background: red;
+    cursor: pointer;
+    background: rgba(128, 128, 128, 0.642);
+}
+.Item .deleteItem:hover {
+    background: rgba(222, 13, 13);
+}
+/**/
+.MainFielfForBasket .emptyBasketMessage{
+    width: 90%;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.emptyBasketMessage .chooseGoods{
+    color: rgb(103, 196, 254);
+    text-decoration: none;
+    font-size: large;
+    font-weight: 300;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.emptyBasketMessage .chooseGoods:hover{
+    color: rgb(34, 170, 254)
 }
 

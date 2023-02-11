@@ -3,14 +3,13 @@ import './Styles/WorkCatalog.css'
 import CardOfWork from './CardOfWork'
 import axios from 'axios'
 
-export default function WorkCatalog( {setOpenID} ) {
+export default function WorkCatalog( {setOpenID, fetchProducts} ) {
   
   const [CARDS, setCARDS] = useState([])
 
   const fetchFanc = () =>{
-    axios.get('http://129.159.242.47:8081/Item/GetAll')
+    axios.get('https://api.native-flora.tk/Item/GetAll')
     .then(res=>setCARDS(res.data.data))
-    // console.log(response.data)
   }
 
 useEffect(()=>{
@@ -26,7 +25,7 @@ useEffect(()=>{
         <div className='ListOfWorks'>
             {
               CARDS.map(card => (
-                <CardOfWork key={card.id} card={card} setOpenID={setOpenID}/>
+                <CardOfWork key={card.id} card={card} setOpenID={setOpenID} fetchProducts={fetchProducts}/>
               ))
             }
             {/* <CardOfWork card={CARDS[0]} /> */}

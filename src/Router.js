@@ -8,15 +8,28 @@ import TypeCatalog from './CatalogOfWorks/TypeCatalog'
 import Main from './Main';
 export default function Router({ isAuthorizate, setIsAuthorizate }) {
     
+    const [catalogOrders, setCatalogOrders] = useState(Array);   
     const [OpenID, setOpenID] = useState(0)
     const [isBasketEmpty, setIsBasketEmpty] = useState(true)
+
+    const fetchProducts = (OpenID) => {
+      fetch(`https://api.native-flora.tk/Item/GetById?id=${OpenID}`)
+        .then(res=>res.json())
+        .then(res=>{
+            if(res.data == null){
+                setCatalogOrders(null)
+            } else {
+                setCatalogOrders([res.data])
+            }
+        })
+    }
 
   return (
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Main isAuthorizate = {isAuthorizate} 
                                                setIsAuthorizate = {setIsAuthorizate}
-                                               setOpenID={setOpenID}/>} />
+                                               fetchProducts={fetchProducts}/>} />
             </Routes> 
             <Routes>
                 <Route path='/Registration' element={<Registration setIsAuthorizate = {setIsAuthorizate} />}/>
@@ -33,7 +46,9 @@ export default function Router({ isAuthorizate, setIsAuthorizate }) {
                 <Route path='/GoodsArchive' element={<GoodsArchive />} />
             </Routes>
             <Routes>
-                <Route path='/TypeCatalog' element={<TypeCatalog OpenID={OpenID} setIsBasketEmpty = {setIsBasketEmpty}/>} />
+                <Route path='/TypeCatalog' element={<TypeCatalog OpenID={OpenID} 
+                                                                 setIsBasketEmpty = {setIsBasketEmpty}
+                                                                 catalogOrders={catalogOrders}/>} />
             </Routes>
         </BrowserRouter>
   )

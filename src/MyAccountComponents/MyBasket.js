@@ -1,34 +1,43 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import '../MyAccountComponents/Styles/MyBasket.css'
 import UpNavigation from '../Components/UpNavigation.js'
 import axios from 'axios'
 import Loading from 'react-loading'
+import { NavLink } from 'react-router-dom'
 
 export default function MyBasket({isAuthorizate, setIsAuthorizate }) {
 
   const [ItemsInBasket, setItemsInBasket] = useState([])
-  const [isBasketEmpty, setIsBasketEmpty] = useState(true)
+  const [isBasketEmpty, setIsBasketEmpty] = useState(false)
+
+  const Ref = useRef()
 
   const deleteItem = async (id) => {{
-    let deleteResponce = await axios.delete('https://api.hlofiys.tk/cart/delete', {
-      headers:{'x-access-token': localStorage.getItem('accessToken')},
-      data:{ id: id }
+    await axios.post('https://api.native-flora.tk/Cart/Delete', {
+      id: id
+    }, {
+      headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
     
-    let updateResponce = await requestBasketFunc()
+    await requestBasketFunc()
   }}
 
   const requestBasketFunc = async () => {
-  axios.post( 'http://129.159.242.47:8081/Cart/All', {}, {
+  axios.post( 'https://api.native-flora.tk/Cart/All', {}, {
     headers:{'x-access-token': localStorage.getItem('accessToken')}
   })
-  .then(res=>setItemsInBasket(res.data.data.cartItems))
-  .catch(err=> {
-    if(err.response.status === 404){
-      setIsBasketEmpty(true)
-    }
-    console.log(err)
-  })
+  .then(res => setItemsInBasket(res.data.data.cartItems) ) 
+  .catch(err=> (err.response.data.message) ? setItemsInBasket([]) : '')
+  }
+
+  const updateAmountOfOrder = (ID, Amount) => {
+    axios.post('https://api.native-flora.tk/Cart/Update', {
+        id: ID, 
+        amount: Amount
+      }, {
+        headers:{'x-access-token': localStorage.getItem('accessToken')}
+      }
+    ).then(res=>requestBasketFunc())
   }
 
   useEffect(()=>{
@@ -38,31 +47,68 @@ export default function MyBasket({isAuthorizate, setIsAuthorizate }) {
   return (
     <>
       <UpNavigation isAuthorizate={isAuthorizate} setIsAuthorizate = {setIsAuthorizate}/>
-      <div className='MainFielfForBasket'>
-        {
-          ItemsInBasket === []
-            ?<Loading
-                type="spokes"
-                color={"black"}
-                height={"50px"}
-                width={"50px"}
-                padding={"20px"}
-              />
-              :ItemsInBasket.map(item => (
-                <div className='Item' key={item.id}>
-                  <h4>{item.name}</h4>
-                  <div className='ChangeAmount'>
-                    <input id='ChangeInput'
-                         type='number'
-                         className='ChangeInput' 
-                         min={0} 
-                         placeholder={item.amount}/>
+      
+      <div className='backItemBlock'>
+        <NavLink to='/' className='NavLink'>&#11013;</NavLink>
+        <h4>Корзина</h4>
+      </div>
+
+      <div className='fullContainer'>
+        <div className='MainFielfForBasket'>
+          <div className='basketParametrs'>
+            <p id='fullName'>Товар</p>
+            <p>Цена</p>
+            <p>Кол-во</p>
+            <p>Сумма</p>
+          </div>
+            {
+              isBasketEmpty
+                ? <Loading
+                    type="spokes"
+                    color="black"
+                    height="50px"
+                    width="50px"
+                    padding="20px"
+                  />
+                : ItemsInBasket.map(item => (
+                    <div className='Item' key={item.item.id}>
+                      <img width={55} height={55} src={'http://api.native-flora.tk/media/get/lilu?name=1_main.png'}/>
+                      <h4>{item.item.name}</h4>
+                      <h3>{item.item.price} Br</h3>
+                      <div className='ChangeAmount'>
+                        <input 
+                              id='ChangeInput'
+                              type='number'
+                              className='ChangeInput' 
+                              min={0}
+                              onChange={(e)=>{
+                                updateAmountOfOrder(item.item.id, e.target.value)
+                              }}
+                              defaultValue={item.amount}/>
+                      </div>
+                      <h3>{item.price}</h3>
+                      <button className='deleteItem' onClick={()=>deleteItem(item.item.id)}>&times;</button>
+                    </div>
+                  ))
+            }
+            {
+              ItemsInBasket.length === 0
+                ? <div className='emptyBasketMessage'>
+                    <h3>Ваша корзина пуста!</h3>
+                    <NavLink to='/' className='chooseGoods'>Перейти к выбору товара</NavLink>
                   </div>
-                  <h3>{item.price*item.amount} Br</h3>
-                  <button className='deleteItem' onClick={()=>deleteItem(item.id)}>&times;</button>
-                </div>
-            ))
-        }
+                  :<></>
+            }
+        </div>
+
+        <div className='Chek'>
+          <h3>Расчёт</h3>
+          <div className='Parametrs'>
+            <h5>Сумма: <span>100 Br</span></h5>
+            <h5>Итог: <span>100 Br</span></h5>
+          </div>
+          <button className='makeBTN'>Оформить заказ</button>
+        </div>
       </div>
     </>
   )
