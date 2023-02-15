@@ -27,6 +27,12 @@
     justify-content: center;  
     background-color: rgba(145, 213, 247, 0.594); 
 }
+/* .Card div{
+    background: transparent !important;
+} */
+.Card div div{
+    border-radius: 20px 20px 0 0 !important;
+}
 .Card .AddToCartBTN{
     width: 120px;
     height: 30px;
@@ -59,7 +65,7 @@
     color: rgb(236, 55, 55);
 }
 .ContainerForTypeCatalog .AddedOrder{
-    color: rgb(3, 27, 245);
+    color: rgba(3, 27, 245, 0.884);
     font-weight: bold;
     font-size: medium;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -105,6 +111,7 @@
 }
 .modalViewContainer .changeParametrsOfOrder{
     color: rgba(24, 24, 248, 0.614);
+    text-align: center;
     cursor: pointer;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: 500;
@@ -112,4 +119,18 @@
 }
 .modalViewContainer .changeParametrsOfOrder:hover{
     color: rgba(24, 24, 248);
+}
+
+.imgContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.BTNS{
+    width: 240px;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }

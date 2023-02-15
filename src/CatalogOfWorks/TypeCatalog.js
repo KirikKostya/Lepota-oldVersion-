@@ -6,6 +6,12 @@ import { refreshFunction } from '../App';
 import { NavLink } from 'react-router-dom';
 import Loading from 'react-loading';
 import ReactModal from 'react-modal';
+import { Slide } from 'react-slideshow-image';
+import {Swiper, SwiperSlide} from 'swiper/react';
+import { Navigation } from 'swiper';
+import { Carousel, Thumbs } from 'react-responsive-carousel';
+import SimpleImageSlider from 'react-simple-image-slider';
+import UpdateOrder from './UpdateOrder';
 
 export default function TypeCatalog({ setIsBasketEmpty, catalogOrders}) {
 
@@ -13,6 +19,9 @@ export default function TypeCatalog({ setIsBasketEmpty, catalogOrders}) {
   const [AddedOrder, setAddedOrder] = useState(false)
   const [modalView, setModalView] = useState(false)
   const [modalViewStep, setModalViewStep] = useState(1)
+  
+  //Заказ который есть в корзине, но User хочет поменять метрики 
+  const [selectedOrder, setSelectedOrder] = useState(Array);
 
   const customStylesForModal = {
     content: {
@@ -38,7 +47,7 @@ export default function TypeCatalog({ setIsBasketEmpty, catalogOrders}) {
   const AddItemToCart = async (cardId) =>{
     axios.post(`https://api.native-flora.tk/Cart/Add`, {
       id: cardId,
-      amount: 2
+      amount: 1
     }, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
     })
@@ -56,11 +65,26 @@ export default function TypeCatalog({ setIsBasketEmpty, catalogOrders}) {
     })
   }
 
+  //Make list from response data
+  const getImages = (images) => {
+    return images.map(image=>{
+      let galleryItem = {};
+      galleryItem['url'] = image;
+      return galleryItem; 
+    }); 
+  }
+
+  const fetchOrderById = (ID) => {
+    axios.post( 'https://api.native-flora.tk/Cart/All', {}, {
+      headers:{'x-access-token': localStorage.getItem('accessToken')}
+    })
+    .then(res=>setSelectedOrder(res.data.data.cartItems.filter(item=>item.item.id === ID))) 
+  }
 
   return (
     <div className='ContainerForTypeCatalog'>
       {
-        (WarningMessageIsOpen)
+        WarningMessageIsOpen
             ?
             <ReactModal 
                 isOpen={WarningMessageIsOpen}
@@ -70,7 +94,6 @@ export default function TypeCatalog({ setIsBasketEmpty, catalogOrders}) {
               <h1>Внимание!</h1>
               <h2>Для того чтобы добавить товар в корзину, вам необходимо <NavLink to={'/Registration'}>войти</NavLink> в аккаунт!</h2>
             </ReactModal>
-
             : <>
                   <h1>Каталог товаров по выбранному типу</h1>
                   <BackButton Link='/'/>
@@ -86,7 +109,19 @@ export default function TypeCatalog({ setIsBasketEmpty, catalogOrders}) {
                       />  
                       :catalogOrders.map(order =>(
                         <div key={order.id} className='Card'> 
-                          <img className='IMG' src={order.icon && require('../Photos/somethingWentWrong.png')} />
+                          <SimpleImageSlider
+                            className='SimpleImage'
+                            width={240}
+                            height={200}
+                            navSize={35}
+                            navMargin={0}
+                            style={{background: 'transparent'}}
+                            navStyle={2}
+                            slideDuration={0.8}
+                            images={getImages(order.icon)}
+                            showBullets={false}
+                            showNavs={true} />
+                          
                           <h4>{order.name} <span>{order.price} Br</span> </h4>
                           <p>Здесь будет небольшая информация про продукт</p>
                           <button className='AddToCartBTN' 
@@ -94,8 +129,9 @@ export default function TypeCatalog({ setIsBasketEmpty, catalogOrders}) {
                                     localStorage.getItem('accessToken')
                                       ? AddItemToCart(order.id)
                                         : setWarningMessageIsOpen(true)
-                                    setModalViewStep(1)
-                                    refreshFunction()
+                                    fetchOrderById(order.id)
+                                    setModalViewStep(1) //Change step for update order
+                                    refreshFunction() //Fetch to refresh Token
                                   }}>В корзину &#128722;</button>
                         </div>
                       ))
@@ -104,7 +140,7 @@ export default function TypeCatalog({ setIsBasketEmpty, catalogOrders}) {
                     {
                       (AddedOrder)
                         ?<div className='AddedOrder'>
-                          <h1>Ваш товар добавлен в корзину!</h1>
+                          <h2>Ваш товар добавлен в корзину!</h2>
                          </div>
                           :<></>
                     }
@@ -119,17 +155,30 @@ export default function TypeCatalog({ setIsBasketEmpty, catalogOrders}) {
                             {
                               modalViewStep === 1
                                 ? <div className='modalViewContainer'>
-                                      <h2>Такой товар ужде есть в корзине!</h2>
+                                      <h2>Такой товар уже есть в корзине!</h2>
                                       <h5 className='changeParametrsOfOrder' 
                                           onClick={()=> setModalViewStep(modalViewStep+1)}>
                                             Хотите изменить количество товара или его составляющие?
                                       </h5>
                                       <button onClick={()=>setModalView(!modalView)}>Закрыть</button>  
                                   </div>
-                                  :<div className='modalViewContainer'>
-                                      <h2>Ваш товар</h2>
-                                      <button onClick={()=>setModalView(!modalView)}>Закрыть</button>
-                                  </div>
+                                  : <div className='modalViewContainer'>
+                                      {
+                                        selectedOrder.length === 0
+                                            ?<>
+                                              <h2>Ваш товар</h2>
+                                              <Loading
+                                                type="spokes"
+                                                color="black"
+                                                height="50px"
+                                                width="50px"
+                                                padding="20px"
+                                              /> 
+                                              <button onClick={()=>setModalView(!modalView)}>Закрыть</button>
+                                            </>
+                                            : <UpdateOrder selectedOrder={selectedOrder} setModalView={setModalView}/>
+                                      }
+                                    </div>
                             }
                             
                           </ReactModal>

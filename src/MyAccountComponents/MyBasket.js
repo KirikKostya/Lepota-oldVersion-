@@ -4,13 +4,12 @@ import UpNavigation from '../Components/UpNavigation.js'
 import axios from 'axios'
 import Loading from 'react-loading'
 import { NavLink } from 'react-router-dom'
+import { refreshFunction } from '../App'
 
 export default function MyBasket({isAuthorizate, setIsAuthorizate }) {
 
   const [ItemsInBasket, setItemsInBasket] = useState([])
   const [isBasketEmpty, setIsBasketEmpty] = useState(false)
-
-  const Ref = useRef()
 
   const deleteItem = async (id) => {{
     await axios.post('https://api.native-flora.tk/Cart/Delete', {
@@ -30,14 +29,16 @@ export default function MyBasket({isAuthorizate, setIsAuthorizate }) {
   .catch(err=> (err.response.data.message) ? setItemsInBasket([]) : '')
   }
 
-  const updateAmountOfOrder = (ID, Amount) => {
+  const updateAmountOfOrder = async (ID, Amount) => {
     axios.post('https://api.native-flora.tk/Cart/Update', {
         id: ID, 
         amount: Amount
       }, {
         headers:{'x-access-token': localStorage.getItem('accessToken')}
       }
-    ).then(res=>requestBasketFunc())
+    )
+    .then(res=>setItemsInBasket(res.data.data.cartItems))
+    .catch(err=>console.log(err))
   }
 
   useEffect(()=>{
@@ -70,9 +71,9 @@ export default function MyBasket({isAuthorizate, setIsAuthorizate }) {
                     width="50px"
                     padding="20px"
                   />
-                : ItemsInBasket.map(item => (
+                : ItemsInBasket.sort((a,b)=> a.item.id - b.item.id).map(item => (
                     <div className='Item' key={item.item.id}>
-                      <img width={55} height={55} src={'http://api.native-flora.tk/media/get/lilu?name=1_main.png'}/>
+                      <img width={55} height={55} src={item.item.icon[0]}/>
                       <h4>{item.item.name}</h4>
                       <h3>{item.item.price} Br</h3>
                       <div className='ChangeAmount'>
@@ -80,7 +81,8 @@ export default function MyBasket({isAuthorizate, setIsAuthorizate }) {
                               id='ChangeInput'
                               type='number'
                               className='ChangeInput' 
-                              min={0}
+                              min={1}
+                              max={100}
                               onChange={(e)=>{
                                 updateAmountOfOrder(item.item.id, e.target.value)
                               }}

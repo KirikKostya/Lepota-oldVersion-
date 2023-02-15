@@ -9,7 +9,7 @@
 /**/
 .fullContainer .Chek{
     width: 25%;
-    height: 300px !important; 
+    min-height: 350px !important; 
     border-radius: 0 10px 10px 0;
     border: 1px solid black;
     background: rgba(164, 193, 250, 0.699);
@@ -55,7 +55,7 @@
 /**/
 .MainFielfForBasket{
     width: 65%;
-    min-height: 300px;
+    min-height: 350px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -97,7 +97,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid black;
+    background: rgb(217, 231, 248);
+    border-radius: 10px;
     margin: 10px;
     padding: 0 10px;
 }
@@ -120,7 +121,9 @@
 .ChangeAmount .ChangeInput{
     width: 40px;
     height: 20px;
-    outline: auto;
+    outline: none;
+    border: none;
+    background: rgba(252, 252, 253, 0.642);
 }
 .Item .deleteItem {
     width: 25px;
@@ -159,3 +162,28 @@
     color: rgb(34, 170, 254)
 }
 
+/*MEDIA*/
+@media screen and (max-width: 944px) {
+    .fullContainer{
+        flex-direction: column;
+    }
+    .MainFielfForBasket{
+        border-radius: 10px 10px 0 0;
+    }
+    .fullContainer .Chek{
+        width: 65%;
+        height: 150px;
+        border-radius: 0 0 10px 10px;
+    }
+    .backItemBlock{
+        width: 65%
+    }
+}
+@media screen and (max-width:730px){
+    .MainFielfForBasket{
+        width: 80%;
+    }
+    .fullContainer .Chek{
+        width: 80%;
+    }
+}

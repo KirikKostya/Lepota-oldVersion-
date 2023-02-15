@@ -9,7 +9,10 @@ export default function WorkCatalog( {setOpenID, fetchProducts} ) {
 
   const fetchFanc = () =>{
     axios.get('https://api.native-flora.tk/Item/GetAll')
-    .then(res=>setCARDS(res.data.data))
+    .then(res=>{
+      setCARDS(res.data.data)
+      console.log(res.data.data)
+    })
   }
 
 useEffect(()=>{

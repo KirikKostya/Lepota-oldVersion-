@@ -47,7 +47,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: white;
+    color:rgb(238, 245, 253);
+    font-size: medium;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .ContainerForTimingAndDelivery .TextPath{
     display: flex;
