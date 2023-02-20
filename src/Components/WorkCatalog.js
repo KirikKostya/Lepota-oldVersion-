@@ -9,21 +9,19 @@ export default function WorkCatalog( {setOpenID, fetchProducts} ) {
 
   const fetchFanc = () =>{
     axios.get('https://api.native-flora.tk/Item/GetAll')
-    .then(res=>{
-      setCARDS(res.data.data)
-      console.log(res.data.data)
-    })
+    .then(res=>setCARDS(res.data.data))
   }
 
-useEffect(()=>{
-  fetchFanc()
-},[])
+  useEffect(()=>{
+    fetchFanc()
+  },[])
+
   return (
     <div className='CatalogContainer' id='CatalogOfWorks'>
         <h1>Наши Работы</h1>
         <p className='p'>У нас вы можете приобрести разного вида подарки, 
           начиная от выразительных статуэток и заканчивая ключницами и разными подставками. 
-          вы сможете сделать заказ и обсудить с мастером вариант вашейго собственного заказа.
+          Вы сможете сделать заказ и обсудить с мастером вариант вашейго собственного заказа.
         </p>
         <div className='ListOfWorks'>
             {

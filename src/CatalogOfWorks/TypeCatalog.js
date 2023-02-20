@@ -6,12 +6,10 @@ import { refreshFunction } from '../App';
 import { NavLink } from 'react-router-dom';
 import Loading from 'react-loading';
 import ReactModal from 'react-modal';
-import { Slide } from 'react-slideshow-image';
-import {Swiper, SwiperSlide} from 'swiper/react';
-import { Navigation } from 'swiper';
-import { Carousel, Thumbs } from 'react-responsive-carousel';
 import SimpleImageSlider from 'react-simple-image-slider';
 import UpdateOrder from './UpdateOrder';
+import UpNavigation from '../Components/UpNavigation';
+import ContactWithUs from '../Components/ContactWithUs';
 
 export default function TypeCatalog({ setIsBasketEmpty, catalogOrders}) {
 
@@ -95,8 +93,9 @@ export default function TypeCatalog({ setIsBasketEmpty, catalogOrders}) {
               <h2>Для того чтобы добавить товар в корзину, вам необходимо <NavLink to={'/Registration'}>войти</NavLink> в аккаунт!</h2>
             </ReactModal>
             : <>
+                  <UpNavigation hide={'hide'}/>
                   <h1>Каталог товаров по выбранному типу</h1>
-                  <BackButton Link='/'/>
+                  {/* <BackButton Link='/'/> */}
                   <div className='ContainerForCards'>
                   {
                     catalogOrders === null
@@ -165,18 +164,19 @@ export default function TypeCatalog({ setIsBasketEmpty, catalogOrders}) {
                                   : <div className='modalViewContainer'>
                                       {
                                         selectedOrder.length === 0
-                                            ?<>
-                                              <h2>Ваш товар</h2>
-                                              <Loading
-                                                type="spokes"
-                                                color="black"
-                                                height="50px"
-                                                width="50px"
-                                                padding="20px"
-                                              /> 
-                                              <button onClick={()=>setModalView(!modalView)}>Закрыть</button>
-                                            </>
-                                            : <UpdateOrder selectedOrder={selectedOrder} setModalView={setModalView}/>
+                                            ? <>
+                                                <h2>Ваш товар</h2>
+                                                <Loading
+                                                  type="spokes"
+                                                  color="black"
+                                                  height="50px"
+                                                  width="50px"
+                                                  padding="20px"
+                                               /> 
+                                                <button onClick={()=>setModalView(!modalView)}>Закрыть</button>
+                                              </>
+                                              : <UpdateOrder selectedOrder={selectedOrder} 
+                                                             setModalView={setModalView}/>
                                       }
                                     </div>
                             }
@@ -184,6 +184,7 @@ export default function TypeCatalog({ setIsBasketEmpty, catalogOrders}) {
                           </ReactModal>
                           :<></>
                     }
+                    <ContactWithUs />
                 </>
       }
     </div>

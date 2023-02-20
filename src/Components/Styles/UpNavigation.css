@@ -58,6 +58,9 @@
 .active{
     color: blue !important;
 }
+.hide{
+    display: none;
+}
 @media screen and (max-width:944px){
     .UpNavContainer{
         width: 100%;

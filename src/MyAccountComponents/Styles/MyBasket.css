@@ -1,6 +1,6 @@
 .fullContainer{
     width: 90%;
-    min-width: 77vh;
+    min-height: 87vh;
     display: flex;
     flex-direction: row;
     align-items: center;

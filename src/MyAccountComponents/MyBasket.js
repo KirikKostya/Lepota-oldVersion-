@@ -5,6 +5,7 @@ import axios from 'axios'
 import Loading from 'react-loading'
 import { NavLink } from 'react-router-dom'
 import { refreshFunction } from '../App'
+import ContactWithUs from '../Components/ContactWithUs'
 
 export default function MyBasket({isAuthorizate, setIsAuthorizate }) {
 
@@ -47,12 +48,12 @@ export default function MyBasket({isAuthorizate, setIsAuthorizate }) {
 
   return (
     <>
-      <UpNavigation isAuthorizate={isAuthorizate} setIsAuthorizate = {setIsAuthorizate}/>
+      <UpNavigation isAuthorizate={isAuthorizate} setIsAuthorizate = {setIsAuthorizate} hide={'hide'}/>
       
-      <div className='backItemBlock'>
+      {/* <div className='backItemBlock'>
         <NavLink to='/' className='NavLink'>&#11013;</NavLink>
         <h4>Корзина</h4>
-      </div>
+      </div> */}
 
       <div className='fullContainer'>
         <div className='MainFielfForBasket'>
@@ -112,6 +113,8 @@ export default function MyBasket({isAuthorizate, setIsAuthorizate }) {
           <button className='makeBTN'>Оформить заказ</button>
         </div>
       </div>
+      
+      <ContactWithUs />
     </>
   )
 }

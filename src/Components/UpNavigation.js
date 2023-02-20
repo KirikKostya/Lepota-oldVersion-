@@ -5,10 +5,10 @@ import MyAccount from './MyAccount'
 import { Link } from 'react-scroll';
 import { NavLink } from 'react-router-dom';
 
-export default function UpNavigation({ isAuthorizate, setIsAuthorizate}) {
-
+export default function UpNavigation({ isAuthorizate, setIsAuthorizate, hide }) {
+ 
   const [myAccountIsOpen, setMyAccountIsOpen] = useState(false);
-  const [openHamburgerMenu, setOpenHamburgerMenu] = useState('close')
+  const [openHamburgerMenu, setOpenHamburgerMenu] = useState('close');
 
   return (
     <>
@@ -37,7 +37,7 @@ export default function UpNavigation({ isAuthorizate, setIsAuthorizate}) {
                   duration={500} 
                   isDynamic={true} 
                   onClick={refreshFunction}
-                  className='NavLink'>ГЛАВНАЯ</Link>
+                  className={`NavLink `} >ГЛАВНАЯ</Link>
             <Link activeClass="active" 
                   to="CatalogOfWorks" 
                   spy={true} 
@@ -45,17 +45,29 @@ export default function UpNavigation({ isAuthorizate, setIsAuthorizate}) {
                   offset={-60} 
                   duration={500} 
                   onClick={refreshFunction}
-                  className='NavLink'>КАТАЛОГ</Link>
+                  className={`NavLink ${hide}`} >КАТАЛОГ</Link>
             <Link activeClass="active" 
                   to="TimingAndDelivery" 
+                  spy={true}
+                  smooth={true}
+                  offset={-100}
+                  duration={500}
+                  onClick={refreshFunction}
+                  className={`NavLink ${hide}`} >СРОКИ И ДОСТАКА</Link>
+            <Link activeClass="active" 
+                  to="AboutCashpo" 
                   spy={true} 
                   smooth={true} 
                   offset={-100} 
-                  duration={500}
-                  onClick={refreshFunction}
-                  className='NavLink'>СРОКИ И ДОСТАКА</Link>
-            <Link activeClass="active" to="AboutCashpo" spy={true} smooth={true} offset={-100} duration={500} className='NavLink'>О КАШПО</Link>
-            <Link activeClass="active" to="ContactWithUs" spy={true} smooth={true} offset={-65} duration={500} className='NavLink'>КОНТАКТЫ</Link>
+                  duration={500} 
+                  className={`NavLink ${hide}`} >О КАШПО</Link>
+            <Link activeClass="active" 
+                  to="ContactWithUs" 
+                  spy={true} 
+                  smooth={true} 
+                  offset={-65} 
+                  duration={500} 
+                  className={`NavLink`} >КОНТАКТЫ</Link>
         </div>
         
         <NavLink to='/'>
@@ -64,14 +76,14 @@ export default function UpNavigation({ isAuthorizate, setIsAuthorizate}) {
         
         <div className='Hamburger' 
              onClick={()=>{
-              if(openHamburgerMenu === ''){
-                setOpenHamburgerMenu('close')
-              } else { 
-                setOpenHamburgerMenu('')
-              }
+              (openHamburgerMenu === '')
+                ? setOpenHamburgerMenu('close')
+                  :setOpenHamburgerMenu('')
+
               if(localStorage.getItem('accessToken')){
                 refreshFunction();
               }
+
           }}>☰</div>
         {
           (!myAccountIsOpen)
@@ -89,7 +101,7 @@ export default function UpNavigation({ isAuthorizate, setIsAuthorizate}) {
                   duration={500} 
                   isDynamic={true} 
                   onClick={refreshFunction}
-                  className='NavLink'>ГЛАВНАЯ</Link>
+                  className={`NavLink `}>ГЛАВНАЯ</Link>
             <Link activeClass="active" 
                   to="CatalogOfWorks" 
                   spy={true} 
@@ -97,7 +109,7 @@ export default function UpNavigation({ isAuthorizate, setIsAuthorizate}) {
                   offset={-210} 
                   duration={500}
                   onClick={refreshFunction}
-                  className='NavLink'>КАТАЛОГ</Link>
+                  className={`NavLink ${hide}`}>КАТАЛОГ</Link>
             <Link activeClass="active" 
                   to="TimingAndDelivery" 
                   spy={true} 
@@ -105,7 +117,7 @@ export default function UpNavigation({ isAuthorizate, setIsAuthorizate}) {
                   offset={-210} 
                   duration={500}
                   onClick={refreshFunction}
-                  className='NavLink'>СРОКИ И ДОСТАКА</Link>
+                  className={`NavLink ${hide}`}>СРОКИ И ДОСТАКА</Link>
             <Link activeClass="active" 
                   to="AboutCashpo" 
                   spy={true} 
@@ -113,7 +125,7 @@ export default function UpNavigation({ isAuthorizate, setIsAuthorizate}) {
                   offset={-210} 
                   duration={500} 
                   onClick={refreshFunction}
-                  className='NavLink'>О КАШПО</Link>
+                  className={`NavLink ${hide}`}>О КАШПО</Link>
             <Link activeClass="active" 
                   to="ContactWithUs" 
                   spy={true} 
@@ -121,7 +133,7 @@ export default function UpNavigation({ isAuthorizate, setIsAuthorizate}) {
                   offset={-180} 
                   duration={500}
                   onClick={refreshFunction}
-                  className='NavLink'>КОНТАКТЫ</Link>
+                  className={`NavLink `}>КОНТАКТЫ</Link>
     </div>
     </>
   )

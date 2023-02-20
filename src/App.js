@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import ReactModal from 'react-modal';
-import './App.css';
 import Router from './Router';
+import './App.css';
+
 
 export const refreshFunction = async () => {
   fetch('https://api.native-flora.tk/Auth/checkToken', {
