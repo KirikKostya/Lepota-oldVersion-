@@ -19,7 +19,7 @@ export default function ContactWithUs() {
                                     (isOpen)
                                       ? setIsOpen(false)  
                                         :setIsOpen(true)}}><path d={Telegram}/></svg></a>
-                <a href='https://www.instagram.com/lepota.by/' target='_blank' ><svg  fill="black" viewBox="0 0 16 16"><path d={Instagram}/></svg></a>
+                <a href='https://www.instagram.com/lepota.by/' target='_blank'><svg  fill="black" viewBox="0 0 16 16"><path d={Instagram}/></svg></a>
             {/* <a href='mailto:dordom.decor@gmail.com'>
 
             </a>  Mail.ru*/} 

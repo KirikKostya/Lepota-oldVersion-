@@ -83,15 +83,14 @@ export default function TypeCatalog({ setIsBasketEmpty, catalogOrders}) {
     <div className='ContainerForTypeCatalog'>
       {
         WarningMessageIsOpen
-            ?
-            <ReactModal 
-                isOpen={WarningMessageIsOpen}
-                ariaHideApp={false}
-                contentLabel="Selected Option"
-                style={customStylesForModal}>
-              <h1>Внимание!</h1>
-              <h2>Для того чтобы добавить товар в корзину, вам необходимо <NavLink to={'/Registration'}>войти</NavLink> в аккаунт!</h2>
-            </ReactModal>
+            ? <ReactModal 
+                  isOpen={WarningMessageIsOpen}
+                  ariaHideApp={false}
+                  contentLabel="Selected Option"
+                  style={customStylesForModal}>
+                <h1>Внимание!</h1>
+                <h2>Для того чтобы добавить товар в корзину, вам необходимо <NavLink to={'/Registration'}>войти</NavLink> в аккаунт!</h2>
+              </ReactModal>
             : <>
                   <UpNavigation hide={'hide'}/>
                   <h1>Каталог товаров по выбранному типу</h1>

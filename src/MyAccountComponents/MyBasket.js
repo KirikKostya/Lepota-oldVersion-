@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom'
 import { refreshFunction } from '../App'
 import ContactWithUs from '../Components/ContactWithUs'
 
-export default function MyBasket({isAuthorizate, setIsAuthorizate }) {
+export default function MyBasket() {
 
   const [ItemsInBasket, setItemsInBasket] = useState([])
   const [isBasketEmpty, setIsBasketEmpty] = useState(false)
@@ -27,7 +27,9 @@ export default function MyBasket({isAuthorizate, setIsAuthorizate }) {
     headers:{'x-access-token': localStorage.getItem('accessToken')}
   })
   .then(res => setItemsInBasket(res.data.data.cartItems) ) 
-  .catch(err=> (err.response.data.message) ? setItemsInBasket([]) : '')
+  .catch(err=> (err.response.data.message) 
+                  ? setItemsInBasket([]) 
+                    : '')
   }
 
   const updateAmountOfOrder = async (ID, Amount) => {
@@ -48,7 +50,7 @@ export default function MyBasket({isAuthorizate, setIsAuthorizate }) {
 
   return (
     <>
-      <UpNavigation isAuthorizate={isAuthorizate} setIsAuthorizate = {setIsAuthorizate} hide={'hide'}/>
+      <UpNavigation hide={'hide'}/>
       
       {/* <div className='backItemBlock'>
         <NavLink to='/' className='NavLink'>&#11013;</NavLink>

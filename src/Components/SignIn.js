@@ -1,14 +1,9 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
 import axios from 'axios'
 import './Styles/SignIn.css'
 
-export default function SignIn({setRegistr, setIsAuthorizate}) {
-  
-  let PasswordInput;
-
-  useEffect(()=>{
-     PasswordInput = document.querySelector('#PasswordInput');
-  }, [])
+export default function SignIn({ setRegistr }) {
   
     const [LoginInputValue, setLoginInputValue] = useState('');
     const [PasswordInputValue, setPasswordInputValue] = useState('');
@@ -17,12 +12,12 @@ export default function SignIn({setRegistr, setIsAuthorizate}) {
     const [ColorOfValidateForm, setColorOfValidateForm] = useState('bad')
 
 
+    const dispatch = useDispatch()
+
   const showPassword = ()=>{
-    if(TypeOfPasswordInput == 'password'){
-      setTypeOfPasswordInput('text')
-    } else {
-      setTypeOfPasswordInput('password')
-    }
+    (TypeOfPasswordInput == 'password')
+      ? setTypeOfPasswordInput('text')
+        : setTypeOfPasswordInput('password')
   }
 
   function validateEmail(email) {
@@ -63,8 +58,8 @@ export default function SignIn({setRegistr, setIsAuthorizate}) {
             setColorOfValidateForm('');
             setStatusValidateForm('')
           },4000)
-          setIsAuthorizate(true)
-    } else {
+          dispatch({ type: 'COMPLETED_AUTHORIZATION'})  
+        } else {
       console.log('123')
     }
   }

@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom'
 import { refreshFunction } from '../App';
 import axios from 'axios';
 import './Styles/MyAccount.css'
 
-export default function MyAccount({isAuthorizate, setIsAuthorizate}) {
+export default function MyAccount() {
 
   const [amountOrderInBasket, setAmountOrderInBasket] = useState(0);
 
+  const dispatch = useDispatch()
+  const isAuthorizate = useSelector(state=>state.isAuthorizate)
+
   const SignOut = () =>{
-    setIsAuthorizate(false);
+    dispatch({ type: 'UNCOMPLETED_AUTHORIZATION'})
     localStorage.clear();
   }
 

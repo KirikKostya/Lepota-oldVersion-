@@ -4,7 +4,7 @@ import BackButton from './BackButton';
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 
-export default function Registration({ setIsAuthorizate }) {
+export default function Registration() {
 
     const [Registr, setRegistr] = useState(true);
 
@@ -14,8 +14,8 @@ export default function Registration({ setIsAuthorizate }) {
         <div className='FieldEffect'></div>
             {
             (Registr)
-                ? <SignUp setRegistr={setRegistr} setIsAuthorizate = {setIsAuthorizate} />
-                  :<SignIn setRegistr={setRegistr} setIsAuthorizate = {setIsAuthorizate}/>
+                ? <SignUp setRegistr={setRegistr} />
+                  :<SignIn setRegistr={setRegistr} />
             }
         
         

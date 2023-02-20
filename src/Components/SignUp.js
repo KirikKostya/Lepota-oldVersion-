@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useRef} from 'react'
 import axios from 'axios';
 import './Styles/SignUp.css'
+import { useDispatch } from 'react-redux';
 
 
-export default function SignUp({setRegistr, setIsAuthorizate}) {
-  
+export default function SignUp({ setRegistr }) {
+
     const [LoginInputValue, setLoginInputValue] = useState('');
     const [PasswordInputValue, setPasswordInputValue] = useState('');
     const [SecondPasswordInputValue, setSecondPasswordInputValue] = useState('')
@@ -13,12 +14,13 @@ export default function SignUp({setRegistr, setIsAuthorizate}) {
     const [StatusValidateForm, setStatusValidateForm] = useState('') 
     const [ColorOfValidateForm, setColorOfValidateForm] = useState('bad')
 
+
+    const dispatch = useDispatch()
+    
   const showPassword = ()=>{
-    if(TypeForFirstPasswordInput == 'password'){
-      setTypeForFirstPasswordInput('text')
-    } else {
-      setTypeForFirstPasswordInput('password')
-    }
+    (TypeForFirstPasswordInput == 'password')
+      ? setTypeForFirstPasswordInput('text')
+        : setTypeForFirstPasswordInput('password')
   }
   
   const showSecondPassword = ()=>{
@@ -67,7 +69,7 @@ export default function SignUp({setRegistr, setIsAuthorizate}) {
             setColorOfValidateForm('');
             setStatusValidateForm('')
           },4000)
-          setIsAuthorizate(true)
+          dispatch({ type: 'COMPLETED_AUTHORIZATION'})
     } else {
       console.log('1')
     }

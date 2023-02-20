@@ -6,7 +6,7 @@ import MyBasket from './MyAccountComponents/MyBasket'
 import GoodsArchive from './MyAccountComponents/GoodsArchive';
 import TypeCatalog from './CatalogOfWorks/TypeCatalog'
 import Main from './Main';
-export default function Router({ isAuthorizate, setIsAuthorizate }) {
+export default function Router() {
     
     const [catalogOrders, setCatalogOrders] = useState(Array);   
     const [OpenID, setOpenID] = useState(0)
@@ -27,20 +27,16 @@ export default function Router({ isAuthorizate, setIsAuthorizate }) {
   return (
         <BrowserRouter>
             <Routes>
-                <Route path='/' element={<Main isAuthorizate = {isAuthorizate} 
-                                               setIsAuthorizate = {setIsAuthorizate}
-                                               fetchProducts={fetchProducts}/>} />
+                <Route path='/' element={<Main fetchProducts={fetchProducts}/>} />
             </Routes> 
             <Routes>
-                <Route path='/Registration' element={<Registration setIsAuthorizate = {setIsAuthorizate} />}/>
+                <Route path='/Registration' element={<Registration />}/>
             </Routes>
             <Routes>
                 <Route path='/Profile' element={<Profile />} />
             </Routes>
             <Routes>
-                <Route path='/MyBasket' element={<MyBasket isAuthorizate={isAuthorizate} 
-                                                           setIsAuthorizate = {setIsAuthorizate}
-                                                           setIsBasketEmpty = {setIsBasketEmpty}/>} />
+                <Route path='/MyBasket' element={<MyBasket setIsBasketEmpty = {setIsBasketEmpty}/>} />
             </Routes>
             <Routes>
                 <Route path='/GoodsArchive' element={<GoodsArchive />} />
