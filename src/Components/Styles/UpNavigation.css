@@ -5,6 +5,8 @@
     align-items: center;
     justify-content: space-around;
     position: sticky;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    /* font-weight: 600; */
     padding: 0 0;
     top: 0;
     background-color: rgb(164, 193, 250);
@@ -29,12 +31,14 @@
 .false{
     display: none;
 }
-.UpNavContainer .Logo{
-    width: 115px;
-    height: 70px;
-    margin-top: 3px;
-    border-radius: 10px;
-    box-shadow: 3px 3px 3px rgb(19, 19, 19);
+.UpNavContainer .header{
+    background-color: #14afaa;
+    background-image: linear-gradient(90deg, #4425f6, #068b87);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-decoration: none !important;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    overflow: none;
 }
 .UpNavContainer .NavLinks{
     width: 80%;
@@ -56,7 +60,7 @@
     cursor: pointer !important;
 }
 .active{
-    color: blue !important;
+    color: #e55050 !important;
 }
 .hide{
     display: none;

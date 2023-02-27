@@ -29,10 +29,7 @@ export default function WorkCatalog( {setOpenID, fetchProducts} ) {
                 <CardOfWork key={card.id} card={card} setOpenID={setOpenID} fetchProducts={fetchProducts}/>
               ))
             }
-            {/* <CardOfWork card={CARDS[0]} /> */}
         </div>
-
-        {/* <button className='SearchMore'>Загрузить ёще...</button> */}
     </div>
   )
 }

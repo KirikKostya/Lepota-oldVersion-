@@ -3,8 +3,8 @@
     height: 30px;
     position: absolute;
     border-radius: 10px ;
-    background-color: #d5d514;
-    opacity: 70%;
+    background-color: rgba(3, 200, 255, 0.776);
+    /* opacity: 70%; */
     left: 0;
     top: 0;
     margin: 30px;
@@ -19,8 +19,8 @@
     color: black;
     font-weight: 600;
     font-size: larger;
+    overflow: none;
 }
 .BackButton:hover{
-    opacity: 100%;
-    border: 2px solid #d5d514;
+    background-color: rgba(3, 200, 255, );
 }

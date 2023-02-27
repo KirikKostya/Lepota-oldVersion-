@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
 import Registration from './Components/Registration';
 import Profile from './MyAccountComponents/Profile'

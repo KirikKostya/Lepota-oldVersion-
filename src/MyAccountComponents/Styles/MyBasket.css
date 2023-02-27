@@ -1,48 +1,99 @@
 .fullContainer{
     width: 90%;
-    min-height: 87vh;
+    min-height: 88vh;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
+}
+
+.loading-basket{
+    width: 90%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 /**/
 .fullContainer .Chek{
     width: 25%;
     min-height: 350px !important; 
     border-radius: 0 10px 10px 0;
-    border: 1px solid black;
-    background: rgba(164, 193, 250, 0.699);
+    border-radius: 10px;
+    background: rgb(221, 241, 255);
+    box-shadow: inset 0 0px 10px 3px rgba(164, 193, 250);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
 }
-.Chek .Parametrs{
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-}
-.Chek h3{
-    width: 80%;
-    font-weight: 700;
-    font-size: larger;
-    font-family: Arial, Helvetica, sans-serif;    
-}
-.Parametrs h5{
-    width: 100%;
+.Chek .typeOfDelivery{
+    width: 90%;
+    margin: 0;
+    padding: 0;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: smaller;
+    font-weight: 600;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    font-weight: 500;
+    justify-content: center;
+}
+.typeOfDelivery p{
+    width: 50%;
+    text-align: center;
+    cursor: pointer;
+}
+.typeOfDelivery p:nth-child(1){
+    border-right: 1.5px solid grey;
+}
+.typeOfDelivery .active{
+    color: #e55050 !important;
+}
+.Chek .infoAboutUser{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+.Chek label{
+    width: 100%;
+}
+label p{
+    margin: 0 0 7px 0;
     padding: 0;
-    margin: 10px 0;
+    font-size: small;
+}
+/*Multy label Adress and Post Index*/
+.adressPostIndex{
+    width: 95%;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: space-between !important;
+}
+.adressPostIndex label:nth-child(1){
+    width: 65% !important;
+}
+.adressPostIndex label:nth-child(2){
+    width: 30% !important;
+}
+/*------*/
+.Chek .checkInput{
+    width: 95%;
+    outline: none;
+    background: rgb(236, 249, 253);
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 5px;
+    margin: 0 0 5px 0;
 }
 .Chek .makeBTN{
     width: 80%;
     height: 35px;
-    border-radius: 20px;
+    border-radius: 10px;
     border: none;
     cursor: pointer;
     background: rgba(104, 7, 216, 0.578);
@@ -60,19 +111,26 @@
     flex-direction: column;
     align-items: center;
     margin: 5px;
-    border: 1px solid black;
-    border-radius: 10px 0 0 10px;
+    border-radius: 10px;
     background: transparent;
+    box-shadow: inset 0 0px 10px 3px rgba(164, 193, 250);
 }
 .MainFielfForBasket .basketParametrs{
     width: 90%;
     height: 50px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    align-items: center;
+    /* padding-left: 150px; */
 }
 .MainFielfForBasket .basketParametrs #fullName{
-    width: 30%;
+    width: 51%;
+}
+.MainFielfForBasket .basketParametrs #price{
+    width: 12%;
+}
+.MainFielfForBasket .basketParametrs #amount{
+    width: 12%;
 }
 .backItemBlock{
     width: 80%;
@@ -106,11 +164,13 @@
     width: 30%;
     margin: 0;
 }
-.Item .Img{
+.Item img{
     width: 50px;
     height: 50px;
-    border: 1px solid black;
-    box-shadow: 5px 5px 5px 5px black;
+    border-radius: 5px;
+}
+.Item #summaryPrice{
+    min-width: 80px
 }
 .Item .ChangeAmount{
     display: flex;
@@ -129,7 +189,7 @@
     width: 25px;
     height: 25px;
     border: none;
-    border-radius: 50%;
+    border-radius: 6px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -137,10 +197,10 @@
     font-weight: bold;
     margin-top: 1px;
     cursor: pointer;
-    background: rgba(128, 128, 128, 0.642);
+    background: rgb(196, 219, 244);
 }
 .Item .deleteItem:hover {
-    background: rgba(222, 13, 13);
+    background: #e55050 !important;
 }
 /**/
 .MainFielfForBasket .emptyBasketMessage{
@@ -178,6 +238,23 @@
     .backItemBlock{
         width: 65%
     }
+    .MainFielfForBasket .basketParametrs{
+        width: 90%;
+    }
+    .MainFielfForBasket .basketParametrs #fullName{
+        width: 45%;
+    }
+    .MainFielfForBasket .basketParametrs #price{
+        width: 12%;
+    }
+    .MainFielfForBasket .basketParametrs #amount{
+        width: 12%;
+    }
+}
+@media screen and (max-width:848px){
+    .MainFielfForBasket .basketParametrs #amount{
+        width: 15%;
+    }
 }
 @media screen and (max-width:730px){
     .MainFielfForBasket{
@@ -185,5 +262,6 @@
     }
     .fullContainer .Chek{
         width: 80%;
+        margin-bottom: 30px;
     }
 }

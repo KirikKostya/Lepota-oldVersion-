@@ -92,7 +92,6 @@ export default function SignIn({ setRegistr }) {
                 </div>
 
             </div>
-            <p className='RegistrBtn' onClick={()=>setRegistr(true)}>Зарегистрироваться</p>
             <button className='SignInBTN' onClick={Authorization}>Войти</button>
         </div>
         <div className='ChangeField'>

@@ -1,14 +1,21 @@
 import React, {useState} from 'react'
 import { NavLink } from 'react-router-dom'
-import refreshFunction from '../App.js'
 import './Styles/CardOfWork.css'
 
 export default function CardOfWork({card, fetchProducts}) {
+
+  const getImageFromAPI = (photoList) => {
+    if (photoList === null){ 
+      return  require('../Photos/somethingWentWrong.png')
+    } else {
+      return photoList[0]
+    }
+  }
   return (
     <div className='Card'>
 
         <div className='InfoOfCard' key={card.id}>
-          <img src={require('../Photos/somethingWentWrong.png')} className='IMG' />
+          <img src={getImageFromAPI(card.icon)} className='IMG' />
           <h4 onClick={()=>console.log(card)}>{card.name} <span>{card.price} Br</span> </h4>
           <p>Здесь будет небольшая информация про продукт</p>
         

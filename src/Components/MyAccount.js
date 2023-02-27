@@ -31,7 +31,7 @@ export default function MyAccount() {
           ?<div className='ContainerForMyAccount'>
             <NavLink onClick={refreshFunction} to='/Profile' className='ListItem'>Мой аккаунт</NavLink>
             <NavLink onClick={refreshFunction} to='/GoodsArchive' className='ListItem'>Архив заказов</NavLink>
-            <NavLink onClick={refreshFunction} to='/MyBasket' className='ListItem'><span className='CountOrders'>{amountOrderInBasket}</span>Корзина</NavLink>
+            <NavLink onClick={refreshFunction} to='/MyBasket' className='ListItem'>Корзина (<span className='countOfOrders'>{`${amountOrderInBasket}`}</span>)</NavLink>
             <NavLink onClick={SignOut} className='Link'>Выйти</NavLink>
           </div>
             :<div className='ContainerForMyAccount'>

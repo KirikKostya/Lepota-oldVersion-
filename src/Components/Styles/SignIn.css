@@ -23,7 +23,7 @@
     justify-content: space-evenly;
     width: 380px;
     height: 420px;
-    background-color: rgb(188, 216, 224);
+    background-color: rgb(207, 222, 226);
     border-radius: 10px;
 }
 .SignIn .StatusValidateForm{
@@ -37,7 +37,6 @@
     border-radius: 20px;
     padding: 10px;
     font-weight: bold;
-    /* position: absolute; */
 }
 .SignIn .ForInputs{
     display: flex;
@@ -74,29 +73,21 @@
 .SignIn .Input::-webkit-input-placeholder { 
     color: black;
 }
-.RegistrBtn{
-    color: black;
-    display: none;
-}
-.RegistrBtn:hover{
-    color: blue;
-    cursor: pointer;
-}
 .SignIn .SignInBTN{
-    width: 140px;
-    height: 50px;
-    background-color: #3d6170;
-    opacity: 70%;
-    border-radius: 20px;
+    width: 160px;
+    height: 40px;
+    background-color: rgba(164, 193, 250, 0.788);
+    border-radius: 10px;
     font-size: large;
-    color: rgb(21, 21, 21);
+    color: rgb(0, 0, 0);
     font-weight: 500;
+    cursor: pointer;
     font-family: AdventPro;
+    border: 1.5px solid rgb(0, 18, 106);
 }
 .SignIn .SignInBTN:hover{
-    opacity: 100%;
-    color: black;
-    cursor: pointer;
+    color: rgb(0, 0, 0);  
+    background-color: rgb(164, 193, 250);
 }
 .ActiveInput{
     border-bottom:3px solid red !important ;
@@ -182,17 +173,16 @@
     .SignIn .SignInBTN{
         width: 140px;
         height: 50px;
-        background-color: #3d6170;
-        opacity: 70%;
+        background-color: #3d6170b1;
         border-radius: 20px;
         font-size: large;
-        color: rgb(21, 21, 21);
+        color: rgb(0, 0, 0);
         font-weight: 500;
         font-family: AdventPro;
         margin-bottom: 10px;
     }
     .SignIn .SignInBTN:hover{
-        opacity: 100%;
+        background-color: #3d6170;
         color: black;
         cursor: pointer;
     }

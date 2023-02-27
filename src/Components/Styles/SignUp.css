@@ -23,7 +23,7 @@
     justify-content: space-evenly;
     width: 380px;
     height: 420px;
-    background-color: rgb(188, 216, 224);
+    background-color: rgb(207, 222, 226);
     border-radius: 10px;
 }
 .SignUp .StatusValidateForm{
@@ -83,31 +83,21 @@
 .SignUp .Input::-webkit-input-placeholder { 
     color: black;
 }
-.SignIn{
-    margin: 0;
-    padding: 0;
-    color: black;
-    display: none;
-}
-.SignIn:hover{
-    color: blue;
-    cursor: pointer;
-}
 .SignUp .SignUpBTN{
-    width: 140px;
-    height: 50px;
-    background-color: #3d6170;
-    opacity: 70%;
-    border-radius: 20px;
+    width: 160px;
+    height: 40px;
+    background-color: rgba(164, 193, 250, 0.788);
+    border-radius: 10px;
     font-size: large;
-    color: rgb(21, 21, 21);
+    color: rgb(0, 0, 0);
     font-weight: 500;
+    cursor: pointer;
     font-family: AdventPro;
+    border: 1.5px solid rgb(0, 18, 106);
 }
 .SignUp .SignUpBTN:hover{
-    opacity: 100%;
-    color: black;
-    cursor: pointer;
+    color: rgb(0, 0, 0);  
+    background-color: rgb(164, 193, 250);
 }
 .ActiveInput{
     border-bottom:3px solid red !important ;

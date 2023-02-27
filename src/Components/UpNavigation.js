@@ -4,10 +4,12 @@ import MyAccount from './MyAccount'
 import { Link } from 'react-scroll';
 import { NavLink } from 'react-router-dom';
 import './Styles/UpNavigation.css'
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function UpNavigation({ hide }) {
- 
-  const [myAccountIsOpen, setMyAccountIsOpen] = useState(false);
+
+  const dispatch = useDispatch();
+  const myAccountIsOpen = useSelector(state=>state.myAccountIsOpen);
   const [openHamburgerMenu, setOpenHamburgerMenu] = useState('close');
 
   return (
@@ -18,12 +20,13 @@ export default function UpNavigation({ hide }) {
                    height="40" 
                    viewBox="0 0 16 16" 
                    onClick={()=>{
-                                  (myAccountIsOpen) 
-                                    ? setMyAccountIsOpen(false) 
-                                      : setMyAccountIsOpen(true);
-                                  if(localStorage.getItem('accessToken')){
-                                    refreshFunction();
-                                  }
+                                  myAccountIsOpen
+                                    ? dispatch({type: 'CLOSE_MY_ACCOUNT'}) 
+                                      : dispatch({type: 'OPEN_MY_ACCOUNT'}) 
+
+                                      if(localStorage.getItem('accessToken')){
+                                        refreshFunction();
+                                      }
                                 }}> 
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/> 
                 <path fillRule="evenodd" 
@@ -33,7 +36,7 @@ export default function UpNavigation({ hide }) {
         
         <div className='NavLinks'>
             <Link activeClass="active" 
-                  to="Main" 
+                  to={`${hide? 'HideNavBarMainLink' : 'Main'}`} 
                   spy={true} 
                   smooth={true} 
                   offset={-90} 
@@ -56,7 +59,7 @@ export default function UpNavigation({ hide }) {
                   offset={-100}
                   duration={500}
                   onClick={refreshFunction}
-                  className={`NavLink ${hide}`} >СРОКИ И ДОСТАКА</Link>
+                  className={`NavLink ${hide}`} >СРОКИ И ДОСТАВКА</Link>
             <Link activeClass="active" 
                   to="AboutCashpo" 
                   spy={true} 
@@ -73,8 +76,8 @@ export default function UpNavigation({ hide }) {
                   className={`NavLink`} >КОНТАКТЫ</Link>
         </div>
         
-        <NavLink to='/'>
-          <img src={require('../Photos/LOGO.png')} className='Logo' />
+        <NavLink to='/' className='header'>
+          <h2>LEPOTA.BY</h2>
         </NavLink>
         
         <div className='Hamburger' 
@@ -89,9 +92,9 @@ export default function UpNavigation({ hide }) {
 
           }}>☰</div>
         {
-          (!myAccountIsOpen)
-            ?<></>
-             :<MyAccount />
+          (myAccountIsOpen)
+            ? <MyAccount />
+             : <></>
         }
 
       </div>
