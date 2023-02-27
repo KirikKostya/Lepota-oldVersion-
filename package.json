@@ -2,7 +2,7 @@
   "name": "lepota",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://KirikKostya.github.io/Lepota",
+  "homepage": "http://KirikKostya.github.io/Lepota/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

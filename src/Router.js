@@ -25,7 +25,7 @@ export default function Router() {
     }
 
   return (
-        <BrowserRouter>
+        // <BrowserRouter>
             <HashRouter basename='/'>
                 <Routes>
                     <Route path='/' element={<Main fetchProducts={fetchProducts}/>} />
@@ -48,6 +48,6 @@ export default function Router() {
                                                                     catalogOrders={catalogOrders}/>} />
                 </Routes>
             </HashRouter>
-        </BrowserRouter>
+        // </BrowserRouter>
   )
 }
