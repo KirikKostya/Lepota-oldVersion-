@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { BrowserRouter, Routes, Route} from 'react-router-dom'
+import { BrowserRouter, Routes, Route, HashRouter} from 'react-router-dom'
 import Registration from './Components/Registration';
 import Profile from './MyAccountComponents/Profile'
 import MyBasket from './MyAccountComponents/MyBasket'
@@ -26,26 +26,28 @@ export default function Router() {
 
   return (
         <BrowserRouter>
-            <Routes>
-                <Route path='/' element={<Main fetchProducts={fetchProducts}/>} />
-            </Routes> 
-            <Routes>
-                <Route path='/Registration' element={<Registration />}/>
-            </Routes>
-            <Routes>
-                <Route path='/Profile' element={<Profile />} />
-            </Routes>
-            <Routes>
-                <Route path='/MyBasket' element={<MyBasket setIsBasketEmpty = {setIsBasketEmpty}/>} />
-            </Routes>
-            <Routes>
-                <Route path='/GoodsArchive' element={<GoodsArchive />} />
-            </Routes>
-            <Routes>
-                <Route path='/TypeCatalog' element={<TypeCatalog OpenID={OpenID} 
-                                                                 setIsBasketEmpty = {setIsBasketEmpty}
-                                                                 catalogOrders={catalogOrders}/>} />
-            </Routes>
+            <HashRouter basename='/'>
+                <Routes>
+                    <Route path='/' element={<Main fetchProducts={fetchProducts}/>} />
+                </Routes> 
+                <Routes>
+                    <Route path='/Registration' element={<Registration />}/>
+                </Routes>
+                <Routes>
+                    <Route path='/Profile' element={<Profile />} />
+                </Routes>
+                <Routes>
+                    <Route path='/MyBasket' element={<MyBasket setIsBasketEmpty = {setIsBasketEmpty}/>} />
+                </Routes>
+                <Routes>
+                    <Route path='/GoodsArchive' element={<GoodsArchive />} />
+                </Routes>
+                <Routes>
+                    <Route path='/TypeCatalog' element={<TypeCatalog OpenID={OpenID} 
+                                                                    setIsBasketEmpty = {setIsBasketEmpty}
+                                                                    catalogOrders={catalogOrders}/>} />
+                </Routes>
+            </HashRouter>
         </BrowserRouter>
   )
 }
