@@ -11,7 +11,7 @@
 }
 .ContainerForContactWithUs h1{
     text-align: center;
-    color: black;
+    color: rgb(238, 245, 253);
     margin: 60px 0 20px 0 ;
 }
 .MassagerIcons svg{
@@ -29,4 +29,5 @@
     font-weight: bolder;
     font-size: medium;
     margin-top: -15px;
+    color: rgb(238, 245, 253);
 }

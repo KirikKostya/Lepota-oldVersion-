@@ -13,13 +13,13 @@ export default function ContactWithUs() {
         <h1>Контакты</h1>
         <p>С нами можно связаться через:</p>
             <div className='MassagerIcons'>
-                <a href='tel:+375259716466'><svg fill="black"
+                <a href='tel:+375259716466'><svg fill="white"
                      viewBox="0 0 16 16" 
                      onClick={()=>{
                                     (isOpen)
                                       ? setIsOpen(false)  
                                         :setIsOpen(true)}}><path d={Telegram}/></svg></a>
-                <a href='https://www.instagram.com/lepota.by/' target='_blank'><svg  fill="black" viewBox="0 0 16 16"><path d={Instagram}/></svg></a>
+                <a href='https://www.instagram.com/lepota.by/' target='_blank'><svg  fill="white" viewBox="0 0 16 16"><path d={Instagram}/></svg></a>
             {/* <a href='mailto:dordom.decor@gmail.com'>
 
             </a>  Mail.ru*/} 
