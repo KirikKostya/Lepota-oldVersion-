@@ -39,5 +39,9 @@
 @media screen and (max-width:730px){
   .DiscriptionContainer{
     width: 95% !important;
+    max-height: 400px !important;
   }
+  .DiscriptionContainer .Slide{
+    max-height: 380px;
+}
 }

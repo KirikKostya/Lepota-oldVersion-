@@ -10,7 +10,8 @@
     text-align: center;
     font-family:'Courier New', Courier, monospace;
     font-size: large;
-    font-weight: 400;
+    font-weight:bold;
+    color: rgba(0, 0, 0, 0.769);
 }
 .CatalogContainer ul{
     display: flex;
@@ -35,4 +36,9 @@
     color: antiquewhite;
     cursor: pointer;
     margin-top: 50px;
+}
+@media screen and (max-width:819px) {
+    .CatalogContainer .p{
+        font-size: 11pt;
+    }
 }

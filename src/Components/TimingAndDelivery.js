@@ -46,7 +46,7 @@ export default function TimingAndDelivery() {
                 {
                     Path.map(part=>(
                         <div className='PartOfPath' key={part.id}>
-                            <h2>{part.tittle}</h2>
+                            <h3>{part.tittle}</h3>
                             <p>{part.discription}</p>
                         </div>
                     ))

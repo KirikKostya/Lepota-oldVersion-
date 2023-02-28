@@ -36,7 +36,7 @@ export default function MyBasket() {
   return (
     <>
       <UpNavigation hide='hide'/>
-      {/* <h2 className='HeaderOfBasket'>Корзина</h2> */}
+
       <div className='fullContainer' id='HideNavBarMainLink'>
         <div className='MainFielfForBasket'>
           <div className='basketParametrs'>

@@ -54,10 +54,7 @@
     text-decoration: none;
     color: black;
     margin: 0 23px;
-}
-.NavLink:hover{
-    color: blue;
-    cursor: pointer !important;
+    cursor: pointer;
 }
 .active{
     color: #e55050 !important;

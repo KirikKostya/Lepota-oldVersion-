@@ -1,15 +1,16 @@
-import React, {useEffect, useState} from 'react'
-import './Styles/WorkCatalog.css'
+import React, { useEffect, useState } from 'react'
 import CardOfWork from './CardOfWork'
 import axios from 'axios'
+import './Styles/WorkCatalog.css'
 
 export default function WorkCatalog( {setOpenID, fetchProducts} ) {
   
   const [CARDS, setCARDS] = useState([])
 
   const fetchFanc = () =>{
-    axios.get('https://api.native-flora.tk/Item/GetAll')
-    .then(res=>setCARDS(res.data.data))
+    fetch('https://api.native-flora.tk/Item/GetAll')
+    .then(res=>res.json())
+    .then(res=>setCARDS(res.data))  
   }
 
   useEffect(()=>{

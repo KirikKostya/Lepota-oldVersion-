@@ -1,64 +1,62 @@
 
 .ContainerForSignIn{
-    width: 1000px;
+    width: 100% !important;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
     justify-content: space-evenly;
     position: absolute;
-    margin-left: 85px;
-    animation-iteration-count: 1;
-    animation-duration: 1s;
-    animation-name: SlideSignIn;
-    animation-fill-mode:both;
-}
-@keyframes SlideSignIn {
-    0% { width: 50px; }
-    100% { width: 1000px; }
 }
 .ContainerForSignIn .SignIn{
+    width: 30%;
+    height: 420px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    width: 380px;
-    height: 420px;
     background-color: rgb(207, 222, 226);
     border-radius: 10px;
 }
 .SignIn .StatusValidateForm{
-    width: 350px;
+    width: 90% !important;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     font-weight: lighter;
     font-size: small;
-    padding: 0; 
     border-radius: 20px;
     padding: 10px;
     font-weight: bold;
 }
 .SignIn .ForInputs{
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 .ForInputs .PasswordField{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    width: 93% !important;
+    display: flex !important;
+    flex-direction: row !important;
 }
 .PasswordField .EyeBtn{
-    position: absolute;
-    margin-left: 300px;
     border: none;
-    background: transparent;
+    border-radius: 50%;
+    background: transparent ;
     cursor: pointer;
 }
+.ForInputs .helpMessage{
+    width: 90%;
+    font-size: small;
+    font-weight: 600;
+    display: none;
+}
+.helpMessage span{
+    margin-left: 20px;
+}
 .SignIn .Input{
-    width: 350px;
+    width: 100% !important;
     height: 40px;
     background-color: transparent;
     border: none;
@@ -69,6 +67,9 @@
     padding-left: 15px;
     margin: 10px 0;
     outline: none;
+}
+.SignUp .Input:nth-child(1){
+    width: 90%;
 }
 .SignIn .Input::-webkit-input-placeholder { 
     color: black;
@@ -125,51 +126,20 @@
 
 @media screen and (max-width: 890px) {
     .ContainerForSignIn{
-        width: 100%;
+        width: 90% !important;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
     }
     .ContainerForSignIn .SignIn{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-evenly;
-        width: 350px;
-        height: 350px;
-        background-color: rgb(188, 216, 224);
-        border-radius: 10px;
-    }
-    .SignIn .StatusValidateForm{
-        width: 250px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        font-weight: lighter;
-        font-size: small;
-        padding: 0; 
-        border-radius: 20px;
-        padding: 10px;
-        font-weight: bold;
-        margin: 0;
+        width: 55% !important;
     }
     .SignIn .Input{
-        width: 250px;
-        height: 40px;
-        background-color: transparent;
-        border: none;
-        border-bottom: 3px solid #191d1a !important;
-        color: black;
-        text-shadow: 2px 2px 3px rgb(255, 255, 255);
-        font-size:medium;
-        padding-left: 15px;
-        outline: none;
+        width: 90% !important;
     }
     .RegistrBtn{
         display: block;
     }
+    /**/
     .SignIn .SignInBTN{
         width: 140px;
         height: 50px;
@@ -184,10 +154,21 @@
     .SignIn .SignInBTN:hover{
         background-color: #3d6170;
         color: black;
-        cursor: pointer;
     }
     .ContainerForSignIn .ChangeField{
         display: none;
     }
-    
+    .ForInputs .helpMessage{
+        display: inline;
+    }
+}
+@media screen and (max-width: 700px){
+    .ContainerForSignIn{
+        width: 100% !important;
+        display: flex;
+        flex-direction: column;
+    }
+    .ContainerForSignIn .SignIn{
+        width: 90% !important; 
+    }
 }

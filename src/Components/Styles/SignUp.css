@@ -1,33 +1,24 @@
 
 .ContainerForSignUp{
-    width: 100%;
+    width: 90% !important;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
     position: absolute;
-    margin-right: 85px;
-    animation-iteration-count: 1;
-    animation-duration: 1s;
-    animation-name: SlideSignUp;
-    animation-fill-mode:both;
-}
-@keyframes SlideSignUp {
-    0% { width: 50px; }
-    100% { width: 1000px; }
 }
 .ContainerForSignUp .SignUp{
+    width: 30%;
+    height: 420px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    width: 380px;
-    height: 420px;
     background-color: rgb(207, 222, 226);
     border-radius: 10px;
 }
 .SignUp .StatusValidateForm{
-    width: 350px;
+    width: 90%;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -49,26 +40,34 @@
     text-shadow: 2px 2px 2px rgb(112, 112, 81);
 }
 .SignUp .ForInputs{
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 .ForInputs .PasswordField{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    width: 93% !important;
+    display: flex !important;
+    flex-direction: row !important;
 }
 .PasswordField .EyeBtn{
-    position: absolute;
-    margin-left: 300px;
     border: none;
-    background: transparent;
+    border-radius: 50%;
+    background: transparent ;
     cursor: pointer;
 }
+.ForInputs .helpMessage{
+    width: 90%;
+    font-size: small;
+    font-weight: 600;
+    display: none;
+}
+.helpMessage span{
+    margin-left: 20px;
+}
 .SignUp .Input{
-    width: 350px;
+    width: 100%;
     height: 40px;
     background-color: transparent;
     border: none;
@@ -79,6 +78,9 @@
     padding-left: 15px;
     margin: 10px 0;
     outline: none;
+}
+.SignUp .Input:nth-child(1){
+    width: 90%;
 }
 .SignUp .Input::-webkit-input-placeholder { 
     color: black;
@@ -134,55 +136,22 @@
   }
 
 
-  @media screen and (max-width: 890px) {
+@media screen and (max-width: 890px) {
     .ContainerForSignUp{
+        width: 90% !important;
         display: flex;
         flex-direction: column;
     }
     .ContainerForSignUp .SignUp{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-evenly;
-        width: 350px;
-        height: 375px;
-        background-color: rgb(188, 216, 224);
-        border-radius: 10px;
-    }
-    .SignUp .StatusValidateForm{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        font-weight: lighter;
-        font-size: small;
-        padding: 0; 
-        border-radius: 20px;
-        padding: 10px;
-        font-weight: bold;
+        width: 55%;
     }
     .SignIn{
         display: block;
     }
     .SignUp .Input{
-        width: 250px;
-        height: 30px;
-        background-color: transparent;
-        border: none;
-        border-bottom: 3px solid #191d1a !important;
-        color: black;
-        text-shadow: 2px 2px 3px rgb(255, 255, 255);
-        font-size:medium;
-        padding-left: 15px;
-        outline: none;
+        width: 100%;
     }
-    .PasswordField .EyeBtn{
-        position: absolute;
-        margin-left: 250px;
-        border: none;
-        background: transparent;
-        cursor: pointer;
-    }
+    /**/
     .SignUp .SignUpBTN{
         width: 140px;
         height: 50px;
@@ -198,10 +167,22 @@
     .SignUp .SignUpBTN:hover{
         opacity: 100%;
         color: black;
-        cursor: pointer;
     }
     .ContainerForSignUp .ChangeField{
         display: none;
     }
+    .ForInputs .helpMessage{
+        display: inline;
+    }
     
+}
+@media screen and (max-width: 700px){
+    .ContainerForSignUp{
+        width: 100% !important;
+        display: flex;
+        flex-direction: column;
+    }
+    .ContainerForSignUp .SignUp{
+        width: 90%;
+    }
 }

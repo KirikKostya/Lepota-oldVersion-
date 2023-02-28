@@ -44,9 +44,11 @@
 @media screen and (max-width: 500px){
     .ContainerForAboutKashpo p{
         width: 100%;
-        font-family:monospace;
-        font-size: larger;
-        font-weight: bold;
         text-align: center;
+        font-size: 11pt;
+        letter-spacing: 1px;
+        color: rgba(0, 0, 0, 0.815);
+        /* font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+        margin-top: 0;
     }
 }

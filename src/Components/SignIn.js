@@ -90,13 +90,18 @@ export default function SignIn({ setRegistr }) {
                          value={PasswordInputValue}/>
                   <button onClick={showPassword} className='EyeBtn'>&#128065;&#65039;</button>
                 </div>
+                
+                <p className='helpMessage'>Есть аккаунт? 
+                  <span onClick={()=>setRegistr(true)}>РЕГИСТИРОВАТЬСЯ</span>
+                </p>
 
             </div>
             <button className='SignInBTN' onClick={Authorization}>Войти</button>
         </div>
         <div className='ChangeField'>
           <p>У вас нет аккаунта? Зарегистрируйся!</p>
-          <button className='SignInChangeBtn' onClick={()=>setRegistr(true)}>Регистрация</button>
+          <button className='SignInChangeBtn' 
+                  onClick={()=>setRegistr(true)}>Регистрация</button>
         </div>
     </div>
   )

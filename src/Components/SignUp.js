@@ -2,6 +2,7 @@ import React, {useState, useRef} from 'react'
 import axios from 'axios';
 import './Styles/SignUp.css'
 import { useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 
 export default function SignUp({ setRegistr }) {
@@ -110,6 +111,9 @@ export default function SignUp({ setRegistr }) {
                   <button onClick={showSecondPassword} className='EyeBtn'>&#128065;&#65039;</button>
                 </div>
 
+                <p className='helpMessage'>Есть аккаунт? 
+                  <span onClick={()=>setRegistr(false)}>ВОЙТИ</span>
+                </p>
             </div>
             <button className='SignUpBTN' 
                     onClick={Registration}>Создать аккаунт</button>

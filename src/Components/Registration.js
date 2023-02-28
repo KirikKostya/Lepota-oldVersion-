@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react'
-import './Styles/Registration.css'
+import React, { useState } from 'react'
 import BackButton from './BackButton';
 import SignIn from './SignIn'
 import SignUp from './SignUp'
+import './Styles/Registration.css'
 
 export default function Registration() {
 
@@ -15,7 +15,7 @@ export default function Registration() {
             {
             (Registr)
                 ? <SignUp setRegistr={setRegistr} />
-                  :<SignIn setRegistr={setRegistr} />
+                  : <SignIn setRegistr={setRegistr} />
             }
         
         
