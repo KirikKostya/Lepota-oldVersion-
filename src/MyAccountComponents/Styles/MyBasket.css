@@ -132,6 +132,9 @@ label p{
 .MainFielfForBasket .basketParametrs #amount{
     width: 12%;
 }
+.MainFielfForBasket .basketParametrs #totalPrice{
+    width: 15%;
+}
 .backItemBlock{
     width: 80%;
     display: flex;
@@ -171,7 +174,7 @@ label p{
 }
 .Item #summaryPrice{
     min-width: 80px;
-    text-align: center;
+    text-align: start;
 }
 .Item .ChangeAmount{
     display: flex;
@@ -256,7 +259,7 @@ label p{
         width: 30%;
     }
     .MainFielfForBasket .basketParametrs #fullName{
-        width: 40%;
+        width: 55%;
         padding: 0 3px;
     }
     .MainFielfForBasket .basketParametrs #price{
@@ -264,8 +267,14 @@ label p{
         padding: 0 3px;
     }
     .MainFielfForBasket .basketParametrs #amount{
-        width: 15%;
+        width: 17%;
         padding: 0 3px;
+    }
+    .MainFielfForBasket .basketParametrs #totalPrice{
+        display: none !important;
+    }
+    .Item #summaryPrice{
+        display: none !important;
     }
 }
 @media screen and (max-width:730px){

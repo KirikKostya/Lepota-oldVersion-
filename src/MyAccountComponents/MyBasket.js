@@ -43,7 +43,7 @@ export default function MyBasket() {
             <p id='fullName'>Товар</p>
             <p id='price'>Цена</p>
             <p id='amount'>Кол-во</p>
-            <p>Сумма</p>
+            <p id='totalPrice'>Сумма</p>
           </div>
             {
               isLoading
