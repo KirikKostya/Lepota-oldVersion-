@@ -39,17 +39,17 @@
     font-style:normal;
 }
 .Card .CatalogBTN{
+    width: 125px;
+    height: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100px;
-    height: 30px;
-    background-color: rgba(245, 57, 88, 0.881);
     text-align: center;
     border: none;
     cursor: pointer;
     color: aliceblue;
+    background-color: rgba(245, 57, 88, 0.881);
     text-shadow: 2px 2px 2px rgb(0, 0, 0);
     border-radius: 3px;
     text-decoration: none;

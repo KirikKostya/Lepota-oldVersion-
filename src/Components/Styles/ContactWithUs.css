@@ -23,7 +23,7 @@
 .ContainerForContactWithUs .MobilePhone{
     font-weight: bold;
     font-size: larger;
-    color: black;
+    color: rgb(238, 245, 253) !important;
 }
 .ContainerForContactWithUs p{
     font-weight: bolder;

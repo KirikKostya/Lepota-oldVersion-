@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import ContactWithUs from '../Components/ContactWithUs';
 import LoadingComp from './LoadingComp';
 import ChangeMetricsModalView from './ChangeMetricsModalView';
 import OrderCard from './OrderCard';
 import UpNavigation from '../Components/UpNavigation';
 import WarningModalView from './WarningModalView';
-import './Style/TypeCatalog.css'
 import ReactModal from 'react-modal';
-import axios from 'axios';
+import './Style/TypeCatalog.css'
 
 export default function TypeCatalog({ setIsBasketEmpty, catalogOrders }) {
 
@@ -18,7 +17,6 @@ export default function TypeCatalog({ setIsBasketEmpty, catalogOrders }) {
   
   //Заказ который есть в корзине, но User хочет поменять метрики 
   const [selectedOrder, setSelectedOrder] = useState(Array);
-
 
   const customStylesForModal = {
     content: {
@@ -38,11 +36,6 @@ export default function TypeCatalog({ setIsBasketEmpty, catalogOrders }) {
       borderRadius: '20px',
     },
 }
-
-  useEffect(()=>{
-    axios.get(`http://129.159.242.47:8081/Item/GetById?id=${1}`)
-    .then(res => console.log(res))
-  })
 
   return (
     <>

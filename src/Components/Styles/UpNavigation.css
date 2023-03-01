@@ -6,7 +6,6 @@
     justify-content: space-around;
     position: sticky;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    /* font-weight: 600; */
     padding: 0 0;
     top: 0;
     background-color: rgb(164, 193, 250);
@@ -52,7 +51,7 @@
 }
 .NavLink{
     text-decoration: none;
-    color: black;
+    color: black !important;
     margin: 0 23px;
     cursor: pointer;
 }
@@ -115,19 +114,11 @@
     }
     .HamburgerNavLinks .NavLink{
         text-align: center;
-        color: black;
+        color: black ;
         text-decoration: none;
         margin: 5px 0;
     }
     .close{
         display: none !important;
-    }
-    .HamburgerNavLinks .NavLink{
-        width: 100%;
-        text-decoration: none;
-        color: black;
-    }
-    .HamburgerNavLinks .NavLink:hover{
-        color: blue;
     }
 }

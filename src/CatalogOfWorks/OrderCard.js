@@ -59,13 +59,13 @@ export default function OrderCard(
         <div key={order.id} className='Card'> 
           <SimpleImageSlider
             className='SimpleImage'
-            width={240}
-            height={200}
-            navSize={35}
+            width={200}
+            height={150}
+            navSize={25}
             navMargin={0}
             style={{background: 'transparent'}}
-            navStyle={2}
-            slideDuration={0.8}
+            navStyle={3}
+            slideDuration={0.7}
             images={getImages(order.icon)}
             showBullets={false}
             showNavs={true} />

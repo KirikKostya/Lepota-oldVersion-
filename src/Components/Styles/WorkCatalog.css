@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: space-around;
 }
-.CatalogContainer .p{
+.CatalogContainer .paragraph{
     max-width: 600px;
     text-align: center;
     font-family:'Courier New', Courier, monospace;
@@ -26,6 +26,15 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+}
+.ListOfWorks .LoadingComp{
+    width: 100%;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
 }
 .CatalogContainer .SearchMore{
     width: 120px;
