@@ -1,9 +1,10 @@
 {
   "files": {
-    "main.css": "/Lepota/static/css/main.4e28d2b0.css",
+    "main.css": "/Lepota/static/css/main.522afdda.css",
     "main.js": "/Lepota/static/js/main.ad521606.js",
     "static/js/787.983573e0.chunk.js": "/Lepota/static/js/787.983573e0.chunk.js",
     "static/media/Human.png": "/Lepota/static/media/Human.d97eae9dce5536ef48e3.png",
+    "static/media/CONSOLA.TTF": "/Lepota/static/media/CONSOLA.230da2be4964a2fbb45f.TTF",
     "static/media/Registration.png": "/Lepota/static/media/Registration.7ea83b1aa73b72ced7e9.png",
     "static/media/Cup.png": "/Lepota/static/media/Cup.35aa2d3c03e239fcdeb9.png",
     "static/media/LOGO.png": "/Lepota/static/media/LOGO.4db41df131b286e74051.png",
@@ -11,18 +12,19 @@
     "static/media/GARAIT.TTF": "/Lepota/static/media/GARAIT.a9746f3bdd6da54dc166.TTF",
     "static/media/candleBird.png": "/Lepota/static/media/candleBird.d2960e4f2bea949c92e6.png",
     "static/media/candle.png": "/Lepota/static/media/candle.d0972de67965316e7408.png",
+    "static/media/CENTURY.TTF": "/Lepota/static/media/CENTURY.0a097736022a4b0b78b8.TTF",
     "static/media/Dog.png": "/Lepota/static/media/Dog.dc6037237b976d1ac259.png",
     "static/media/BubbleGum.png": "/Lepota/static/media/BubbleGum.63b9ab33ebb12be01e2c.png",
     "static/media/somethingWentWrong.png": "/Lepota/static/media/somethingWentWrong.915b7e167f3e83ab3eb2.png",
     "static/media/SweetsInKashpo.png": "/Lepota/static/media/SweetsInKashpo.ac74a5f55a1ac7810fa3.png",
     "static/media/MoneyKashpo.png": "/Lepota/static/media/MoneyKashpo.5bfb7d191d29e1b23757.png",
     "index.html": "/Lepota/index.html",
-    "main.4e28d2b0.css.map": "/Lepota/static/css/main.4e28d2b0.css.map",
+    "main.522afdda.css.map": "/Lepota/static/css/main.522afdda.css.map",
     "main.ad521606.js.map": "/Lepota/static/js/main.ad521606.js.map",
     "787.983573e0.chunk.js.map": "/Lepota/static/js/787.983573e0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4e28d2b0.css",
+    "static/css/main.522afdda.css",
     "static/js/main.ad521606.js"
   ]
 }
