@@ -1,0 +1,18 @@
+@font-face{
+    font-family: 'GARAIT';
+    src: url('/src/Fonts/GARAIT.TTF');
+    font-size: normal;
+    font-weight: normal;
+}
+@font-face{
+    font-family: 'CENTURY';
+    src: url('/src/Fonts/CENTURY.TTF');
+    font-size: normal;
+    font-weight: normal;
+}
+@font-face{
+    font-family: 'CONSOLA';
+    src: url('/src/Fonts/CONSOLA.TTF');
+    font-size: normal;
+    font-weight: normal;
+}

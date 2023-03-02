@@ -11,15 +11,16 @@
     border-radius: 10px 0 10px 10px;
     background: rgba(139, 207, 255);
     padding: 5px;
-    animation-iteration-count: 1;
-    animation-duration: .5s;
-    animation-name: slidegdz;
-    animation-fill-mode:both;
+    animation: slidegdz .7s ease forwards;
 }
 @keyframes slidegdz {
-    0% { width: 20px; }
-    100% { width: 200px; }
-   }
+    0% { 
+        width: 0; 
+    }
+    100% { 
+        width: 200px; 
+    }
+}
 .ContainerForMyAccount .ListItem{
     width: 150px;
     height: 30px;

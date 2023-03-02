@@ -1,11 +1,28 @@
 
 .ContainerForSignIn{
-    width: 100% !important;
+    width: 30%;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
     justify-content: space-evenly;
     position: absolute;
+    animation: max-screenOpening_SI 1s ease forwards;
+}
+@keyframes max-screenOpening_SI{
+    0%{
+        width: 50%;
+    }
+    100%{
+        width: 95%;
+    }
+}
+@keyframes other-screenOpening_SI{
+    0%{
+        width: 20%;
+    }
+    100%{
+        width: 90%;
+    }
 }
 .ContainerForSignIn .SignIn{
     width: 30%;
@@ -46,14 +63,19 @@
     background: transparent ;
     cursor: pointer;
 }
-.ForInputs .helpMessage{
-    width: 90%;
-    font-size: small;
-    font-weight: 600;
+.ForInputs .helpMessage_SI {
+    width: 90% !important;
+    cursor: pointer !important;
+    margin-left: 10px !important;
     display: none;
+    margin: 0 0 20px 15px;
+    font-size: small !important;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+    font-weight: 700 !important;
+    color: #36519d !important;
 }
-.helpMessage span{
-    margin-left: 20px;
+.ForInputs .helpMessage_SI:hover{
+    color: rgba(0, 0, 255, 0.861) !important;
 }
 .SignIn .Input{
     width: 100% !important;
@@ -68,27 +90,28 @@
     margin: 10px 0;
     outline: none;
 }
-.SignUp .Input:nth-child(1){
-    width: 90%;
+.SignIn .Input:nth-child(1){
+    width: 88% !important;
 }
 .SignIn .Input::-webkit-input-placeholder { 
     color: black;
 }
 .SignIn .SignInBTN{
-    width: 160px;
-    height: 40px;
-    background-color: rgba(164, 193, 250, 0.788);
-    border-radius: 10px;
+    width: 200px;
+    height: 50px;
+    color: rgb(0, 0, 0); 
+    background-color: rgb(164, 193, 250);
+    border: 1px solid rgb(0, 18, 106);
+    border-radius: 15px;
     font-size: large;
-    color: rgb(0, 0, 0);
     font-weight: 500;
-    cursor: pointer;
     font-family: AdventPro;
-    border: 1.5px solid rgb(0, 18, 106);
+    cursor: pointer;
+    margin: 10px 0;
 }
 .SignIn .SignInBTN:hover{
-    color: rgb(0, 0, 0);  
-    background-color: rgb(164, 193, 250);
+    border: 1.5px solid rgb(0, 18, 106);
+    background-color: rgb(109, 155, 248); 
 }
 .ActiveInput{
     border-bottom:3px solid red !important ;
@@ -124,11 +147,21 @@
     text-align: center;
   }
 
+
+  /* @keyframes btnChange{
+    0%{
+        width: 20px !important;
+    }
+    100%{
+        width: 200px !important;
+    }
+  } */
 @media screen and (max-width: 890px) {
     .ContainerForSignIn{
-        width: 90% !important;
+        width: 20%;
         display: flex;
         flex-direction: column;
+        animation: other-screenOpening_SI 1s ease forwards;
     }
     .ContainerForSignIn .SignIn{
         width: 55% !important;
@@ -141,32 +174,25 @@
     }
     /**/
     .SignIn .SignInBTN{
-        width: 140px;
-        height: 50px;
-        background-color: #3d6170b1;
-        border-radius: 20px;
-        font-size: large;
-        color: rgb(0, 0, 0);
-        font-weight: 500;
-        font-family: AdventPro;
-        margin-bottom: 10px;
+        /* width: 20px ; */
+        border: 1.5px solid rgb(0, 18, 106) !important;
+        background-color: rgb(109, 155, 248) !important; 
+        /* animation: btnChange 2s ease forwards ; */
     }
-    .SignIn .SignInBTN:hover{
-        background-color: #3d6170;
-        color: black;
-    }
+
     .ContainerForSignIn .ChangeField{
         display: none;
     }
-    .ForInputs .helpMessage{
+    .ForInputs .helpMessage_SI{
         display: inline;
     }
 }
 @media screen and (max-width: 700px){
     .ContainerForSignIn{
-        width: 100% !important;
+        width: 30%;
         display: flex;
         flex-direction: column;
+        animation: max-screenOpening_SI 1s ease forwards;
     }
     .ContainerForSignIn .SignIn{
         width: 90% !important; 

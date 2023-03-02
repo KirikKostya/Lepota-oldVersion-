@@ -51,7 +51,7 @@
 }
 .NavLink{
     text-decoration: none;
-    color: black !important;
+    color: black ;
     margin: 0 23px;
     cursor: pointer;
 }

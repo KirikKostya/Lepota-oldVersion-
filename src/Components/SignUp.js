@@ -2,7 +2,6 @@ import React, {useState, useRef} from 'react'
 import axios from 'axios';
 import './Styles/SignUp.css'
 import { useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 
 
 export default function SignUp({ setRegistr }) {
@@ -106,7 +105,7 @@ export default function SignUp({ setRegistr }) {
                          className='Input' 
                          onChange={(e)=>setSecondPasswordInputValue(e.target.value)} 
                          type={`${TypeForSecondPasswordInput}`} 
-                         placeholder='Please, repeat your password' 
+                         placeholder='Please, repeat password' 
                          value={SecondPasswordInputValue}/>
                   <button onClick={showSecondPassword} className='EyeBtn'>&#128065;&#65039;</button>
                 </div>

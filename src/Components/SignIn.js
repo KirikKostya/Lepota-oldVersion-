@@ -91,8 +91,9 @@ export default function SignIn({ setRegistr }) {
                   <button onClick={showPassword} className='EyeBtn'>&#128065;&#65039;</button>
                 </div>
                 
-                <p className='helpMessage'>Есть аккаунт? 
-                  <span onClick={()=>setRegistr(true)}>РЕГИСТИРОВАТЬСЯ</span>
+                <p className='helpMessage_SI'
+                   onClick={()=>setRegistr(true)}>
+                  РЕГИСТИРОВАТЬСЯ
                 </p>
 
             </div>
