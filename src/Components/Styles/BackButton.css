@@ -4,7 +4,6 @@
     position: absolute;
     border-radius: 10px ;
     background-color: rgba(3, 200, 255, 0.776);
-    /* opacity: 70%; */
     left: 0;
     top: 0;
     margin: 30px;
@@ -24,3 +23,4 @@
 .BackButton:hover{
     background-color: rgba(3, 200, 255, );
 }
+

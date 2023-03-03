@@ -1,0 +1,33 @@
+.ReactModal__Overlay{
+    background-color: rgb(0, 0, 0, 0.6) !important;
+}
+.ReactModal__Content{
+    width: 40% !important;
+    height: 40% !important;
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin-right: -50% !important;
+    transform: translate(-50%, -50%) !important;
+    color: black !important;
+    background: aliceblue !important; 
+    display: flex !important;
+    flex-direction: column !important; 
+    align-items: center !important;
+    justify-content: space-around !important;
+    border-radius: 20px !important;
+}
+@media screen and (max-width: 890px) {
+    .ReactModal__Content{
+        width: 50% !important;
+        height: 50% !important;
+    }
+}
+@media screen and (max-width: 730px) {
+    .ReactModal__Content{
+        width: 70% !important;
+        height: 50% !important;
+    }
+
+}

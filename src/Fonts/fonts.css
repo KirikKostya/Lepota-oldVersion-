@@ -22,3 +22,15 @@
     font-size: normal;
     font-weight: normal;
 }
+@font-face{
+    font-family: 'sylfaen';
+    src: url('/src/Fonts/sylfaen.ttf');
+    font-size: normal;
+    font-weight: normal;
+}
+@font-face{
+    font-family: 'agpresquirec';
+    src: url('/src/Fonts/agpresquirec-bolditalic.otf');
+    font-size: normal;
+    font-weight: normal;
+}

@@ -36,21 +36,21 @@
     border-radius: 10px;
 }
 .SignUp .StatusValidateForm{
-    width: 90%;
+    width: 90% !important;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+    font-family: 'CENTURY';
     font-weight: lighter;
-    font-size: small;
-    padding: 0; 
+    font-size: 9pt !important;
     border-radius: 20px;
+    padding: 0 10px;
     font-weight: bold;
-    margin: 0;
 }
-.good{
+.green{
     color: green;
 }
-.bad{
+.red{
     color: red;
 }
 .yellow{
@@ -107,7 +107,8 @@
     outline: none;
 }
 .SignUp .Input:nth-child(1){
-    width: 90%;
+    width: 88%;
+    margin-bottom: 5px !important;
 }
 .SignUp .Input::-webkit-input-placeholder { 
     color: black;
@@ -124,6 +125,7 @@
     font-family: AdventPro;
     cursor: pointer;
     margin: 10px 0;
+    transition: all 0.4s linear;
 }
 .SignUp .SignUpBTN:hover{ 
     border: 1.5px solid rgb(0, 18, 106);

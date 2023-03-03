@@ -35,11 +35,16 @@
 .DiscriptionContainer .Slide:nth-child(7){
   padding: 0;
 }
-
+@media screen and (max-width:890px){
+  .DiscriptionContainer{
+    width: 80% !important;
+    max-height: 550px !important;
+  }
+}
 @media screen and (max-width:730px){
   .DiscriptionContainer{
     width: 95% !important;
-    max-height: 400px !important;
+    max-height: 450px !important;
   }
   .DiscriptionContainer .Slide{
     max-height: 380px;

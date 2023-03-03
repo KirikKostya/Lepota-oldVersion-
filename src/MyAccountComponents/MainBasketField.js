@@ -4,6 +4,7 @@ import axios from 'axios'
 
 export default function MainBasketField({ ItemsInBasket, setItemsInBasket, requestBasketFunc }) {
   
+    //Function removes order from basket
     const deleteItem = async (id) => {{
         await axios.post('https://api.native-flora.tk/Cart/Delete', {
           id: id
@@ -13,7 +14,8 @@ export default function MainBasketField({ ItemsInBasket, setItemsInBasket, reque
         
         await requestBasketFunc()
       }}
-    
+  
+    //function updates amount of order in basket 
     const updateAmountOfOrder = async (ID, Amount) => {
         axios.post('https://api.native-flora.tk/Cart/Update', {
             id: ID, 
@@ -25,6 +27,7 @@ export default function MainBasketField({ ItemsInBasket, setItemsInBasket, reque
         .then(res=>setItemsInBasket(res.data.data.cartItems))
         .catch(err=>console.log(err))
     }
+
   return (
     <>
         {

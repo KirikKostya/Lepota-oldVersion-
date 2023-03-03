@@ -2,6 +2,7 @@ import React from 'react'
 import ReactModal from 'react-modal'
 import LoadingComp from './LoadingComp';
 import UpdateOrder from './UpdateOrder';
+import './Style/WarningModalView.css'
 
 export default function ChangeMetricsModalView(
   { 
@@ -11,33 +12,11 @@ export default function ChangeMetricsModalView(
     setModalViewStep, 
     selectedOrder }) {
   
-    const customStylesForModal = {
-        content: {
-          width: '40%',
-          height: '50%',
-          top: '50%',
-          left: '50%',
-          right: 'auto',
-          bottom: 'auto',
-          marginRight: '-50%',
-          transform: 'translate(-50%, -50%)',
-          color: 'black',
-          display: 'flex',
-          alignItems: 'center',
-          display: "flex",
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          borderRadius: '20px', 
-        },
-    }
-  
     return (
     <ReactModal 
       isOpen={modalView}
       ariaHideApp={false}
       contentLabel="Selected Option"
-      style={customStylesForModal}
     >
         {
           modalViewStep === 1

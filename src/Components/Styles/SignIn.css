@@ -1,4 +1,4 @@
-
+@import url('/src/Fonts/fonts.css');
 .ContainerForSignIn{
     width: 30%;
     display: flex;
@@ -39,10 +39,11 @@
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+    font-family: 'CENTURY';
     font-weight: lighter;
-    font-size: small;
+    font-size: 9pt !important;
     border-radius: 20px;
-    padding: 10px;
+    padding: 0 10px;
     font-weight: bold;
 }
 .SignIn .ForInputs{
@@ -92,6 +93,7 @@
 }
 .SignIn .Input:nth-child(1){
     width: 88% !important;
+    margin-bottom: 5px !important;
 }
 .SignIn .Input::-webkit-input-placeholder { 
     color: black;
@@ -108,6 +110,7 @@
     font-family: AdventPro;
     cursor: pointer;
     margin: 10px 0;
+    transition: all 0.4s linear;
 }
 .SignIn .SignInBTN:hover{
     border: 1.5px solid rgb(0, 18, 106);

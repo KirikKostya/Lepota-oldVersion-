@@ -21,18 +21,18 @@ export default function SignIn({ setRegistr }) {
   }
 
   function validateEmail(email) {
-    var re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+    let re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
     return (re.test(email));
   }
 
   const statusValidate = async ()=>{
     if(validateEmail(LoginInputValue)){
         setStatusValidateForm('Отлично!');
-        setColorOfValidateForm('good')
+        setColorOfValidateForm('green')
         return true
       } else {
         setStatusValidateForm('Вы ввели некорректный Email!');
-        setColorOfValidateForm('bad')
+        setColorOfValidateForm('red')
         return false
      }
   }
@@ -41,26 +41,33 @@ export default function SignIn({ setRegistr }) {
     let status = await statusValidate();
     if(PasswordInputValue && status){  
       axios.defaults.withCredentials = true;
-      let response = await axios
-                              .post('https://api.native-flora.tk/Auth/Login', 
-                              {
-                                 'username': LoginInputValue,
-                                 'password': PasswordInputValue
-                              })
-
-        localStorage.setItem('accessToken', response.data.data);
-          setPasswordInputValue('');
-          setLoginInputValue('');
-          setStatusValidateForm('');
-          setStatusValidateForm('Вы вошли в свой аккаунт!');
-          setColorOfValidateForm('yellow')
+      axios.post('https://api.native-flora.tk/Auth/Login', 
+            {
+               'username': LoginInputValue,
+                'password': PasswordInputValue
+            })
+      .then(res=>{
+        localStorage.setItem('accessToken', res.data.data);
+        setStatusValidateForm('Вы вошли в свой аккаунт!');
+        setColorOfValidateForm('yellow')
+        dispatch({ type: 'COMPLETED_AUTHORIZATION'});
+        setPasswordInputValue('');
+        setLoginInputValue('');
+      }) 
+      .catch(err=>{
+        setStatusValidateForm('Не верный логин или пароль!');
+        setColorOfValidateForm('red');
+        setPasswordInputValue('');
+        setLoginInputValue('');
+      })
           setTimeout(()=>{
             setColorOfValidateForm('');
             setStatusValidateForm('')
           },4000)
-          dispatch({ type: 'COMPLETED_AUTHORIZATION'})  
+
         } else {
-      console.log('123') // here will be message about error
+          setStatusValidateForm('Введите корректные логин и пароль');
+          setColorOfValidateForm('red')
     }
   }
    
@@ -74,6 +81,7 @@ export default function SignIn({ setRegistr }) {
                 <input id='LoginInput' 
                        className='Input' 
                        type='email'
+                       autoComplete='off'
                        onChange={(e)=>{
                                         setLoginInputValue(e.target.value);
                                         statusValidate()

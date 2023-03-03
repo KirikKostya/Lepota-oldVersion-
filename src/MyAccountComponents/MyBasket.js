@@ -37,7 +37,7 @@ export default function MyBasket() {
     <>
       <UpNavigation hide='hide'/>
 
-      <div className='fullContainer' id='HideNavBarMainLink'>
+      <div className='fullContainer' id='hideNavBarMainLink'>
         <div className='MainFielfForBasket'>
           <div className='basketParametrs'>
             <p id='fullName'>Товар</p>
@@ -62,7 +62,7 @@ export default function MyBasket() {
                     />
             }
         </div>
-        <Check />
+        <Check ItemsInBasket = {ItemsInBasket}/>
       </div>
       
       <ContactWithUs />

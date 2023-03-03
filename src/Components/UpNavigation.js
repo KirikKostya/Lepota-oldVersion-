@@ -44,14 +44,14 @@ export default function UpNavigation({ hide }) {
         
         <div className='NavLinks'>
             <Link activeClass="active" 
-                  to={`${hide? 'HideNavBarMainLink' : 'Main'}`} 
+                  to={`${hide? 'hideNavBarMainLink' : 'Main'}`} 
                   spy={true} 
                   smooth={true} 
                   offset={-90} 
                   duration={500} 
                   isDynamic={true} 
                   onClick={refreshFunction}
-                  className={`NavLink `} >ГЛАВНАЯ</Link>
+                  className={`NavLink`} >ГЛАВНАЯ</Link>
             <Link activeClass="active" 
                   to="CatalogOfWorks" 
                   spy={true} 
@@ -108,7 +108,7 @@ export default function UpNavigation({ hide }) {
       </div>
       <div className={`HamburgerNavLinks ${openHamburgerMenu}`} >
             <Link activeClass="active" 
-                  to="Main" 
+                  to={`${hide? 'hideNavBarMainLink' : 'Main'}`}
                   spy={true} 
                   smooth={true} 
                   offset={-230} 

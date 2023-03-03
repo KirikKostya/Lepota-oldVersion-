@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 
-export default function Check() {
+export default function Check({ ItemsInBasket }) {
 
     const dispatch = useDispatch()
     const typeOfDelivery = useSelector(state=>state.typeOfDelivery)
+    const [isDisabled, setIsDisabled] = useState(Boolean(localStorage.getItem('accessToken')));
 
     const handlerChange = (TYPE) => {
         dispatch({type: TYPE})
@@ -63,7 +64,12 @@ export default function Check() {
                         
                    </div>
         }
-        <button className='makeBTN'>Оформить заказ</button>
+        <button 
+            className={
+                (!isDisabled || ItemsInBasket.length === 0) 
+                            ? 'disabled' 
+                                : "makeBTN"}
+            disabled={!isDisabled || ItemsInBasket.length === 0}>Оформить заказ</button>
     </div>
   )
 }

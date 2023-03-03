@@ -1,3 +1,4 @@
+@import url('/src/Fonts/fonts.css');
 .UpNavContainer{
     width: 100%;
     display: flex;
@@ -5,11 +6,10 @@
     align-items: center;
     justify-content: space-around;
     position: sticky;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     padding: 0 0;
     top: 0;
     background-color: rgb(164, 193, 250);
-    z-index: 1;
+    z-index: 2;
 }
 .Hamburger{
     font-weight: bold;
@@ -18,11 +18,12 @@
 }
 .HamburgerNavLinks{
     width: 100%;
-    display: flex;
+    display: none;
     flex-direction: column !important;
     align-items: center;
     justify-content: center;
-    display: none;
+    z-index: 1;
+
 }
 .true{
     display: block;
@@ -36,7 +37,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-decoration: none !important;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    font-family: 'agpresquirec';
     overflow: none;
 }
 .UpNavContainer .NavLinks{
@@ -50,6 +51,9 @@
     cursor: pointer;
 }
 .NavLink{
+    font-family: 'sylfaen' !important;
+    font-size: 11pt !important ;
+    font-weight: 500 !important;
     text-decoration: none;
     color: black ;
     margin: 0 23px;
@@ -107,14 +111,14 @@
         cursor: pointer;
     }
     .HamburgerNavLinks{
+        display: flex !important;
         background-color: rgb(164, 193, 250);
         position: sticky;
         top: 75px;
-        display: flex !important;
     }
     .HamburgerNavLinks .NavLink{
-        text-align: center;
         color: black ;
+        text-align: center;
         text-decoration: none;
         margin: 5px 0;
     }

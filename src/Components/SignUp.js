@@ -32,18 +32,18 @@ export default function SignUp({ setRegistr }) {
   }
 
   function validateEmail(email) {
-    var re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+    let re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
     return (re.test(email));
   }
 
   const statusValidate = async()=>{
     if(validateEmail(LoginInputValue)){
         setStatusValidateForm('Отлично!');
-        setColorOfValidateForm('good');
+        setColorOfValidateForm('green');
         return true
       } else {
         setStatusValidateForm('Вы ввели некорректный Email!');
-        setColorOfValidateForm('bad')
+        setColorOfValidateForm('red')
         return false
      }
   }
@@ -64,14 +64,15 @@ export default function SignUp({ setRegistr }) {
           setLoginInputValue('');
           setSecondPasswordInputValue('');
           setStatusValidateForm('Вы успеешно зарегистрированы!');
-          setColorOfValidateForm('yellow')
+          setColorOfValidateForm('yellow');
           setTimeout(()=>{
             setColorOfValidateForm('');
-            setStatusValidateForm('')
+            setStatusValidateForm('');
           },4000)
           dispatch({ type: 'COMPLETED_AUTHORIZATION'})
     } else {
-      console.log('1') // here will be message about error
+      setStatusValidateForm('Введите корректные логин и пароль');
+      setColorOfValidateForm('red');
     }
   }
     
@@ -84,7 +85,8 @@ export default function SignUp({ setRegistr }) {
             <div className='ForInputs'>
                 
                 <input id='LoginInput' 
-                       className='Input'  
+                       className='Input' 
+                       autoComplete='off'
                        onChange={(e)=>{
                                         setLoginInputValue(e.target.value);
                                         statusValidate()
@@ -95,6 +97,7 @@ export default function SignUp({ setRegistr }) {
                 <div className='PasswordField'>
                   <input id='PasswordInput' 
                          className='Input' 
+                         autoComplete='off'
                          onChange={(e)=>setPasswordInputValue(e.target.value)} 
                          type={`${TypeForFirstPasswordInput}`} placeholder='Password' 
                          value={PasswordInputValue}/>
