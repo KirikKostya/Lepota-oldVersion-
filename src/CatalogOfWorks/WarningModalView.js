@@ -30,11 +30,9 @@ export default function WarningModalView({ WarningMessageIsOpen }) {
             contentLabel="Selected Option"
             style={customStylesForModal}>
         <h1>Внимание!</h1>
-        <h2 style={
-          {
-            textAlign: 'center'
-          }
-        }>Для того чтобы добавить товар в корзину, вам необходимо <NavLink to={'/Registration'}>войти</NavLink> в аккаунт!</h2>
+        <h2 
+          style={{ textAlign: 'center'}}
+        >Для того чтобы добавить товар в корзину, вам необходимо <NavLink to={'/Registration'}>войти</NavLink> в аккаунт!</h2>
     </ReactModal>
     )
 }

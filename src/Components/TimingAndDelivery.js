@@ -1,7 +1,7 @@
 import React from 'react'
 import './Styles/TimingAndDelivery.css'
 
-const Path = [
+const stepsOfDeliver = [
     {
         id: 0,
         tittle: 'Отправьте заявку',
@@ -44,7 +44,7 @@ export default function TimingAndDelivery() {
             </div>
             <div className='TextPath'>
                 {
-                    Path.map(part=>(
+                    stepsOfDeliver.map(part=>(
                         <div className='PartOfPath' key={part.id}>
                             <h3>{part.tittle}</h3>
                             <p>{part.discription}</p>

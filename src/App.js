@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import ReactModal from 'react-modal';
 import Router from './Router';
-import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
+import './App.css';
 
-
+//refresh Token for authori- and registration (only this function uses fetch-request)
 export const refreshFunction = async () => {
   if(localStorage.getItem('accessToken')){
     fetch('https://api.native-flora.tk/Auth/checkToken', {
@@ -41,8 +41,12 @@ function App() {
 
   const customStylesForModal = {
     content: {
-      width: '40%',
+      width: '50%',
       height: '50%',
+      display: "flex",
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'space-between',
       top: '50%',
       left: '50%',
       right: 'auto',
@@ -50,12 +54,6 @@ function App() {
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
       color: 'black',
-      display: 'flex',
-      alignItems: 'center',
-      display: "flex",
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'space-between',
       borderRadius: '20px'
     },
   } 

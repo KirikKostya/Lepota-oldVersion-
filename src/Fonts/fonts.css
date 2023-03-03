@@ -16,3 +16,9 @@
     font-size: normal;
     font-weight: normal;
 }
+@font-face{
+    font-family: 'adonisc-bold';
+    src: url('/src/Fonts/adonisc-bold.otf');
+    font-size: normal;
+    font-weight: normal;
+}

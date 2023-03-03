@@ -14,7 +14,8 @@
     margin-top: 0;
 }
 .AboutCompanyContainer h3{
-    font-family: 'GARAIT'
+    font-family: 'GARAIT';
+    color: rgba(0, 0, 0, 0.8) !important
 }
 @media screen and (max-width:819px) {
     .AboutCompanyContainer p{

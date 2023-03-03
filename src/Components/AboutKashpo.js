@@ -1,7 +1,7 @@
 import React from 'react'
 import './Styles/AboutKashpo.css'
 
-const UsingSuchUs = [
+const exemplesOfUsed = [
     {
         id: 0,
         img: require('../Photos/FlowersInKashpo.png'),
@@ -32,7 +32,7 @@ export default function AboutKashpo() {
         <h3>Кашпо можно использовать:</h3>
         <div className='ExamplesOfUsing'>
             {
-                UsingSuchUs.map(Item=>(
+                exemplesOfUsed.map(Item=>(
                     <div key={Item.id} className='Fact'>
                         <img className='Img' src={Item.img} />
                         <h3>{Item.tittle}</h3>

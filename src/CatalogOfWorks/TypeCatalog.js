@@ -8,7 +8,7 @@ import WarningModalView from './WarningModalView';
 import ReactModal from 'react-modal';
 import './Style/TypeCatalog.css'
 
-export default function TypeCatalog({ setIsBasketEmpty, catalogOrders }) {
+export default function TypeCatalog({ catalogOrders }) {
 
   const [WarningMessageIsOpen, setWarningMessageIsOpen] = useState(false);
   const [AddedOrder, setAddedOrder] = useState(false)
@@ -56,7 +56,6 @@ export default function TypeCatalog({ setIsBasketEmpty, catalogOrders }) {
                             setModalViewStep={setModalViewStep}
                             setSelectedOrder={setSelectedOrder}
                             setAddedOrder={setAddedOrder}
-                            setIsBasketEmpty={setIsBasketEmpty}
                             setModalView={setModalView}
                             />
                     }

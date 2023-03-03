@@ -3,6 +3,7 @@ import CardOfWork from './CardOfWork'
 import LoadingComp from '../CatalogOfWorks/LoadingComp'
 import { useDispatch, useSelector } from 'react-redux'
 import './Styles/WorkCatalog.css'
+import axios from 'axios'
 
 export default function WorkCatalog( {setOpenID, fetchProducts} ) {
   
@@ -11,13 +12,11 @@ export default function WorkCatalog( {setOpenID, fetchProducts} ) {
   const isLoading = useSelector(state=>state.isLoading);
 
   const fetchFanc = () =>{
-    fetch('https://api.native-flora.tk/Item/GetAll')
-      .then(res=>res.json())
+    axios.get(`https://api.native-flora.tk/Item/GetAll`)
       .then(res=>{
-        setCARDS(res.data)
+        setCARDS(res.data.data)
         dispatch({type: 'LOADING_IS_COMPLETED'});
-      })  
-
+      }) 
   }
 
   useEffect(()=>{

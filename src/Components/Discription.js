@@ -2,7 +2,7 @@ import React from 'react'
 import './Styles/Discription.css'
 
 
- const Pictures = [
+ const exemplesOfWorks = [
   {
     id: Math.random(),
     original:require('../Photos/LOGO.png'),
@@ -40,7 +40,7 @@ export default function Discription() {
   return (
     <div className='DiscriptionContainer' id='Main'>
         {
-          Pictures.map(work=>(
+          exemplesOfWorks.map(work=>(
             <img key={work.id} src={work.original} className = 'Slide' />
           ))
         }

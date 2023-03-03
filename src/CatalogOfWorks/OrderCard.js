@@ -10,7 +10,6 @@ export default function OrderCard(
     setModalViewStep,
     setSelectedOrder,
     setAddedOrder,
-    setIsBasketEmpty,
     setModalView
   }
 ) {
@@ -44,7 +43,6 @@ export default function OrderCard(
         if(res.status === 200){
           setAddedOrder(true)
           setTimeout(()=>setAddedOrder(false), 2000)
-          setIsBasketEmpty(false)
         }
       })
       .catch(err => {

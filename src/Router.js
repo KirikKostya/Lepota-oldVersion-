@@ -6,26 +6,24 @@ import MyBasket from './MyAccountComponents/MyBasket'
 import GoodsArchive from './MyAccountComponents/GoodsArchive';
 import TypeCatalog from './CatalogOfWorks/TypeCatalog'
 import Main from './Main';
+import axios from 'axios';
 export default function Router() {
     
     const [catalogOrders, setCatalogOrders] = useState(Array);   
     const [OpenID, setOpenID] = useState(0)
-    const [isBasketEmpty, setIsBasketEmpty] = useState(true)
 
     const fetchProducts = (OpenID) => {
-      fetch(`https://api.native-flora.tk/Item/GetById?id=${OpenID}`)
-        .then(res=>res.json())
-        .then(res=>{
-            if(res.data == null){
-                setCatalogOrders(null)
-            } else {
-                setCatalogOrders([res.data])
-            }
-        })
+        axios.get(`https://api.native-flora.tk/Item/GetById?id=${OpenID}`)
+            .then(res=>{
+                if(res.data == null){
+                    setCatalogOrders(null)
+                } else {
+                    setCatalogOrders([res.data.data])
+                }
+            })
     }
 
   return (
-        // <BrowserRouter>
             <HashRouter basename='/'>
                 <Routes>
                     <Route path='/' element={<Main fetchProducts={fetchProducts}/>} />
@@ -37,17 +35,15 @@ export default function Router() {
                     <Route path='/Profile' element={<Profile />} />
                 </Routes>
                 <Routes>
-                    <Route path='/MyBasket' element={<MyBasket setIsBasketEmpty = {setIsBasketEmpty}/>} />
+                    <Route path='/MyBasket' element={<MyBasket />} />
                 </Routes>
                 <Routes>
                     <Route path='/GoodsArchive' element={<GoodsArchive />} />
                 </Routes>
                 <Routes>
                     <Route path='/TypeCatalog' element={<TypeCatalog OpenID={OpenID} 
-                                                                    setIsBasketEmpty = {setIsBasketEmpty}
-                                                                    catalogOrders={catalogOrders}/>} />
+                                                                     catalogOrders={catalogOrders}/>} />
                 </Routes>
             </HashRouter>
-        // </BrowserRouter>
   )
 }

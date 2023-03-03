@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { refreshFunction } from '../App'
-import MyAccount from './MyAccount'
-import { Link } from 'react-scroll';
-import { NavLink } from 'react-router-dom';
-import './Styles/UpNavigation.css'
 import { useDispatch, useSelector } from 'react-redux';
+import { refreshFunction } from '../App'
+import { NavLink } from 'react-router-dom';
+import { Link } from 'react-scroll';
+import MyAccount from './MyAccount'
+import axios from 'axios';
+import './Styles/UpNavigation.css'
 
 export default function UpNavigation({ hide }) {
 
@@ -12,6 +13,12 @@ export default function UpNavigation({ hide }) {
   const myAccountIsOpen = useSelector(state=>state.myAccountIsOpen);
   const [openHamburgerMenu, setOpenHamburgerMenu] = useState('close');
 
+  const getCountOfOrdersInBasket = ()=>{
+    axios.post( 'https://api.native-flora.tk/Cart/Count', {}, {
+      headers:{'x-access-token': localStorage.getItem('accessToken')}
+    })
+    .then(res => dispatch({type: 'SET_COUNT_OF_ORDERS', payload: res.data.data}))
+  }
   return (
     <>
       <div id='UpNav' className='UpNavContainer'>
@@ -26,6 +33,7 @@ export default function UpNavigation({ hide }) {
 
                                       if(localStorage.getItem('accessToken')){
                                         refreshFunction();
+                                        getCountOfOrdersInBasket();
                                       }
                                 }}> 
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/> 

@@ -1,7 +1,7 @@
-import React, {useState, useRef} from 'react'
+import React, {useState} from 'react'
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import './Styles/SignUp.css'
-import { useDispatch } from 'react-redux';
 
 
 export default function SignUp({ setRegistr }) {
@@ -71,7 +71,7 @@ export default function SignUp({ setRegistr }) {
           },4000)
           dispatch({ type: 'COMPLETED_AUTHORIZATION'})
     } else {
-      console.log('1')
+      console.log('1') // here will be message about error
     }
   }
     

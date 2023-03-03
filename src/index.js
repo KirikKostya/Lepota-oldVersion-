@@ -12,7 +12,8 @@ const allContextParametrs = {
     isAuthorizate: localStorage.getItem('accessToken'),
     isLoading: true,
     typeOfDelivery: 'pickUp',
-    myAccountIsOpen: false
+    myAccountIsOpen: false,
+    countOfOrders: 0
 }
 
 const reducer = (state = allContextParametrs, action) => {
@@ -33,6 +34,8 @@ const reducer = (state = allContextParametrs, action) => {
         return {...state, myAccountIsOpen: true};
       case 'CLOSE_MY_ACCOUNT':
         return {...state, myAccountIsOpen: false};
+      case 'SET_COUNT_OF_ORDERS':
+        return {...state, countOfOrders: action.payload};
       default : 
         return {...state}
       }

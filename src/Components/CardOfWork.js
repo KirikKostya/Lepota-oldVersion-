@@ -4,6 +4,7 @@ import './Styles/CardOfWork.css'
 
 export default function CardOfWork({card, fetchProducts}) {
 
+  //make examination and return true images from DB-API
   const getImageFromAPI = (photoList) => {
     if (photoList === null || photoList[0] == undefined){ 
       return  require('../Photos/somethingWentWrong.png')
@@ -11,11 +12,12 @@ export default function CardOfWork({card, fetchProducts}) {
       return photoList[0]
     }
   }
+
   return (
     <div className='Card'>
 
         <div className='InfoOfCard' key={card.id}>
-          <img src={getImageFromAPI(card.icon) || require('../Photos/somethingWentWrong.png')} className='IMG' />
+          <img src={getImageFromAPI(card.icon)} className='IMG' />
           <h4 onClick={()=>console.log(card)}>{card.name} <span>{card.price} Br</span> </h4>
           <p>Здесь будет небольшая информация про продукт</p>
         

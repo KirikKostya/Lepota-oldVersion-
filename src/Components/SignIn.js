@@ -60,7 +60,7 @@ export default function SignIn({ setRegistr }) {
           },4000)
           dispatch({ type: 'COMPLETED_AUTHORIZATION'})  
         } else {
-      console.log('123')
+      console.log('123') // here will be message about error
     }
   }
    

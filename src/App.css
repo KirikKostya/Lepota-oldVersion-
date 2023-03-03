@@ -1,3 +1,4 @@
+@import url('/src/Fonts/fonts.css');
 body{
     background: rgb(238, 245, 253);
 }
@@ -24,4 +25,7 @@ body{
 }
 .SignInModalBtn{
     cursor: pointer;
+}
+h1{
+    font-family: 'adonisc-bold';
 }
