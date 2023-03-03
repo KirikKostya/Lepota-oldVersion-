@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Lepota/static/css/main.522afdda.css",
-    "main.js": "/Lepota/static/js/main.ad521606.js",
+    "main.css": "/Lepota/static/css/main.6b3d84b8.css",
+    "main.js": "/Lepota/static/js/main.4b91ee2a.js",
     "static/js/787.983573e0.chunk.js": "/Lepota/static/js/787.983573e0.chunk.js",
     "static/media/Human.png": "/Lepota/static/media/Human.d97eae9dce5536ef48e3.png",
     "static/media/CONSOLA.TTF": "/Lepota/static/media/CONSOLA.230da2be4964a2fbb45f.TTF",
@@ -15,16 +15,17 @@
     "static/media/CENTURY.TTF": "/Lepota/static/media/CENTURY.0a097736022a4b0b78b8.TTF",
     "static/media/Dog.png": "/Lepota/static/media/Dog.dc6037237b976d1ac259.png",
     "static/media/BubbleGum.png": "/Lepota/static/media/BubbleGum.63b9ab33ebb12be01e2c.png",
+    "static/media/adonisc-bold.otf": "/Lepota/static/media/adonisc-bold.dfaf174255d212f8afa6.otf",
     "static/media/somethingWentWrong.png": "/Lepota/static/media/somethingWentWrong.915b7e167f3e83ab3eb2.png",
     "static/media/SweetsInKashpo.png": "/Lepota/static/media/SweetsInKashpo.ac74a5f55a1ac7810fa3.png",
     "static/media/MoneyKashpo.png": "/Lepota/static/media/MoneyKashpo.5bfb7d191d29e1b23757.png",
     "index.html": "/Lepota/index.html",
-    "main.522afdda.css.map": "/Lepota/static/css/main.522afdda.css.map",
-    "main.ad521606.js.map": "/Lepota/static/js/main.ad521606.js.map",
+    "main.6b3d84b8.css.map": "/Lepota/static/css/main.6b3d84b8.css.map",
+    "main.4b91ee2a.js.map": "/Lepota/static/js/main.4b91ee2a.js.map",
     "787.983573e0.chunk.js.map": "/Lepota/static/js/787.983573e0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.522afdda.css",
-    "static/js/main.ad521606.js"
+    "static/css/main.6b3d84b8.css",
+    "static/js/main.4b91ee2a.js"
   ]
 }
