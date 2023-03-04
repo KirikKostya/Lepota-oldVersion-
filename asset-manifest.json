@@ -1,9 +1,10 @@
 {
   "files": {
-    "main.css": "/Lepota/static/css/main.22a3fb4c.css",
+    "main.css": "/Lepota/static/css/main.615ec238.css",
     "main.js": "/Lepota/static/js/main.74fe531b.js",
     "static/js/787.983573e0.chunk.js": "/Lepota/static/js/787.983573e0.chunk.js",
     "static/media/Human.png": "/Lepota/static/media/Human.d97eae9dce5536ef48e3.png",
+    "static/media/CONSTAN.TTF": "/Lepota/static/media/CONSTAN.3fa5923a4b3bf7fc24db.TTF",
     "static/media/CONSOLA.TTF": "/Lepota/static/media/CONSOLA.230da2be4964a2fbb45f.TTF",
     "static/media/Registration.png": "/Lepota/static/media/Registration.7ea83b1aa73b72ced7e9.png",
     "static/media/sylfaen.ttf": "/Lepota/static/media/sylfaen.52e6494de75b3fd67ab9.ttf",
@@ -22,12 +23,12 @@
     "static/media/SweetsInKashpo.png": "/Lepota/static/media/SweetsInKashpo.ac74a5f55a1ac7810fa3.png",
     "static/media/MoneyKashpo.png": "/Lepota/static/media/MoneyKashpo.5bfb7d191d29e1b23757.png",
     "index.html": "/Lepota/index.html",
-    "main.22a3fb4c.css.map": "/Lepota/static/css/main.22a3fb4c.css.map",
+    "main.615ec238.css.map": "/Lepota/static/css/main.615ec238.css.map",
     "main.74fe531b.js.map": "/Lepota/static/js/main.74fe531b.js.map",
     "787.983573e0.chunk.js.map": "/Lepota/static/js/787.983573e0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.22a3fb4c.css",
+    "static/css/main.615ec238.css",
     "static/js/main.74fe531b.js"
   ]
 }
