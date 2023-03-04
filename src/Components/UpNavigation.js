@@ -84,7 +84,7 @@ export default function UpNavigation({ hide }) {
                   className={`NavLink`} >КОНТАКТЫ</Link>
         </div>
         
-        <NavLink to='/' className='header'>
+        <NavLink to='/' className='header-LOGO'>
           <h2>LEPOTA.BY</h2>
         </NavLink>
         

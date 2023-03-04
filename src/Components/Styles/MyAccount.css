@@ -66,4 +66,7 @@
         background-size: 0% !important;
         transition: none;
     }
+    .ContainerForMyAccount .Link:hover{
+        color: black !important;
+    } 
 }

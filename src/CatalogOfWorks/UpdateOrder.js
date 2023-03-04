@@ -22,7 +22,7 @@ export default function UpdateOrder({ selectedOrder, setModalView }) {
         {
             selectedOrder.map(item=>(
                 <div key={item.item.id} className='updataOrderContainer'>
-                    <h2>{item.item.name}</h2>
+                    <h2 className='modal-header'>{item.item.name}</h2>
                     <div className='metrics'>
                         <div className='mixItems'>
                         <p>First <input type='checkbox' onClick={(e) => console.log(e.target.value)} value={1}/></p>
@@ -38,7 +38,7 @@ export default function UpdateOrder({ selectedOrder, setModalView }) {
                                    defaultValue={item.amount}/>
                         </div>
                     </div>
-                    <button onClick={()=>updateOrder(item.item.id)}>Изменить</button>
+                    <button className='modal-closeBTN' onClick={()=>updateOrder(item.item.id)}>Изменить</button>
                 </div>
             ))
         }

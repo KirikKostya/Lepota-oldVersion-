@@ -1,3 +1,4 @@
+@import url('/src/Fonts/fonts.css');
 .ReactModal__Overlay{
     background-color: rgb(0, 0, 0, 0.6) !important;
 }
@@ -17,6 +18,30 @@
     align-items: center !important;
     justify-content: space-around !important;
     border-radius: 20px !important;
+}
+.modal-header{
+    width: 95% !important;
+    font-family: 'adonisc-bold';
+    letter-spacing: 1.5px;
+    text-align: center;
+}
+.modal-errorMessage{
+    font-family: 'CENTURY';
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.826);
+    text-align: center;
+}
+.modal-closeBTN{
+    width: 150px !important;
+    height: 40px !important;
+    border-radius: 10px ;
+    border: none;
+    background: rgb(208, 216, 223);
+    color: black;
+    font-family: "CONSOLA";
+    font-size: 12pt;
+    font-weight: 500;
+    cursor: pointer;
 }
 @media screen and (max-width: 890px) {
     .ReactModal__Content{

@@ -31,7 +31,7 @@
 .false{
     display: none;
 }
-.UpNavContainer .header{
+.UpNavContainer .header-LOGO{
     background-color: #14afaa;
     background-image: linear-gradient(90deg, #4425f6, #068b87);
     -webkit-background-clip: text;
@@ -94,7 +94,7 @@
         display: flex;
         flex-direction: row-reverse;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-around ;
         position: sticky;
         border-bottom: 2px solid black;
     }

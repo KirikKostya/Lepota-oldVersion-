@@ -3,7 +3,7 @@
     src: url('/src/Fonts/GARAIT.TTF');
     font-size: normal;
     font-weight: normal;
-}
+}/*Для подписей*/
 @font-face{
     font-family: 'CENTURY';
     src: url('/src/Fonts/CENTURY.TTF');
@@ -21,7 +21,7 @@
     src: url('/src/Fonts/adonisc-bold.otf');
     font-size: normal;
     font-weight: normal;
-}
+}/*Заголовки*/
 @font-face{
     font-family: 'sylfaen';
     src: url('/src/Fonts/sylfaen.ttf');
@@ -31,6 +31,12 @@
 @font-face{
     font-family: 'agpresquirec';
     src: url('/src/Fonts/agpresquirec-bolditalic.otf');
+    font-size: normal;
+    font-weight: normal;
+}
+@font-face{
+    font-family: 'CONSTAN';
+    src: url('/src/Fonts/CONSTAN.TTF');
     font-size: normal;
     font-weight: normal;
 }

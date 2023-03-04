@@ -11,10 +11,9 @@ export default function WarningModalView({ WarningMessageIsOpen }) {
             ariaHideApp={false}
             contentLabel="Selected Option"
             >
-        <h1>Внимание!</h1>
-        <h2 
-          style={{ textAlign: 'center'}}
-        >Для того чтобы добавить товар в корзину, вам необходимо <NavLink to={'/Registration'}>войти</NavLink> в аккаунт!</h2>
+        <h1 className='modal-header'>Внимание!</h1>
+        <p className='modal-errorMessage'
+        >Для того чтобы добавить товар в корзину, вам необходимо <NavLink to={'/Registration'}>войти</NavLink> в аккаунт!</p>
     </ReactModal>
     )
 }

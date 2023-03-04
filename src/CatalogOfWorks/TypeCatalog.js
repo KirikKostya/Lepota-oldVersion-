@@ -18,25 +18,6 @@ export default function TypeCatalog({ catalogOrders }) {
   //Заказ который есть в корзине, но User хочет поменять метрики 
   const [selectedOrder, setSelectedOrder] = useState(Array);
 
-  const customStylesForModal = {
-    content: {
-      width: '30%',
-      height: '40%',
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      color: 'black',
-      display: "flex",
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'space-around',
-      borderRadius: '20px',
-    },
-}
-
   return (
     <>
       <UpNavigation hide={'hide'}/>
@@ -45,7 +26,6 @@ export default function TypeCatalog({ catalogOrders }) {
           WarningMessageIsOpen
               ? <WarningModalView WarningMessageIsOpen={WarningMessageIsOpen}/>
                 :<>
-                  <h2></h2>
                   <div className='ContainerForCards' >
                     {
                       catalogOrders.length === 0
@@ -66,9 +46,8 @@ export default function TypeCatalog({ catalogOrders }) {
                             isOpen={AddedOrder}
                             ariaHideApp={false}
                             contentLabel="Selected Option"
-                            style={customStylesForModal}
                           >
-                            <h2>Ваш товар добавлен в корзину!</h2>
+                            <h2 className='modal-header'>Ваш товар добавлен в корзину!</h2>
                           </ReactModal>
                           :<></>
                     }

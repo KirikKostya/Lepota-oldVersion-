@@ -1,4 +1,5 @@
 @import url('/src/Fonts/fonts.css');
+
 .ContainerForSignIn{
     width: 30%;
     display: flex;
@@ -40,11 +41,9 @@
     flex-direction: row;
     align-items: flex-start;
     font-family: 'CENTURY';
-    font-weight: lighter;
+    font-weight: lighter !important;
     font-size: 9pt !important;
     border-radius: 20px;
-    padding: 0 10px;
-    font-weight: bold;
 }
 .SignIn .ForInputs{
     width: 90%;
@@ -64,14 +63,14 @@
     background: transparent ;
     cursor: pointer;
 }
-.ForInputs .helpMessage_SI {
+.ForInputs .helpMessage_SI{
     width: 90% !important;
     cursor: pointer !important;
     margin-left: 10px !important;
     display: none;
     margin: 0 0 20px 15px;
+    font-family: 'CONSOLA';
     font-size: small !important;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
     font-weight: 700 !important;
     color: #36519d !important;
 }
@@ -96,25 +95,40 @@
     margin-bottom: 5px !important;
 }
 .SignIn .Input::-webkit-input-placeholder { 
-    color: black;
+    color: rgba(0, 0, 0, 0.733);
+    font-family: 'CONSTAN';
 }
 .SignIn .SignInBTN{
-    width: 200px;
+    width: 20px;
     height: 50px;
-    color: rgb(0, 0, 0); 
+    color: transparent; 
     background-color: rgb(164, 193, 250);
     border: 1px solid rgb(0, 18, 106);
     border-radius: 15px;
-    font-size: large;
+    font-family: "CONSOLA";
+    font-size: 12pt;
     font-weight: 500;
-    font-family: AdventPro;
     cursor: pointer;
     margin: 10px 0;
     transition: all 0.4s linear;
+    animation: btnChange_SI 1s ease forwards;
 }
 .SignIn .SignInBTN:hover{
     border: 1.5px solid rgb(0, 18, 106);
     background-color: rgb(109, 155, 248); 
+}
+@keyframes btnChange_SI{
+    0%{
+        width: 20px ;
+        color: transparent;
+    }
+    50%{
+        color: transparent;
+    }
+    100%{
+        width: 200px;
+        color: rgb(0, 0, 0);;
+    }
 }
 .ActiveInput{
     border-bottom:3px solid red !important ;
@@ -150,15 +164,6 @@
     text-align: center;
   }
 
-
-  /* @keyframes btnChange{
-    0%{
-        width: 20px !important;
-    }
-    100%{
-        width: 200px !important;
-    }
-  } */
 @media screen and (max-width: 890px) {
     .ContainerForSignIn{
         width: 20%;

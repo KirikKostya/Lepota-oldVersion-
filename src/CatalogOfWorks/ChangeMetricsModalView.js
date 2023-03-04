@@ -21,12 +21,14 @@ export default function ChangeMetricsModalView(
         {
           modalViewStep === 1
             ? <div className='modalViewContainer'>
-                <h2>Такой товар уже есть в корзине!</h2>
+                <h2 className='modal-header'>Такой товар уже есть в корзине!</h2>
                 <h5 className='changeParametrsOfOrder' 
                     onClick={()=> setModalViewStep(modalViewStep+1)}>
                  Хотите изменить количество товара или его составляющие?
                 </h5>
-                <button onClick={()=>setModalView(!modalView)}>Закрыть</button>  
+                <button 
+                  className='modal-closeBTN' 
+                  onClick={()=>setModalView(!modalView)}>Закрыть</button>  
               </div>
                 :<div className='modalViewContainer'>
                    {
@@ -34,7 +36,9 @@ export default function ChangeMetricsModalView(
                      ?<>
                         <h2>Ваш товар</h2>
                         <LoadingComp /> 
-                        <button onClick={()=>setModalView(!modalView)}>Закрыть</button>
+                        <button 
+                          className='modal-closeBTN' 
+                          onClick={()=>setModalView(!modalView)}>Закрыть</button>
                       </>
                       :<UpdateOrder selectedOrder={selectedOrder} 
                                     setModalView={setModalView}/>
