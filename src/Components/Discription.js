@@ -5,7 +5,7 @@ import './Styles/Discription.css'
  const exemplesOfWorks = [
   {
     id: Math.random(),
-    original:require('../Photos/LOGO.png'),
+    original:require('../Photos/Logo.png'),
   },
   {
     id: Math.random(),

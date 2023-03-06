@@ -7,24 +7,24 @@ const Instagram = 'M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.
 
 export default function ContactWithUs() {
 
-  const [isOpen, setIsOpen] = useState(false)
+  const [isTelephoneOpen, setIsTelephoneOpen] = useState(false)
 
   return (
     <div className='ContainerForContactWithUs' id='ContactWithUs' >
         <h1>Контакты</h1>
         <p>С нами можно связаться через:</p>
             <div className='MassagerIcons'>
-                <a href='tel:+375259716466'><svg fill="white"
+                <a href='http://t.me/Kaetanaa'><svg fill="white"
                      viewBox="0 0 16 16" 
                      onClick={()=>{
-                                    (isOpen)
-                                      ? setIsOpen(false)  
-                                        : setIsOpen(true)}}><path d={Telegram}/></svg></a>
+                                    (isTelephoneOpen)
+                                      ? setIsTelephoneOpen(false)  
+                                        : setIsTelephoneOpen(true)}}><path d={Telegram}/></svg></a>
                 <a href='https://www.instagram.com/lepota.by/' target='_blank'><svg  fill="white" viewBox="0 0 16 16"><path d={Instagram}/></svg></a>
 
             </div>
         {
-          (!isOpen)
+          (!isTelephoneOpen)
             ?<p>Tub on telegram icon!</p>
              :<p className='MobilePhone'>+375 (25) 971 64 66</p>
         }

@@ -154,8 +154,10 @@
     font-family: "montserrat";
     text-decoration: none;
     border: 2px solid #ff7675;
+    border-radius: 5px;
     padding: 14px 20px;
     cursor: pointer;
+    transition: all 0.4s;
   }
   .ContainerForSignUp .SignInChangeBtn:hover{
     background-color: #ff7675;

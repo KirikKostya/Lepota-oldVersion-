@@ -40,6 +40,7 @@
     background-size: 0% 1px;
     transition: background-size 0.9s;
 }
+
 .ContainerForMyAccount .ListItem:hover{
     background-size: 100% 1px;
     color: rgb(0, 0, 0);

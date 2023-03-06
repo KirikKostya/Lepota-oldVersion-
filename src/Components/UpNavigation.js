@@ -10,6 +10,7 @@ import './Styles/UpNavigation.css'
 export default function UpNavigation({ hide }) {
 
   const dispatch = useDispatch();
+  const isAuthorizate = useSelector(state=>state.isAuthorizate);
   const myAccountIsOpen = useSelector(state=>state.myAccountIsOpen);
   const [openHamburgerMenu, setOpenHamburgerMenu] = useState('close');
 
@@ -22,7 +23,9 @@ export default function UpNavigation({ hide }) {
   return (
     <>
       <div id='UpNav' className='UpNavContainer'>
-        <div>
+        {
+          isAuthorizate
+          ? <div>
               <svg width="40" 
                    height="40" 
                    viewBox="0 0 16 16" 
@@ -40,8 +43,9 @@ export default function UpNavigation({ hide }) {
                 <path fillRule="evenodd" 
                       d='M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z'/> 
               </svg>
-        </div>
-        
+            </div>
+            :<NavLink to={'/Registration'} className='SingInBTN_UN'>ВОЙТИ</NavLink>
+        }
         <div className='NavLinks'>
             <Link activeClass="active" 
                   to={`${hide? 'hideNavBarMainLink' : 'Main'}`} 

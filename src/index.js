@@ -9,7 +9,7 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const allContextParametrs = {
-    isAuthorizate: localStorage.getItem('accessToken'),
+    isAuthorizate: Boolean(localStorage.getItem('accessToken')),
     isLoading: true,
     typeOfDelivery: 'pickUp',
     myAccountIsOpen: false,

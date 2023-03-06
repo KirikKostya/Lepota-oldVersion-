@@ -4,6 +4,7 @@ import SignIn from './SignIn'
 import SignUp from './SignUp'
 import './Styles/Registration.css'
 
+
 export default function Registration() {
 
     const [Registr, setRegistr] = useState(true);
