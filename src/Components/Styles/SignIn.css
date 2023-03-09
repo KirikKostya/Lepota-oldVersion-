@@ -27,7 +27,7 @@
 }
 .ContainerForSignIn .SignIn{
     width: 30%;
-    height: 420px;
+    min-height: 440px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -35,14 +35,27 @@
     background-color: rgb(207, 222, 226);
     border-radius: 10px;
 }
+.SignIn h1{
+    animation: headerAnimation 1s ease forwards;
+}
+@keyframes headerAnimation{
+    0%{
+        color: transparent;
+    }
+    50%{
+        color: transparent
+    }
+    100%{
+        color: black
+    }
+}
 .SignIn .StatusValidateForm{
     width: 90% !important;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    font-family: 'CENTURY';
-    font-weight: lighter !important;
-    font-size: 9pt !important;
+    font-family: 'Montserrat-Light';
+    font-size: 8pt !important;
     border-radius: 20px;
 }
 .SignIn .ForInputs{
@@ -52,40 +65,41 @@
     align-items: center;
     justify-content: center;
 }
-.ForInputs .PasswordField{
+.ForInputs .PasswordField_SI{
     width: 93% !important;
     display: flex !important;
     flex-direction: row !important;
+    margin: 10px 0 0 0 ;
 }
-.PasswordField .EyeBtn{
+.PasswordField_SI .EyeBtn{
     border: none;
     border-radius: 50%;
     background: transparent ;
     cursor: pointer;
 }
-.ForInputs .helpMessage_SI{
-    width: 90% !important;
-    cursor: pointer !important;
-    margin-left: 10px !important;
+.SignIn .helpMessage_SI{
+    width: 90%;
+    color: transparent;
+    font-family: 'Montserrat-Medium';
+    font-size: 8pt;
     display: none;
-    margin: 0 0 20px 15px;
-    font-family: 'CONSOLA';
-    font-size: small !important;
-    font-weight: 700 !important;
-    color: #36519d !important;
+    margin: 5px 0 15px 0;
+    text-align: center;
+    cursor: pointer;
 }
-.ForInputs .helpMessage_SI:hover{
-    color: rgba(0, 0, 255, 0.861) !important;
+.SignIn .helpMessage_SI:hover{
+    color: rgba(0, 0, 255, 0.861) ;
 }
 .SignIn .Input{
-    width: 100% !important;
+    width: 100%;
     height: 40px;
     background-color: transparent;
     border: none;
-    border-bottom: 3px solid #191d1a !important;
+    border-bottom: 3px solid #000000 !important;
     color: black;
     text-shadow: 2px 2px 3px rgb(255, 255, 255);
-    font-size: larger;
+    font-family: 'Montserrat-Medium' !important;
+    font-size: 14pt;
     padding-left: 15px;
     margin: 10px 0;
     outline: none;
@@ -96,20 +110,20 @@
 }
 .SignIn .Input::-webkit-input-placeholder { 
     color: rgba(0, 0, 0, 0.733);
-    font-family: 'CONSTAN';
+    font-family: 'Montserrat-Medium' !important;
+    font-size: 12pt !important;
 }
 .SignIn .SignInBTN{
     width: 20px;
-    height: 50px;
-    color: transparent; 
+    height: 50px; 
     background-color: rgb(164, 193, 250);
     border: 1px solid rgb(0, 18, 106);
     border-radius: 15px;
-    font-family: "CONSOLA";
     font-size: 12pt;
     font-weight: 500;
+    font-family: 'Montserrat-Medium';
     cursor: pointer;
-    margin: 10px 0;
+    margin: 20px 0 10px 0;
     transition: all 0.4s linear;
     animation: btnChange_SI 1s ease forwards;
 }
@@ -137,8 +151,8 @@
     position: relative;
     display: block;
     color: rgb(0, 0, 0);
-    font-size: 22px;
-    font-family: "montserrat";
+    font-family: 'Montserrat-Medium';
+    font-size: 16px;
     text-decoration: none;
     border: 2px solid #ff7675;
     border-radius: 5px;
@@ -158,12 +172,12 @@
     justify-content: center;
   }
   .ChangeField p{
-    color: #eceeef;
-    font-weight: bold;
-    font-size: larger;
-    margin: 20px;
     width: 200px;
+    font-family: 'Montserrat-Regular';
+    font-size: 14pt;
     text-align: center;
+    color: #eceeef;
+    margin: 20px;
   }
 
 @media screen and (max-width: 890px) {
@@ -175,6 +189,10 @@
     }
     .ContainerForSignIn .SignIn{
         width: 55% !important;
+        min-height: 420px !important;
+    }
+    .SignIn .ForInputs{
+        flex: 1!important;
     }
     .SignIn .Input{
         width: 90% !important;
@@ -184,17 +202,29 @@
     }
     /**/
     .SignIn .SignInBTN{
-        /* width: 20px ; */
+        width: 20px ;
         border: 1.5px solid rgb(0, 18, 106) !important;
-        background-color: rgb(109, 155, 248) !important; 
-        /* animation: btnChange 2s ease forwards ; */
+        background-color: rgb(109, 155, 248) !important;
     }
 
     .ContainerForSignIn .ChangeField{
         display: none;
     }
-    .ForInputs .helpMessage_SI{
+    .SignIn .helpMessage_SI{
         display: inline;
+        color: rgba(0, 0, 255, 0.861) !important;
+        animation: helpMessageAnimation 1s ease forwards;
+    }
+    @keyframes helpMessageAnimation{
+        0%{
+            opacity: 0;
+        }
+        25%{
+            opacity: 0;
+        }
+        100%{
+            opacity: 1;
+        }
     }
 }
 @media screen and (max-width: 700px){

@@ -32,7 +32,7 @@ export default function SignUp({ setRegistr }) {
   }
 
   function validateEmail(email) {
-    let re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+    let re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{1,})$/iu;
     return (re.test(email));
   }
 
@@ -53,23 +53,31 @@ export default function SignUp({ setRegistr }) {
     let status = await statusValidate();
     if(PasswordInputValue === SecondPasswordInputValue && PasswordInputValue != '' && status){
         axios.defaults.withCredentials = true;
-        let response = await axios
-                              .post('https://api.native-flora.tk/Auth/Register', 
-                              {
-                                 'username': LoginInputValue,
-                                 'password': PasswordInputValue
-                              })
-        localStorage.setItem('accessToken', response.data.data)
-          setPasswordInputValue('');
-          setLoginInputValue('');
-          setSecondPasswordInputValue('');
-          setStatusValidateForm('Вы успеешно зарегистрированы!');
-          setColorOfValidateForm('yellow');
-          setTimeout(()=>{
-            setColorOfValidateForm('');
-            setStatusValidateForm('');
-          },4000)
-          dispatch({ type: 'COMPLETED_AUTHORIZATION'})
+        axios
+          .post('https://api.native-flora.tk/Auth/Register', 
+              {
+                 'username': LoginInputValue,
+                 'password': PasswordInputValue
+              })
+          .then(res=>{
+            localStorage.setItem('accessToken', res.data.data);
+              setStatusValidateForm('Вы успеешно зарегистрированы!');
+              setColorOfValidateForm('green');
+              setPasswordInputValue('');
+              setLoginInputValue('');
+              setSecondPasswordInputValue('');
+              dispatch({ type: 'COMPLETED_AUTHORIZATION'})
+                setTimeout(()=>{
+                  setColorOfValidateForm('');
+                  setStatusValidateForm('');
+                },4000)
+          })
+          .catch(err=>{
+            if(err.response.status === 400){
+              setStatusValidateForm('Такой пользователь уже существует !');
+              setColorOfValidateForm('red');
+            }
+          })
     } else {
       setStatusValidateForm('Введите корректные логин и пароль');
       setColorOfValidateForm('red');
@@ -113,12 +121,12 @@ export default function SignUp({ setRegistr }) {
                   <button onClick={showSecondPassword} className='EyeBtn'>&#128065;&#65039;</button>
                 </div>
 
-                <p className='helpMessage'>Есть аккаунт? 
-                  <span onClick={()=>setRegistr(false)}>ВОЙТИ</span>
-                </p>
             </div>
             <button className='SignUpBTN' 
                     onClick={Registration}>Создать аккаунт</button>
+            <p className='helpMessage'>Есть аккаунт? 
+              <span onClick={()=>setRegistr(false)}>ВОЙТИ</span>
+            </p>
         </div>
         <div className='ChangeField'>
             <p>Есть аккаунт? Тогда добро пожаловать!</p>

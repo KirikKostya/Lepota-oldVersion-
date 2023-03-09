@@ -40,3 +40,29 @@
     font-size: normal;
     font-weight: normal;
 }
+
+/**/
+@font-face{
+    font-family: 'Montserrat-Light';
+    src: url('/src/Fonts/Montserrat-Light.ttf');
+    font-size: normal;
+    font-weight: normal;
+}/*paragraph, */
+@font-face{
+    font-family: 'Montserrat-Regular';
+    src: url('/src/Fonts/Montserrat-Regular.ttf');
+    font-size: normal;
+    font-weight: normal;
+}/*text bigger then paragraph*/
+@font-face{
+    font-family: 'Montserrat-Medium';
+    src: url('/src/Fonts/Montserrat-Medium.otf');
+    font-size: normal;
+    font-weight: normal;
+}/*buttons, 2lvl header */
+@font-face{
+    font-family: 'Montserrat-Bold';
+    src: url('/src/Fonts/Montserrat-Bold.ttf');
+    font-size: normal;
+    font-weight: normal;
+}/*1lvl header*/

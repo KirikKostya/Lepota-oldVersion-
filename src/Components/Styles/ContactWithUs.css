@@ -28,7 +28,8 @@
     color: rgb(238, 245, 253) !important;
 }
 .ContainerForContactWithUs p{
-    font-family: 'CENTURY' !important;
+    font-family: 'Montserrat-Medium' !important;
+    font-size: 11pt !important ;
     font-weight: 500 ;
     font-size: medium !important;
     margin-top: -15px;

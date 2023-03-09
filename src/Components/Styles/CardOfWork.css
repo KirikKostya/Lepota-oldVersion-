@@ -1,3 +1,4 @@
+@import url('/src/Fonts/fonts.css');
 .Card{
     width: 220px;
     display: flex;
@@ -41,6 +42,7 @@
 .Card .CatalogBTN{
     width: 125px;
     height: 30px;
+    font-family: 'Montserrat-Medium';
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -49,8 +51,8 @@
     border: none;
     cursor: pointer;
     color: aliceblue;
-    background-color: rgba(245, 57, 88, 0.881);
-    text-shadow: 2px 2px 2px rgb(0, 0, 0);
+    background-color: #5da6f3 !important;
+    /* text-shadow: 1px 1px 5px rgb(0, 0, 0); */
     border-radius: 3px;
     text-decoration: none;
 }

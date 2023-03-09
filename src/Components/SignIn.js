@@ -21,7 +21,7 @@ export default function SignIn({ setRegistr }) {
   }
 
   function validateEmail(email) {
-    let re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+    let re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{1,})$/iu;
     return (re.test(email));
   }
 
@@ -49,7 +49,7 @@ export default function SignIn({ setRegistr }) {
       .then(res=>{
         localStorage.setItem('accessToken', res.data.data);
         setStatusValidateForm('Вы вошли в свой аккаунт!');
-        setColorOfValidateForm('yellow')
+        setColorOfValidateForm('green')
         dispatch({ type: 'COMPLETED_AUTHORIZATION'});
         setPasswordInputValue('');
         setLoginInputValue('');
@@ -68,7 +68,7 @@ export default function SignIn({ setRegistr }) {
         } else {
           setStatusValidateForm('Введите корректные логин и пароль');
           setColorOfValidateForm('red')
-    }
+        }
   }
    
   return (
@@ -89,7 +89,7 @@ export default function SignIn({ setRegistr }) {
                        placeholder='Login' 
                        value={LoginInputValue}/>
                 <span className={`StatusValidateForm ${ColorOfValidateForm}`}>{StatusValidateForm}</span>
-                <div className='PasswordField'>
+                <div className='PasswordField_SI'>
                   <input id='PasswordInput' 
                          className='Input' 
                          onChange={(e)=>setPasswordInputValue(e.target.value)} 
@@ -98,14 +98,15 @@ export default function SignIn({ setRegistr }) {
                          value={PasswordInputValue}/>
                   <button onClick={showPassword} className='EyeBtn'>&#128065;&#65039;</button>
                 </div>
-                
-                <p className='helpMessage_SI'
-                   onClick={()=>setRegistr(true)}>
-                  РЕГИСТИРОВАТЬСЯ
-                </p>
 
             </div>
-            <button className='SignInBTN' onClick={Authorization}>Войти</button>
+            <button 
+              className='SignInBTN' 
+              onClick={Authorization}>Войти</button>
+            <p className='helpMessage_SI'
+               onClick={()=>setRegistr(true)}>
+                РЕГИСТИРОВАТЬСЯ
+            </p>
         </div>
         <div className='ChangeField'>
           <p>У вас нет аккаунта? Зарегистрируйся!</p>

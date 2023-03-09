@@ -9,8 +9,8 @@
 .AboutCompanyContainer p{
     width: 800px;
     text-align: center;
-    font-size: larger;
-    font-family: 'CENTURY';
+    font-family: 'Montserrat-Regular' !important;
+    font-size: 11pt;
     margin-top: 0;
 }
 .AboutCompanyContainer h3{
@@ -20,9 +20,8 @@
 @media screen and (max-width:819px) {
     .AboutCompanyContainer p{
         width: 95%;
-        text-align: center;
-        font-size: 11.5pt;
-        font-family: 'CENTURY';
+        font-family: 'Montserrat-Regular' !important;
+        font-size: 11pt;
         margin-top: 0;
     }
 }
