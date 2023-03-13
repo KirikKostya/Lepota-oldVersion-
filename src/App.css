@@ -17,6 +17,7 @@ body{
 }
 .warningMessage{
     width: 80%;
+    font-family: 'Montserrat-Regular';
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,4 +30,9 @@ body{
 h1{
     font-family: 'Montserrat-Bold';
     font-size: 22pt;
+}
+@media screen and (max-width: 890px) {
+    .warningMessage{
+        width: 95% !important;
+    }
 }

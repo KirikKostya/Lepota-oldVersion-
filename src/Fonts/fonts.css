@@ -1,46 +1,3 @@
-@font-face{
-    font-family: 'GARAIT';
-    src: url('/src/Fonts/GARAIT.TTF');
-    font-size: normal;
-    font-weight: normal;
-}/*Для подписей*/
-@font-face{
-    font-family: 'CENTURY';
-    src: url('/src/Fonts/CENTURY.TTF');
-    font-size: normal;
-    font-weight: normal;
-}
-@font-face{
-    font-family: 'CONSOLA';
-    src: url('/src/Fonts/CONSOLA.TTF');
-    font-size: normal;
-    font-weight: normal;
-}
-@font-face{
-    font-family: 'adonisc-bold';
-    src: url('/src/Fonts/adonisc-bold.otf');
-    font-size: normal;
-    font-weight: normal;
-}/*Заголовки*/
-@font-face{
-    font-family: 'sylfaen';
-    src: url('/src/Fonts/sylfaen.ttf');
-    font-size: normal;
-    font-weight: normal;
-}
-@font-face{
-    font-family: 'agpresquirec';
-    src: url('/src/Fonts/agpresquirec-bolditalic.otf');
-    font-size: normal;
-    font-weight: normal;
-}
-@font-face{
-    font-family: 'CONSTAN';
-    src: url('/src/Fonts/CONSTAN.TTF');
-    font-size: normal;
-    font-weight: normal;
-}
-
 /**/
 @font-face{
     font-family: 'Montserrat-Light';
@@ -48,21 +5,31 @@
     font-size: normal;
     font-weight: normal;
 }/*paragraph, */
+
 @font-face{
     font-family: 'Montserrat-Regular';
     src: url('/src/Fonts/Montserrat-Regular.ttf');
     font-size: normal;
     font-weight: normal;
 }/*text bigger then paragraph*/
+
 @font-face{
     font-family: 'Montserrat-Medium';
     src: url('/src/Fonts/Montserrat-Medium.otf');
     font-size: normal;
     font-weight: normal;
 }/*buttons, 2lvl header */
+
 @font-face{
     font-family: 'Montserrat-Bold';
     src: url('/src/Fonts/Montserrat-Bold.ttf');
     font-size: normal;
     font-weight: normal;
 }/*1lvl header*/
+
+@font-face{
+    font-family: 'GARAIT';
+    src: url('/src/Fonts/GARAIT.TTF');
+    font-size: normal;
+    font-weight: normal;
+}/*Для подписей*/

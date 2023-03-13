@@ -39,25 +39,6 @@ function App() {
   const myAccountIsOpen = useSelector(state=>state.myAccountIsOpen);
   const [isOpenModal, setIsOpenModal] = useState(!true);
 
-  const customStylesForModal = {
-    content: {
-      width: '50%',
-      height: '50%',
-      display: "flex",
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      color: 'black',
-      borderRadius: '20px'
-    },
-  } 
-
   return (
     <div className="App" 
          onClick={()=>{
@@ -67,12 +48,14 @@ function App() {
          }}>
       <Router />
       <ReactModal 
+        ariaHideApp={false}
         isOpen={isOpenModal}
-        style={customStylesForModal}
       >
-        <h2 className='warningHeader'>Вы снова с нами!</h2>
+        <h1 className='warningHeader'>Приветствуем !</h1>
         <p className='warningMessage'>Вас долго не было с нами, вам необходимо повторно войти в аккаунт! </p>
-        <button className='SignInModalBtn' onClick={()=>setIsOpenModal(!isOpenModal)}>Войти</button>
+        <button 
+                  className='modal-closeBTN' 
+                  onClick={()=>setIsOpenModal(!isOpenModal)}>Закрыть</button>  
       </ReactModal>
     </div>
   );

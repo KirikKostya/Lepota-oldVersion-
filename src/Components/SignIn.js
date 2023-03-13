@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { showPassword, statusValidate, clearInputs } from './Registration';
 import { useDispatch } from 'react-redux';
 import axios from 'axios'
 import './Styles/SignIn.css'
@@ -8,37 +9,15 @@ export default function SignIn({ setRegistr }) {
     const [LoginInputValue, setLoginInputValue] = useState('');
     const [PasswordInputValue, setPasswordInputValue] = useState('');
     const [TypeOfPasswordInput, setTypeOfPasswordInput] = useState('password')
+    const [closeEyesStatus, setCloseEyesStatus] = useState(true)
     const [StatusValidateForm, setStatusValidateForm] = useState('') 
     const [ColorOfValidateForm, setColorOfValidateForm] = useState('bad')
 
 
-    const dispatch = useDispatch()
-
-  const showPassword = ()=>{
-    (TypeOfPasswordInput == 'password')
-      ? setTypeOfPasswordInput('text')
-        : setTypeOfPasswordInput('password')
-  }
-
-  function validateEmail(email) {
-    let re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{1,})$/iu;
-    return (re.test(email));
-  }
-
-  const statusValidate = async ()=>{
-    if(validateEmail(LoginInputValue)){
-        setStatusValidateForm('Отлично!');
-        setColorOfValidateForm('green')
-        return true
-      } else {
-        setStatusValidateForm('Вы ввели некорректный Email!');
-        setColorOfValidateForm('red')
-        return false
-     }
-  }
+  const dispatch = useDispatch()
 
   const Authorization = async ()=> {
-    let status = await statusValidate();
+    let status = await statusValidate(setStatusValidateForm, setColorOfValidateForm, LoginInputValue);
     if(PasswordInputValue && status){  
       axios.defaults.withCredentials = true;
       axios.post('https://api.native-flora.tk/Auth/Login', 
@@ -51,14 +30,12 @@ export default function SignIn({ setRegistr }) {
         setStatusValidateForm('Вы вошли в свой аккаунт!');
         setColorOfValidateForm('green')
         dispatch({ type: 'COMPLETED_AUTHORIZATION'});
-        setPasswordInputValue('');
-        setLoginInputValue('');
+        clearInputs( setLoginInputValue, setPasswordInputValue, setPasswordInputValue );
       }) 
       .catch(err=>{
         setStatusValidateForm('Не верный логин или пароль!');
         setColorOfValidateForm('red');
-        setPasswordInputValue('');
-        setLoginInputValue('');
+        clearInputs( setLoginInputValue, setPasswordInputValue );
       })
           setTimeout(()=>{
             setColorOfValidateForm('');
@@ -84,7 +61,7 @@ export default function SignIn({ setRegistr }) {
                        autoComplete='off'
                        onChange={(e)=>{
                                         setLoginInputValue(e.target.value);
-                                        statusValidate()
+                                        statusValidate(setStatusValidateForm, setColorOfValidateForm, LoginInputValue)
                                       }} 
                        placeholder='Login' 
                        value={LoginInputValue}/>
@@ -96,7 +73,24 @@ export default function SignIn({ setRegistr }) {
                          type={`${TypeOfPasswordInput}`} 
                          placeholder='Password' 
                          value={PasswordInputValue}/>
-                  <button onClick={showPassword} className='EyeBtn'>&#128065;&#65039;</button>
+                  {/* <button onClick={showPassword} className='EyeBtn'>&#128065;&#65039;</button> */}
+                  {
+                    closeEyesStatus
+                      ? <svg onClick={()=>showPassword(TypeOfPasswordInput, setTypeOfPasswordInput, setCloseEyesStatus)} 
+                             width={23} height={23} viewBox={'0 0 20 20'} fill='none'>
+                          <path d='M4 10C4 10 5.6 15 12 15M12 15C18.4 15 20 10 20 10M12 15V18M18 17L16 14.5M6 17L8 14.5'
+                                stroke='#000' 
+                                strokeLinecap='round' 
+                                strokeLinejoin='round' />
+                        </svg>
+                        : <svg onClick={()=>showPassword(TypeOfPasswordInput, setTypeOfPasswordInput, setCloseEyesStatus)}  
+                                    width={23} height={23} viewBox={'0 0 20 20'} fill='none'>
+                            <path d='M4 12C4 12 5.6 7 12 7M12 7C18.4 7 20 12 20 12M12 7V4M18 5L16 7.5M6 5L8 7.5M15 13C15 14.6569 13.6569 16 12 16C10.3431 16 9 14.6569 9 13C9 11.3431 10.3431 10 12 10C13.6569 10 15 11.3431 15 13Z'
+                                stroke='#000' 
+                                strokeLinecap='round' 
+                                strokeLinejoin='round' />
+                          </svg>
+                  }
                 </div>
 
             </div>

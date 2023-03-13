@@ -31,15 +31,6 @@
 .false{
     display: none;
 }
-.UpNavContainer .header-LOGO{
-    background-color: #14afaa;
-    background-image: linear-gradient(90deg, #4425f6, #068b87);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-decoration: none !important;
-    font-family: 'agpresquirec';
-    overflow: none;
-}
 .UpNavContainer .NavLinks{
     width: 80%;
     background-color: #e9e9e9;

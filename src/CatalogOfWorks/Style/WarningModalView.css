@@ -21,12 +21,12 @@
 }
 .modal-header{
     width: 95% !important;
-    font-family: 'adonisc-bold';
-    letter-spacing: 1.5px;
+    letter-spacing: 1.2px;
     text-align: center;
 }
 .modal-errorMessage{
-    font-family: 'CENTURY';
+    width: 80% !important;
+    font-family: 'Montserrat-Regular';
     font-weight: 600;
     color: rgba(0, 0, 0, 0.826);
     text-align: center;
@@ -38,7 +38,7 @@
     border: none;
     background: rgb(208, 216, 223);
     color: black;
-    font-family: "CONSOLA";
+    font-family: "Montserrat-Medium";
     font-size: 12pt;
     font-weight: 500;
     cursor: pointer;
@@ -47,6 +47,9 @@
     .ReactModal__Content{
         width: 50% !important;
         height: 50% !important;
+    }
+    .modal-errorMessage{
+        width: 95% !important;
     }
 }
 @media screen and (max-width: 730px) {

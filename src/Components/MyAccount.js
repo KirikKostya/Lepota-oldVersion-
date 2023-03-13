@@ -12,7 +12,6 @@ export default function MyAccount() {
   const SignOut = () =>{
     dispatch({ type: 'UNCOMPLETED_AUTHORIZATION'})
     localStorage.clear();
-    alert('Вы вышли из аккаунта')
   }
 
   return (

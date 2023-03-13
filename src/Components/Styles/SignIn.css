@@ -69,12 +69,13 @@
     width: 93% !important;
     display: flex !important;
     flex-direction: row !important;
+    align-items: center !important;
     margin: 10px 0 0 0 ;
 }
-.PasswordField_SI .EyeBtn{
-    border: none;
-    border-radius: 50%;
-    background: transparent ;
+.PasswordField_SI svg{
+    border-radius: 45%;
+    padding: 0 3px 3px 0 ;
+    background: rgb(192, 192, 192);
     cursor: pointer;
 }
 .SignIn .helpMessage_SI{
@@ -154,14 +155,14 @@
     font-family: 'Montserrat-Medium';
     font-size: 16px;
     text-decoration: none;
-    border: 2px solid #ff7675;
+    border: 2px solid #0865f1;
     border-radius: 5px;
     padding: 14px 20px;
     cursor: pointer;
-    transition: all 0.4s;
+    transition: all 0.5s;
   }
   .ContainerForSignIn .SignInChangeBtn:hover{
-    background-color: #ff7675;
+    background-color: #1d78fe;
     border: 2px solid #e8e8e8;
     color: #e8e8e8;
   }

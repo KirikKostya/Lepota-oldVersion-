@@ -26,8 +26,9 @@
     width: 150px;
     height: 30px;
     margin: 10px;
-    font-family: 'sylfaen';
-    font-weight: 500 !important;
+    font-family: 'Montserrat-Light';
+    font-size: 10pt;
+    /* font-weight: 500 !important; */
     border-radius: 0 0 3px 3px;
     text-align: center;
     color: rgba(0, 0, 0, 0.85) !important;
@@ -47,7 +48,7 @@
 }
 
 .ContainerForMyAccount .Link{
-    font-family: 'adonisc-bold';
+    font-family: 'Montserrat-Bold';
     color: black !important;
     text-decoration: none !important;
     font-weight: bold;
@@ -58,8 +59,8 @@
 } 
 .countOfOrders{
     padding: 0 3px 0 3px;
-    font-size: medium;
-    font-weight: 700;
+    font-family: 'Montserrat-Medium';
+    font-size: 10pt;
     color: rgba(247, 28, 28, 0.893)
 }
 @media screen and (max-width: 730px) {

@@ -3,7 +3,6 @@
     height: 100vh;
     background: url('/src/Photos/Registration.png');
     background-size: cover;
-    /* background-color: #7a7878; */
     display: flex;
     flex-direction: column;
     align-items: center;
