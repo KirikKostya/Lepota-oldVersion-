@@ -5,6 +5,7 @@ import Profile from './MyAccountComponents/Profile'
 import MyBasket from './MyAccountComponents/MyBasket'
 import GoodsArchive from './MyAccountComponents/GoodsArchive';
 import TypeCatalog from './CatalogOfWorks/TypeCatalog'
+import AccountActivation from './MyAccountComponents/AccountActivation';
 import Main from './Main';
 import axios from 'axios';
 export default function Router() {
@@ -24,7 +25,7 @@ export default function Router() {
     }
 
   return (
-            <HashRouter basename='/'>
+            <HashRouter>
                 <Routes>
                     <Route path='/' element={<Main fetchProducts={fetchProducts}/>} />
                 </Routes> 
@@ -41,8 +42,15 @@ export default function Router() {
                     <Route path='/GoodsArchive' element={<GoodsArchive />} />
                 </Routes>
                 <Routes>
-                    <Route path='/TypeCatalog' element={<TypeCatalog OpenID={OpenID} 
-                                                                     catalogOrders={catalogOrders}/>} />
+                    <Route path='/TypeCatalog' 
+                           element={
+                            <TypeCatalog 
+                                OpenID={OpenID} 
+                                catalogOrders={catalogOrders}/>
+                           } />
+                </Routes>
+                <Routes>
+                    <Route path='/Activation' element={<AccountActivation />} />
                 </Routes>
             </HashRouter>
   )

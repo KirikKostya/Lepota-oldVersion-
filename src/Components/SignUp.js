@@ -33,8 +33,7 @@ export default function SignUp({ setRegistr }) {
                  'password': PasswordInputValue
               })
           .then(res=>{
-            localStorage.setItem('accessToken', res.data.data);
-              setStatusValidateForm('Вы успеешно зарегистрированы!');
+              setStatusValidateForm('Ссылка на подтверждение отпралена на почту!');
               setColorOfValidateForm('green');
               clearInputs( setLoginInputValue, setPasswordInputValue, setSecondPasswordInputValue );
               dispatch({ type: 'COMPLETED_AUTHORIZATION'})

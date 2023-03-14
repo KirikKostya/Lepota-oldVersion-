@@ -23,7 +23,7 @@ export default function SignIn({ setRegistr }) {
       axios.post('https://api.native-flora.tk/Auth/Login', 
             {
                'username': LoginInputValue,
-                'password': PasswordInputValue
+               'password': PasswordInputValue
             })
       .then(res=>{
         localStorage.setItem('accessToken', res.data.data);
@@ -33,6 +33,7 @@ export default function SignIn({ setRegistr }) {
         clearInputs( setLoginInputValue, setPasswordInputValue, setPasswordInputValue );
       }) 
       .catch(err=>{
+        console.log(err)
         setStatusValidateForm('Не верный логин или пароль!');
         setColorOfValidateForm('red');
         clearInputs( setLoginInputValue, setPasswordInputValue );

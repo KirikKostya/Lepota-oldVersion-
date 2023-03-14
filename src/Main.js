@@ -9,7 +9,6 @@ import ContactWithUs from './Components/ContactWithUs';
 import './Main.css'
 
 export default function Main( { setOpenID, fetchProducts} ) {
-
   return (
         <div className='Main'>        
             <UpNavigation/>
@@ -18,7 +17,7 @@ export default function Main( { setOpenID, fetchProducts} ) {
             <WorkCatalog setOpenID={setOpenID} fetchProducts={fetchProducts}/>
             <TimingAndDelivery />
             <AboutKashpo />
-            <ContactWithUs /> 
+            <ContactWithUs />
         </div>
   )
 }

@@ -1,0 +1,89 @@
+@import url('/src/Fonts/fonts.css');
+html, body{
+    width: 100%;
+    height: 100%;
+}
+.containerForActivation{
+    width: 80%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:space-evenly;
+    background: #e9e9e9;
+}
+h1{
+    font-family: 'Montserrat-Medium';
+    text-align: center;
+}
+.check{
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    position: relative;
+    margin: auto;
+    -webkit-tap-highlight-color: transparent;
+    transform: translate3d(0,0,0);
+}
+.check:before{
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(#223254,.03);
+    opacity: 0;
+    transition: opacity .2s ease;
+}
+.svg{
+    width: 100px;
+    height: 100px;
+    position: relative;
+    z-index: 1;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: #C8CCD4;
+    stroke-width: 1.5;
+    transform: translate3d(0,0,0);
+    transition: all .2s ease;
+}
+.path{
+    stroke-dasharray: 60;
+    stroke-dashoffset: 0;
+}
+.polyline {
+    stroke-dasharray: 22;
+    stroke-dashoffset: 66;
+}  
+.check:hover:before{
+    opacity: 1
+}
+.svg{
+    stroke: #36c008
+}
+#cbx:checked + .check .svg{
+    stroke: #08ce33;
+}
+#cbx:checked + .check .path{
+      stroke-dashoffset: 60;
+      transition: all .3s linear;
+}    
+#cbx:checked + .check .polyline{
+      stroke-dashoffset: 42;
+      transition: all .2s linear;
+      transition-delay: .15s;
+}
+.containerForActivation .hiddenPar span{
+    display: none;
+}
+.containerForActivation .NavLink{
+    height: 20px !important;
+    text-decoration: underline;
+    color: blue
+}
+@media screen and (max-width: 1000px) {
+    .containerForActivation{
+        width: 100%;
+    }
+}
