@@ -117,6 +117,10 @@
 .SignIn .SignInBTN{
     width: 20px;
     height: 50px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
     background-color: rgb(164, 193, 250);
     border: 1px solid rgb(0, 18, 106);
     border-radius: 15px;

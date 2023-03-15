@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ContactWithUs from '../Components/ContactWithUs';
 import LoadingComp from './LoadingComp';
 import ChangeMetricsModalView from './ChangeMetricsModalView';
@@ -18,10 +18,13 @@ export default function TypeCatalog({ catalogOrders }) {
   //Заказ который есть в корзине, но User хочет поменять метрики 
   const [selectedOrder, setSelectedOrder] = useState(Array);
 
+  useEffect(()=>{
+    window.scrollTo(0, 0);
+  },[])
   return (
     <>
       <UpNavigation hide={'hide'}/>
-      <div className='ContainerForTypeCatalog' id='HideNavBarMainLink'>
+      <div className='ContainerForTypeCatalog' id='hideNavBarMainLink'>
         {
           WarningMessageIsOpen
               ? <WarningModalView WarningMessageIsOpen={WarningMessageIsOpen}/>

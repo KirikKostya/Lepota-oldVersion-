@@ -43,7 +43,6 @@ export default function Registration() {
 
   return (
     <div className='ContainerForRegistration'>
-        <BackButton Link='/'/>
         <div className='FieldEffect'></div>
             {
             (Registr)

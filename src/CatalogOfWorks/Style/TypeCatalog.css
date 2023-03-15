@@ -34,7 +34,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-color: rgba(227, 85, 85, 0.8);
+    background-color: #5da6f3bd;
     border: 1px solid black;
     color: aliceblue;
     font-size: medium;
@@ -43,7 +43,7 @@
     cursor: pointer;
 }
 .Card .AddToCartBTN:hover{
-    background-color: rgba(227, 85, 85);
+    background-color: #5da6f3;
 }
 .ContainerForTypeCatalog .WarningMessage{
     width: 80%;
@@ -58,9 +58,7 @@
 }
 .ContainerForTypeCatalog .AddedOrder{
     color: rgba(3, 27, 245, 0.884);
-    font-weight: bold;
-    font-size: medium;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Montserrat-Medium' !important;
     position: sticky;
     top: 0;
     margin-top: 10px;
@@ -112,7 +110,6 @@
 .modalViewContainer .changeParametrsOfOrder:hover{
     color: rgba(24, 24, 248);
 }
-
 .imgContainer{
     display: flex;
     flex-direction: row;
@@ -125,4 +122,9 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+}
+@media screen and (max-width: 900px){
+    .Card .AddToCartBTN{
+        background:#5da6f3 !important;
+    }
 }

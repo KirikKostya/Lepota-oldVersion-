@@ -53,7 +53,6 @@ export default function SignUp({ setRegistr }) {
       setColorOfValidateForm('red');
     }
   }
-    
 
   return (
     <div className='ContainerForSignUp'>
@@ -79,7 +78,6 @@ export default function SignUp({ setRegistr }) {
                          onChange={(e)=>setPasswordInputValue(e.target.value)} 
                          type={`${TypeForFirstPasswordInput}`} placeholder='Password' 
                          value={PasswordInputValue}/>
-                  {/* <button onClick={showPassword} className='EyeBtn'>&#128065;&#65039;</button> */}
                   {
                     closeFirstEyes
                       ? <svg onClick={()=>showPassword(TypeForFirstPasswordInput, setTypeForFirstPasswordInput, setCloseFirstEyes)} 
@@ -105,7 +103,6 @@ export default function SignUp({ setRegistr }) {
                          type={`${TypeForSecondPasswordInput}`} 
                          placeholder='Please, repeat password' 
                          value={SecondPasswordInputValue}/>
-                  {/* <button onClick={showSecondPassword} className='EyeBtn'>&#128065;&#65039;</button> */}
                   {
                     closeSecondEyes
                       ? <svg onClick={()=>showPassword(TypeForSecondPasswordInput, setTypeForSecondPasswordInput, setCloseSecondEyes)} 
@@ -126,7 +123,7 @@ export default function SignUp({ setRegistr }) {
                 </div>
 
             </div>
-            <button className='SignUpBTN' 
+            <button className={`SignUpBTN`} 
                     onClick={Registration}>Создать аккаунт</button>
             <p className='helpMessage'>Есть аккаунт? 
               <span onClick={()=>setRegistr(false)}>ВОЙТИ</span>

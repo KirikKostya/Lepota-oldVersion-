@@ -3,6 +3,7 @@ import { showPassword, statusValidate, clearInputs } from './Registration';
 import { useDispatch } from 'react-redux';
 import axios from 'axios'
 import './Styles/SignIn.css'
+import { NavLink } from 'react-router-dom';
 
 export default function SignIn({ setRegistr }) {
   
@@ -12,6 +13,8 @@ export default function SignIn({ setRegistr }) {
     const [closeEyesStatus, setCloseEyesStatus] = useState(true)
     const [StatusValidateForm, setStatusValidateForm] = useState('') 
     const [ColorOfValidateForm, setColorOfValidateForm] = useState('bad')
+
+    const [buttonStatus, setButtonStatus] = useState('Войти');
 
 
   const dispatch = useDispatch()
@@ -28,9 +31,10 @@ export default function SignIn({ setRegistr }) {
       .then(res=>{
         localStorage.setItem('accessToken', res.data.data);
         setStatusValidateForm('Вы вошли в свой аккаунт!');
-        setColorOfValidateForm('green')
+        setColorOfValidateForm('green');
         dispatch({ type: 'COMPLETED_AUTHORIZATION'});
         clearInputs( setLoginInputValue, setPasswordInputValue, setPasswordInputValue );
+        setButtonStatus('Перейти на главную');
       }) 
       .catch(err=>{
         console.log(err)
@@ -74,7 +78,6 @@ export default function SignIn({ setRegistr }) {
                          type={`${TypeOfPasswordInput}`} 
                          placeholder='Password' 
                          value={PasswordInputValue}/>
-                  {/* <button onClick={showPassword} className='EyeBtn'>&#128065;&#65039;</button> */}
                   {
                     closeEyesStatus
                       ? <svg onClick={()=>showPassword(TypeOfPasswordInput, setTypeOfPasswordInput, setCloseEyesStatus)} 
@@ -95,9 +98,17 @@ export default function SignIn({ setRegistr }) {
                 </div>
 
             </div>
-            <button 
-              className='SignInBTN' 
-              onClick={Authorization}>Войти</button>
+            {
+              buttonStatus === 'Войти'
+                ?<button 
+                    className='SignInBTN' 
+                    onClick={Authorization}>{buttonStatus}</button>
+                  :<NavLink 
+                      className='NavLink SignInBTN'
+                      to='/' 
+                      >{buttonStatus}</NavLink>
+            }
+            
             <p className='helpMessage_SI'
                onClick={()=>setRegistr(true)}>
                 РЕГИСТИРОВАТЬСЯ

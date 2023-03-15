@@ -5,6 +5,7 @@ import ErrorModal from './ErrorModal';
 import './Styles/AccountActivation.css'
 
 export default function AccountActivation() {
+    const [activate, setActivate] = useState(false)
     const [link, setLink]  = useSearchParams();
 
     const [errorMessage, setErrorMessage] = useState('');
@@ -36,7 +37,8 @@ export default function AccountActivation() {
             <label htmlFor="cbx" 
                    className="check" 
                    onClick={()=>{
-                    if(Boolean(localStorage.getItem('accessToken'))){
+                    setActivate(!activate);
+                    if(!activate){
                       activationFunction();
                     }
                    }}>
