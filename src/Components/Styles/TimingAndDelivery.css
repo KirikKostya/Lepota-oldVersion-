@@ -12,7 +12,6 @@
     width: 100%;
     text-align: center !important;
     font-family: 'Montserrat-Bold' !important;
-    /* font-weight: bolder; */
     font-size: 22pt;
 }
 .ContainerForTimingAndDelivery .Steps{
@@ -31,29 +30,28 @@
     width: 80%;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items:center;
-    margin: 10px;
+    margin: 10px 0;
 }
-
-.GraphicPath .hr{
-    width: 260px;
-    height: 2px;
-    color: black;
-    background: #000;
+.ContainerForTimingAndDelivery .GraphicPath::before{
+    content: '';
+    width: 80%;
+    position: absolute;
+    border-top: 2px solid black;
 }
 .GraphicPath .Circle{
     width: 50px;
     height: 50px;
-    background: #5da6f3;
-    border-radius: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-family: 'Montserrat-Regular';
+    background: #5da6f3;
     color:rgb(238, 245, 253);
-    font-size: medium;
-    font-weight: bold;
-    font-family: 'Montserrat-Regular'
+    border-radius: 50%;
+    z-index: 1;
 }
 .ContainerForTimingAndDelivery .TextPath{
     display: flex;
@@ -79,11 +77,20 @@
 
 @media screen and (max-width:1240px) {
     .ContainerForTimingAndDelivery .GraphicPath{
-        display: flex;
+        height: 450px;
         flex-direction: column;
-        align-items: center;
-        justify-content: space-around;
         padding: 0;
+    }
+    .ContainerForTimingAndDelivery .GraphicPath::before{
+        content: '';
+        width: 0;
+        height: 450px;
+        border-top: none !important;
+        border-right: 2px solid black;
+    }
+    .ContainerForTimingAndDelivery .TextPath{
+        width: 100%;
+        flex-direction: column;
     }
     .ContainerForTimingAndDelivery .Steps{
         width: 100%;
@@ -92,37 +99,13 @@
         align-items: flex-start;
         justify-content: center;
     }
-    .GraphicPath .hr{
-        display: none
-    }
-    .GraphicPath .Circle{
-        width: 50px;
-        height: 50px;
-        background: rgb(201, 64, 64);
-        border-radius: 50%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        margin: 0 0 150px 0;
-    }
-    .ContainerForTimingAndDelivery .TextPath{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
+    .Steps .containerForGraphicRath{
+        width: 50%;
     }
     .TextPath .PartOfPath{
         width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
         justify-content: flex-start;
         margin: 0;
-    }
-    .PartOfPath p{
-        text-align: start !important;
-        /* font-weight: 500; */
     }
 }
 @media screen and (max-width:700px){
@@ -131,10 +114,10 @@
     }
     .ContainerForTimingAndDelivery .TextPath{
         width: 100%;
-        display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        flex: 1;
     }
     .TextPath .PartOfPath{
         width: 90%;
