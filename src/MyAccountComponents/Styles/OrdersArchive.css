@@ -1,0 +1,177 @@
+@import url('/src/Fonts/fonts.css');
+.containerForArchivePage{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* */
+span{
+    font-family: 'Montserrat-Regular';
+}
+/* */
+.mainContainerForArhive{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(254, 250, 250, 0.6);
+}
+.listContainer{
+    width: 65%;
+    display: flex;
+    justify-content: center;
+    border-radius: 15px 15px 5px 5px;
+    background: #BFD4FD;
+    margin: 15px 0 10px 0;
+}
+.listContainer:nth-child(1){
+    margin-top: 30px;
+}
+/* */
+.archiveCheck{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+/* */
+.date_numberOrder{
+    width: 95%;
+    display: flex;
+    justify-content: space-between !important;
+    font-family: 'Montserrat-Light';
+    font-size: 9pt !important;
+}
+/* */
+.customerName{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.customerName p{
+    width: 100%;
+    height: 20px;
+    font-family: 'Montserrat-Light';
+    /* font-size: 10pt;  */
+    text-align: center;
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+.customerName span{
+    font-family: 'Montserrat-Regular';
+}
+/* */
+.orderItems{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.orderItems p{
+    width: 100%;
+    height: 20px;
+    font-family: 'Montserrat-Light';
+    text-align: center;
+    margin: 20px 0 10px 0;
+    padding: 0;
+}
+.orderItems .item{
+    width: 80%;
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+.item p{
+    width: 150px;
+    font-family: 'Montserrat-Medium';
+    font-size: 10pt;
+    text-align: start;
+}
+.item span{
+    font-family: 'Montserrat-Regular';
+    font-size: 10pt;
+}
+/* */
+.shippingType{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px 0 0 0 ;
+}
+.shippingType p{
+    height: 20px;
+    font-family: 'Montserrat-Medium';
+    font-size: 11pt;
+    color: #676767;
+    text-align: center;
+    margin: 20px 0 10px 0;
+    padding: 0;
+}
+/* */
+.customer{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.customer p{
+    height: 20px;
+    font-family: 'Montserrat-Medium';
+    font-size: 11pt;
+    color: #676767 ;
+    margin: 0 0 0 0;
+}
+.customer span{
+    font-family: 'Montserrat-Medium';
+    font-size: 12pt;
+}
+/* */
+.orderStatus{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.orderStatus p{
+    height: 20px;
+    font-family: 'Montserrat-Medium';
+    font-size: 11pt;
+    color: #676767 ;
+    margin: 10px 0 10px 0;
+}
+.orderStatus span{
+    font-family: 'Montserrat-Bold';
+    font-size: 12pt;
+    color: #00BB40;
+}
+
+@media screen and (max-width: 1024px) {
+    .mainContainerForArhive{
+        width: 100%;
+    }
+    .listContainer{
+        width: 40%;
+    }
+}
+@media screen and (max-width: 840px) {
+    .listContainer{
+        width: 60%;
+    }
+}
+@media screen and (max-width: 550px) {
+    .listContainer{
+        width: 80%;
+    }
+}

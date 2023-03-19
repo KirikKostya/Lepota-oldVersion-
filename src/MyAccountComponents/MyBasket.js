@@ -21,16 +21,18 @@ export default function MyBasket() {
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
     .then(res => {
-      setItemsInBasket(res.data.data.cartItems)
+      if(!res.data.data){
+        setItemsInBasket([])
+      } else {
+        setItemsInBasket(res.data.data.cartItems)
+      }
+      dispatch({type: 'LOADING_IS_COMPLETED'})
     })
-    .catch(err => {
-      setItemsInBasket([])
-    })
-     dispatch({type: 'LOADING_IS_COMPLETED'})
   }
 
   useEffect(()=>{
-   requestBasketFunc()
+   requestBasketFunc();
+   window.scrollTo(0, 0)
   }, [])
 
   return (
@@ -62,7 +64,7 @@ export default function MyBasket() {
                     />
             }
         </div>
-        <Check ItemsInBasket = {ItemsInBasket}/>
+        <Check ItemsInBasket = {ItemsInBasket} requestBasketFunc={requestBasketFunc}/>
       </div>
       
       <ContactWithUs />

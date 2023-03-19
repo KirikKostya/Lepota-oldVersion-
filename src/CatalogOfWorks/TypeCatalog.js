@@ -21,6 +21,7 @@ export default function TypeCatalog({ catalogOrders }) {
   useEffect(()=>{
     window.scrollTo(0, 0);
   },[])
+  
   return (
     <>
       <UpNavigation hide={'hide'}/>

@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { refreshFunction } from '../App'
 import { NavLink } from 'react-router-dom'
 import './Styles/CardOfWork.css'
 
@@ -25,6 +26,7 @@ export default function CardOfWork({card, fetchProducts}) {
                  className='CatalogBTN' 
                  onClick={()=>{
                   fetchProducts(card.id)
+                  refreshFunction()
                  }}>Каталог</NavLink>
                  
         </div>

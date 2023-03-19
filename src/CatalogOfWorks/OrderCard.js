@@ -28,7 +28,11 @@ export default function OrderCard(
       axios.post( 'https://api.native-flora.tk/Cart/All', {}, {
         headers:{'x-access-token': localStorage.getItem('accessToken')}
       })
-      .then(res=>setSelectedOrder(res.data.data.cartItems.filter(item=>item.item.id === ID))) 
+      .then(res=>{
+        if(res.data.data){          
+          setSelectedOrder(res.data.data.cartItems.filter(item=>item.item.id === ID))
+        }
+      }) 
     }
 
     //Added item to cart of order

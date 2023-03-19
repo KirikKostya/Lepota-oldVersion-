@@ -1,53 +1,69 @@
 import axios from 'axios'
-import React, {useState} from 'react'
-import { NavLink, useSearchParams } from 'react-router-dom'
+import React, {useState, useEffect} from 'react'
+import Loading from 'react-loading';
+import { useDispatch, useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom'
+import UpNavigation from '../Components/UpNavigation';
 import ErrorModal from './ErrorModal';
 import './Styles/AccountActivation.css'
 
-export default function AccountActivation() {
-    const [activate, setActivate] = useState(false)
-    const [link, setLink]  = useSearchParams();
 
+export default function AccountActivation() {
+    const [link, setLink]  = useSearchParams();
+    
+    const isLoading = useSelector(state=>state.isLoading);
+    const dispatch = useDispatch()
+    
     const [errorMessage, setErrorMessage] = useState('');
 
     const activationFunction = () => {
       axios.defaults.withCredentials = true;
       axios.post(`https://api.native-flora.tk/Auth/Activate/${link.get('id')}`)
       .then(res=>{
+          dispatch({type: 'LOADING_IS_COMPLETED'})
           setErrorMessage('Вы активировали аккаунт!')
           localStorage.setItem('accessToken', res.data.data);
         })
       .catch(err=>{
         (err.response.status === 400)
-          ? setErrorMessage('Такой пользователь уже существует!')
+          ? setErrorMessage('Такой аккаунт уже активирован!')
             : (err.response.status === 404)
               ? setErrorMessage('Такого пользователя не существует!')
                 : setErrorMessage('Что-то пошло не так! Проверьте подключение к интернету')
+        dispatch({type: 'LOADING_IS_COMPLETED'})
       })
     }
 
+    useEffect(()=>{
+      activationFunction();
+    }, [])
+
   return (
+    <div className='MainCont'>
+    <div className='upsider'>
+      <img width={120} height={100} src={require('../Photos/Logo.png')}/>
+    </div>
     <div className='containerForActivation'>
-        <h1>Подвердите действие на странице</h1>
-        <ErrorModal errorMessage={errorMessage}
-                    setErrorMessage={setErrorMessage}
-                     />
-        <div>
-            <input type="checkbox" id="cbx" style={{display: 'none'}} />
-            <label htmlFor="cbx" 
-                   className="check" 
-                   onClick={()=>{
-                    setActivate(!activate);
-                    if(!activate){
-                      activationFunction();
-                    }
-                   }}>
-                <svg viewBox="0 0 18 18" className='svg'>
-                    <path className='path' d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z" />
-                    <polyline className='polyline' points="1 9 7 14 15 4" />
-                </svg>
-            </label>
-        </div>
+        <h1>Подождите...</h1>
+        <h2>Идет активация вашего аккаунта</h2>
+          {
+            isLoading
+              ? <Loading
+                  type='spokes'
+                  color="#5da6f3"
+                  height="45px"
+                  width="45px" 
+                />
+              : <ErrorModal 
+                  errorMessage={errorMessage}
+                  setErrorMessage={setErrorMessage}
+                  activationFunction={activationFunction}
+                />
+          }
+    </div>
+    {/* <div className='upsider'>
+      <img width={170} height={150} src={require('../Photos/Logo.png')}/>
+    </div> */}
     </div>
   )
 }

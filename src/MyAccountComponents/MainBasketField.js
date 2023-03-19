@@ -1,4 +1,5 @@
 import React from 'react'
+import { refreshFunction } from '../App'
 import { NavLink } from 'react-router-dom'
 import axios from 'axios'
 
@@ -54,7 +55,12 @@ export default function MainBasketField({ ItemsInBasket, setItemsInBasket, reque
                                 defaultValue={item.amount}/>
                         </div>
                         <h3 id='summaryPrice'>{item.price}</h3>
-                        <button className='deleteItem' onClick={()=>deleteItem(item.item.id)}>&times;</button>
+                        <button 
+                          className='deleteItem' 
+                          onClick={()=>{
+                            deleteItem(item.item.id);
+                            refreshFunction()
+                          }}>&times;</button>
                         </div>
             ))
         }

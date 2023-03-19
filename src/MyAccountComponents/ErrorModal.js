@@ -1,9 +1,10 @@
 import React from 'react'
 import ReactModal from 'react-modal'
-import { NavLink } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import '../CatalogOfWorks/Style/WarningModalView.css'
 
-export default function ErrorModal( { errorMessage, setErrorMessage } ) {
+export default function ErrorModal( { errorMessage, setErrorMessage, activationFunction } ) {
+    const dispatch = useDispatch()
   return (
     <ReactModal
         isOpen={Boolean(errorMessage)}
@@ -11,7 +12,7 @@ export default function ErrorModal( { errorMessage, setErrorMessage } ) {
     >
         <h1 className='modal-header'>{errorMessage}</h1>
         {
-            errorMessage === 'Такой пользователь уже существует!' || errorMessage === 'Вы активировали аккаунт!'
+            errorMessage === 'Такой аккаунт уже активирован!' || errorMessage === 'Вы активировали аккаунт!'
                 ? <svg  width="60" 
                         height="60"
                         viewBox="0 0 512 512">
@@ -38,9 +39,15 @@ export default function ErrorModal( { errorMessage, setErrorMessage } ) {
                         </svg>
         }
         {
-            errorMessage === 'Такой пользователь уже существует!' || errorMessage === 'Вы активировали аккаунт!'
+            errorMessage === 'Такой аккаунт уже активирован!' || errorMessage === 'Вы активировали аккаунт!'
                 ? <a className='NavLink modal-closeBTN' href={'https://kirikkostya.github.io/Lepota/'}>прожолжить</a>
-                    : <button className='modal-closeBTN' onClick={()=>setErrorMessage('')}>повторить</button>
+                    : <button 
+                        className='modal-closeBTN' 
+                        onClick={()=>{
+                            setErrorMessage('');
+                            dispatch({type: 'LOADING_IS_UNCOMPLETED'})
+                            activationFunction()
+                        }}>повторить</button>
         }
     </ReactModal>
   )

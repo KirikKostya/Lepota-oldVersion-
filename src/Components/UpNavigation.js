@@ -23,7 +23,13 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
     .then(res => dispatch({type: 'SET_COUNT_OF_ORDERS', payload: res.data.data}))
+    .catch(err=>{
+      if(err.response.status === 404){
+        getCountOfOrdersInBasket()
+      }
+    })
   }
+  
   return (
     <>
       <div id='UpNav' className='UpNavContainer'>
@@ -101,7 +107,11 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
         </div>
         
         <NavLink to='/' className='header-LOGO'>
-          <img width={90} height={70} src={require('../Photos/Logo.png')}/>
+          <img 
+            width={90} 
+            height={70} 
+            src={require('../Photos/Logo.png')}
+            onClick={refreshFunction}/>
         </NavLink>
         
         <div className='Hamburger' 

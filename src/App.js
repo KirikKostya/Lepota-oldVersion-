@@ -8,7 +8,9 @@ import './App.css';
 export const refreshFunction = async () => {
   if(localStorage.getItem('accessToken')){
     fetch('https://api.native-flora.tk/Auth/checkToken', {
-      mode: 'cors',
+        method: 'GET',
+        mode: 'cors',
+        credentials: 'include',
         headers:{'x-access-token': localStorage.getItem('accessToken')}
       })
 

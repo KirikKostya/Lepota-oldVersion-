@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, HashRouter} from 'react-router-dom'
 import Registration from './Components/Registration';
 import Profile from './MyAccountComponents/Profile'
 import MyBasket from './MyAccountComponents/MyBasket'
-import GoodsArchive from './MyAccountComponents/GoodsArchive';
+import OrdersArchive from './MyAccountComponents/OrdersArchive';
 import TypeCatalog from './CatalogOfWorks/TypeCatalog'
 import AccountActivation from './MyAccountComponents/AccountActivation';
 import Main from './Main';
@@ -39,7 +39,7 @@ export default function Router() {
                     <Route path='/MyBasket' element={<MyBasket />} />
                 </Routes>
                 <Routes>
-                    <Route path='/GoodsArchive' element={<GoodsArchive />} />
+                    <Route path='/OrdersArchive' element={<OrdersArchive />} />
                 </Routes>
                 <Routes>
                     <Route path='/TypeCatalog' 

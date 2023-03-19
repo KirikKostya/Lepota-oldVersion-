@@ -20,7 +20,11 @@ export default function ContactWithUs() {
                                     (isTelephoneOpen)
                                       ? setIsTelephoneOpen(false)  
                                         : setIsTelephoneOpen(true)}}><path d={Telegram}/></svg></a>
-                <a href='https://www.instagram.com/lepota.by/' target='_blank'><svg  fill="white" viewBox="0 0 16 16"><path d={Instagram}/></svg></a>
+                <a href='https://www.instagram.com/lepota.by/' target='_blank'>
+                  <svg  fill="white" viewBox="0 0 16 16">
+                    <path d={Instagram}/>
+                  </svg>
+                </a>
 
             </div>
         {
