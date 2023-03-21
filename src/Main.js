@@ -8,13 +8,13 @@ import AboutKashpo from './Components/AboutKashpo';
 import ContactWithUs from './Components/ContactWithUs';
 import './Main.css'
 
-export default function Main( { setOpenID, fetchProducts} ) {
+export default function Main() {
   return (
         <div className='Main'>        
             <UpNavigation/>
             <Discription />
             <AboutCompany />
-            <WorkCatalog setOpenID={setOpenID} fetchProducts={fetchProducts}/>
+            <WorkCatalog />
             <TimingAndDelivery />
             <AboutKashpo />
             <ContactWithUs />

@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import './Styles/WorkCatalog.css'
 import axios from 'axios'
 
-export default function WorkCatalog( {setOpenID, fetchProducts} ) {
+export default function WorkCatalog() {
   
   const [CARDS, setCARDS] = useState([])
+  
   const dispatch = useDispatch();
   const isLoading = useSelector(state=>state.isLoading);
 
@@ -37,7 +38,7 @@ export default function WorkCatalog( {setOpenID, fetchProducts} ) {
                     <LoadingComp />
                   </div>
                   : CARDS.map(card => (
-                      <CardOfWork key={card.id} card={card} setOpenID={setOpenID} fetchProducts={fetchProducts}/>
+                      <CardOfWork key={card.id} card={card}/>
                     ))
             }
         </div>

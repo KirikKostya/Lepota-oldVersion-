@@ -11,9 +11,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const allContextParametrs = {
     isAuthorizate: Boolean(localStorage.getItem('accessToken')),
     isLoading: true,
-    // typeOfDelivery: 'pickUp',
     myAccountIsOpen: false,
-    countOfOrders: 0
+    countOfOrders: 0,
+    searchOrderById: 0
 }
 
 const reducer = (state = allContextParametrs, action) => {
@@ -26,16 +26,14 @@ const reducer = (state = allContextParametrs, action) => {
         return {...state, isLoading: false};
       case 'LOADING_IS_UNCOMPLETED': 
         return {...state, isLoading: true}; // delete (if didn't used)
-      // case 'SET_TYPE_OF_DELIVERY_TO_PICK_UP':
-      //   return {...state, typeOfDelivery: 'pickUp'};
-      // case 'SET_TYPE_OF_DELIVERY_TO_DELIVERY':
-      //   return {...state, typeOfDelivery: 'delivery'};
       case 'OPEN_MY_ACCOUNT':
         return {...state, myAccountIsOpen: true};
       case 'CLOSE_MY_ACCOUNT':
         return {...state, myAccountIsOpen: false};
       case 'SET_COUNT_OF_ORDERS':
         return {...state, countOfOrders: action.payload};
+      case 'SET_SEARCH_ORDER-ID':
+        return {...state, searchOrderById: action.payload}
       default : 
         return {...state}
       }

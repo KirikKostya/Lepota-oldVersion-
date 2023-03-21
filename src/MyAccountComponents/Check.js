@@ -24,6 +24,15 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
         console.log(typeof(+zipCode))
     }
 
+    const makeTime = (date) => {
+        // ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}
+        let hours = date.getHours() < 10 ? `0${date.getHours()}` : `${date.getHours()}`;
+        let minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : `${date.getMinutes()}`;
+        let seconds = date.getSeconds() < 10 ? `0${date.getSeconds()}` : `${date.getSeconds()}`;
+        return `${hours}:${minutes}:${seconds}`
+
+    } 
+
     const clearForms = (setFIO, setCITY, setADRESS, setPHONE, setZIP) => {
         setFIO('');
         setCITY('');
@@ -40,7 +49,11 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
             "phoneNumber": phoneNumber,
             "contact": instContact,
             "zipCode": zipCode,
-            "city": city
+            "city": city,    
+            "fullDate": {
+                "Time": makeTime(new Date()),
+                "Date":  new Date().toISOString().split('T')[0].split('-').reverse().join('.')
+            }
         }, {
             headers:{
                 'x-access-token': localStorage.getItem('accessToken')
@@ -48,6 +61,7 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
         })
         .then(res=>{
             if(res.status === 200){
+                console.log(res)
                 requestBasketFunc();
                 clearForms(setFio, setCity, setAdress, setPhoneNumber, setZipCode);
                 refreshFunction()

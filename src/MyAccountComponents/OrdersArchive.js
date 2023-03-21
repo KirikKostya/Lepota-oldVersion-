@@ -7,6 +7,11 @@ import './Styles/OrdersArchive.css';
 
 
 function ListOfOrders({LIST}) {
+
+  const makeArray = (object) => {
+    return [object]
+  }
+
   return (
     <div className='mainContainerForArhive'>
       {
@@ -14,13 +19,17 @@ function ListOfOrders({LIST}) {
           ? <>sorry, no orders!</>
             : <>
                 {
-                  LIST.map(el=>(
-                    <div className='listContainer' key={el.id}>
+                  LIST.map((el, index)=>(
+                    <div className='listContainer' key={index}>
                       <div className={'archiveCheck'}>
                         
                         <div className='date_numberOrder'>
                           <p>Заказ #<span>{el.id}</span></p>
-                          <p>19.03.2023</p>
+                            {
+                              makeArray(el.fullDate).map((fullDate, index)=>(
+                                <p className='date' key={index}>{fullDate.Time} - {fullDate.Date}</p>
+                              ))
+                            }
                         </div>
 
                         <div className='customerName'>
@@ -31,8 +40,8 @@ function ListOfOrders({LIST}) {
                         <div className='orderItems'>
                           <p>Заказанные товары :</p>
                             {
-                              el.cartItems.map(item=>(
-                                <div key={item.id} className={'item'}>
+                              el.cartItems.map((item, index)=>(
+                                <div key={index} className={'item'}>
                                   <p>{item.item.name}</p>
                                   <span>{item.price}p.</span>
                                 </div>
@@ -76,7 +85,6 @@ export default function OrdersArchive() {
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
     .then(res=>{
-      console.log(res.data.data)
       setListOfOrdersInArchive(res.data.data);
       dispatch({type: 'LOADING_IS_COMPLETED'});
     })

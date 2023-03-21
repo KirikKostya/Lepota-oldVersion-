@@ -1,3 +1,78 @@
+@import url('/src/Fonts/fonts.css');
+/**/
+.infoContainer{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+}
+.infoOrder{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    padding: 0;
+}
+.infoOrder .description_metrics{
+    width: 80%;
+}
+.description_metrics span{
+    width: 70%;
+}
+.orderMatrics{
+    width: 30%;
+    float: right;
+    padding: 0 10px;
+}
+.orderMatrics::before{
+    content: '';
+    display: block;
+    /* transform: rotate(90deg); */
+    width: 90%;
+    height: 2px;
+    background: #238cfdb1;
+    box-shadow: 0px 0px 15px 5px #61aeff;
+    margin-bottom: 10px;
+}
+.orderMatrics .mitricItem{
+    width: 80%;
+    list-style: none;
+    text-align: start;
+    display: flex;
+    justify-content: space-between;
+    margin: 3px 10px;
+    font-family: 'Montserrat-Medium';
+}
+
+.mitricItem span{
+    font-family: 'Montserrat-Regular';
+    font-size: 11pt;
+    text-align: end;
+    color: #0050a5;
+}
+.orderMatrics .hide{
+    display: none;
+}
+
+.forOrderMakes{
+    width: 100%;
+    font-family: 'Montserrat-Medium';
+    font-size: 14pt;
+    text-align: start;
+}
+.forOrderMakes span{
+    font-family: 'Montserrat-Regular';
+    font-size: 12pt;
+}
+.item-contact{
+    margin-left: 10px !important;
+    font-family: 'Montserrat-Bold' !important;
+    transition: all 0.3s;
+}
+.item-contact:hover{
+    color: #5da6f3;
+}
+/**/
 .ContainerForTypeCatalog{
     width: 100%;
     display: flex;
@@ -9,12 +84,12 @@
     text-align: center;
 }
 .ContainerForTypeCatalog .ContainerForCards{
-    width: 90%;
+    width: 70%;
     min-height: 75vh;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
 }
 .ContainerForCards .Card{
     width: 200px;
@@ -124,7 +199,61 @@
     justify-content: space-between;
 }
 @media screen and (max-width: 900px){
+    .infoContainer{
+        width: 95%;
+    }
+    .infoOrder .description_metrics{
+        width: 100%;
+    }
     .Card .AddToCartBTN{
         background:#5da6f3 !important;
+    }
+}
+@media screen and (max-width: 620px){
+    .infoContainer{
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+    }
+    .infoOrder h1{
+        width: 100%;
+        text-align: center;
+    }
+    .infoOrder .description_metrics{
+        width: 95%;
+        display: flex;
+        align-items: center;
+        flex-direction: column !important;
+    }
+    .description_metrics span{
+        width: 100%;
+        text-align: justify;
+    }
+    .orderMatrics{
+        width: 45%;
+    }
+    .orderMatrics::before{
+        content: none;
+    }
+    .orderMatrics::after{
+        content: '';
+        display: block;
+        /* transform: rotate(90deg); */
+        width: 100%;
+        height: 2px;
+        background: #238cfdb1;
+        box-shadow: 0px 0px 15px 5px #61aeff;
+        margin: 10px 0
+    }
+    .orderMatrics .mitricItem{
+        width: 100%;
+        margin: 0;
+    }
+    .orderMatrics .mitricItem span{
+        text-align: end;
+    }
+    .ContainerForTypeCatalog .ContainerForCards {
+        align-items: center;
+        justify-content: center;
     }
 }

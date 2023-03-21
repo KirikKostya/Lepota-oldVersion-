@@ -9,25 +9,11 @@ import AccountActivation from './MyAccountComponents/AccountActivation';
 import Main from './Main';
 import axios from 'axios';
 export default function Router() {
-    
-    const [catalogOrders, setCatalogOrders] = useState(Array);   
-    const [OpenID, setOpenID] = useState(0)
-
-    const fetchProducts = (OpenID) => {
-        axios.get(`https://api.native-flora.tk/Item/GetById?id=${OpenID}`)
-            .then(res=>{
-                if(res.data == null){
-                    setCatalogOrders(null)
-                } else {
-                    setCatalogOrders([res.data.data])
-                }
-            })
-    }
 
   return (
             <HashRouter>
                 <Routes>
-                    <Route path='/' element={<Main fetchProducts={fetchProducts}/>} />
+                    <Route path='/' element={<Main/>} />
                 </Routes> 
                 <Routes>
                     <Route path='/Registration' element={<Registration />}/>
@@ -42,12 +28,7 @@ export default function Router() {
                     <Route path='/OrdersArchive' element={<OrdersArchive />} />
                 </Routes>
                 <Routes>
-                    <Route path='/TypeCatalog' 
-                           element={
-                            <TypeCatalog 
-                                OpenID={OpenID} 
-                                catalogOrders={catalogOrders}/>
-                           } />
+                    <Route path='/TypeCatalog' element={<TypeCatalog />} />
                 </Routes>
                 <Routes>
                     <Route path='/Activation' element={<AccountActivation />} />

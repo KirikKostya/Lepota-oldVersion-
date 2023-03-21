@@ -25,6 +25,7 @@ span{
     border-radius: 15px 15px 5px 5px;
     background: #BFD4FD;
     margin: 15px 0 10px 0;
+    border-top: 10px solid transparent;
 }
 .listContainer:nth-child(1){
     margin-top: 30px;
@@ -44,6 +45,9 @@ span{
     justify-content: space-between !important;
     font-family: 'Montserrat-Light';
     font-size: 9pt !important;
+}
+.date_numberOrder .date{
+    font-family: 'Montserrat-Regular';
 }
 /* */
 .customerName{
