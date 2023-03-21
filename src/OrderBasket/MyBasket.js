@@ -1,12 +1,12 @@
-import React, {useEffect, useRef, useState} from 'react'
-import '../MyAccountComponents/Styles/MyBasket.css'
+import React, {useEffect, useState} from 'react'
 import UpNavigation from '../Components/UpNavigation.js'
-import axios from 'axios'
 import Loading from 'react-loading'
 import ContactWithUs from '../Components/ContactWithUs'
 import { useDispatch, useSelector } from 'react-redux'
 import MainBasketField from './MainBasketField'
+import axios from 'axios'
 import Check from './Check'
+import './Styles/MyBasket.css'
 
 export default function MyBasket() {
 
@@ -15,9 +15,9 @@ export default function MyBasket() {
   const dispatch = useDispatch()
   const isLoading = useSelector(state => state.isLoading)
 
-
+  //takes all carts from basket-API
   const requestBasketFunc = async () => {
-    await axios.post( 'https://api.native-flora.tk/Cart/All', {}, {
+    await axios.post('https://api.native-flora.tk/Cart/All', {}, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
     .then(res => {
@@ -66,7 +66,6 @@ export default function MyBasket() {
         </div>
         <Check ItemsInBasket = {ItemsInBasket} requestBasketFunc={requestBasketFunc}/>
       </div>
-      
       <ContactWithUs />
     </>
   )

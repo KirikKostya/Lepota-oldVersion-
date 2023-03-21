@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import UpNavigation from '../Components/UpNavigation.js'
-import Loading from 'react-loading';
+import LoadingComp from '../Loading/LoadingComp.js';
+import ContactWithUs from '../Components/ContactWithUs.js';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import './Styles/OrdersArchive.css';
 
@@ -13,7 +14,7 @@ function ListOfOrders({LIST}) {
   }
 
   return (
-    <div className='mainContainerForArhive'>
+    <div className='mainContainerForArhive' id='hideNavBarMainLink'>
       {
         LIST.length === 0
           ? <>sorry, no orders!</>
@@ -105,14 +106,10 @@ export default function OrdersArchive() {
       <UpNavigation hide='hide'/>
       {
         isLoading
-        ? <Loading
-            type='spokes'
-            color="#5da6f3"
-            height="45px"
-            width="45px" 
-          />
+        ? <LoadingComp />
           : <ListOfOrders LIST={listOfOrdersInArchive} />
       }
+      <ContactWithUs />
     </div>
   )
 }

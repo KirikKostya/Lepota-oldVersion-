@@ -27,7 +27,6 @@
 .orderMatrics::before{
     content: '';
     display: block;
-    /* transform: rotate(90deg); */
     width: 90%;
     height: 2px;
     background: #238cfdb1;
@@ -216,7 +215,7 @@
         flex-direction: row;
     }
     .infoOrder h1{
-        width: 100%;
+        width: 95%;
         text-align: center;
     }
     .infoOrder .description_metrics{
@@ -227,7 +226,7 @@
     }
     .description_metrics span{
         width: 100%;
-        text-align: justify;
+        font-size: 10pt;
     }
     .orderMatrics{
         width: 45%;
@@ -247,6 +246,7 @@
     }
     .orderMatrics .mitricItem{
         width: 100%;
+        font-size: 10pt;
         margin: 0;
     }
     .orderMatrics .mitricItem span{
@@ -255,5 +255,11 @@
     .ContainerForTypeCatalog .ContainerForCards {
         align-items: center;
         justify-content: center;
+    }
+    .forOrderMakes{
+        font-size: 10pt;
+    }
+    .forOrderMakes span{
+        font-size: 9pt;
     }
 }

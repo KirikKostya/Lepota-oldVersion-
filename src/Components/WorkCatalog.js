@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import CardOfWork from './CardOfWork'
-import LoadingComp from '../CatalogOfWorks/LoadingComp'
+import LoadingComp from '../Loading/LoadingComp'
 import { useDispatch, useSelector } from 'react-redux'
-import './Styles/WorkCatalog.css'
 import axios from 'axios'
+import './Styles/WorkCatalog.css'
 
 export default function WorkCatalog() {
   

@@ -1,7 +1,8 @@
 import React from 'react'
-import axios from 'axios';
-import { refreshFunction } from '../App'
 import SimpleImageSlider from 'react-simple-image-slider';
+import { useDispatch } from 'react-redux';
+import { refreshFunction } from '../MailFiles/App'
+import axios from 'axios';
 
 export default function OrderCard(
   {
@@ -13,6 +14,8 @@ export default function OrderCard(
     setModalView
   }
 ) {
+
+    const dispatch = useDispatch()
 
     //Make list from response data
     const getImages = (images) => {
@@ -81,7 +84,7 @@ export default function OrderCard(
                         : setWarningMessageIsOpen(true)
                     fetchOrderById(order.id)
                     setModalViewStep(1) //Change step for update order
-                    refreshFunction() //Fetch to refresh Token
+                    refreshFunction(dispatch) //Fetch to refresh Token
                   }}>В корзину
             <svg 
               width="18" 

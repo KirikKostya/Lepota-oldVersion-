@@ -5,7 +5,6 @@ import './Style/UpdataOrder.css'
 export default function UpdateOrder({ selectedOrder, setModalView }) {
   
     const [amount, setAmount] = useState(Number);
-    const [variantsOfMixOrder, setVariantsOfMixOrder] = useState(Array);
 
     const updateOrder = (ID) => {
         axios.post('https://api.native-flora.tk/Cart/Update', {

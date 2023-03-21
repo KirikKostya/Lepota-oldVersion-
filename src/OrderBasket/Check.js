@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { refreshFunction } from '../App';
+import { refreshFunction } from '../MailFiles/App'
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 
 export default function Check({ ItemsInBasket, requestBasketFunc}) {
@@ -15,24 +16,21 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
     const [zipCode, setZipCode] = useState(''); 
     const [instContact, setInstContact] = useState('inst/Kirik_10');
 
-    const handlerChenge = (data, setFunction) => {
+    const dispatch = useDispatch();
+
+    const handlerChange = (data, setFunction) => {
         setFunction(data);
     }
 
-    const LOG = () => {
-        console.log(`${fio}, ${adress}, ${city}, ${phoneNumber}, ${instContact}, ${isShipping}, ${zipCode}`);
-        console.log(typeof(+zipCode))
-    }
-
+    //converts the time to the correct format
     const makeTime = (date) => {
-        // ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}
         let hours = date.getHours() < 10 ? `0${date.getHours()}` : `${date.getHours()}`;
         let minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : `${date.getMinutes()}`;
         let seconds = date.getSeconds() < 10 ? `0${date.getSeconds()}` : `${date.getSeconds()}`;
         return `${hours}:${minutes}:${seconds}`
-
     } 
 
+    //clears all forms from checkComp
     const clearForms = (setFIO, setCITY, setADRESS, setPHONE, setZIP) => {
         setFIO('');
         setCITY('');
@@ -41,6 +39,7 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
         setZIP('')
     }
 
+    //creats order and clears forms and basket
     const createOrder = () => {
         axios.post('https://api.native-flora.tk/Order/Create', {
             "shipping": String(isShipping),
@@ -61,10 +60,9 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
         })
         .then(res=>{
             if(res.status === 200){
-                console.log(res)
                 requestBasketFunc();
                 clearForms(setFio, setCity, setAdress, setPhoneNumber, setZipCode);
-                refreshFunction()
+                refreshFunction(dispatch)
             }
         })
         .catch(err=>console.log(err))
@@ -89,7 +87,7 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
                         <p>ФИО</p>
                         <input 
                             className='checkInput'
-                            onChange={(e)=>handlerChenge(e.target.value, setFio)}
+                            onChange={(e)=>handlerChange(e.target.value, setFio)}
                             value={fio}
                         />
                     </label>
@@ -97,7 +95,7 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
                         <p>Город</p>
                         <input 
                             className='checkInput'
-                            onChange={(e)=>handlerChenge(e.target.value, setCity)}
+                            onChange={(e)=>handlerChange(e.target.value, setCity)}
                             value={city}
                         />
                     </label>
@@ -107,7 +105,7 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
                             <p>Адрес</p>
                             <input 
                                 className='checkInput adress'
-                                onChange={(e)=>handlerChenge(e.target.value, setAdress)}
+                                onChange={(e)=>handlerChange(e.target.value, setAdress)}
                                 value={adress}
                             />
                         </label>
@@ -115,7 +113,7 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
                             <p>Индекс</p>
                             <input 
                                 className='checkInput index'
-                                onChange={(e)=>handlerChenge(e.target.value, setZipCode)}
+                                onChange={(e)=>handlerChange(e.target.value, setZipCode)}
                                 value={zipCode}
                             />
                         </label>
@@ -125,7 +123,7 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
                         <p>Номер телефона</p>
                         <input 
                             className='checkInput'
-                            onChange={(e)=>handlerChenge(e.target.value, setPhoneNumber)}
+                            onChange={(e)=>handlerChange(e.target.value, setPhoneNumber)}
                             value={phoneNumber}
                         />
                     </label>
@@ -135,7 +133,7 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
                             <p>ФИО</p>
                             <input 
                                 className='checkInput'
-                                onChange={(e)=>handlerChenge(e.target.value, setFio)}
+                                onChange={(e)=>handlerChange(e.target.value, setFio)}
                                 value={fio}
                             />
                         </label>
@@ -143,7 +141,7 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
                             <p>Номер телефона</p>
                             <input 
                                 className='checkInput'
-                                onChange={(e)=>handlerChenge(e.target.value, setPhoneNumber)}
+                                onChange={(e)=>handlerChange(e.target.value, setPhoneNumber)}
                                 value={phoneNumber}
                             />
                         </label>

@@ -1,7 +1,6 @@
 import React from 'react'
 import './Styles/Discription.css'
 
-
  const exemplesOfWorks = [
   {
     id: Math.random(),
@@ -27,9 +26,7 @@ import './Styles/Discription.css'
     id: Math.random(),
     original:require('../Photos/WorksPictures/BubbleGum.png'),
   }
-
  ]
-
 
 export default function Discription() {
 

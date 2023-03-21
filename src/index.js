@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import './MailFiles/Styles/index.css';
+import App from './MailFiles/App';
+import reportWebVitals from './Others/reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -13,7 +13,8 @@ const allContextParametrs = {
     isLoading: true,
     myAccountIsOpen: false,
     countOfOrders: 0,
-    searchOrderById: 0
+    searchOrderById: 0,
+    refreshTokenIsExpired: false
 }
 
 const reducer = (state = allContextParametrs, action) => {
@@ -34,6 +35,8 @@ const reducer = (state = allContextParametrs, action) => {
         return {...state, countOfOrders: action.payload};
       case 'SET_SEARCH_ORDER-ID':
         return {...state, searchOrderById: action.payload}
+      case 'SET_REFRESH-TOKEN_STATUS':
+        return {...state, refreshTokenIsExpired: action.payload}
       default : 
         return {...state}
       }

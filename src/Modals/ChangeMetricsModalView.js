@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactModal from 'react-modal'
-import LoadingComp from './LoadingComp';
-import UpdateOrder from './UpdateOrder';
-import './Style/WarningModalView.css'
+import LoadingComp from '../Loading/LoadingComp';
+import UpdateOrder from '../CatalogOfWorks/UpdateOrder';
+import './Styles/WarningModalView.css'
 
 export default function ChangeMetricsModalView(
   { 

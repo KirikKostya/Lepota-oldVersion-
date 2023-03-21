@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import BackButton from './BackButton';
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 import './Styles/Registration.css'
 
+//shows passwords by chosen password-fields
 export const showPassword = (inputType, setInputType, setEyesState) => {
   if(inputType === 'password'){
     setInputType('text');
@@ -14,11 +14,13 @@ export const showPassword = (inputType, setInputType, setEyesState) => {
   }
 }
 
+//checks login-email by validate pattern
 export function validateEmail(email) {
   let re = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{1,})$/iu;
   return (re.test(email));
 }
 
+//shows status of validate fields
 export const statusValidate = async (setStatusValidate, setColorOfValidate, LoginInputValue)=>{
   if(validateEmail(LoginInputValue)){
       setStatusValidate('Отлично!');
@@ -31,6 +33,7 @@ export const statusValidate = async (setStatusValidate, setColorOfValidate, Logi
    }
 }
 
+//clears all inputs on the registration(authorization)
 export const clearInputs = (setLoginInput, setPasswordInput, setSecondPasswordInput) => {
   setLoginInput('');
   setPasswordInput('');
@@ -39,7 +42,7 @@ export const clearInputs = (setLoginInput, setPasswordInput, setSecondPasswordIn
 
 export default function Registration() {
 
-    const [Registr, setRegistr] = useState(true);
+  const [Registr, setRegistr] = useState(true);
 
   return (
     <div className='ContainerForRegistration'>

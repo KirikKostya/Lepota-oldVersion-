@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import ContactWithUs from '../Components/ContactWithUs';
-import LoadingComp from './LoadingComp';
-import ChangeMetricsModalView from './ChangeMetricsModalView';
-import OrderCard from './OrderCard';
-import UpNavigation from '../Components/UpNavigation';
-import WarningModalView from './WarningModalView';
-import ReactModal from 'react-modal';
-import './Style/TypeCatalog.css'
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
+import UpNavigation from '../Components/UpNavigation';
+import LoadingComp from '../Loading/LoadingComp';
+import ChangeMetricsModalView from '../Modals/ChangeMetricsModalView';
+import OrderCard from './OrderCard';
+import ContactWithUs from '../Components/ContactWithUs';
+import ReactModal from 'react-modal';
+import WarningModalView from '../Modals/WarningModalView';
+import { refreshFunction } from '../MailFiles/App'
 import { Link } from 'react-scroll';
-import { refreshFunction } from '../App'
+import axios from 'axios';
+import './Style/TypeCatalog.css'
 
 
 export default function TypeCatalog() {
@@ -35,14 +35,14 @@ export default function TypeCatalog() {
 
   const makeArray = (object) => {
     return [object]
-  } 
+  }
 
-  const breakDescription = (Text) => {
-    console.log(Text.split('.'))
+  const checkMetric = (value) => {
+    return (value) ? '' : 'hide'
   }
 
   const fetchProducts = (OpenID) => {
-    axios.get(`https://api.native-flora.tk/Item/GetById?id=${ OpenID || localStorage.getItem('searchOrderById') }`)
+    axios.get(`https://api.native-flora.tk/Item/GetById?id=${OpenID || localStorage.getItem('searchOrderById')}`)
       .then(res=>{
         setCatalogOrders([res.data.data]);
         dispatch({type: 'LOADING_IS_COMPLETED'});
@@ -64,13 +64,13 @@ export default function TypeCatalog() {
             {
               makeArray(order.sizes).map((item, index)=>(
                 <div className='orderMatrics' key={index}>
-                  <p className={`mitricItem ${item.Weigth ||'hide'}`}>Вес: <span>{item.Weigth}</span></p> 
-                  <p className={`mitricItem ${item.Width ||'hide'}`}>Ширина: <span>{item.Width}</span></p>
-                  <p className={`mitricItem ${item.Height ||'hide'}`}>Высота: <span>{item.Height}</span></p>
-                  <p className={`mitricItem ${item.Depth ||'hide'}`}>Глубина: <span>{item.Depth}</span></p>
-                  <p className={`mitricItem ${item.Diameter ||'hide'}`}>Диаметр: <span>{item.Diameter}</span></p>
-                  <p className={`mitricItem ${item.Length ||'hide'}`}>Длина: <span>{item.Length}</span></p>
-                  <p className={`mitricItem ${item.Material ||'hide'}`}>Материал: <span>{item.Material}</span></p>
+                  <p className={`mitricItem ${checkMetric(item.Weigth)}`}>Вес: <span>{item.Weigth}</span></p> 
+                  <p className={`mitricItem ${checkMetric(item.Width)}`}>Ширина: <span>{item.Width}</span></p>
+                  <p className={`mitricItem ${checkMetric(item.Height)}`}>Высота: <span>{item.Height}</span></p>
+                  <p className={`mitricItem ${checkMetric(item.Depth)}`}>Глубина: <span>{item.Depth}</span></p>
+                  <p className={`mitricItem ${checkMetric(item.Diameter)}`}>Диаметр: <span>{item.Diameter}</span></p>
+                  <p className={`mitricItem ${checkMetric(item.Length)}`}>Длина: <span>{item.Length}</span></p>
+                  <p className={`mitricItem ${checkMetric(item.Material)}`}>Материал: <span>{item.Material}</span></p>
                 </div>
               ))
             }
@@ -85,7 +85,7 @@ export default function TypeCatalog() {
                   smooth={true} 
                   offset={-50} 
                   duration={500}
-                  onClick={refreshFunction}
+                  onClick={()=>{ refreshFunction(dispatch) }}
                   className={`NavLink item-contact`}>СВЯЗАТЬСЯ С НАМИ.</Link>
             </span>
           </p>

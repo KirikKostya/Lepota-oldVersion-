@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { refreshFunction } from '../App'
+import { refreshFunction } from '../MailFiles/App'
 import { NavLink } from 'react-router-dom';
 import { Link } from 'react-scroll';
-import MyAccount from './MyAccount'
+import MyAccount from '../MyAccountComponents/MyAccount'
 import axios from 'axios';
 import './Styles/UpNavigation.css'
 
@@ -17,14 +17,15 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
   const isAuthorizate = useSelector(state=>state.isAuthorizate);
   const myAccountIsOpen = useSelector(state=>state.myAccountIsOpen);
   const [openHamburgerMenu, setOpenHamburgerMenu] = useState('close');
-
+    
+  //getting count of orders in basket
   const getCountOfOrdersInBasket = ()=>{
     axios.post( 'https://api.native-flora.tk/Cart/Count', {}, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
     .then(res => dispatch({type: 'SET_COUNT_OF_ORDERS', payload: res.data.data}))
   }
-  
+
   return (
     <>
       <div id='UpNav' className='UpNavContainer'>
@@ -39,10 +40,10 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
                                     ? dispatch({type: 'CLOSE_MY_ACCOUNT'}) 
                                       : dispatch({type: 'OPEN_MY_ACCOUNT'}) 
 
-                                      if(localStorage.getItem('accessToken')){
-                                        refreshFunction();
-                                        getCountOfOrdersInBasket();
-                                      }
+                                  if(localStorage.getItem('accessToken')){
+                                    refreshFunction(dispatch);
+                                    getCountOfOrdersInBasket()
+                                  }
                                 }}> 
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/> 
                 <path fillRule="evenodd" 
@@ -52,8 +53,12 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
             :
               <NavLink 
                 to={'/Registration'}
-                onClick={()=>refreshFunction()}>
-                  <svg fill='black' width={33} height={33} viewBox='0 0 499.1 499.1'>
+                onClick={()=> refreshFunction(dispatch)}>
+                  <svg 
+                    fill='black' 
+                    width={33} 
+                    height={33} 
+                    viewBox='0 0 499.1 499.1'>
                       <path d={A}/>
                       <path d={B}/>
                   </svg>
@@ -67,7 +72,7 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
                   offset={-90} 
                   duration={500} 
                   isDynamic={true} 
-                  onClick={refreshFunction}
+                  onClick={()=>refreshFunction(dispatch)}
                   className={`NavLink`} >ГЛАВНАЯ</Link>
             <Link activeClass="active" 
                   to="CatalogOfWorks" 
@@ -75,7 +80,7 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
                   smooth={true} 
                   offset={-60} 
                   duration={500} 
-                  onClick={refreshFunction}
+                  onClick={()=> refreshFunction(dispatch)}
                   className={`NavLink ${hide}`} >КАТАЛОГ</Link>
             <Link activeClass="active" 
                   to="TimingAndDelivery" 
@@ -83,7 +88,7 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
                   smooth={true}
                   offset={-100}
                   duration={500}
-                  onClick={refreshFunction}
+                  onClick={()=>refreshFunction(dispatch)}
                   className={`NavLink ${hide}`} >СРОКИ И ДОСТАВКА</Link>
             <Link activeClass="active" 
                   to="AboutCashpo" 
@@ -106,17 +111,17 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
             width={90} 
             height={70} 
             src={require('../Photos/Logo.png')}
-            onClick={refreshFunction}/>
+            onClick={()=>refreshFunction(dispatch)}/>
         </NavLink>
         
         <div className='Hamburger' 
              onClick={()=>{
               (openHamburgerMenu === '')
                 ? setOpenHamburgerMenu('close')
-                  :setOpenHamburgerMenu('')
+                  : setOpenHamburgerMenu('')
 
               if(localStorage.getItem('accessToken')){
-                refreshFunction();
+                refreshFunction(dispatch);
               }
 
           }}>☰</div>
@@ -135,7 +140,7 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
                   offset={-230} 
                   duration={500} 
                   isDynamic={true} 
-                  onClick={refreshFunction}
+                  onClick={()=>refreshFunction(dispatch)}
                   className={`NavLink `}>ГЛАВНАЯ</Link>
             <Link activeClass="active" 
                   to="CatalogOfWorks" 
@@ -143,7 +148,7 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
                   smooth={true} 
                   offset={-210} 
                   duration={500}
-                  onClick={refreshFunction}
+                  onClick={()=>refreshFunction(dispatch)}
                   className={`NavLink ${hide}`}>КАТАЛОГ</Link>
             <Link activeClass="active" 
                   to="TimingAndDelivery" 
@@ -151,7 +156,7 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
                   smooth={true} 
                   offset={-210} 
                   duration={500}
-                  onClick={refreshFunction}
+                  onClick={()=>refreshFunction(dispatch)}
                   className={`NavLink ${hide}`}>СРОКИ И ДОСТАКА</Link>
             <Link activeClass="active" 
                   to="AboutCashpo" 
@@ -159,7 +164,7 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
                   smooth={true} 
                   offset={-210} 
                   duration={500} 
-                  onClick={refreshFunction}
+                  onClick={()=>refreshFunction(dispatch)}
                   className={`NavLink ${hide}`}>О КАШПО</Link>
             <Link activeClass="active" 
                   to="ContactWithUs" 
@@ -167,7 +172,7 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
                   smooth={true} 
                   offset={-180} 
                   duration={500}
-                  onClick={refreshFunction}
+                  onClick={()=>refreshFunction(dispatch)}
                   className={`NavLink `}>КОНТАКТЫ</Link>
       </div>
     </>

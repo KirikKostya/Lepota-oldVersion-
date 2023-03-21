@@ -3,8 +3,7 @@ import React, {useState, useEffect} from 'react'
 import Loading from 'react-loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom'
-import UpNavigation from '../Components/UpNavigation';
-import ErrorModal from './ErrorModal';
+import ErrorModal from '../Modals/ErrorModal';
 import './Styles/AccountActivation.css'
 
 
@@ -16,6 +15,7 @@ export default function AccountActivation() {
     
     const [errorMessage, setErrorMessage] = useState('');
 
+    //activate account
     const activationFunction = () => {
       axios.defaults.withCredentials = true;
       axios.post(`https://api.native-flora.tk/Auth/Activate/${link.get('id')}`)
@@ -40,30 +40,27 @@ export default function AccountActivation() {
 
   return (
     <div className='MainCont'>
-    <div className='upsider'>
-      <img width={120} height={100} src={require('../Photos/Logo.png')}/>
-    </div>
-    <div className='containerForActivation'>
-        <h1>Подождите...</h1>
-        <h2>Идет активация вашего аккаунта</h2>
-          {
-            isLoading
-              ? <Loading
-                  type='spokes'
-                  color="#5da6f3"
-                  height="45px"
-                  width="45px" 
-                />
-              : <ErrorModal 
-                  errorMessage={errorMessage}
-                  setErrorMessage={setErrorMessage}
-                  activationFunction={activationFunction}
-                />
-          }
-    </div>
-    {/* <div className='upsider'>
-      <img width={170} height={150} src={require('../Photos/Logo.png')}/>
-    </div> */}
+      <div className='upsider'>
+        <img width={120} height={100} src={require('../Photos/Logo.png')}/>
+      </div>
+      <div className='containerForActivation'>
+          <h1>Подождите...</h1>
+          <h2>Идет активация вашего аккаунта</h2>
+            {
+              isLoading
+                ? <Loading
+                    type='spokes'
+                    color="#5da6f3"
+                    height="45px"
+                    width="45px" 
+                  />
+                : <ErrorModal 
+                    errorMessage={errorMessage}
+                    setErrorMessage={setErrorMessage}
+                    activationFunction={activationFunction}
+                  />
+            }
+      </div>
     </div>
   )
 }

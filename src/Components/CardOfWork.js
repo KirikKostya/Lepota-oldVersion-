@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
-import { refreshFunction } from '../App'
+import React from 'react'
+import { refreshFunction } from '../MailFiles/App'
 import { NavLink } from 'react-router-dom'
-import './Styles/CardOfWork.css'
 import { useDispatch } from 'react-redux'
+import './Styles/CardOfWork.css'
 
 export default function CardOfWork({ card }) {
 
@@ -31,7 +31,7 @@ export default function CardOfWork({ card }) {
                   dispatch({type: 'SET_SEARCH_ORDER-ID', payload: card.id})
                   localStorage.setItem('searchOrderById', card.id);
                   localStorage.setItem('infoAboutTypeOfOrder', JSON.stringify(card))
-                  refreshFunction();
+                  refreshFunction(dispatch);
                  }}>Каталог</NavLink>
                  
         </div>

@@ -34,11 +34,8 @@ export default function TimingAndDelivery() {
             <div className='containerForGraphicRath'>
                 <div className='GraphicPath'>
                     <div className='Circle'>1</div>
-                    {/* <hr className='hr'></hr> */}
                     <div className='Circle'>2</div>
-                    {/* <hr className='hr'></hr> */}
                     <div className='Circle'>3</div>
-                    {/* <hr className='hr'></hr> */}
                     <div className='Circle'>4</div>
                 </div>
             </div>

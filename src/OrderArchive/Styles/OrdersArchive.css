@@ -1,7 +1,6 @@
 @import url('/src/Fonts/fonts.css');
 .containerForArchivePage{
     width: 100%;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,6 +12,7 @@ span{
 /* */
 .mainContainerForArhive{
     width: 50%;
+    min-height: 90vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,6 +29,9 @@ span{
 }
 .listContainer:nth-child(1){
     margin-top: 30px;
+}
+.listContainer:nth-last-child(-n+1){
+    margin-bottom: 70px;
 }
 /* */
 .archiveCheck{
@@ -61,7 +64,6 @@ span{
     width: 100%;
     height: 20px;
     font-family: 'Montserrat-Light';
-    /* font-size: 10pt;  */
     text-align: center;
     margin: 0 0 10px 0;
     padding: 0;

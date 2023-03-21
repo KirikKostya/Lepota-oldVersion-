@@ -1,10 +1,12 @@
 import React from 'react'
 import ReactModal from 'react-modal'
 import { useDispatch } from 'react-redux'
-import '../CatalogOfWorks/Style/WarningModalView.css'
+import './Styles/WarningModalView.css'
 
-export default function ErrorModal( { errorMessage, setErrorMessage, activationFunction } ) {
+export default function ErrorModal({ errorMessage, setErrorMessage, activationFunction }) {
+    
     const dispatch = useDispatch()
+
   return (
     <ReactModal
         isOpen={Boolean(errorMessage)}
