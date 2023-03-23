@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
-import ReactModal from 'react-modal';
-import Router from './Router';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signOut } from '../MyAccountComponents/MyAccount';
-import './Styles/App.css';
+import ReactModal from 'react-modal';
+import Router from './Router';
 import axios from 'axios';
+import './Styles/App.css';
 
 //refresh Token for authori- and registration (only this function uses fetch-request)
 export const refreshFunction = async (dispatch) => {
-  
   axios.get('https://api.native-flora.tk/Auth/checkToken', {
     withCredentials: true,
     headers:{'x-access-token': localStorage.getItem('accessToken')}

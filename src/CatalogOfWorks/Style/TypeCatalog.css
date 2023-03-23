@@ -1,7 +1,7 @@
 @import url('/src/Fonts/fonts.css');
 /**/
 .infoContainer{
-    width: 80%;
+    width: 75%;
     display: flex;
     flex-direction: row;
 }
@@ -42,7 +42,6 @@
     margin: 3px 10px;
     font-family: 'Montserrat-Medium';
 }
-
 .mitricItem span{
     font-family: 'Montserrat-Regular';
     font-size: 11pt;
@@ -52,7 +51,6 @@
 .orderMatrics .hide{
     display: none;
 }
-
 .forOrderMakes{
     width: 100%;
     font-family: 'Montserrat-Medium';
@@ -72,53 +70,46 @@
     color: #5da6f3;
 }
 /**/
-.ContainerForTypeCatalog{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    z-index: 0;
-}
-.ContainerForTypeCatalog h1{
-    text-align: center;
-}
-.ContainerForTypeCatalog .ContainerForCards{
-    width: 70%;
-    min-height: 75vh;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: start;
-}
-.ContainerForCards .Card{
-    width: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;  
-    background-color: rgba(145, 213, 247, 0.594); 
-}
-.Card div div{
-    border-radius: 20px 20px 0 0 !important;
-}
-.Card .AddToCartBTN{
-    width: 135px;
-    height: 32px;
+.containerForTypeCatalog{
+    width: 80%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-color: #5da6f3bd;
-    border: 1px solid black;
-    color: aliceblue;
-    font-size: medium;
-    font-weight: 400;
-    border-radius: 5px;
-    cursor: pointer;
+    z-index: 0;
 }
-.Card .AddToCartBTN:hover{
-    background-color: #5da6f3;
+.containerForTypeCatalog .loadingField{
+    width: 100%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
+.containerForTypeCatalog h1{
+    text-align: center;
+}
+/*List of cards*/
+.containerForTypeCatalog .containerForCards{
+    width: 46%;
+    min-height: 75vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+/*Additional metrics*/
+.containerForTypeCatalog .additionalMetrics{
+    width: 80%;
+    height: 330px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between !important;
+    flex: 1;
+}
+/*Warning Messages*/
 .ContainerForTypeCatalog .WarningMessage{
     width: 80%;
     height: 300px;
@@ -140,31 +131,7 @@
 .AddedOrder h1{
     margin: 0;
 }
-.ContainerForTypeCatalog .modelCountWindow{
-    width: 200px;
-    height: 150px;
-    position: absolute;
-    border-radius: 10px;
-    background-color: rgb(211, 208, 208);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.modelCountWindow h3{
-    text-align: center;
-}
-.modelCountWindow .countInput{
-    width: 100px;
-}
-.modelCountWindow .AddBtn{
-    width: 70px;
-    height: 30px;
-    background-color: rgba(210, 9, 2, 0.651);
-    border: none;
-    border-radius: 15px;
-    margin-top: 10px;
-}
-/**/
+
 .modalViewContainer{
     width: 100%;
     height: 100%;
@@ -184,18 +151,23 @@
 .modalViewContainer .changeParametrsOfOrder:hover{
     color: rgba(24, 24, 248);
 }
-.imgContainer{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+/**/
+@media screen and (max-width: 1100px){
+    .containerForTypeCatalog {
+        width: 100%;
+    }
+    .infoContainer{
+        width: 85%;
+    }
 }
-.BTNS{
-    width: 240px;
-    position: absolute;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+@media screen and (max-width: 1024px){
+    .containerForTypeCatalog {
+        flex-direction: column;
+    }
+    .containerForTypeCatalog .additionalMetrics{
+        width: 40%;
+        margin-bottom: 20px ;
+    }
 }
 @media screen and (max-width: 900px){
     .infoContainer{
@@ -204,8 +176,18 @@
     .infoOrder .description_metrics{
         width: 100%;
     }
-    .Card .AddToCartBTN{
-        background:#5da6f3 !important;
+    .containerForTypeCatalog .additionalMetrics{
+        width: 50%;
+    }
+}
+@media screen and (max-width: 720px){
+    .containerForTypeCatalog .additionalMetrics{
+        width: 60%;
+    }
+}
+@media screen and (max-width: 640px){
+    .containerForTypeCatalog .additionalMetrics{
+        width: 65%;
     }
 }
 @media screen and (max-width: 620px){
@@ -261,5 +243,18 @@
     }
     .forOrderMakes span{
         font-size: 9pt;
+    }
+    .containerForTypeCatalog .additionalMetrics{
+        width: 70%;
+    }
+}
+@media screen and (max-width: 580px){
+    .containerForTypeCatalog .additionalMetrics{
+        width: 75%;
+    }
+}
+@media screen and (max-width: 550px){
+    .containerForTypeCatalog .additionalMetrics{
+        width: 82%;
     }
 }

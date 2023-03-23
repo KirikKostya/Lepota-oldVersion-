@@ -45,7 +45,9 @@ export default function TypeCatalog() {
     axios.get(`https://api.native-flora.tk/Item/GetById?id=${OpenID || localStorage.getItem('searchOrderById')}`)
       .then(res=>{
         setCatalogOrders([res.data.data]);
+        dispatch({type: 'SET_TOTAL_SUM_TYPE-COMP', payload: res.data.data.price});
         dispatch({type: 'LOADING_IS_COMPLETED'});
+        return res;
       })
   }
 
@@ -91,25 +93,27 @@ export default function TypeCatalog() {
           </p>
         </div>
       </div>
-      <div className='ContainerForTypeCatalog'>
+      <div className='containerForTypeCatalog'>
         {
           WarningMessageIsOpen
               ? <WarningModalView WarningMessageIsOpen={WarningMessageIsOpen}/>
                 :<>
-                  <div className='ContainerForCards' >
                     {
                       isLoading
-                        ? <LoadingComp />
-                          : <OrderCard 
-                              catalogOrders={catalogOrders}
-                              setWarningMessageIsOpen={setWarningMessageIsOpen}
-                              setModalViewStep={setModalViewStep}
-                              setSelectedOrder={setSelectedOrder}
-                              setAddedOrder={setAddedOrder}
-                              setModalView={setModalView}
+                        ? <div className='loadingField'> 
+                            <LoadingComp />
+                          </div>
+                          : 
+                            <OrderCard 
+                                catalogOrders={catalogOrders}
+                                setWarningMessageIsOpen={setWarningMessageIsOpen}
+                                setModalViewStep={setModalViewStep}
+                                setSelectedOrder={setSelectedOrder}
+                                setAddedOrder={setAddedOrder}
+                                setModalView={setModalView}
                               />
                     }
-                  </div>
+
                     {
                       (AddedOrder)
                         ? <ReactModal 
@@ -121,6 +125,7 @@ export default function TypeCatalog() {
                           </ReactModal>
                           :<></>
                     }
+
                     {
                       modalView
                         ? <ChangeMetricsModalView 

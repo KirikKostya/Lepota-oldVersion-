@@ -18,9 +18,10 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
   const myAccountIsOpen = useSelector(state=>state.myAccountIsOpen);
   const [openHamburgerMenu, setOpenHamburgerMenu] = useState('close');
     
-  //getting count of orders in basket
-  const getCountOfOrdersInBasket = ()=>{
-    axios.post( 'https://api.native-flora.tk/Cart/Count', {}, {
+  //First step, makes refresh Token, by the second step gets count of orders in basket
+  const getCountOfOrdersInBasket = async ()=>{
+    await refreshFunction(dispatch);
+    await axios.post( 'https://api.native-flora.tk/Cart/Count', {}, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
     .then(res => dispatch({type: 'SET_COUNT_OF_ORDERS', payload: res.data.data}))
@@ -41,8 +42,7 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
                                       : dispatch({type: 'OPEN_MY_ACCOUNT'}) 
 
                                   if(localStorage.getItem('accessToken')){
-                                    refreshFunction(dispatch);
-                                    getCountOfOrdersInBasket()
+                                    getCountOfOrdersInBasket();
                                   }
                                 }}> 
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/> 

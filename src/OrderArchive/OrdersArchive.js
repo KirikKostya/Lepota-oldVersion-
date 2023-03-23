@@ -5,6 +5,7 @@ import ContactWithUs from '../Components/ContactWithUs.js';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import './Styles/OrdersArchive.css';
+import { NavLink } from 'react-router-dom';
 
 
 function ListOfOrders({LIST}) {
@@ -17,7 +18,10 @@ function ListOfOrders({LIST}) {
     <div className='mainContainerForArhive' id='hideNavBarMainLink'>
       {
         LIST.length === 0
-          ? <>sorry, no orders!</>
+          ? <div className='emptyArchive'>
+              <h1>Ваш архив заказов пуст!</h1>
+              <h3>Для пополнения архива вы должны создать и отправить нам заказ <NavLink to={'/MyBasket'}>в корзине</NavLink></h3>
+            </div>
             : <>
                 {
                   LIST.map((el, index)=>(

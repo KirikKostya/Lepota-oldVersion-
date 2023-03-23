@@ -14,7 +14,8 @@ const allContextParametrs = {
     myAccountIsOpen: false,
     countOfOrders: 0,
     searchOrderById: 0,
-    refreshTokenIsExpired: false
+    refreshTokenIsExpired: false,
+    totalSum_TypeComp: 0,
 }
 
 const reducer = (state = allContextParametrs, action) => {
@@ -37,6 +38,14 @@ const reducer = (state = allContextParametrs, action) => {
         return {...state, searchOrderById: action.payload}
       case 'SET_REFRESH-TOKEN_STATUS':
         return {...state, refreshTokenIsExpired: action.payload}
+
+
+      case 'SET_TOTAL_SUM_TYPE-COMP':
+        return {...state, totalSum_TypeComp: action.payload}
+      case 'INCREMENT_TOTAL_SUM_TYPE-COMP':
+        return {...state, totalSum_TypeComp: state.totalSum_TypeComp + action.payload}
+      case 'DECREMENT_TOTAL_SUM_TYPE-COMP':
+        return {...state, totalSum_TypeComp: state.totalSum_TypeComp - action.payload}
       default : 
         return {...state}
       }

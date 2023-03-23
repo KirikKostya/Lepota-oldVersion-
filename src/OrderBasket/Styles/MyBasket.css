@@ -158,7 +158,7 @@ label p{
     margin: 0;
     padding: 0;
 }
-.backItemBlock h4, h3{
+.backItemBlock h4, .backItemBlock h3{
     margin: 0;
     padding: 10px 0;
     font-family: 'Montserrat-Regular';
