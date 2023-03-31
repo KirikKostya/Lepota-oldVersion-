@@ -113,10 +113,14 @@ span{
     padding: 0;
 }
 .item p{
-    width: 150px;
+    flex: 1;
     font-family: 'Montserrat-Regular';
     font-size: 10pt;
     text-align: start;
+}
+.item p .variantInArchive{
+    font-size: 8pt;
+    margin-left: 5px;
 }
 .item span{
     font-family: 'Montserrat-Regular';

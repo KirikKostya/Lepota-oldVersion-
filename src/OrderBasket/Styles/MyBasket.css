@@ -108,7 +108,6 @@ label p{
     height: 35px;
     border-radius: 10px;
     border: none;
-    cursor: pointer;
     background: rgba(104, 7, 216, 0.578);
     color:rgb(87, 87, 87);
     font-weight: bold;
@@ -138,7 +137,7 @@ label p{
     font-family: 'Montserrat-Regular';
 }
 .MainFielfForBasket .basketParametrs #fullName{
-    width: 51%;
+    width: 52%;
 }
 .MainFielfForBasket .basketParametrs #price{
     width: 12%;
@@ -177,8 +176,12 @@ label p{
     padding: 0 5px;
 }
 .Item h4{
-    width: 30%;
+    flex: 0.5;
     margin: 0;
+}
+.Item h4 .variantInBasket{
+    font-family: 'Montserrat-Light';
+    font-size: 8pt;
 }
 .Item img{
     width: 50px;
@@ -272,7 +275,7 @@ label p{
         width: 30%;
     }
     .MainFielfForBasket .basketParametrs #fullName{
-        width: 55%;
+        width: 60%;
         padding: 0 3px;
     }
     .MainFielfForBasket .basketParametrs #price{
@@ -293,6 +296,9 @@ label p{
 @media screen and (max-width:730px){
     .MainFielfForBasket{
         width: 90% !important;
+    }
+    .MainFielfForBasket .basketParametrs #fullName{
+        width: 55%;
     }
     .fullContainer .Chek{
         width: 90%;

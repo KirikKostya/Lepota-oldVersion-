@@ -3,8 +3,8 @@
     background-color: rgb(0, 0, 0, 0.6) !important;
 }
 .ReactModal__Content{
-    width: 40% !important;
-    height: 40% !important;
+    width: 40% ;
+    height: 65% !important;
     top: 50% !important;
     left: 50% !important;
     right: auto !important;

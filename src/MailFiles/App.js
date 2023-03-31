@@ -22,7 +22,7 @@ export const refreshFunction = async (dispatch) => {
       })
       .catch(res=>{
         (res.response.status === 401)
-          ? dispatch({type: 'SET_REFRESH-TOKEN_STATUS', payload: true}) // dialog window to update  
+          ? dispatch({type: 'SET_REFRESH-TOKEN_STATUS', payload: true})  
             : console.log('Что-то пошло не так!')
       })
     }

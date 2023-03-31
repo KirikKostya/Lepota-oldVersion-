@@ -1,0 +1,35 @@
+.ReactModal__Content{
+    width: 45% ;
+    height: 65% !important;
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin-right: -50% !important;
+    transform: translate(-50%, -50%) !important;
+    color: black !important;
+    background: aliceblue !important; 
+    display: flex !important;
+    flex-direction: column !important; 
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 20px !important;
+}
+.variantBtn{
+    margin-top: 50px;
+}
+@media screen and (max-width: 1060px){
+    .ReactModal__Content{
+        width: 55% !important;
+    }
+}
+@media screen and (max-width: 760px){
+    .ReactModal__Content{
+        width: 87% !important;
+    }
+}
+@media screen and (max-width: 500px) {
+    .ReactModal__Content{
+        height: 75% !important;
+    }
+}

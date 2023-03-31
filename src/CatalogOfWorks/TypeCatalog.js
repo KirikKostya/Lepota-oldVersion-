@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import UpNavigation from '../Components/UpNavigation';
 import LoadingComp from '../Loading/LoadingComp';
-import ChangeMetricsModalView from '../Modals/ChangeMetricsModalView';
 import OrderCard from './OrderCard';
 import ContactWithUs from '../Components/ContactWithUs';
 import ReactModal from 'react-modal';
@@ -18,7 +17,6 @@ export default function TypeCatalog() {
   const [WarningMessageIsOpen, setWarningMessageIsOpen] = useState(false);
   const [AddedOrder, setAddedOrder] = useState(false)
   const [modalView, setModalView] = useState(false)
-  const [modalViewStep, setModalViewStep] = useState(1)
 
   const order = JSON.parse(localStorage.getItem('infoAboutTypeOfOrder'))
   
@@ -45,7 +43,7 @@ export default function TypeCatalog() {
     axios.get(`https://api.native-flora.tk/Item/GetById?id=${OpenID || localStorage.getItem('searchOrderById')}`)
       .then(res=>{
         setCatalogOrders([res.data.data]);
-        dispatch({type: 'SET_TOTAL_SUM_TYPE-COMP', payload: res.data.data.price});
+        dispatch({type: 'SET_TOTAL_SUM_TYPE-COMP', payload: res.data.data.item.price});
         dispatch({type: 'LOADING_IS_COMPLETED'});
         return res;
       })
@@ -107,7 +105,6 @@ export default function TypeCatalog() {
                             <OrderCard 
                                 catalogOrders={catalogOrders}
                                 setWarningMessageIsOpen={setWarningMessageIsOpen}
-                                setModalViewStep={setModalViewStep}
                                 setSelectedOrder={setSelectedOrder}
                                 setAddedOrder={setAddedOrder}
                                 setModalView={setModalView}
@@ -115,7 +112,7 @@ export default function TypeCatalog() {
                     }
 
                     {
-                      (AddedOrder)
+                      AddedOrder
                         ? <ReactModal 
                             isOpen={AddedOrder}
                             ariaHideApp={false}
@@ -123,19 +120,16 @@ export default function TypeCatalog() {
                           >
                             <h2 className='modal-header'>Ваш товар добавлен в корзину!</h2>
                           </ReactModal>
-                          :<></>
-                    }
-
-                    {
-                      modalView
-                        ? <ChangeMetricsModalView 
-                            modalView={modalView}
-                            setModalView={setModalView}
-                            modalViewStep={modalViewStep}
-                            setModalViewStep={setModalViewStep}
-                            selectedOrder={selectedOrder}
-                            />
-                          : <></>
+                          : modalView
+                            ? <ReactModal 
+                                isOpen={modalView}
+                                ariaHideApp={false}
+                                contentLabel="Selected Option"
+                              >
+                                <h2 className='modal-header'>Такой товар уже есть в корзине</h2>
+                                <p>Изменить количество товаров можно в корзине</p>
+                              </ReactModal>
+                               :<></>
                     }
                 </>
         }

@@ -43,8 +43,17 @@ export default function MainBasketField({ ItemsInBasket, setItemsInBasket, reque
                 : ItemsInBasket.sort((a,b)=> a.item.id - b.item.id).map(item => (
                     <div className='Item' key={item.item.id}>
                     <img width={55} height={55} src={item.item.icon[0]}/>
-                    <h4>{item.item.name}</h4>
-                    <h3>{item.item.price} Br</h3>
+                    <h4 onClick={()=>console.log(item)}> {item.item.name} </h4>
+                    <h3>
+                        {
+                          item.variants
+                            ? item.variants.map(el=>(
+                              el.price
+                            ))
+                              : item.kit
+                                ? item.kit.price
+                                  :item.item.price
+                        } Br</h3> 
                     <div className='ChangeAmount'>
                       <input 
                           id='ChangeInput'
@@ -57,14 +66,13 @@ export default function MainBasketField({ ItemsInBasket, setItemsInBasket, reque
                             }}
                           defaultValue={item.amount}/>
                     </div>
-                    <h3 id='summaryPrice'>{item.price}</h3>
+                    <h3 id='summaryPrice'>{item.price} Br</h3>
                     <button 
                       className='deleteItem' 
                         onClick={()=>{
                           deleteItem(item.item.id);
                           refreshFunction(dispatch)
-                        }}
-                    >&times;</button>
+                        }}>&times;</button>
                     </div>
             ))
         }

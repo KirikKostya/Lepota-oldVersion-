@@ -4,8 +4,8 @@ import LoadingComp from '../Loading/LoadingComp.js';
 import ContactWithUs from '../Components/ContactWithUs.js';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import './Styles/OrdersArchive.css';
 import { NavLink } from 'react-router-dom';
+import './Styles/OrdersArchive.css';
 
 
 function ListOfOrders({LIST}) {
@@ -13,6 +13,10 @@ function ListOfOrders({LIST}) {
   const makeArray = (object) => {
     return [object]
   }
+
+  useEffect(()=>{
+    window.scrollTo(0, 0)
+   }, [])
 
   return (
     <div className='mainContainerForArhive' id='hideNavBarMainLink'>
@@ -47,7 +51,21 @@ function ListOfOrders({LIST}) {
                             {
                               el.cartItems.map((item, index)=>(
                                 <div key={index} className={'item'}>
-                                  <p>{item.item.name}</p>
+                                  <p onClick={()=>console.log(item)}>
+                                    {item.item.name}
+                                    <span className='variantInArchive'>
+                                      {`( ${
+                                      item.variants
+                                        ? item.variants.map(el=>(
+                                          el.name
+                                        ))
+                                          : item.kit
+                                            ? item.kit.name
+                                              : ''
+                                      } )`}
+                                    </span>
+                                    {` x${item.amount}`}
+                                  </p>
                                   <span>{item.price}p.</span>
                                 </div>
                               ))
@@ -90,12 +108,12 @@ export default function OrdersArchive() {
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
     .then(res=>{
-      setListOfOrdersInArchive(res.data.data);
+      setListOfOrdersInArchive(res.data.data.reverse());
       dispatch({type: 'LOADING_IS_COMPLETED'});
     })
     .catch(err=>{
       if(err.response.status === 400){
-        setListOfOrdersInArchive(err.response.data.data);
+        setListOfOrdersInArchive(err.response.data.data.reverse());
         dispatch({type: 'LOADING_IS_COMPLETED'});
       }
     })

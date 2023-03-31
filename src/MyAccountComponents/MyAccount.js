@@ -6,7 +6,7 @@ import './Styles/MyAccount.css'
 
 export const signOut = (dispatch) =>{
   dispatch({ type: 'UNCOMPLETED_AUTHORIZATION'})
-  localStorage.clear();
+  localStorage.removeItem('accessToken')
 }
 
 export default function MyAccount() {
