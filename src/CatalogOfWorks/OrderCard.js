@@ -133,7 +133,6 @@ export default function OrderCard(
         <div className='containerForCards'>
           <div className='item-Card'> 
             <SimpleImageSlider
-              className='simpleImage'
               width={380}
               height={330}
               navSize={25}

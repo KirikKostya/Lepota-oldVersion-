@@ -83,7 +83,6 @@
     border-radius: 40%;
     padding: 0 3px 3px 0 ;
     background: rgb(192, 192, 192);
-    cursor: pointer;
 }
 .SignUp .helpMessage{
     width: 90%;

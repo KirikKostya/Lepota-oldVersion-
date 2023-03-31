@@ -9,6 +9,7 @@
     background: url('/src/Photos/ContactWithUs.png');
     background-size: cover;
     color: black;
+    margin-top: 20px;
 }
 .ContainerForContactWithUs h1{
     text-align: center;
@@ -19,7 +20,6 @@
     width: 50px;
     height: 50px;
     margin: 30px 30px;
-    cursor: pointer;
 }
 .ContainerForContactWithUs .MobilePhone{
     font-weight: bold !important;

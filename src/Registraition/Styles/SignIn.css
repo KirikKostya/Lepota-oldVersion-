@@ -76,7 +76,6 @@
     border-radius: 45%;
     padding: 0 3px 3px 0 ;
     background: rgb(192, 192, 192);
-    cursor: pointer;
 }
 .SignIn .helpMessage_SI{
     width: 90%;

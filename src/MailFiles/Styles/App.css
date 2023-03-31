@@ -31,8 +31,45 @@ h1{
     font-family: 'Montserrat-Bold';
     font-size: 22pt;
 }
+
+/*modal*/
+.ReactModal__Overlay{
+    background-color: rgb(0, 0, 0, 0.6) !important;
+}
+.ReactModal__Content{
+    width: 500px;
+    min-height: 200px;
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin-right: -50% !important;
+    transform: translate(-50%, -50%) !important;
+    color: black !important;
+    background: aliceblue !important; 
+    display: flex !important;
+    flex-direction: column !important; 
+    align-items: center !important;
+    justify-content: space-around !important;
+    border-radius: 20px !important;
+}
+@media screen and (max-width: 1060px){
+    .ReactModal__Content{
+        width: 55% !important;
+    }
+}
 @media screen and (max-width: 890px) {
     .warningMessage{
         width: 95% !important;
+    }
+}
+@media screen and (max-width: 760px){
+    .ReactModal__Content{
+        width: 75% !important;
+    }
+}
+@media screen and (max-width: 550px) {
+    .ReactModal__Content{
+        width: 85% !important;
     }
 }

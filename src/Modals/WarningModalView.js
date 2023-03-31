@@ -14,7 +14,7 @@ export default function WarningModalView({ WarningMessageIsOpen }) {
         <h1 className='modal-header'>Внимание!</h1>
         <p className='modal-errorMessage'>
           Для того чтобы добавить товар в корзину, вам необходимо 
-          <NavLink to={'/Registration'}>войти</NavLink>
+          <NavLink className={'linkToRegistration'} to={'/Registration'}> войти </NavLink>
           в аккаунт!
         </p>
     </ReactModal>

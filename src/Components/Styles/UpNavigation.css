@@ -39,9 +39,6 @@
     align-items: center;
     justify-content: center;
 }
-.UpNavContainer svg{
-    cursor: pointer;
-}
 
 .UpNavContainer .SingInBTN_UN{
     display: inline-block;

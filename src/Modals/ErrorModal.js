@@ -42,7 +42,7 @@ export default function ErrorModal({ errorMessage, setErrorMessage, activationFu
         }
         {
             errorMessage === 'Такой аккаунт уже активирован!' || errorMessage === 'Вы активировали аккаунт!'
-                ? <a className='NavLink modal-closeBTN' href={'https://kirikkostya.github.io/Lepota/'}>прожолжить</a>
+                ? <a className='NavLink modal-closeBTN' href={'https://kirikkostya.github.io/Lepota/'}>продолжить</a>
                     : <button 
                         className='modal-closeBTN' 
                         onClick={()=>{

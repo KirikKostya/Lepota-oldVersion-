@@ -1,24 +1,4 @@
 @import url('/src/Fonts/fonts.css');
-.ReactModal__Overlay{
-    background-color: rgb(0, 0, 0, 0.6) !important;
-}
-.ReactModal__Content{
-    width: 40% ;
-    height: 65% !important;
-    top: 50% !important;
-    left: 50% !important;
-    right: auto !important;
-    bottom: auto !important;
-    margin-right: -50% !important;
-    transform: translate(-50%, -50%) !important;
-    color: black !important;
-    background: aliceblue !important; 
-    display: flex !important;
-    flex-direction: column !important; 
-    align-items: center !important;
-    justify-content: space-around !important;
-    border-radius: 20px !important;
-}
 .modal-header{
     width: 95% !important;
     letter-spacing: 1.2px;
@@ -46,19 +26,12 @@
     font-weight: 500;
     cursor: pointer;
 }
+.linkToRegistration{
+    text-decoration: none;
+    margin: 0 5px ;
+}
 @media screen and (max-width: 890px) {
-    .ReactModal__Content{
-        width: 50% !important;
-        height: 50% !important;
-    }
     .modal-errorMessage{
         width: 95% !important;
     }
-}
-@media screen and (max-width: 730px) {
-    .ReactModal__Content{
-        width: 70% !important;
-        height: 50% !important;
-    }
-
 }

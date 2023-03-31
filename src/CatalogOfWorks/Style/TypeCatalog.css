@@ -92,7 +92,6 @@
 /*List of cards*/
 .containerForTypeCatalog .containerForCards{
     width: 46%;
-    min-height: 75vh;
     display: flex;
     flex-direction: row;
     align-items: center;

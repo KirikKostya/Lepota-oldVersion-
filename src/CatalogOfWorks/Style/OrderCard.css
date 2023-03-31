@@ -10,14 +10,9 @@
     flex-direction: row;
     align-items: center;
 }
-.item-Card .simpleImage{
-    width: 100px !important;
-    height: 100px !important;
-}
 .item-Card div div{
     border-radius: 5px 5px !important;
 }
-
 /**/
 .additionalMetrics .listOfMitrics{
     width: 98%;
@@ -40,9 +35,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
-.itemOfMetrics svg{
-    cursor: pointer;
 }
 .itemOfMetrics .metricLabel{
     width: 80%;
@@ -136,6 +128,9 @@
 @media screen and (max-width: 1024px){
     .mainContainer{
         flex-direction: column;
+    }
+    .containerForCards .item-Card{
+        margin-bottom: 15px;
     }
     .containerForHeader_Button .headerCard{
         font-size: 11pt;
