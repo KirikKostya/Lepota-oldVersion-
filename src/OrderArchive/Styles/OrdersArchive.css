@@ -3,7 +3,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: start;
 }
 /* */
 span{
@@ -24,20 +24,26 @@ span{
     text-align: center;
 }
 /* */
-.mainContainerForArhive{
-    width: 50%;
-    min-height: 90vh;
+.mainListContainer{
+    width: 60%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: rgb(254, 250, 250, 0.6);
+    justify-content: center;
 }
-.listContainer{
-    width: 65%;
+.mainContainerForArhive{
+    width: 100%;
+    min-height: 90vh;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+}
+.mainContainerForArhive .listContainer{
+    width: 60%;
     display: flex;
     justify-content: center;
     border-radius: 15px 15px 5px 5px;
-    background: #BFD4FD;
+    background: #e9e9e9;
     margin: 15px 0 10px 0;
     border-top: 10px solid transparent;
 }
@@ -46,6 +52,46 @@ span{
 }
 .listContainer:nth-last-child(-n+1){
     margin-bottom: 70px;
+}
+.mainContainerForArhive .filterContainer{
+    width: 40%;
+    top: 150px;
+    position: sticky;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    margin-top: 30px;  
+}
+.filterContainer .sortBTN{
+    width: 70%;
+    height: 33px;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Montserrat-Medium';
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    color: aliceblue;
+    background-color: #5da6f3;
+    text-decoration: none;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+.filterContainer .sortBTN:hover{
+    letter-spacing: 2px;
+}
+.filterContainer .clearFilter{
+    width: 70%;
+    text-align: center;
+    margin-top: 7px;
+    cursor: pointer;
+}
+.filterContainer .clearFilter:hover{
+    color: #5da6f3;
 }
 /* */
 .archiveCheck{
@@ -185,18 +231,42 @@ span{
 @media screen and (max-width: 1024px) {
     .mainContainerForArhive{
         width: 100%;
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
     }
-    .listContainer{
-        width: 40%;
+    .mainContainerForArhive .listContainer{
+        width: 50%;
+    }
+    .mainContainerForArhive .filterContainer{
+        width: 50%;
+        top: 0;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .mainListContainer{
+        width: 100%;
     }
 }
 @media screen and (max-width: 840px) {
-    .listContainer{
+    .mainContainerForArhive .listContainer{
         width: 60%;
+    }
+    .mainContainerForArhive .filterContainer{
+        width: 70%;
+    }
+    .orderItems .item, .shippingType, .customer, .orderStatus{
+        width: 90%;
     }
 }
 @media screen and (max-width: 550px) {
-    .listContainer{
-        width: 80%;
+    .mainContainerForArhive .listContainer{
+        width: 85%;
+    }
+    .mainContainerForArhive .filterContainer{
+        width: 85%;
     }
 }

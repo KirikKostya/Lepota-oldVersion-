@@ -1,0 +1,68 @@
+.containerForSelect{
+    width: 70%;
+    margin: 5px 0;
+}
+.containerForSelect p{
+    height: 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #002A7E;
+    letter-spacing: 0.015em;
+    text-align: left;
+    padding: 0;
+    margin: 32px 0 8px 0;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+.option{
+    background-color: white;
+}
+.css-1u9des2-indicatorSeparator{
+    display: none !important;
+}
+.css-1p3m7a8-multiValue{
+    max-width: 200px;
+    height: 32px;
+    background: #5A9DFF !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 16px !important;
+    font-style: normal !important;
+    padding: 0 0 0 5px !important;
+    border-radius: 100px !important;
+}
+.css-wsp0cs-MultiValueGeneric{
+    color: #FFFFFF !important;
+}
+.css-12a83d4-MultiValueRemove{
+    width: 18px !important;
+    height: 18px !important;
+    color: #FFFFFF !important;
+    background: #0048A4;
+    border-radius: 100% !important;
+    margin: 7px 8px 7px 16px;
+}
+.css-12a83d4-MultiValueRemove:hover{
+    background: #0048A4 !important;
+    cursor: pointer;
+}
+.active{
+    border: none;
+    background: transparent;
+    display: block;
+}
+.false{
+    display: none;
+}
+
+@media screen and (max-width: 850px) {
+    .containerForSelect{
+        width: 80%;
+    }
+}
