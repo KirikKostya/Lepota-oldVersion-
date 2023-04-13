@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshFunction } from '../MailFiles/App'
 import { NavLink } from 'react-router-dom';
@@ -19,13 +19,13 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
   const [openHamburgerMenu, setOpenHamburgerMenu] = useState('close');
     
   //First step, makes refresh Token, by the second step gets count of orders in basket
-  const getCountOfOrdersInBasket = async ()=>{
+  const getCountOfOrdersInBasket = useCallback(async ()=>{
     await refreshFunction(dispatch);
     await axios.post( 'https://api.native-flora.tk/Cart/Count', {}, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
     .then(res => dispatch({type: 'SET_COUNT_OF_ORDERS', payload: res.data.data}))
-  }
+  }, [dispatch])
 
   return (
     <>
@@ -111,6 +111,7 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
             width={90} 
             height={70} 
             src={require('../Photos/Logo.png')}
+            alt='LOGO'
             onClick={()=>refreshFunction(dispatch)}/>
         </NavLink>
         

@@ -14,7 +14,7 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
     const [adress, setAdress] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [zipCode, setZipCode] = useState(''); 
-    const [instContact, setInstContact] = useState('inst/Kirik_10');
+    const [instContact, setInstContact] = useState('Not Inst');
 
     const dispatch = useDispatch();
 

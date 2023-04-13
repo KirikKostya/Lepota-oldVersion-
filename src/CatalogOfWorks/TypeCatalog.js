@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import UpNavigation from '../Components/UpNavigation';
 import LoadingComp from '../Loading/LoadingComp';
@@ -19,9 +19,6 @@ export default function TypeCatalog() {
   const [modalView, setModalView] = useState(false)
 
   const order = JSON.parse(localStorage.getItem('infoAboutTypeOfOrder'))
-  
-  //Заказ который есть в корзине, но User хочет поменять метрики 
-  const [selectedOrder, setSelectedOrder] = useState(Array);
 
   //Список товаров по заданному типу
   const [catalogOrders, setCatalogOrders] = useState([]);   
@@ -39,7 +36,7 @@ export default function TypeCatalog() {
     return (value) ? '' : 'hide'
   }
 
-  const fetchProducts = (OpenID) => {
+  const fetchProducts = useCallback((OpenID) => {
     axios.get(`https://api.native-flora.tk/Item/GetById?id=${OpenID || localStorage.getItem('searchOrderById')}`)
       .then(res=>{
         setCatalogOrders([res.data.data]);
@@ -47,12 +44,12 @@ export default function TypeCatalog() {
         dispatch({type: 'LOADING_IS_COMPLETED'});
         return res;
       })
-  }
+  }, [dispatch])
 
   useEffect(()=>{
     fetchProducts(searchOrderById);
     window.scrollTo(0, 0);
-  },[])
+  }, [fetchProducts])
   
   return (
     <>
@@ -105,7 +102,6 @@ export default function TypeCatalog() {
                             <OrderCard 
                                 catalogOrders={catalogOrders}
                                 setWarningMessageIsOpen={setWarningMessageIsOpen}
-                                setSelectedOrder={setSelectedOrder}
                                 setAddedOrder={setAddedOrder}
                                 setModalView={setModalView}
                               />

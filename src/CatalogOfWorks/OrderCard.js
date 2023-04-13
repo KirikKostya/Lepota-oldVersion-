@@ -1,5 +1,4 @@
 import React, {useEffect, useState, useRef} from 'react'
-import errorPicture from '../Photos/somethingWentWrong.png'
 import AddedVariantModal from '../Modals/AddedVariantModal'; 
 import SimpleImageSlider from 'react-simple-image-slider';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,7 +11,6 @@ export default function OrderCard(
   {
     catalogOrders,
     setWarningMessageIsOpen,
-    setSelectedOrder,
     setAddedOrder,
     setModalView
   }
@@ -32,19 +30,6 @@ export default function OrderCard(
     const [kits, setKits] = useState(Array);
     const [nameOfKit, setNameOfKit] = useState('');
     const [listOfPhotos, setListOfPhotos] = useState(Array);
-
-
-    //Make List of sort selected orders 
-    const fetchOrderById = (ID) => {
-      axios.post( 'https://api.native-flora.tk/Cart/All', {}, {
-        headers:{'x-access-token': localStorage.getItem('accessToken')}
-      })
-      .then(res=>{
-        if(res.data.data){          
-          setSelectedOrder(res.data.data.cartItems.filter(item=>item === ID))
-        }
-      }) 
-    }
 
     //Added item to cart of order
     const addItemToCart = async (cardId) =>{
@@ -73,7 +58,7 @@ export default function OrderCard(
     }
 
     //Unchecks all inputs and makes null count of orders
-    const cleanSelectedOptions = (refInp, refCount, toNull) => {
+    const cleanSelectedOptions = (refInp, refCount) => {
       for (let i = 0; i < refInp.current.length; i++) {
         refInp.current[i].checked = false;
       }
@@ -225,7 +210,6 @@ export default function OrderCard(
                           localStorage.getItem('accessToken')
                             ? addItemToCart(order.item.id)
                               : setWarningMessageIsOpen(true)
-                          fetchOrderById(order)
                           refreshFunction(dispatch) //Fetch to refresh Token
                         }}>В корзину
                   <svg 

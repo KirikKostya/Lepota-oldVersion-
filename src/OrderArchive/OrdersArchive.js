@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import UpNavigation from '../Components/UpNavigation.js'
 import LoadingComp from '../Loading/LoadingComp.js';
 import ListOfArchive from './ListOfArchive.js'
@@ -15,7 +15,7 @@ export default function OrdersArchive() {
   const dispatch = useDispatch();
 
   //fetchs data from API (order in archive)
-  const fetchingAllOrdersInArchive = () => {
+  const fetchingAllOrdersInArchive = useCallback(() => {
     axios.get('https://api.native-flora.tk/Order/All', {
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
@@ -29,12 +29,16 @@ export default function OrdersArchive() {
         dispatch({type: 'LOADING_IS_COMPLETED'});
       }
     })
-  }
+  }, [dispatch])
 
   useEffect(()=>{
+    const abortController = new AbortController();
     localStorage.setItem('filterMetric', JSON.stringify({ date: '', deliveType: '', deliveStatus: '' }))
-    fetchingAllOrdersInArchive()
-  }, [])
+    fetchingAllOrdersInArchive();
+    return ()=>{
+      abortController.abort()
+    }
+  }, [fetchingAllOrdersInArchive])
 
   return (
     <div className='containerForArchivePage'>

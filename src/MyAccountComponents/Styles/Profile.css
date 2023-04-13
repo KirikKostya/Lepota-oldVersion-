@@ -1,0 +1,300 @@
+@import url('/src/Fonts/fonts.css');
+.containerForProfile{
+    width: 100%;
+    display: flex;
+    align-items: start;
+    margin: 15px 0;
+}
+/**/
+.containerForDataAboutUser{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    padding-left: 10px;
+}
+.containerForDataAboutUser .headerAboutUser{
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 10px;
+}
+/*fio-field*/
+.containerForDataAboutUser .fioField{
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.containerForDataAboutUser .fioField:nth-child(1){
+    margin-top: 0;
+}
+/**/
+
+
+.containerForDataAboutUser .typesOfData{
+    width: calc(100%-40%);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 10px;
+    margin: 0 0 10px 10px;
+    background: #e9e9e9;
+}
+.typesOfData .typeOfData{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-family: 'Montserrat-Bold';
+    font-size: 10.5pt;
+    letter-spacing: 1px;
+    border-radius: 10px;
+    margin: 5px 15px 5px 5px;
+    padding: 5px 13px;
+}
+.typesOfData .typeOfData:not(.active):hover{
+    background: #dbdada;
+}
+.typesOfData .active{
+    background: #cecece;
+}
+/**/
+.containerForDataAboutUser .listInfoCard-Profile{
+    width: 100%;
+    display: grid;
+    grid-gap: 15px;
+    gap: 15px;
+    grid-template-columns: repeat(6,1fr);
+    grid-template-areas: 
+    "profileUser profileUser profileCatalog profileCatalog profileContactMe profileContactMe"
+    "profileArchive profileArchive profileBasket profileBasket profileRecomendation profileRecomendation";
+    margin-top: 11px;
+}
+.profileAdmin{
+    grid-area: profileAdmin;
+}
+.profileUser{
+    grid-area: profileUser;
+}
+.profileCatalog{
+    grid-area: profileCatalog;
+}
+.profileContactMe{
+    grid-area: profileContactMe;
+}
+.profileArchive{
+    grid-area: profileArchive;
+}
+.profileBasket{
+    grid-area: profileBasket;
+}
+.profileRecomendation{
+    grid-area: profileRecomendation;
+}
+
+.listInfoCard-Profile .infoCard{
+    width: 89%;
+    height: 150px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 15px;
+    background: red;
+    padding: 15px 16px 17px;
+    margin-left: 10px ;
+    background: #f0ebebca;
+    transition: all .5s ease;
+}
+.listInfoCard-Profile .infoCard:hover{
+    box-shadow: 0 0 15px 5px #cecece;
+}
+.infoCard .dataContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer ;
+}
+.dataContainer .dataProf{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+}
+.dataContainer .dataProf .header{
+    font-family: 'Montserrat-Bold';
+    font-size: 14pt;
+    color: #363636;
+    margin-bottom: 10px;
+}
+.dataContainer .dataProf span{
+    font-family: 'Montserrat-Regular';
+    font-size: 10pt;
+}
+.profileUser .exiteBtn{
+    text-decoration: none;
+    color: #363636;
+    font-family: 'Montserrat-Bold';
+    font-size: 10pt;
+    transition: all .5s ease;
+}
+.profileUser .exiteBtn:hover{
+    color: #56a8ffd5;
+}
+
+
+/**/
+.fioField .textArea{
+    width: 100%;
+}
+.fioField .textArea textarea{
+    width: 60%;
+    height: 200px;
+}
+.fioField form{
+    flex: 1;
+}
+.fioField form p{
+    font-size: 10.5pt;
+    font-family: 'Montserrat-Light';
+    letter-spacing: 1px;
+    margin: 5px 0 5px 3px;
+    padding: 0;
+}
+.fioField form input{
+    width: 90%;
+    height: 40px;
+    border: 1px solid black;
+    font-family: 'Montserrat-Regular';
+    letter-spacing: 1px;
+    border-radius: 5px;
+    padding: 0 0 0 10px;
+    background: #f9f9f9b2;
+    outline: none;
+}
+/**/
+/**/
+.containerForDataAboutUser .saveButton_Prof{
+    width: 100%;
+}
+.containerForDataAboutUser .saveButton_Prof button{
+    width: 60%;
+    height: 35px;
+    color: aliceblue;
+    font-family: 'Montserrat-Medium';
+    font-size: 12pt;
+    letter-spacing: 2px;
+    background: #5da6f3d5;
+    border: none;
+    border-radius: 5px;
+    margin-top: 30px;
+    cursor: pointer;
+}
+.containerForDataAboutUser .saveButton_Prof button:hover{
+    background: #5da6f3;
+}
+
+.containerForDataAboutUser .submitButton_Prof{
+    width: 100%;
+}
+.containerForDataAboutUser .submitButton_Prof button{
+    width: 400px;
+    height: 35px;
+    color: aliceblue;
+    font-family: 'Montserrat-Medium';
+    font-size: 12pt;
+    letter-spacing: 2px;
+    background: #5da6f3d5;
+    border: none;
+    border-radius: 5px;
+    margin-top: 30px;
+    cursor: pointer;
+}
+.containerForDataAboutUser .submitButton_Prof button:hover{
+    background: #5da6f3;
+}
+/**/
+@media screen and (max-width: 1200px) {
+    .containerForDataAboutUser .listInfoCard-Profile{
+        grid-template-areas: "profileUser profileUser profileUser profileContactMe profileContactMe profileContactMe"
+        "profileCatalog profileCatalog profileCatalog profileArchive profileArchive profileArchive"
+        "profileBasket profileBasket profileBasket profileRecomendation profileRecomendation profileRecomendation";
+    }
+}
+@media screen and (max-width: 1023px) {
+    .containerForDataAboutUser{
+        padding: 0;
+    }
+    .containerForDataAboutUser .listInfoCard-Profile{
+        grid-template-areas: "profileUser profileUser profileUser profileContactMe profileContactMe profileContactMe"
+        " profileCatalog profileCatalog profileReviews profileArchive profileCard "
+        "profileBasket profileBasket profileBasket profileRecomendation profileRecomendation profileRecomendation";
+    }
+    .containerForDataAboutUser .fioField, 
+    .containerForDataAboutUser .saveButton_Prof button,
+    .fioField .textArea{
+        width: 95%;
+    }
+}
+@media screen and (max-width: 768px) {
+    .containerForDataAboutUser{
+        align-items: center;
+    }
+    .containerForDataAboutUser .typesOfData{
+        display: none;
+    }
+    .listInfoCard-Profile .infoCard{
+        height: 100px;
+    }
+    .containerForDataAboutUser .fioField{
+        flex-direction: column;
+        align-items: start;
+    }
+    .fioField .textArea{
+        width: 95%;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+    .fioField .textArea textarea{
+        width: 90%;
+        height: 200px;
+        margin-left: 10px;
+    }
+    .fioField form{
+        width: 95%;
+    }
+    .fioField form input{
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    .containerForDataAboutUser .saveButton_Prof{
+        width: 95%;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+    .containerForDataAboutUser .saveButton_Prof button{
+        width: 97.5%;
+    }
+    .containerForDataAboutUser .listInfoCard-Profile{
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 8px;
+        gap: 8px;
+        grid-template-areas:
+        "profileUser profileUser"
+        "profileCatalog profileCatalog"
+        "profileArchive profileArchive"
+        "profileRecomendation profileRecomendation"
+        "profileContactMe profileContactMe"
+        "profileBasket profileBasket"
+        "profileReviews profileReviews";
+    }
+    .typesOfData-down{
+        display: flex;
+    }
+}
