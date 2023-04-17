@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Select from "react-select";
 import "./Styles/SingleSelect.css";
 
-export default function SingleSelect({options, placeholder}) {
+export default function SingleSelect({ options, placeholder }) {
   
   const [activeOption, setActiveOption] = useState(String);
   
@@ -40,7 +40,6 @@ export default function SingleSelect({options, placeholder}) {
         height="8"
         viewBox="1 1 12 8"
         fill="none"
-        xmlns="http://www.w3.org/2000/svg"
       >
         <path
           d="M1 4L4.5 7.5L11 1"
@@ -48,10 +47,11 @@ export default function SingleSelect({options, placeholder}) {
           strokeLinecap="round"
           strokeLinejoin="round"
           className={
-            JSON.parse(localStorage.getItem('filterMetric')).date == option.label 
-              && 
-            option.label === activeOption 
-              ? "active" : "false"}
+            // JSON.parse(localStorage.getItem('filterMetric')).date == option.label 
+            //   && 
+            // option.label === activeOption 
+            //   ? "active" : "false"
+              activeOption === option.label ? "active" : "false"}
         />
       </svg>
     </div>

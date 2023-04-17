@@ -1,0 +1,193 @@
+@import url('/src/Fonts/fonts.css');
+.addedFieldAdmine{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+}
+/**/
+.photoAndDiscriptionContainer{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.photoAndDiscriptionContainer .listOfSelectedImages{
+    width: 98%;
+    min-height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 5px;
+    background: rgba(196, 219, 244, 0.678);
+}
+.listOfSelectedImages .addedFileBTN{
+    width: 90px;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 2px dashed black;
+    border-radius: 5px;
+    margin: 10px;
+}
+.addedFileBTN p{
+    font-family: 'Montserrat-Medium';
+    font-size: 24pt;
+}
+.addedFileBTN span{
+    font-family: 'Montserrat-Regular';
+    font-size: 8pt;
+}
+.listOfSelectedImages .selectedImage{
+    width: 90px;
+    height: 90px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 10px 0 10px 10px;
+    transition: all .3s ease;
+}
+.listOfSelectedImages .selectedImage:hover{
+    opacity: 0.4;
+}
+
+.photoAndDiscriptionContainer .discriptionContainer{
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    background: rgba(196, 219, 244, 0.678);
+    margin-top: 8px;
+}
+.discriptionContainer p{
+    width: 95%;
+    text-align: start;
+    font-family: 'Montserrat-Bold';
+    font-size: 13pt;
+    margin: 5px 0 10px 0;
+}
+.discriptionContainer textarea{
+    width: 95%;
+    height: 350px;
+    resize: none;
+    outline: none;
+    font-family: 'Montserrat-Regular';
+    font-size: 11pt;
+    border-radius: 5px;
+    padding: 10px 0 0 10px;
+    margin-bottom: 10px;
+    background: rgba(225, 239, 255, 0.957);
+}
+
+/**/
+.metricContainer_Admine{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.metricContainer_Admine .priceContainer{
+    width: 100%;
+    height: 115px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    background: rgba(196, 219, 244, 0.678);
+}
+.priceContainer h3{
+    margin: 10px 0 15px 20px;
+}
+.priceContainer input{
+    width: 50%;
+    height: 30px;
+    font-family: 'Montserrat-Medium';
+    font-size: 14pt;
+    border: 1.5px solid black;
+    border-radius: 5px;
+    padding: 0 15px;
+    margin: 0 15px 20px 20px;
+}
+/**/
+.metricContainer_Admine .metricCart{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    background: rgba(196, 219, 244, 0.678);
+    margin-top: 8px;
+    padding: 10px 0 ;
+}
+.metricCart h3{
+    width: 90%;
+    margin: 10px 0 15px 0;
+}
+.metricCart form{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px 10px ;
+}
+.metricCart form .metricName{
+    flex: 1;
+}
+.metricCart form .metricInput{
+    flex: 0.4;
+    height: 22.5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 0 10px;
+}
+.metricCart form .metricType{
+    flex: 0.3;
+    text-align: end;
+}
+/**/
+.metricContainer_Admine .createCartField{
+    width: 100%;
+    height: 125px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    border-radius: 5px;
+    margin-top: 8px;
+    background: rgba(196, 219, 244, 0.678);
+}
+.createCartField .createCartBTN{
+    width: 90%;
+    height: 30px;
+    font-family: 'Montserrat-Medium';
+    font-size: 12pt;
+    letter-spacing: .5px;
+    color: rgb(255, 255, 255);
+    background-color: #5da6f3bd;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: .6s ease all;
+}
+.createCartField .createCartBTN:hover{
+    border: 1.5px solid black;
+    letter-spacing: 1px;
+}
+/**/
+
+@media screen and (max-width: 1155px) {
+    .addedFieldAdmine{
+        flex-direction: column;
+        align-items: center;
+    }
+    .photoAndDiscriptionContainer{
+        width: 90%;
+    }
+    .metricContainer_Admine{
+        width: 88%;
+        margin-top: 8px;
+    }
+}

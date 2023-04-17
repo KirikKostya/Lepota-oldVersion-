@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import UpNavigation from '../Components/UpNavigation'
+import AddedNewCart from '../Admin/AddedNewCart'
 import ContactWithUs from '../Components/ContactWithUs'
 import { FaChevronLeft } from 'react-icons/fa'
 import { useDispatch } from 'react-redux'
@@ -42,13 +43,15 @@ export default function Profile() {
             {
               typeOfData === 'secureData'
                 ? 'Личные данные'
-                  : typeOfData === 'reference'
-                    ? 'Рекомендации'
-                      : typeOfData === 'messages'
-                        ? 'Связаться со мной'
-                          : typeOfData === 'main'
-                            ? 'Личный кабинет'
-                              : 'Личный кабинет'
+                  : typeOfData === 'addedCart'
+                    ? 'Личные данные'
+                      : typeOfData === 'reference'
+                        ? 'Рекомендации'
+                          : typeOfData === 'messages'
+                            ? 'Связаться со мной'
+                              : typeOfData === 'main'
+                                ? 'Личный кабинет'
+                                  : 'Личный кабинет'
             }
             {
               isAdmin && ` (Администатор)`
@@ -62,12 +65,24 @@ export default function Profile() {
               </svg>
               Главная
             </span>
-            <span className={`typeOfData ${typeOfData==='secureData' && 'active' || ''}`} onClick={()=>refreshAndSetType('secureData')}>
-              <svg width="16" height="16" fill='currentColor' viewBox="0 0 24 24" style={{marginRight: '3px'}}> 
-                <path d="M14.26862,15.01038A4.28181,4.28181,0,0,1,15.04993,13.01H11.02167v-2h7.994v.001a4.90339,4.90339,0,0,1,1.99871.43939V3.01337A2.00146,2.00146,0,0,0,19.01294,1.0119H3.01587A2.00151,2.00151,0,0,0,1.0144,3.01337V17.01044A2.00147,2.00147,0,0,0,3.01587,19.0119H13.0127v-.801a3.01328,3.01328,0,0,1,.26831-1.20056H7.01337v-2Zm4.74414-6.0008H11.01868v-2h7.99408ZM7.01337,3.01062H19.01276v2H7.01337ZM5.002,17.01038h-2v-2h2Zm0-11.99976h-2v-2h2Zm2.00538,1.999h2v2h-2Zm.003,6.00043v-2h2v2Zm14.80236,4.001v-1.5a2.818,2.818,0,0,0-5.6,0v1.5a1.29042,1.29042,0,0,0-1.2,1.2v3.5a1.30931,1.30931,0,0,0,1.2,1.3h5.5a1.30939,1.30939,0,0,0,1.3-1.2v-3.5A1.30937,1.30937,0,0,0,21.81274,17.01105Zm-1.3,0h-3v-1.5a1.37461,1.37461,0,0,1,1.5-1.3,1.37465,1.37465,0,0,1,1.5,1.3Z"/> 
-              </svg>
-              Личные данные
-            </span>
+            {
+              isAdmin
+                ? <span className={`typeOfData ${typeOfData==='addedCart' && 'active' || ''}`} onClick={()=>refreshAndSetType('addedCart')}>
+                  <svg width="16" height="16" fill='currentColor' viewBox="0 0 22 22" style={{marginRight: '3px'}}> 
+                    <g> 
+                      <path fill="none" d="M0 0h24v24H0z"/> 
+                      <path d="M20 22H6a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3h14a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1zm-1-2v-2H6a1 1 0 0 0 0 2h13zM5 16.17c.313-.11.65-.17 1-.17h13V4H6a1 1 0 0 0-1 1v11.17zM12 10a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm-3 4a3 3 0 0 1 6 0H9z"/> 
+                    </g> 
+                  </svg>
+                  Добавить товар
+                </span>
+                  : <span className={`typeOfData ${typeOfData==='secureData' && 'active' || ''}`} onClick={()=>refreshAndSetType('secureData')}>
+                      <svg width="16" height="16" fill='currentColor' viewBox="0 0 24 24" style={{marginRight: '3px'}}> 
+                        <path d="M14.26862,15.01038A4.28181,4.28181,0,0,1,15.04993,13.01H11.02167v-2h7.994v.001a4.90339,4.90339,0,0,1,1.99871.43939V3.01337A2.00146,2.00146,0,0,0,19.01294,1.0119H3.01587A2.00151,2.00151,0,0,0,1.0144,3.01337V17.01044A2.00147,2.00147,0,0,0,3.01587,19.0119H13.0127v-.801a3.01328,3.01328,0,0,1,.26831-1.20056H7.01337v-2Zm4.74414-6.0008H11.01868v-2h7.99408ZM7.01337,3.01062H19.01276v2H7.01337ZM5.002,17.01038h-2v-2h2Zm0-11.99976h-2v-2h2Zm2.00538,1.999h2v2h-2Zm.003,6.00043v-2h2v2Zm14.80236,4.001v-1.5a2.818,2.818,0,0,0-5.6,0v1.5a1.29042,1.29042,0,0,0-1.2,1.2v3.5a1.30931,1.30931,0,0,0,1.2,1.3h5.5a1.30939,1.30939,0,0,0,1.3-1.2v-3.5A1.30937,1.30937,0,0,0,21.81274,17.01105Zm-1.3,0h-3v-1.5a1.37461,1.37461,0,0,1,1.5-1.3,1.37465,1.37465,0,0,1,1.5,1.3Z"/> 
+                      </svg>
+                      Личные данные
+                    </span>
+            }
             <span className={`typeOfData ${typeOfData==='reference' && 'active' || ''}`} onClick={()=>refreshAndSetType('reference')}>
               <svg width="16" height="16" fill='currentColor' viewBox="0 0 24 24" style={{marginRight: '3px'}}> 
                 <g> 
@@ -92,7 +107,7 @@ export default function Profile() {
               ? <div className='listInfoCard-Profile'>
                 {
                   isAdmin 
-                  ? <div className='infoCard profileUser' onClick={()=>refreshAndSetType('secureData')}>
+                  ? <div className='infoCard profileUser' onClick={()=>refreshAndSetType('addedCart')}>
                       <div className='dataContainer'>
                         <svg 
                             width="50" 
@@ -211,64 +226,48 @@ export default function Profile() {
                       </button>
                     </div>
                   </>
-                    : typeOfData === 'reference'
-                      ? <>
-                          <div className='fioField'>
-                            <div className='textArea'>
-                              <textarea />
-                              <div className='saveButton_Prof'>
-                                <button>
-                                  Сохранить
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </>
-                        : typeOfData === 'messages'
+                    : typeOfData === 'addedCart'
+                      ? <AddedNewCart />
+                        : typeOfData === 'reference'
                           ? <>
                               <div className='fioField'>
-                                <form>
-                                  <p>Insta:</p>
-                                  <input placeholder='Ссылка'/>
-                                </form>
-                                <form>
-                                  <p>VKontacte:</p>
-                                  <input placeholder='Ссылка '/>
-                                </form>
-                                <form>
-                                  <p>Telegram:</p>
-                                  <input placeholder='Ссылка'/>
-                                </form>
-                              </div>
-                              <div className='saveButton_Prof'>
-                                <button>
-                                  Сохранить
-                                </button>
+                                <div className='textArea'>
+                                  <textarea />
+                                  <div className='saveButton_Prof'>
+                                    <button>
+                                      Сохранить
+                                    </button>
+                                  </div>
+                                </div>
                               </div>
                             </>
-                              :<></>
+                            : typeOfData === 'messages'
+                              ? <>
+                                  <div className='fioField'>
+                                    <form>
+                                      <p>Insta:</p>
+                                      <input placeholder='Ссылка'/>
+                                    </form>
+                                    <form>
+                                      <p>VKontacte:</p>
+                                      <input placeholder='Ссылка '/>
+                                    </form>
+                                    <form>
+                                      <p>Telegram:</p>
+                                      <input placeholder='Ссылка'/>
+                                    </form>
+                                  </div>
+                                  <div className='saveButton_Prof'>
+                                    <button>
+                                      Сохранить
+                                    </button>
+                                  </div>
+                                </>
+                                  :<></>
           }
         </div>
       </div>
       <ContactWithUs />
-      {/* <div className='typesOfData-down'>
-        <span className={`typeOfData ${typeOfData==='main' && 'active' || ''}`} onClick={()=>refreshAndSetType('main')}>
-          <svg width="30" height="30" fill="black" viewBox="0 0 16 16"> 
-            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/> 
-          </svg>
-        </span>
-        <span className={`typeOfData ${typeOfData==='secureData' && 'active' || ''}`} onClick={()=>refreshAndSetType('secureData')}>2</span>
-        <span className={`typeOfData ${typeOfData==='reference' && 'active' || ''}`} onClick={()=>refreshAndSetType('reference')}>
-        <svg width="30" height="30" fill="black" viewBox="0 0 16 16"> 
-          <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/> 
-        </svg>
-        </span>
-        <span className={`typeOfData ${typeOfData==='messages' && 'active' || ''}`} onClick={()=>refreshAndSetType('messages')}>
-          <svg width="30" height="30" fill="black" viewBox="0 0 16 16"> 
-            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/> 
-          </svg>
-        </span>
-      </div> */}
     </>
   )
 }

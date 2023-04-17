@@ -6,12 +6,15 @@ import SingleSelect from '../DropDowns/SingleSelect.js';
 import axios from 'axios';
 import Loading from '../Loading/LoadingComp.js'
 import './Styles/OrdersArchive.css';
+import LoadingComp2 from '../Loading/LoadingComp2.js';
 
 
 export default function ListOfArchive({LIST, setList}) {
 
   const isLoading = useSelector(state=>state.isLoadingInArchive);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
+  const [deliveType, setDeliveType] = useState('Получен');
 
   //makes array from object
   const makeArray = (object) => {
@@ -91,7 +94,7 @@ export default function ListOfArchive({LIST, setList}) {
             :  <div className='mainListContainer'>
                 {
                     isLoading 
-                        ? <Loading />
+                        ? <LoadingComp2 />
                             : LIST.map((el, index)=>(
                                 <div className='listContainer' key={index}>
                                 <div className={'archiveCheck'}>
@@ -148,7 +151,11 @@ export default function ListOfArchive({LIST, setList}) {
 
                                     <div className='orderStatus'>
                                     <p>Статус Заказа :</p>
-                                    <span>Получен</span>
+                                    <span className={deliveType === 'Получен' ? 'trueStatus' : 'falseStatus'}>
+                                      {
+                                        deliveType
+                                      }
+                                    </span>
                                     </div>
                                 </div>
                                 </div>

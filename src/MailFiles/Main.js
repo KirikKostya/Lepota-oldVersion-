@@ -9,15 +9,16 @@ import ContactWithUs from '../Components/ContactWithUs';
 import './Styles/Main.css'
 
 export default function Main() {
+
   return (
-    <div className='Main'>        
-        <UpNavigation />
-        <Discription />
-        <AboutCompany />
-        <WorkCatalog />
-        <TimingAndDelivery />
-        <AboutKashpo />
-        <ContactWithUs />
+    <div className='Main'>    
+      <UpNavigation />
+      <Discription />
+      <AboutCompany />
+      <WorkCatalog />
+      <TimingAndDelivery />
+      <AboutKashpo />
+      <ContactWithUs />
     </div>
   )
 }

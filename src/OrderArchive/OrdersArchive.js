@@ -6,6 +6,7 @@ import ContactWithUs from '../Components/ContactWithUs.js';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import './Styles/OrdersArchive.css';
+import LoadingComp2 from '../Loading/LoadingComp2.js';
 
 export default function OrdersArchive() {
   
@@ -45,7 +46,7 @@ export default function OrdersArchive() {
       <UpNavigation hide='hide'/>
       {
         isLoading
-          ? <LoadingComp />
+          ? <LoadingComp2 />
             : <ListOfArchive LIST={listOfOrdersInArchive} setList = {setListOfOrdersInArchive} />
       }
       <ContactWithUs />

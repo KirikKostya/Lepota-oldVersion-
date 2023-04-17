@@ -32,6 +32,24 @@ export default function MainBasketField({ ItemsInBasket, setItemsInBasket, reque
         .catch(err=>console.log(err))
     }
 
+    //find photo
+    const findPhoto = (cart) => {
+      return cart.variants
+              ? cart.variants[0].icon[0]
+                : (cart.kit)
+                  ? cart.kit.icon[0]
+                    : cart.item.icon[0]
+    }
+
+    //gets variants or kit of select cart
+    const getVariantsOrKit = (cart) => {
+      return cart.variants
+              ? cart.variants.map(item=>item.name).join(' ')
+                : cart.kit 
+                  ? cart.kit.name
+                    : ''
+    }
+
   return (
     <>
         {
@@ -40,20 +58,20 @@ export default function MainBasketField({ ItemsInBasket, setItemsInBasket, reque
                 <h3>Ваша корзина пуста!</h3>
                 <NavLink to='/' className='chooseGoods'>Перейти к выбору товара</NavLink>
               </div>
-                : ItemsInBasket.sort((a,b)=> a.item.id - b.item.id).map(item => (
-                    <div className='Item' key={item.item.id}>
-                    <img width={55} height={55} src={item.item.icon[0]}/>
-                    <h4 onClick={()=>console.log(item)}> {item.item.name} </h4>
-                    <h3>
+                : ItemsInBasket.sort((a,b) => a.cartItemId - b.cartItemId).map(item => (
+                    <div className='Item' key={item.cartItemId}>
+                    <img width={55} height={55} src={findPhoto(item)}/>
+                    <h4 onClick={()=>console.log(item)}> {item.item.name} <br/>
+                      <span className={`variant-Kit ${getVariantsOrKit(item) || 'hide'}`} >{` ( ${getVariantsOrKit(item)} ) `}</span>
+                    </h4>
+                    <span>
                         {
                           item.variants
-                            ? item.variants.map(el=>(
-                              el.price
-                            ))
+                            ? item.variants.map( el => el.price )
                               : item.kit
                                 ? item.kit.price
-                                  :item.item.price
-                        } Br</h3> 
+                                  : item.item.price
+                        } Br</span> 
                     <div className='ChangeAmount'>
                       <input 
                           id='ChangeInput'
@@ -62,7 +80,7 @@ export default function MainBasketField({ ItemsInBasket, setItemsInBasket, reque
                           min={1}
                           max={100}
                             onChange={(e)=>{
-                                updateAmountOfOrder(item.item.id, e.target.value)
+                                updateAmountOfOrder(item.cartItemId, e.target.value)
                             }}
                           defaultValue={item.amount}/>
                     </div>
@@ -70,7 +88,7 @@ export default function MainBasketField({ ItemsInBasket, setItemsInBasket, reque
                     <button 
                       className='deleteItem' 
                         onClick={()=>{
-                          deleteItem(item.item.id);
+                          deleteItem(item.cartItemId);
                           refreshFunction(dispatch)
                         }}>&times;</button>
                     </div>

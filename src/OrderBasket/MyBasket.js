@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import UpNavigation from '../Components/UpNavigation.js'
-import Loading from 'react-loading'
+import LoadingComp2 from '../Loading/LoadingComp2.js'
 import ContactWithUs from '../Components/ContactWithUs'
 import { useDispatch, useSelector } from 'react-redux'
 import MainBasketField from './MainBasketField'
@@ -38,34 +38,26 @@ export default function MyBasket() {
   return (
     <>
       <UpNavigation hide='hide'/>
-
-      <div className='fullContainer' id='hideNavBarMainLink'>
-        <div className='MainFielfForBasket'>
-          <div className='basketParametrs'>
-            <p id='fullName'>Товар</p>
-            <p id='price'>Цена</p>
-            <p id='amount'>Кол-во</p>
-            <p id='totalPrice'>Сумма</p>
-          </div>
-            {
-              isLoading
-                ? <div className='loading-basket'>
-                    <Loading
-                      type="spokes"
-                      color="black"
-                      height="45px"
-                      width="45px" 
-                    />
+      {
+        isLoading
+          ? <LoadingComp2 />
+            : <div className='fullContainer' id='hideNavBarMainLink' style={{ 'alignItems': ItemsInBasket.length === 0 ? 'center' : 'start'}}>
+                <div className='MainFielfForBasket'>
+                  <div className='basketParametrs'>
+                    <p id='fullName'>Товар</p>
+                    <p id='price'>Цена</p>
+                    <p id='amount'>Кол-во</p>
+                    <p id='totalPrice'>Сумма</p>
                   </div>
-                  : <MainBasketField 
-                      ItemsInBasket = {ItemsInBasket}
-                      setItemsInBasket = {setItemsInBasket} 
-                      requestBasketFunc = {requestBasketFunc}
-                    />
-            }
-        </div>
-        <Check ItemsInBasket = {ItemsInBasket} requestBasketFunc={requestBasketFunc}/>
-      </div>
+                  <MainBasketField 
+                    ItemsInBasket = {ItemsInBasket}
+                    setItemsInBasket = {setItemsInBasket} 
+                    requestBasketFunc = {requestBasketFunc}
+                  />
+                </div>
+                <Check ItemsInBasket = {ItemsInBasket} requestBasketFunc={requestBasketFunc}/>
+              </div>
+      }
       <ContactWithUs />
     </>
   )
