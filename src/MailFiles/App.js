@@ -7,28 +7,33 @@ import axios from 'axios';
 import './Styles/App.css';
 
 //refresh Token for authori- and registration (only this function uses fetch-request)
-export const refreshFunction = async (dispatch) => {
-  if(localStorage.getItem('accessToken')){
-    axios.get('https://api.native-flora.tk/Auth/checkToken', {
-      withCredentials: true,
-      headers:{'x-access-token': localStorage.getItem('accessToken')}
-    })
-    .catch(async res => {
-      if(res.response.status === 401){
-        axios.get('https://api.native-flora.tk/Auth/Refresh', {
-          withCredentials: true
+export const refreshFunction = async (dispatch, newFunc) => {
+  new Promise((resolve, reject) => {
+    localStorage.getItem('accessToken') 
+      &&
+        axios.get('https://api.native-flora.tk/Auth/checkToken', {
+          withCredentials: true,
+          headers:{'x-access-token': localStorage.getItem('accessToken')}
         })
-        .then(res=>{
-          localStorage.setItem('accessToken', res.data.data)
+        .then(resolve)
+        .catch(async res => {
+          if(res.response.status === 401){
+            axios.get('https://api.native-flora.tk/Auth/Refresh', {
+              withCredentials: true
+            })
+            .then(res=>{
+              localStorage.setItem('accessToken', res.data.data)
+            })
+            .then(resolve)
+            .catch(res=>{
+              (res.response.status === 401)
+                ? dispatch({type: 'SET_REFRESH-TOKEN_STATUS', payload: true})  
+                  : console.log('Что-то пошло не так!')
+            })
+          }
         })
-        .catch(res=>{
-          (res.response.status === 401)
-            ? dispatch({type: 'SET_REFRESH-TOKEN_STATUS', payload: true})  
-              : console.log('Что-то пошло не так!')
-        })
-      }
-    })
-  }
+  })
+  .then(newFunc)
 }
 
 

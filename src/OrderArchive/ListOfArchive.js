@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { sortByDate, sortByDileverStatus, sortByDileverType } from '../DropDowns/OptionList.js';
+import { SortByDate, SortByDileverStatus, SortByDileverType } from '../DropDowns/OptionList.js';
 import SingleSelect from '../DropDowns/SingleSelect.js';
 import axios from 'axios';
 import Loading from '../Loading/LoadingComp.js'
@@ -165,16 +165,19 @@ export default function ListOfArchive({LIST, setList}) {
       }
       <div className='filterContainer'>
         <SingleSelect 
-          options={sortByDate} 
+          options={SortByDate} 
           placeholder={'Сортировка по дате'}
+          width={'70%'}
         />
         <SingleSelect 
-          options={sortByDileverType} 
+          options={SortByDileverType} 
           placeholder={'Тип доставки'} 
+          width={'70%'}
         />
         <SingleSelect 
-          options={sortByDileverStatus} 
+          options={SortByDileverStatus} 
           placeholder={'Статус получения'}
+          width={'70%'}
         />
         <button 
           className='sortBTN' 

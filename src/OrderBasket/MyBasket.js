@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react'
+import MainBasketField from './MainBasketField'
 import UpNavigation from '../Components/UpNavigation.js'
 import LoadingComp2 from '../Loading/LoadingComp2.js'
 import ContactWithUs from '../Components/ContactWithUs'
 import { useDispatch, useSelector } from 'react-redux'
-import MainBasketField from './MainBasketField'
-import axios from 'axios'
+import { refreshFunction } from '../MailFiles/App.js'
 import Check from './Check'
+import axios from 'axios'
 import './Styles/MyBasket.css'
 
 export default function MyBasket() {
@@ -31,7 +32,7 @@ export default function MyBasket() {
   }
 
   useEffect(()=>{
-   requestBasketFunc();
+   refreshFunction(dispatch, requestBasketFunc)
    window.scrollTo(0, 0)
   }, [])
 

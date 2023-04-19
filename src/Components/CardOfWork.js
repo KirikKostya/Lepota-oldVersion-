@@ -19,10 +19,8 @@ export default function CardOfWork({ card }) {
 
   return (
     <div className='Card'>
-
         <div className='InfoOfCard' key={card.id}>
           <img src={getImageFromAPI(card.icon)} className='IMG' />
-          
           <div className='name_button'>
             <h4>{card.name} <span>{card.price} Br</span> </h4>
             <NavLink 
@@ -34,8 +32,7 @@ export default function CardOfWork({ card }) {
                 localStorage.setItem('infoAboutTypeOfOrder', JSON.stringify(card))
                 refreshFunction(dispatch);
               }}>Подробнее</NavLink>
-          </div>
-                 
+          </div>   
         </div>
     </div>
   )

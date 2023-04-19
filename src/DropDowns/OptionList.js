@@ -1,4 +1,4 @@
-export const sortByDate = [
+export const SortByDate = [
     {
         value: 'newOrderds',
         label: 'Новые'
@@ -8,7 +8,7 @@ export const sortByDate = [
         label: 'Старые'
     }
 ]
-export const sortByDileverStatus = [
+export const SortByDileverStatus = [
     {
         value: 'newOrderds',
         label: 'Получен'
@@ -18,7 +18,7 @@ export const sortByDileverStatus = [
         label: 'Не получен'
     }
 ]
-export const sortByDileverType = [
+export const SortByDileverType = [
     {
         value: 'newOrderds',
         label: 'Доставка'
@@ -26,5 +26,35 @@ export const sortByDileverType = [
     {
         value: 'oldOrders',
         label: 'Самовывоз'
+    }
+]
+export const OptionsOfMetrics = [
+    {
+        label: 'Материалы',
+        value: 'Материалы'
+    },
+    {
+        label: 'Ширина (см)',
+        value: 'Ширина'
+    },
+    {
+        label: 'Высота (см)',
+        value: 'Высота'
+    },
+    {
+        label: 'Глубина (см)',
+        value: 'Глубина'
+    },
+    {
+        label: 'Длина (см)',
+        value: 'Длина'
+    },
+    {
+        label: 'Диаметр (см)',
+        value: 'Диаметр'
+    },
+    {
+        label: 'Вес (кг)',
+        value: 'Вес'
     }
 ]

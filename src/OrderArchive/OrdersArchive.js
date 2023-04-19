@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import UpNavigation from '../Components/UpNavigation.js'
-import LoadingComp from '../Loading/LoadingComp.js';
+import LoadingComp2 from '../Loading/LoadingComp2.js';
 import ListOfArchive from './ListOfArchive.js'
 import ContactWithUs from '../Components/ContactWithUs.js';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import './Styles/OrdersArchive.css';
-import LoadingComp2 from '../Loading/LoadingComp2.js';
+import { refreshFunction } from '../MailFiles/App.js';
 
 export default function OrdersArchive() {
   
@@ -35,7 +35,7 @@ export default function OrdersArchive() {
   useEffect(()=>{
     const abortController = new AbortController();
     localStorage.setItem('filterMetric', JSON.stringify({ date: '', deliveType: '', deliveStatus: '' }))
-    fetchingAllOrdersInArchive();
+    refreshFunction(dispatch, fetchingAllOrdersInArchive)
     return ()=>{
       abortController.abort()
     }

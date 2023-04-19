@@ -2,14 +2,20 @@ import React, { useState } from "react";
 import Select from "react-select";
 import "./Styles/SingleSelect.css";
 
-export default function SingleSelect({ options, placeholder }) {
+export default function SingleSelect({ options, placeholder, width, index, selectedOptions, setSelectedOptions }) {
   
   const [activeOption, setActiveOption] = useState(String);
+
+  const handlerChanges = (event) => {
+     let newArray = [...selectedOptions];
+     newArray[index] = {metric: event.value, value: ''};
+     setSelectedOptions(newArray)
+  }
   
   const formatOptionLabel = (option) => (
     <div
       style={{
-        height: "35px",
+        height: '35px',
         display: "flex",
         alignItems: "center",
         flexDirection: "row",
@@ -46,12 +52,7 @@ export default function SingleSelect({ options, placeholder }) {
           stroke="#5A9DFF"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className={
-            // JSON.parse(localStorage.getItem('filterMetric')).date == option.label 
-            //   && 
-            // option.label === activeOption 
-            //   ? "active" : "false"
-              activeOption === option.label ? "active" : "false"}
+          className={activeOption === option.label ? "active" : "false"}
         />
       </svg>
     </div>
@@ -60,7 +61,7 @@ export default function SingleSelect({ options, placeholder }) {
   const singleSelectStyles = {
     option: (provided, state) => ({
       ...provided,
-      height: "44px",
+      height: '44px',
       fontWeight: "400",
       fontSize: "14px",
       fontStyle: "normal",
@@ -86,11 +87,26 @@ export default function SingleSelect({ options, placeholder }) {
         background: "#555",
       },
     }),
+    control: (base)=>({
+      ...base,
+      alignItems: 'start',
+      minHeight: 'none',
+      height: '30px',
+      color: "red !important"
+    }),
+    valueContainer: (base)=>({
+      ...base,
+      padding: '0 10px'
+    }),
+    indicatorsContainer: (base)=>({
+      ...base,
+      height: '30px',
+      padding: '5px'
+    })
   };
 
   return (
-    <div className="containerForSelect">
-      <>
+    <div className="containerForSelect" style={{width: width}}>
         <Select
           placeholder={placeholder}
           styles={singleSelectStyles}
@@ -98,11 +114,11 @@ export default function SingleSelect({ options, placeholder }) {
           isObject={false}
           isSearchable={true}
           options={options}
-          formatOptionLabel={formatOptionLabel}
+          onChange={handlerChanges}
+          // formatOptionLabel={formatOptionLabel}
           showArrow
           maxMenuHeight={264}
         />
-      </>
     </div>
   );
 }

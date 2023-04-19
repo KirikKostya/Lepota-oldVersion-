@@ -36,7 +36,7 @@ export default function TypeCatalog() {
     return (value) ? '' : 'hide'
   }
 
-  const fetchProducts = useCallback((OpenID) => {
+  const fetchProducts = (OpenID) => {
     axios.get(`https://api.native-flora.tk/Item/GetById?id=${OpenID || localStorage.getItem('searchOrderById')}`)
       .then(res=>{
         setCatalogOrders([res.data.data]);
@@ -44,12 +44,12 @@ export default function TypeCatalog() {
         dispatch({type: 'LOADING_IS_COMPLETED'});
         return res;
       })
-  }, [dispatch])
+  }
 
   useEffect(()=>{
-    fetchProducts(searchOrderById);
+    refreshFunction(dispatch, ()=>fetchProducts(searchOrderById))
     window.scrollTo(0, 0);
-  }, [fetchProducts])
+  }, [])
   
   return (
     <>
@@ -61,13 +61,13 @@ export default function TypeCatalog() {
             {
               makeArray(order.sizes).map((item, index)=>(
                 <div className='orderMatrics' key={index}>
-                  <p className={`mitricItem ${checkMetric(item.Weigth)}`}>Вес: <span>{item.Weigth}</span></p> 
+                  <p className={`mitricItem ${checkMetric(item.Material)}`}>Материал: <span>{item.Material}</span></p>
                   <p className={`mitricItem ${checkMetric(item.Width)}`}>Ширина: <span>{item.Width}</span></p>
                   <p className={`mitricItem ${checkMetric(item.Height)}`}>Высота: <span>{item.Height}</span></p>
                   <p className={`mitricItem ${checkMetric(item.Depth)}`}>Глубина: <span>{item.Depth}</span></p>
-                  <p className={`mitricItem ${checkMetric(item.Diameter)}`}>Диаметр: <span>{item.Diameter}</span></p>
                   <p className={`mitricItem ${checkMetric(item.Length)}`}>Длина: <span>{item.Length}</span></p>
-                  <p className={`mitricItem ${checkMetric(item.Material)}`}>Материал: <span>{item.Material}</span></p>
+                  <p className={`mitricItem ${checkMetric(item.Diameter)}`}>Диаметр: <span>{item.Diameter}</span></p>
+                  <p className={`mitricItem ${checkMetric(item.Weigth)}`}>Вес: <span>{item.Weigth}</span></p> 
                 </div>
               ))
             }

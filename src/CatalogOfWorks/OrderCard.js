@@ -66,6 +66,7 @@ export default function OrderCard(
         setListOfPhotos(getImages(JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')).icon))
         refCount.current.value = 1;
         setNameOfKit('Нет комплекта')
+        setKits([])
     }
 
     //Make list from response data
@@ -79,11 +80,9 @@ export default function OrderCard(
 
     //changes total price, when user ckick on label
     const handlerChangeTotalSum = async (isCheckedLabel, id) =>{
-        if(isCheckedLabel){
-          setKits([...kits, id]);
-        } else {
-          setKits([...kits.filter(el => el !== id)]);
-        }
+      (isCheckedLabel)
+        ? setKits([...kits, id])
+          : setKits([...kits.filter(el => el !== id)])
     }
 
     //checks length of selected items and makes correct result
