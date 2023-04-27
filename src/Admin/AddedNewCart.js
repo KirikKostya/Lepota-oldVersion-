@@ -5,6 +5,7 @@ import { refreshFunction } from '../MailFiles/App';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import './Style/AddedNewCart.css'
+import Picker from './Picker';
 
 export default function AddedNewCart() {
     
@@ -55,6 +56,15 @@ export default function AddedNewCart() {
         } 
     }
 
+    //
+    const makeScroll = () => {
+        return (window.innerWidth > 724 && photos.length >= 7) 
+                || 
+                (window.innerWidth <= 724 && photos.length >= 3) 
+                    ? 'scroll' 
+                        : 'none'
+    }
+
     //request to add product in catalog
     const addProductInCatalog = () => {
         axios.post('https://api.native-flora.tk/Item/Add', {
@@ -81,42 +91,71 @@ export default function AddedNewCart() {
         .catch(err=>console.log(err))
     }
 
+    // clears all fields
+    const clearAll = () => {
+        setPhotos([]);
+        setDiscription('');
+        setName('');
+        setPrice('');
+        setMetricsListStep([])
+    }
   return (
     <div className='addedFieldAdmine'>
         <div className='photoAndDiscriptionContainer'>
-            <div className='listOfSelectedImages'>
+            <div 
+                className='listOfSelectedImages' 
+                style={
+                  {
+                    overflowX: makeScroll()
+                  }
+                }>
                 {
                     photos.map(photo=>(
                         <img key={photo} 
                              src={photo} 
                              className='selectedImage' 
+                             style={
+                                {
+                                    scrollSnapAlign: 'start'
+                                }
+                             }
                              alt='photo' 
                              onClick={() => setPhotos(photos.filter(item => item !== photo))
                         }/>
                     ))
                 }
-                <label className='addedFileBTN'>
-                    <p>+</p>
-                    <input type='file' onChange={(e)=>makeListOfAddedPhotos(e)} multiple style={{display: 'none'}}/>
-                    <span>Загрузить фото</span>
-                </label>
+                <Picker setPhotos={setPhotos} photos={photos} className='addedFileBTN' />
             </div>
             <div className='discriptionContainer'>
                 <p>Описание:</p>
-                <textarea placeholder='Введите описание товара' onChange={(event) => setDiscription(event.target.value)}/>
+                <textarea 
+                    placeholder='Введите описание товара' 
+                    onChange={(event) => setDiscription(event.target.value)}
+                    value={discription}
+                />
             </div>
         </div>
         <div className='metricContainer_Admine'>
             <div className='nameContainer'>
                 <h4>Наименование:</h4>
                 <form>
-                    <input className='nameField' placeholder='Наименование' onChange={(event)=>setName(event.target.value)}/>
+                    <input 
+                        className='nameField' 
+                        placeholder='Наименование' 
+                        onChange={(event)=>setName(event.target.value)}
+                        value={name}
+                    />
                 </form>
             </div>
             <div className='priceContainer'>
                 <h4>Цена:</h4>
                 <form>
-                    <input className='priceField' placeholder='10' onChange={(event)=>setPrice(event.target.value)}/>
+                    <input 
+                        className='priceField' 
+                        placeholder='10' 
+                        onChange={(event)=>setPrice(event.target.value)}
+                        value={price}
+                    />
                     <span>BYN</span>
                 </form>
             </div>
@@ -131,6 +170,7 @@ export default function AddedNewCart() {
                                 index={index}
                                 selectedOptions = {selectedOptions}
                                 setSelectedOptions = {setSelectedOptions}
+                                type={'metric'}
                             />
                             <input 
                                 className='metricInput' 
@@ -156,23 +196,25 @@ export default function AddedNewCart() {
                     ))
                 }
                 <button 
-                    className='deleteMetricBtn'
+                    className='deleteMetricBtnField'
                     onClick={()=>{
                         setMetricsListStep([...metricsListStep, Math.random().toFixed(4)])
                         setSelectedOptions([...selectedOptions, Math.random().toFixed(2)])
                     }}
                     style={{display: metricsListStep.length >= 7 && 'none'}}
-                >Добавить</button>
+                ><span className='deleteMetricBtn'>Добавить</span></button>
             </div>
             <div className='createCartField'>
                 <button 
                     className='createCartBTN'
                     onClick={()=>{
                         refreshFunction(dispatch, addProductInCatalog)
+                        clearAll()
                     }}
                 >Создать</button>
             </div>
         </div>
+        {/* <Picker setPhotos={setPhotos} photos={photos}/> */}
     </div>
   )
 }

@@ -15,9 +15,10 @@ export default function WorkCatalog() {
   const fetchFanc = () =>{
     axios.get(`https://api.native-flora.tk/Item/GetAll`)
       .then(res=>{
+        console.log(res.data.data)
         setCARDS(res.data.data)
         dispatch({type: 'LOADING_IS_COMPLETED'});
-      }) 
+      })
   }
 
   useEffect(()=>{
@@ -37,7 +38,7 @@ export default function WorkCatalog() {
                 ? <div className='LoadingComp'>
                     <LoadingComp />
                   </div>
-                  : CARDS.map(card => (
+                  : CARDS.sort((a,b) => a.id - b.id).map(card => (
                       <CardOfWork key={card.id} card={card}/>
                     ))
             }

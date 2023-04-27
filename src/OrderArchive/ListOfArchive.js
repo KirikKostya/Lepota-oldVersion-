@@ -1,20 +1,17 @@
 import React, { useState,useEffect } from 'react';
+import { SortByDate, SortByDileverStatus, SortByDileverType } from '../DropDowns/OptionList.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { SortByDate, SortByDileverStatus, SortByDileverType } from '../DropDowns/OptionList.js';
 import SingleSelect from '../DropDowns/SingleSelect.js';
-import axios from 'axios';
-import Loading from '../Loading/LoadingComp.js'
-import './Styles/OrdersArchive.css';
 import LoadingComp2 from '../Loading/LoadingComp2.js';
+import axios from 'axios';
+import './Styles/OrdersArchive.css';
 
 
 export default function ListOfArchive({LIST, setList}) {
 
   const isLoading = useSelector(state=>state.isLoadingInArchive);
   const dispatch = useDispatch();
-
-  const [deliveType, setDeliveType] = useState('Получен');
 
   //makes array from object
   const makeArray = (object) => {
@@ -47,10 +44,12 @@ export default function ListOfArchive({LIST, setList}) {
 
   const filterByStatus = (type, metric) => {
     if(metric.deliveStatus){
-      if(metric.deliveStatus === 'Получен'){
-        return type.filter(item=>item.status === 'Получен')
-      } else {
-        return type.filter(item=>item.status === 'Не получен')
+      if(metric.deliveStatus === 'Принят в обработку'){
+        return type.filter(item=>item.shippingStatus === 'BeingProcessed')
+      } else if(metric.deliveStatus === 'В пути'){
+        return type.filter(item=>item.shippingStatus === 'Shipping')
+      } else if(metric.deliveStatus === 'Получен'){
+        return type.filter(item=>item.shippingStatus === 'Delivered')
       }
     } else {
       return type
@@ -64,10 +63,10 @@ export default function ListOfArchive({LIST, setList}) {
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
     .then(async res=>{
-      let date = await sortDate(res, metric)
-      let type = await filterByType(date, metric)
-      let status = await filterByStatus(type, metric)
-      setList(status)
+      let dateFiltered = await sortDate(res, metric)
+      let typeFiltered = await filterByType(dateFiltered, metric)
+      let statusFiltered = await filterByStatus(typeFiltered, metric)
+      setList(statusFiltered)
       dispatch({type: 'LOADING-Archive_IS_COMPLETED'});
     })
     .catch(err=>{
@@ -78,6 +77,27 @@ export default function ListOfArchive({LIST, setList}) {
 
   } 
 
+  //
+  const checkedStatusOfDelivering = (param) => {
+    return param == 'BeingProcessed'
+            ? 'Принят в обработку'
+              : param == 'Shipping'
+                ? 'В пути'
+                  : param == 'Delivered'
+                    ? 'Доставлен'
+                      : 'Не определено'
+  }
+
+  //makes Styles For Status Of Delivering
+  const creatingStyles = (param) => {
+    return param == 'BeingProcessed'
+            ? {color: '#61aeff'}
+              : param == 'Shipping'
+                ? {color: '#eb0c0c'}
+                  : param == 'Delivered'
+                    ? {calor: '#00BB40'}
+                      : {color: 'black'}
+  }
 
   useEffect(()=>{
     window.scrollTo(0, 0)
@@ -151,9 +171,9 @@ export default function ListOfArchive({LIST, setList}) {
 
                                     <div className='orderStatus'>
                                     <p>Статус Заказа :</p>
-                                    <span className={deliveType === 'Получен' ? 'trueStatus' : 'falseStatus'}>
+                                    <span style={creatingStyles(el.shippingStatus)}>
                                       {
-                                        deliveType
+                                        checkedStatusOfDelivering(el.shippingStatus)
                                       }
                                     </span>
                                     </div>
@@ -168,16 +188,19 @@ export default function ListOfArchive({LIST, setList}) {
           options={SortByDate} 
           placeholder={'Сортировка по дате'}
           width={'70%'}
+          type={'sorting'}
         />
         <SingleSelect 
           options={SortByDileverType} 
           placeholder={'Тип доставки'} 
           width={'70%'}
+          type={'sorting'}
         />
         <SingleSelect 
           options={SortByDileverStatus} 
           placeholder={'Статус получения'}
           width={'70%'}
+          type={'sorting'}
         />
         <button 
           className='sortBTN' 

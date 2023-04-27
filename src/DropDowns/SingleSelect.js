@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Select from "react-select";
 import "./Styles/SingleSelect.css";
 
-export default function SingleSelect({ options, placeholder, width, index, selectedOptions, setSelectedOptions }) {
+export default function SingleSelect({ options, placeholder, width, index, selectedOptions, setSelectedOptions, type }) {
   
   const [activeOption, setActiveOption] = useState(String);
 
@@ -15,6 +15,7 @@ export default function SingleSelect({ options, placeholder, width, index, selec
   const formatOptionLabel = (option) => (
     <div
       style={{
+        width: '100%',
         height: '35px',
         display: "flex",
         alignItems: "center",
@@ -34,10 +35,12 @@ export default function SingleSelect({ options, placeholder, width, index, selec
                     : (option.label === 'Самовывоз')
                       ? localStorage.setItem('filterMetric', JSON.stringify({...JSON.parse(localStorage.getItem('filterMetric')), deliveType: 'Самовывоз'}))
                         : (option.label === 'Получен')
-                          ? localStorage.setItem('filterMetric', JSON.stringify({...JSON.parse(localStorage.getItem('filterMetric')), deliveStatus: 'Получено'}))
-                            : (option.label === 'Не получен') 
-                              ? localStorage.setItem('filterMetric', JSON.stringify({...JSON.parse(localStorage.getItem('filterMetric')), deliveStatus: 'Не получено'}))
-                                : localStorage.setItem('filterMetric', JSON.stringify({...JSON.parse(localStorage.getItem('filterMetric'))}))
+                          ? localStorage.setItem('filterMetric', JSON.stringify({...JSON.parse(localStorage.getItem('filterMetric')), deliveStatus: 'Получен'}))
+                            : (option.label === 'В пути')
+                              ? localStorage.setItem('filterMetric', JSON.stringify({...JSON.parse(localStorage.getItem('filterMetric')), deliveStatus: 'В пути'}))
+                                : (option.label === 'Принят в обработку') 
+                                  ? localStorage.setItem('filterMetric', JSON.stringify({...JSON.parse(localStorage.getItem('filterMetric')), deliveStatus: 'Принят в обработку'}))
+                                    : localStorage.setItem('filterMetric', JSON.stringify({...JSON.parse(localStorage.getItem('filterMetric'))}))
       }}
     >
       <span>{option.label}</span>
@@ -58,17 +61,19 @@ export default function SingleSelect({ options, placeholder, width, index, selec
     </div>
   );
 
-  const singleSelectStyles = {
+  const stylesForSorting = {
     option: (provided, state) => ({
       ...provided,
       height: '44px',
+      display: 'flex',
+      alignItems:'center',
       fontWeight: "400",
       fontSize: "14px",
       fontStyle: "normal",
       lineHeight: "16px",
       color: "black",
       margin: 0,
-      backgroundColor: state.isSelected ? "#F5FCFF" : "white",
+      backgroundColor: state.isSelected ? "#F5FCFF" : "white"
     }),
     menuList: (base) => ({
       ...base,
@@ -86,7 +91,11 @@ export default function SingleSelect({ options, placeholder, width, index, selec
       "::-webkit-scrollbar-thumb:hover": {
         background: "#555",
       },
-    }),
+    })
+  };
+
+  const stylesForMetricSingleSelect = {
+    ...stylesForSorting,
     control: (base)=>({
       ...base,
       alignItems: 'start',
@@ -103,19 +112,19 @@ export default function SingleSelect({ options, placeholder, width, index, selec
       height: '30px',
       padding: '5px'
     })
-  };
+  }
 
   return (
     <div className="containerForSelect" style={{width: width}}>
         <Select
           placeholder={placeholder}
-          styles={singleSelectStyles}
+          styles={type === 'metric' ? stylesForMetricSingleSelect : stylesForSorting}
           singleSelect={true}
           isObject={false}
           isSearchable={true}
           options={options}
-          onChange={handlerChanges}
-          // formatOptionLabel={formatOptionLabel}
+          onChange={type === 'metric' ? handlerChanges : ''}
+          formatOptionLabel={type === 'sorting' ? formatOptionLabel : '' }
           showArrow
           maxMenuHeight={264}
         />

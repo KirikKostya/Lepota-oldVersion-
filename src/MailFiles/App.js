@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signOut } from '../MyAccountComponents/MyAccount';
 import ReactModal from 'react-modal';
 import Router from './Router';
 import axios from 'axios';
 import './Styles/App.css';
+import { checkIsAdmine } from '../Admin/AdmineController';
 
 //refresh Token for authori- and registration (only this function uses fetch-request)
 export const refreshFunction = async (dispatch, newFunc) => {
@@ -36,12 +37,15 @@ export const refreshFunction = async (dispatch, newFunc) => {
   .then(newFunc)
 }
 
-
 function App() {
   
   const myAccountIsOpen = useSelector(state=>state.myAccountIsOpen);
   const refreshTokenIsExpired = useSelector(state=>state.refreshTokenIsExpired);
   const dispatch = useDispatch();
+
+  useEffect(()=>{
+    refreshFunction(dispatch, ()=>checkIsAdmine(dispatch))
+  }, [])
   
   return (
     <div 

@@ -10,12 +10,16 @@ export const SortByDate = [
 ]
 export const SortByDileverStatus = [
     {
-        value: 'newOrderds',
+        value: 'BeingProcessed',
+        label: 'Принят в обработку'
+    },
+    {
+        value: 'Delivered',
         label: 'Получен'
     },
     {
-        value: 'oldOrders',
-        label: 'Не получен'
+        value: 'Shipping',
+        label: 'В пути'
     }
 ]
 export const SortByDileverType = [

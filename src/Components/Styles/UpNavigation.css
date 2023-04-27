@@ -81,7 +81,7 @@
 .hide{
     display: none;
 }
-@media screen and (max-width:970px){
+@media screen and (max-width: 975px){
     .UpNavContainer{
         width: 100%;
         height: 75px;

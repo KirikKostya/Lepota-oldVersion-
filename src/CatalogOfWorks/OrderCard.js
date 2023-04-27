@@ -1,6 +1,7 @@
 import React, {useEffect, useState, useRef} from 'react'
 import AddedVariantModal from '../Modals/AddedVariantModal'; 
 import SimpleImageSlider from 'react-simple-image-slider';
+import Pensil from '../Icons/Pensil';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshFunction } from '../MailFiles/App'
 import axios from 'axios';
@@ -21,6 +22,7 @@ export default function OrderCard(
     const refCount = useRef(null);
 
     const totalSum_TypeComp = useSelector(state=>state.totalSum_TypeComp);
+    const isAdmin = useSelector(state=>state.isAdmin);
     const dispatch = useDispatch();
 
     const [isOpen, setIsOpen] = useState(false);
@@ -143,7 +145,7 @@ export default function OrderCard(
                       }}>
                         <input ref={(element) => { refInput.current[index] = element }} type={'checkbox'} className='checkBox' />
                         <span>+</span>
-                        <p id='variantName'>{item.name}</p>
+                        <p id='variantName'>{item.name} </p>
                         <p className='item-price'>{item.price} BYN</p>
                     </label>
                     <svg 
@@ -163,6 +165,7 @@ export default function OrderCard(
                           strokeLinejoin={'round'}
                         />
                     </svg>
+                    <span>{ isAdmin && <Pensil /> }</span>
                   </div>
                 ))
               }

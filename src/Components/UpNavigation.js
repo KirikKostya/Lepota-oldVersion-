@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshFunction } from '../MailFiles/App'
 import { NavLink } from 'react-router-dom';
@@ -117,12 +117,9 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
               if(localStorage.getItem('accessToken')){
                 refreshFunction(dispatch);
               }
-
           }}>☰</div>
         {
-          (myAccountIsOpen)
-            ? <MyAccount />
-             : <></>
+          myAccountIsOpen && <MyAccount />
         }
 
       </div>

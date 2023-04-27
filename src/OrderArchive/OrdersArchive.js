@@ -16,7 +16,7 @@ export default function OrdersArchive() {
   const dispatch = useDispatch();
 
   //fetchs data from API (order in archive)
-  const fetchingAllOrdersInArchive = useCallback(() => {
+  const fetchingAllOrdersInArchive = () => {
     axios.get('https://api.native-flora.tk/Order/All', {
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
@@ -30,7 +30,7 @@ export default function OrdersArchive() {
         dispatch({type: 'LOADING_IS_COMPLETED'});
       }
     })
-  }, [dispatch])
+  }
 
   useEffect(()=>{
     const abortController = new AbortController();
@@ -39,7 +39,7 @@ export default function OrdersArchive() {
     return ()=>{
       abortController.abort()
     }
-  }, [fetchingAllOrdersInArchive])
+  }, [])
 
   return (
     <div className='containerForArchivePage'>

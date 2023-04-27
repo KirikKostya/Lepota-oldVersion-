@@ -10,6 +10,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const allContextParametrs = {
     isAuthorizate: Boolean(localStorage.getItem('accessToken')),
+    isAdmin: false,
     isLoading: true,
     myAccountIsOpen: false,
     countOfOrders: 0,
@@ -25,6 +26,10 @@ const reducer = (state = allContextParametrs, action) => {
         return {...state, isAuthorizate: true};
       case 'UNCOMPLETED_AUTHORIZATION': 
         return {...state, isAuthorizate: false};
+      case 'IS_ADMIN':
+        return {...state, isAdmin: true};
+      case 'IS_NOT_ADMIN': 
+        return {...state, isAdmin: false};
       case 'LOADING_IS_COMPLETED':
         return {...state, isLoading: false};
       case 'LOADING_IS_UNCOMPLETED': 

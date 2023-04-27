@@ -3,15 +3,15 @@ import UpNavigation from '../Components/UpNavigation'
 import AddedNewCart from '../Admin/AddedNewCart'
 import ContactWithUs from '../Components/ContactWithUs'
 import { FaChevronLeft } from 'react-icons/fa'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { refreshFunction } from '../MailFiles/App'
 import { NavLink } from 'react-router-dom'
-import axios from 'axios'
+import { checkIsAdmine } from '../Admin/AdmineController'
 import './Styles/Profile.css'
 
 export default function Profile() {
 
-  const [isAdmin, setIsAdmin] = useState('false');
+  const isAdmin = useSelector(state=>state.isAdmin);
   
   const [typeOfData, setTypeOfData] = useState('main');
   const dispatch = useDispatch();
@@ -19,19 +19,13 @@ export default function Profile() {
   const refreshAndSetType = (value) => {
     setTypeOfData(value);
     refreshFunction(dispatch)
-  } 
-
-  const checkIsAdmine = () => {
-    axios.get('https://api.native-flora.tk/Auth/IsAdmin', {
-      headers:{'x-access-token': localStorage.getItem('accessToken')}
-    })
-    .then(res=>setIsAdmin(res.data.data))
   }
 
   useEffect(()=>{
     window.scrollTo(0, 0);
-    refreshFunction(dispatch, checkIsAdmine)
-  })
+    // refreshFunction(dispatch, ()=>checkIsAdmine(dispatch))
+    // console.log(isAdmin)
+  }, [])
 
   return (
     <>

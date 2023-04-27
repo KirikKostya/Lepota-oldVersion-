@@ -19,7 +19,7 @@ span{
     margin-top: 10rem;
 }
 .emptyArchive h1, .emptyArchive h3 {
-    width: 95%;
+    width: 60%;
     font-family: 'Montserrat-Bold';
     text-align: center;
 }
@@ -222,7 +222,11 @@ span{
     color: #676767 ;
     margin: 10px 0 10px 0;
 }
-.orderStatus .trueStatus{
+.orderStatus span{
+    font-family: 'Montserrat-Bold';
+    font-size: 12pt;
+}
+/* .orderStatus .trueStatus{
     font-family: 'Montserrat-Bold';
     font-size: 12pt;
     color: #00BB40;
@@ -231,7 +235,7 @@ span{
     font-family: 'Montserrat-Bold';
     font-size: 12pt;
     color: #eb0c0c;
-}
+} */
 
 @media screen and (max-width: 1024px) {
     .mainContainerForArhive{
