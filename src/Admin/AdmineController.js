@@ -8,25 +8,39 @@ export const checkIsAdmine = (dispatch) => {
     .catch(() => dispatch({type: 'IS_NOT_ADMIN'}))
   }
 
-export const updateMetric = (id, nameOfMetric, value) => {
-    // console.log(id)
-    axios.post(`https://api.native-flora.tk/Item/Update`, {
-        "sizes": {
-            "1": value
-        },
-        "id": id
-      }, {
-        headers:{'x-access-token': localStorage.getItem('accessToken')}     
-      })
-}
-
-export const updateName = (id, name) => {
+export const updateMetric = (id, metricValue, type) => {
+  // console.log(type.replace('metric ', ''), metricValue)
     axios.post(`https://api.native-flora.tk/Item/Update`, {
         "id": id,
-        "name": name 
+        "sizes": {
+            [type.replace('metric ', '')] : metricValue
+        },
       }, {
         headers:{'x-access-token': localStorage.getItem('accessToken')}     
       })
-      .then(res=>console.log(res))
-      .catch(err=>console.log(err))
+    .then(res=>console.log(res))
+    .catch(err=>console.log(err))
+}
+
+export const updateName = (id, nameValue) => {
+    axios.post(`https://api.native-flora.tk/Item/Update`, {
+        "id": id,
+        "name": nameValue 
+      }, {
+        headers:{'x-access-token': localStorage.getItem('accessToken')}     
+      })
+    .then(res=>console.log(res))
+    .catch(err=>console.log(err))
+}
+
+export const updateDescription = (id, descriptionValue) => {
+  console.log(descriptionValue)
+  axios.post(`https://api.native-flora.tk/Item/Update`, {
+        "id": id,
+        "description": descriptionValue.split('.')
+      }, {
+        headers:{'x-access-token': localStorage.getItem('accessToken')}     
+      })
+    .then(res=>console.log(res))
+    .catch(err=>console.log(err))
 }

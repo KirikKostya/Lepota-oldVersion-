@@ -7,7 +7,7 @@ import ContactWithUs from '../Components/ContactWithUs';
 import ReactModal from 'react-modal';
 import WarningModalView from '../Modals/WarningModalView';
 import Pensil from '../Icons/Pensil';
-import { updateMetric, updateName } from '../Admin/AdmineController';
+import { updateDescription, updateMetric, updateName } from '../Admin/AdmineController';
 import { refreshFunction } from '../MailFiles/App'
 import { Link } from 'react-scroll';
 import axios from 'axios';
@@ -52,11 +52,6 @@ export default function TypeCatalog() {
       })
   }
 
-  //
-  const openUpdateWindow = () => {
-    
-  }
-
   useEffect(()=>{
     refreshFunction(dispatch, ()=>fetchProducts(searchOrderById))
     window.scrollTo(0, 0);
@@ -67,7 +62,7 @@ export default function TypeCatalog() {
       <UpNavigation hide={'hide'}/>
       <div className='infoContainer' id='hideNavBarMainLink'>
         <div className='infoOrder'>
-          <h1>Кашпо {order.name} { isAdmin && <Pensil updateFunc={()=>setUpdateModalViewType('name')}/> } </h1>
+          <h1>Кашпо {order.name} { isAdmin && <Pensil setUpdateModalViewType={()=>setUpdateModalViewType('name')}/> } </h1>
           <div className='description_metrics'>
             {
               makeArray(order.sizes).map((item, index)=>(
@@ -76,48 +71,48 @@ export default function TypeCatalog() {
                     Материал: <span>
                                 {item.Material}
                               </span>
-                        <sup>{ isAdmin && <Pensil updateFunc={()=>setUpdateModalViewType('metric')}/> }</sup>
+                        <sup>{ isAdmin && <Pensil setUpdateModalViewType={()=>setUpdateModalViewType('metric Material')}/> }</sup>
                   </p>
                   <p className={`metricItem ${checkMetric(item.Width)}`}>
                     Ширина: <span>
                               {item.Width}
                             </span>
-                      <sup>{ isAdmin && <Pensil updateFunc={()=>setUpdateModalViewType('metric')}/> }</sup>
+                      <sup>{ isAdmin && <Pensil setUpdateModalViewType={()=>setUpdateModalViewType('metric Width')}/> }</sup>
                   </p>
                   <p className={`metricItem ${checkMetric(item.Height)}`}>
                     Высота: <span>
                               {item.Height}
                             </span>
-                      <sup>{ isAdmin && <Pensil updateFunc={()=>setUpdateModalViewType('metric')}/> }</sup>
+                      <sup>{ isAdmin && <Pensil setUpdateModalViewType={()=>setUpdateModalViewType('metric Height')}/> }</sup>
                   </p>
                   <p className={`metricItem ${checkMetric(item.Depth)}`}>
                     Глубина: <span>
                               {item.Depth}
                             </span>
-                      <sup>{ isAdmin && <Pensil updateFunc={()=>setUpdateModalViewType('metric')}/> }</sup>
+                      <sup>{ isAdmin && <Pensil setUpdateModalViewType={()=>setUpdateModalViewType('metric Depth')}/> }</sup>
                   </p>
                   <p className={`metricItem ${checkMetric(item.Length)}`}>
                     Длина: <span>
                               {item.Length}
                             </span>
-                      <sup>{ isAdmin && <Pensil updateFunc={()=>setUpdateModalViewType('metric')}/> }</sup>
+                      <sup>{ isAdmin && <Pensil setUpdateModalViewType={()=>setUpdateModalViewType('metric Length')}/> }</sup>
                   </p>
                   <p className={`metricItem ${checkMetric(item.Diameter)}`}>
                     Диаметр: <span>
                               {item.Diameter}
                             </span>
-                      <sup>{ isAdmin && <Pensil updateFunc={()=>setUpdateModalViewType('metric')}/> }</sup>
+                      <sup>{ isAdmin && <Pensil setUpdateModalViewType={()=>setUpdateModalViewType('metric Diameter')}/> }</sup>
                   </p>
                   <p className={`metricItem ${checkMetric(item.Weigth)}`}>
                     Вес: <span>
                               {item.Weigth}
                             </span>
-                      <sup>{ isAdmin && <Pensil updateFunc={()=>setUpdateModalViewType('metric')}/> }</sup>
+                      <sup>{ isAdmin && <Pensil setUpdateModalViewType={()=>setUpdateModalViewType('metric Weigth')}/> }</sup>
                   </p> 
                 </div>
               ))
             }
-            <span>{order.description.join(' ')}{ isAdmin && <Pensil /> }</span>
+            <span>{order.description.join('. ')}{ isAdmin && <Pensil setUpdateModalViewType={()=>setUpdateModalViewType('description')}/> }</span>
           </div>
           <p className='forOrderMakes'>Для заказа: 
             <span> заполните форму в корзине заказов и отправьте Ваш оформленный заказ нам. 
@@ -134,7 +129,23 @@ export default function TypeCatalog() {
           </p>
         </div>
       </div>
-      <UpdateModalView type={updateModalViewType} setUpdateModalViewType={setUpdateModalViewType}/>
+
+      <UpdateModalView 
+        type={updateModalViewType} 
+        setUpdateModalViewType={setUpdateModalViewType}
+        allDataOfOrder={JSON.parse(localStorage.getItem('infoAboutTypeOfOrder'))}
+        refreshFunction={()=>refreshFunction(dispatch, ()=>fetchProducts(searchOrderById))}
+        updateFunc={
+          updateModalViewType === 'name' 
+            ? updateName 
+              : updateModalViewType === 'description' 
+                ? updateDescription 
+                  : updateModalViewType.includes('metric') 
+                    ? updateMetric 
+                      : ''
+        }
+      />
+
       <div className='containerForTypeCatalog'>
         {
           WarningMessageIsOpen
