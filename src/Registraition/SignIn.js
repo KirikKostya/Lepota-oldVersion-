@@ -54,14 +54,13 @@ export default function SignIn({ setRegistr }) {
     }
    
   return (
-    <div className='ContainerForSignIn'>
+    <div className='containerForSignIn'>
         
-        <div className='SignIn'>
+        <div className='signIn'>
             <h1>Войти</h1>
-            <div className='ForInputs'>
+            <div className='forInputs'>
               <input 
-                id='LoginInput' 
-                className='Input' 
+                className='input' 
                 type='email'
                 autoComplete='off'
                   onChange={(e)=>{
@@ -70,11 +69,10 @@ export default function SignIn({ setRegistr }) {
                   }} 
                 placeholder='Login' 
                 value={LoginInputValue}/>
-              <span className={`StatusValidateForm ${ColorOfValidateForm}`}>{StatusValidateForm}</span>
-              <div className='PasswordField_SI'>
+              <span className={`statusValidateForm ${ColorOfValidateForm}`}>{StatusValidateForm}</span>
+              <div className='passwordField_SI'>
                 <input 
-                  id='PasswordInput' 
-                  className='Input' 
+                  className='input' 
                   onChange={(e)=>setPasswordInputValue(e.target.value)} 
                   type={`${TypeOfPasswordInput}`} 
                   placeholder='Password' 
@@ -111,10 +109,10 @@ export default function SignIn({ setRegistr }) {
             {
               buttonStatus === 'Войти'
                 ? <button 
-                    className='SignInBTN' 
+                    className='signInBTN' 
                     onClick={Authorization}>{buttonStatus}</button>
                   : <NavLink 
-                      className='NavLink SignInBTN'
+                      className='NavLink signInBTN'
                       to='/'>{buttonStatus}</NavLink>
             }
             <p 
@@ -123,10 +121,10 @@ export default function SignIn({ setRegistr }) {
             РЕГИСТИРОВАТЬСЯ
             </p>
         </div>
-        <div className='ChangeField'>
+        <div className='changeField'>
           <p>У вас нет аккаунта? Зарегистрируйся!</p>
           <button 
-            className='SignInChangeBtn' 
+            className='signInChangeBtn' 
             onClick={()=>setRegistr(true)}>Регистрация</button>
         </div>
     </div>

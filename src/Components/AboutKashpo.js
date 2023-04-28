@@ -26,7 +26,7 @@ const exemplesOfUsed = [
 
 export default function AboutKashpo() {
   return (
-    <div className='ContainerForAboutKashpo' id='AboutCashpo'>
+    <div className='containerForAboutKashpo' id='aboutCashpo'>
         <h1>О Кашпо</h1>
         <p> Кашпо выполнено из гипсобетона. В состав входят: скульптурный гипс, цемент, добавки. Изделия получаются достаточно прочными!</p>
         <h3>Кашпо можно использовать:</h3>

@@ -77,7 +77,7 @@ export default function ListOfArchive({LIST, setList}) {
 
   } 
 
-  //
+  //on page writting status of delivering
   const checkedStatusOfDelivering = (param) => {
     return param == 'BeingProcessed'
             ? 'Принят в обработку'

@@ -69,7 +69,7 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
     }
 
   return (
-    <div className='Chek'>
+    <div className='chek'>
         <div className='typeOfDelivery'>
             <p 
                 onClick={()=>setIsShipping(!isShipping)}

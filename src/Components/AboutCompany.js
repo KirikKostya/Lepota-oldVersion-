@@ -3,7 +3,7 @@ import './Styles/AboutCompany.css'
 
 export default function AboutCompany() {
   return (
-    <div className='AboutCompanyContainer'>
+    <div className='aboutCompanyContainer'>
         <h1>Наше собственное производство</h1>
         <p>
             Lepota.by - бренд гипсового декора. 

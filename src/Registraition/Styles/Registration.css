@@ -1,4 +1,4 @@
-.ContainerForRegistration{
+.containerForRegistration{
     width: 100%;
     height: 100vh;
     background: url('/src/Photos/Registration.png');
@@ -8,22 +8,14 @@
     align-items: center;
     justify-content: center;
 }
-.ContainerForRegistration .FieldEffect{
+.containerForRegistration .fieldEffect{
     width: 75%;
     height: 60%;
     border-radius: 5px;
     background-color: rgba(45, 45, 206, 0.728);
 }
-.ContainerForRegistration .RegistrField{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    position: absolute;
-}
 @media screen and (max-width: 700px){
-    .ContainerForRegistration .FieldEffect{
+    .containerForRegistration .fieldEffect{
         display: none !important;
     }
 }

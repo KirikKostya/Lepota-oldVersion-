@@ -59,7 +59,7 @@ export default function MainBasketField({ ItemsInBasket, setItemsInBasket, reque
                 <NavLink to='/' className='chooseGoods'>Перейти к выбору товара</NavLink>
               </div>
                 : ItemsInBasket.sort((a,b) => a.cartItemId - b.cartItemId).map(item => (
-                    <div className='Item' key={item.cartItemId}>
+                    <div className='item' key={item.cartItemId}>
                     <img width={55} height={55} src={findPhoto(item)}/>
                     <h4 onClick={()=>console.log(item)}> {item.item.name} <br/>
                       <span className={`variant-Kit ${getVariantsOrKit(item) || 'hide'}`} >{` ( ${getVariantsOrKit(item)} ) `}</span>
@@ -72,11 +72,11 @@ export default function MainBasketField({ ItemsInBasket, setItemsInBasket, reque
                                 ? item.kit.price
                                   : item.item.price
                         } Br</span> 
-                    <div className='ChangeAmount'>
+                    <div className='changeAmount'>
                       <input 
-                          id='ChangeInput'
+                          id='changeInput'
                           type='number'
-                          className='ChangeInput' 
+                          className='changeInput' 
                           min={1}
                           max={100}
                             onChange={(e)=>{

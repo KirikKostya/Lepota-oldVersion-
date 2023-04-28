@@ -39,7 +39,7 @@ export default function AccountActivation() {
     }, [])
 
   return (
-    <div className='MainCont'>
+    <div className='mainCont'>
       <div className='upsider'>
         <img width={120} height={100} src={require('../Photos/Logo.png')}/>
       </div>

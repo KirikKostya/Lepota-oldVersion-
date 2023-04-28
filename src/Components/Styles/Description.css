@@ -1,11 +1,11 @@
-.DiscriptionContainer{
+.descriptionContainer{
   width: 60%;
   display: flex;
   overflow-x: scroll ;
   margin-top: 10px;
   border-radius: 20px;
 }
-.DiscriptionContainer::-webkit-scrollbar {
+.descriptionContainer::-webkit-scrollbar {
   height: 10px;
 }
 
@@ -26,27 +26,27 @@
   background: rgb(164, 193, 250);
 }
 
-.DiscriptionContainer .Slide{
+.descriptionContainer .slide{
     height: calc(100vh - 100px);
     flex: 0 0 100%;
     padding: 0 20px 0 0;
     scroll-snap-align: start;
 }
-.DiscriptionContainer .Slide:nth-child(6){
+.descriptionContainer .slide:nth-child(6){
   padding: 0;
 }
 @media screen and (max-width:890px){
-  .DiscriptionContainer{
+  .descriptionContainer{
     width: 80% !important;
     max-height: 550px !important;
   }
 }
 @media screen and (max-width:730px){
-  .DiscriptionContainer{
+  .descriptionContainer{
     width: 95% !important;
     max-height: 450px !important;
   }
-  .DiscriptionContainer .Slide{
+  .descriptionContainer .slide{
     max-height: 380px;
 }
 }

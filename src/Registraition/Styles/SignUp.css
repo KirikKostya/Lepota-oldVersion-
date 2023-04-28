@@ -1,5 +1,5 @@
 @import url("/src/Fonts/fonts.css");
-.ContainerForSignUp{
+.containerForSignUp{
     width: 30%;
     height: 50%;
     display: flex;
@@ -25,7 +25,7 @@
         width: 90%;
     }
 }
-.ContainerForSignUp .SignUp{
+.containerForSignUp .signUp{
     width: 30%;
     min-height: 420px;
     display: flex;
@@ -35,7 +35,7 @@
     background-color: rgb(207, 222, 226);
     border-radius: 10px;
 }
-.SignUp h1{
+.signUp h1{
     animation: headerAnimation 1s ease forwards;
 }
 @keyframes headerAnimation{
@@ -49,7 +49,7 @@
         color: black
     }
 }
-.SignUp .StatusValidateForm{
+.signUp .statusValidateForm{
     width: 90% !important;
     display: flex;
     flex-direction: row;
@@ -66,25 +66,25 @@
     color: red;
     font-weight: 600 !important;
 }
-.SignUp .ForInputs{
+.signUp .forInputs{
     width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.ForInputs .PasswordField{
+.forInputs .passwordField{
     width: 93% !important;
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important; 
 }
-.PasswordField svg{
+.passwordField svg{
     border-radius: 40%;
     padding: 0 3px 3px 0 ;
     background: rgb(192, 192, 192);
 }
-.SignUp .helpMessage{
+.signUp .helpMessage{
     width: 90%;
     font-family: 'Montserrat-Light';
     font-size: 7pt;
@@ -102,7 +102,7 @@
 .helpMessage span:hover{
     color: rgba(0, 0, 255, 0.861) !important;
 }
-.SignUp .Input{
+.signUp .input{
     width: 100%;
     height: 40px;
     background-color: transparent;
@@ -116,16 +116,16 @@
     margin: 10px 0;
     outline: none;
 }
-.SignUp .Input:nth-child(1){
+.signUp .input:nth-child(1){
     width: 88%;
     margin-bottom: 5px !important;
 }
-.SignUp .Input::-webkit-input-placeholder { 
+.signUp .input::-webkit-input-placeholder { 
     color: rgba(0, 0, 0, 0.733);
     font-family: 'Montserrat-Medium' !important;
     font-size: 12pt !important;
 }
-.SignUp .SignUpBTN{
+.signUp .signUpBTN{
     width: 20px;
     height: 50px;
     color: transparent; 
@@ -140,7 +140,7 @@
     transition: all 0.4s linear;
     animation: btnChange_SU 1s ease forwards;
 }
-.SignUp .SignUpBTN:hover{ 
+.signUp .signUpBTN:hover{ 
     border: 1.5px solid rgb(0, 18, 106);
     background-color: rgb(109, 155, 248); 
 }
@@ -160,7 +160,7 @@
 .ActiveInput{
     border-bottom:3px solid red !important ;
 }
-.ContainerForSignUp .SignInChangeBtn{
+.containerForSignUp .signInChangeBtn{
     position: relative;
     display: block;
     color: rgb(0, 0, 0);
@@ -173,18 +173,18 @@
     cursor: pointer;
     transition: all 0.5s;
   }
-  .ContainerForSignUp .SignInChangeBtn:hover{
+  .containerForSignUp .signInChangeBtn:hover{
     background-color: #1d78fe;
     border: 2px solid #e8e8e8;
     color: #e8e8e8;
   }
-  .ContainerForSignUp .ChangeField{
+  .containerForSignUp .changeField{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
-  .ChangeField p{
+  .changeField p{
     width: 200px;
     font-family: 'Montserrat-Regular';
     font-size: 14pt;
@@ -195,30 +195,30 @@
 
 /*MEDIA*/
 @media screen and (max-width: 890px) {
-    .ContainerForSignUp{
+    .containerForSignUp{
         width: 20%;
         display: flex;
         flex-direction: column;
         animation: other-screenOpening_SU 1s ease forwards;
     }
-    .ContainerForSignUp .SignUp{
+    .containerForSignUp .signUp{
         width: 55%;
     }
-    .SignIn{
+    .signIn{
         display: block;
     }
-    .SignUp .Input{
+    .signUp .input{
         width: 100%;
     }
     /**/
-    .SignUp .SignUpBTN{
+    .signUp .signUpBTN{
         border: 1.5px solid rgb(0, 18, 106) !important;
         background-color: rgb(109, 155, 248) !important; 
     }
-    .ContainerForSignUp .ChangeField{
+    .containerForSignUp .changeField{
         display: none;
     }
-    .SignUp .helpMessage{
+    .signUp .helpMessage{
         display: inline;
         animation: helpMessageAnimation 1s ease forwards;
     }
@@ -235,13 +235,13 @@
   }
 }
 @media screen and (max-width: 700px){
-    .ContainerForSignUp{
+    .containerForSignUp{
         width: 30% ;
         display: flex;
         flex-direction: column;
         animation: max-screenOpening_SU 1s ease forwards;
     }
-    .ContainerForSignUp .SignUp{
+    .containerForSignUp .signUp{
         width: 90% !important;
     }
 }

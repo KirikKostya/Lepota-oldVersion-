@@ -10,7 +10,7 @@ import Picker from './Picker';
 export default function AddedNewCart() {
     
     const [photos, setPhotos] = useState(Array);
-    const [discription, setDiscription] = useState('');
+    const [description, setDescription] = useState('');
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
 
@@ -70,7 +70,7 @@ export default function AddedNewCart() {
         axios.post('https://api.native-flora.tk/Item/Add', {
             
                 "name": name,
-                "description": discription.split('.'),
+                "description": description.split('.'),
                 "price": +price,
                 "icon": photos,
                 "sizes": {
@@ -94,14 +94,14 @@ export default function AddedNewCart() {
     // clears all fields
     const clearAll = () => {
         setPhotos([]);
-        setDiscription('');
+        setDescription('');
         setName('');
         setPrice('');
         setMetricsListStep([])
     }
   return (
     <div className='addedFieldAdmine'>
-        <div className='photoAndDiscriptionContainer'>
+        <div className='photoAndDescriptionContainer'>
             <div 
                 className='listOfSelectedImages' 
                 style={
@@ -126,12 +126,12 @@ export default function AddedNewCart() {
                 }
                 <Picker setPhotos={setPhotos} photos={photos} className='addedFileBTN' />
             </div>
-            <div className='discriptionContainer'>
+            <div className='descriptionContainer'>
                 <p>Описание:</p>
                 <textarea 
                     placeholder='Введите описание товара' 
-                    onChange={(event) => setDiscription(event.target.value)}
-                    value={discription}
+                    onChange={(event) => setDescription(event.target.value)}
+                    value={description}
                 />
             </div>
         </div>

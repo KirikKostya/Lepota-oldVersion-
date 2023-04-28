@@ -9,10 +9,10 @@ export default function ContactWithUs() {
   const [isTelephoneOpen, setIsTelephoneOpen] = useState(false)
 
   return (
-    <div className='ContainerForContactWithUs' id='ContactWithUs' >
+    <div className='containerForContactWithUs' id='contactWithUs' >
         <h1>Контакты</h1>
         <p>С нами можно связаться через:</p>
-            <div className='MassagerIcons'>
+            <div className='massagerIcons'>
                 <a href='http://t.me/Kaetanaa'>
                   <svg 
                       fill="white"
@@ -34,7 +34,7 @@ export default function ContactWithUs() {
         {
           (!isTelephoneOpen)
             ? <p>Tub on telegram icon!</p>
-             : <p className='MobilePhone'>+375 (25) 971 64 66</p>
+             : <p className='mobilePhone'>+375 (25) 971 64 66</p>
         }
     </div>
   

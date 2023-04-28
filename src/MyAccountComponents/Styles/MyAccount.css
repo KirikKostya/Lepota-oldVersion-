@@ -1,5 +1,5 @@
 @import url('/src/Fonts/fonts.css');
-.ContainerForMyAccount{
+.containerForMyAccount{
     width: 200px;
     display: flex;
     flex-direction: column;
@@ -22,7 +22,7 @@
         width: 200px; 
     }
 }
-.ContainerForMyAccount .ListItem{
+.containerForMyAccount .listItem{
     width: 150px;
     height: 26px;
     margin: 14px;
@@ -34,7 +34,7 @@
     cursor: pointer;
     text-decoration: none;
 }
-.ContainerForMyAccount .ListItem::after{
+.containerForMyAccount .listItem::after{
     content: '';
     display: block;
     width: 100%;
@@ -44,17 +44,17 @@
     transform-origin: 0%;
     transition: all ease 0.5s;
 }
-.ContainerForMyAccount .ListItem:hover::after{
+.containerForMyAccount .listItem:hover::after{
     transform: scaleX(1);
 }
-.ContainerForMyAccount .Link{
+.containerForMyAccount .Link{
     font-family: 'Montserrat-Bold';
     color: black !important;
     text-decoration: none !important;
     margin: 10px 0;
     transition: all 0.5s;
 }
-.ContainerForMyAccount .Link:hover{
+.containerForMyAccount .Link:hover{
     color: rgb(248, 86, 86) !important;
 } 
 .countOfOrders{
@@ -64,14 +64,14 @@
     color: rgba(247, 28, 28, 0.893)
 }
 @media screen and (max-width: 900px) {
-    .ContainerForMyAccount .ListItem{
+    .containerForMyAccount .listItem{
         background-size: 0% !important;
         transition: none !important;
     }
-    .ContainerForMyAccount .ListItem::after{
+    .containerForMyAccount .listItem::after{
         display: none;
     }
-    .ContainerForMyAccount .Link:hover{
+    .containerForMyAccount .Link:hover{
         color: black !important;
     } 
 }

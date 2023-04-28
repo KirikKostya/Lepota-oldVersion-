@@ -49,7 +49,7 @@ function App() {
   
   return (
     <div 
-      className="App" 
+      className="app" 
       onClick={()=>{
         if(myAccountIsOpen){
           dispatch({type: 'CLOSE_MY_ACCOUNT'})

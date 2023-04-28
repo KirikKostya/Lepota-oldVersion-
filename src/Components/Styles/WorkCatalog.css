@@ -1,34 +1,34 @@
 @import url('/src/Fonts/fonts.css');
 
-.CatalogContainer{
+.catalogContainer{
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
 }
-.CatalogContainer .paragraph{
+.catalogContainer .paragraph{
     width: 600px;
     font-family: 'Montserrat-Regular' ;
     font-size: 11pt;
     text-align: center;
     color: rgba(0, 0, 0);
 }
-.CatalogContainer ul{
+.catalogContainer ul{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
 }
-.CatalogContainer .ListOfWorks{
+.catalogContainer .listOfWorks{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
 }
-.ListOfWorks .LoadingComp{
+.listOfWorks .loadingComp{
     width: 100%;
     height: 150px;
     display: flex;
@@ -37,7 +37,7 @@
     justify-content: center;
     margin-top: 50px;
 }
-.CatalogContainer .SearchMore{
+.catalogContainer .SearchMore{
     width: 120px;
     height: 40px;
     background-color: rgb(125, 6, 6);
@@ -48,7 +48,7 @@
     margin-top: 50px;
 }
 @media screen and (max-width: 890px) {
-    .CatalogContainer .paragraph{
+    .catalogContainer .paragraph{
         width: 95%;
     }
 }

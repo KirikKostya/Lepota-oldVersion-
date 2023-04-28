@@ -226,17 +226,7 @@ span{
     font-family: 'Montserrat-Bold';
     font-size: 12pt;
 }
-/* .orderStatus .trueStatus{
-    font-family: 'Montserrat-Bold';
-    font-size: 12pt;
-    color: #00BB40;
-}
-.orderStatus .falseStatus{
-    font-family: 'Montserrat-Bold';
-    font-size: 12pt;
-    color: #eb0c0c;
-} */
-
+/*MEDIA*/
 @media screen and (max-width: 1024px) {
     .mainContainerForArhive{
         width: 100%;

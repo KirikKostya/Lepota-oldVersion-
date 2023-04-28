@@ -3,11 +3,11 @@ import ReactModal from 'react-modal'
 import { NavLink } from 'react-router-dom'
 import './Styles/WarningModalView.css'
 
-export default function WarningModalView({ WarningMessageIsOpen }) {
+export default function WarningModalView({ warningMessageIsOpen }) {
      
   return (
     <ReactModal 
-            isOpen={WarningMessageIsOpen}
+            isOpen={warningMessageIsOpen}
             ariaHideApp={false}
             contentLabel="Selected Option"
             >

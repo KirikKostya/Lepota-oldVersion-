@@ -56,13 +56,12 @@ export default function SignUp({ setRegistr }) {
   }
 
   return (
-    <div className='ContainerForSignUp'>
-        <div className='SignUp'>
+    <div className='containerForSignUp'>
+        <div className='signUp'>
             <h1>Регистрация</h1>
-            <div className='ForInputs'>
+            <div className='forInputs'>
               <input 
-                id='LoginInput' 
-                className='Input' 
+                className='input' 
                 autoComplete='off'
                 onChange={(e)=>{
                     setLoginInputValue(e.target.value);
@@ -70,11 +69,10 @@ export default function SignUp({ setRegistr }) {
                   }} 
                 placeholder='Email' 
                 value={LoginInputValue}/>
-              <span className={`StatusValidateForm ${ColorOfValidateForm}`}>{StatusValidateForm}</span>
-              <div className='PasswordField'>
+              <span className={`statusValidateForm ${ColorOfValidateForm}`}>{StatusValidateForm}</span>
+              <div className='passwordField'>
                 <input 
-                  id='PasswordInput' 
-                  className='Input' 
+                  className='input' 
                   autoComplete='off'
                   onChange={(e)=>setPasswordInputValue(e.target.value)} 
                   type={`${TypeForFirstPasswordInput}`} 
@@ -108,10 +106,9 @@ export default function SignUp({ setRegistr }) {
                           </svg>
                   }
               </div>
-              <div className='PasswordField'>
+              <div className='passwordField'>
                 <input 
-                  id='SecondPasswordInput' 
-                  className='Input' 
+                  className='input' 
                   onChange={(e)=>setSecondPasswordInputValue(e.target.value)} 
                   type={`${TypeForSecondPasswordInput}`} 
                   placeholder='Please, repeat password' 
@@ -146,17 +143,17 @@ export default function SignUp({ setRegistr }) {
                 </div>
             </div>
             <button 
-              className={`SignUpBTN`} 
+              className={`signUpBTN`} 
               onClick={Registration}>Создать аккаунт</button>
             <p className='helpMessage'>
               Есть аккаунт? 
               <span onClick={()=>setRegistr(false)}>ВОЙТИ</span>
             </p>
         </div>
-        <div className='ChangeField'>
+        <div className='changeField'>
             <p>Есть аккаунт? Тогда добро пожаловать!</p>
             <button 
-              className='SignInChangeBtn' 
+              className='signInChangeBtn' 
               onClick={()=>setRegistr(false)}>Войти</button>
         </div>
     </div>

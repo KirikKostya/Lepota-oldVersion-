@@ -18,14 +18,14 @@ export default function CardOfWork({ card }) {
   }
 
   return (
-    <div className='Card'>
-        <div className='InfoOfCard' key={card.id}>
+    <div className='card'>
+        <div className='infoOfCard' key={card.id}>
           <img src={getImageFromAPI(card.icon)} className='IMG' />
           <div className='name_button'>
             <h4>{card.name} <span>{card.price} Br</span> </h4>
             <NavLink 
               to='/TypeCatalog' 
-              className='CatalogBTN' 
+              className='catalogBTN' 
               onClick={()=>{
                 dispatch({type: 'SET_SEARCH_ORDER-ID', payload: card.id})
                 localStorage.setItem('searchOrderById', card.id);

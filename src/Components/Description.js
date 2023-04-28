@@ -1,5 +1,5 @@
 import React from 'react'
-import './Styles/Discription.css'
+import './Styles/Description.css'
 
  const exemplesOfWorks = [
   {
@@ -28,13 +28,13 @@ import './Styles/Discription.css'
   }
  ]
 
-export default function Discription() {
+export default function Description() {
 
   return (
-    <div className='DiscriptionContainer' id='Main'>
+    <div className='descriptionContainer' id='main'>
         {
           exemplesOfWorks.map(work=>(
-            <img key={work.id} src={work.original} className = 'Slide' />
+            <img key={work.id} src={work.original} className='slide' />
           ))
         }
     </div>

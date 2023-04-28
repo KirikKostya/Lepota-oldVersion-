@@ -43,7 +43,7 @@ export default function MyBasket() {
         isLoading
           ? <LoadingComp2 />
             : <div className='fullContainer' id='hideNavBarMainLink' style={{ 'alignItems': ItemsInBasket.length === 0 ? 'center' : 'start'}}>
-                <div className='MainFielfForBasket'>
+                <div className='mainFielfForBasket'>
                   <div className='basketParametrs'>
                     <p id='fullName'>Товар</p>
                     <p id='price'>Цена</p>

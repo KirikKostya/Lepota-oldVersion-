@@ -17,8 +17,8 @@ import UpdateModalView from '../Admin/UpdateModalView';
 
 export default function TypeCatalog() {
 
-  const [WarningMessageIsOpen, setWarningMessageIsOpen] = useState(false);
-  const [AddedOrder, setAddedOrder] = useState(false)
+  const [warningMessageIsOpen, setWarningMessageIsOpen] = useState(false);
+  const [addedOrder, setAddedOrder] = useState(false)
   const [modalView, setModalView] = useState(false)
   const [updateModalViewType, setUpdateModalViewType] = useState('')
 
@@ -148,8 +148,8 @@ export default function TypeCatalog() {
 
       <div className='containerForTypeCatalog'>
         {
-          WarningMessageIsOpen
-              ? <WarningModalView WarningMessageIsOpen={WarningMessageIsOpen}/>
+          warningMessageIsOpen
+              ? <WarningModalView warningMessageIsOpen={warningMessageIsOpen}/>
                 :<>
                     {
                       isLoading
@@ -166,9 +166,9 @@ export default function TypeCatalog() {
                     }
 
                     {
-                      AddedOrder
+                      addedOrder
                         ? <ReactModal 
-                            isOpen={AddedOrder}
+                            isOpen={addedOrder}
                             ariaHideApp={false}
                             contentLabel="Selected Option"
                           >

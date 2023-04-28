@@ -25,16 +25,16 @@ export default function WorkCatalog() {
   },[])
 
   return (
-    <div className='CatalogContainer' id='CatalogOfWorks'>
+    <div className='catalogContainer' id='catalogOfWorks'>
         <h1>Наши Работы</h1>
         <p className='paragraph'>У нас вы можете приобрести разного вида подарки, 
           начиная от выразительных статуэток и заканчивая ключницами и разными подставками. 
           Вы сможете сделать заказ и обсудить с мастером вариант вашейго собственного заказа.
         </p>
-        <div className='ListOfWorks'>
+        <div className='listOfWorks'>
             {
               isLoading
-                ? <div className='LoadingComp'>
+                ? <div className='loadingComp'>
                     <LoadingComp />
                   </div>
                   : CARDS.sort((a,b) => a.id - b.id).map(card => (

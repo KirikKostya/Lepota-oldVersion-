@@ -45,8 +45,8 @@ export default function Registration() {
   const [Registr, setRegistr] = useState(true);
 
   return (
-    <div className='ContainerForRegistration'>
-        <div className='FieldEffect'></div>
+    <div className='containerForRegistration'>
+        <div className='fieldEffect'></div>
             {
             (Registr)
                 ? <SignUp setRegistr={setRegistr} />

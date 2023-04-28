@@ -1,24 +1,24 @@
 @import url('/src/Fonts/fonts.css'); 
 
-.AboutCompanyContainer{
+.aboutCompanyContainer{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.AboutCompanyContainer p{
+.aboutCompanyContainer p{
     width: 800px;
     text-align: center;
     font-family: 'Montserrat-Regular' !important;
     font-size: 11pt;
     margin-top: 0;
 }
-.AboutCompanyContainer h3{
+.aboutCompanyContainer h3{
     font-family: 'GARAIT';
     color: rgba(0, 0, 0, 0.8) !important
 }
 @media screen and (max-width:819px) {
-    .AboutCompanyContainer p{
+    .aboutCompanyContainer p{
         width: 95%;
         font-family: 'Montserrat-Regular' !important;
         font-size: 11pt;
@@ -26,7 +26,7 @@
     }
 }
 @media screen and (max-width:530px){
-    .AboutCompanyContainer h1{
+    .aboutCompanyContainer h1{
         text-align: center;
     }
 }

@@ -27,7 +27,7 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
 
   return (
     <>
-      <div id='UpNav' className='UpNavContainer'>
+      <div id='upNav' className='upNavContainer'>
         {
           isAuthorizate
           ? <div>
@@ -59,7 +59,7 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
         }
         <div className='NavLinks'>
             <Link activeClass="active" 
-                  to={`${hide? 'hideNavBarMainLink' : 'Main'}`} 
+                  to={`${hide? 'hideNavBarMainLink' : 'main'}`} 
                   spy={true} 
                   smooth={true} 
                   offset={-90} 
@@ -68,7 +68,7 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
                   onClick={()=>refreshFunction(dispatch)}
                   className={`NavLink`} >ГЛАВНАЯ</Link>
             <Link activeClass="active" 
-                  to="CatalogOfWorks" 
+                  to="catalogOfWorks" 
                   spy={true} 
                   smooth={true} 
                   offset={-60} 
@@ -76,7 +76,7 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
                   onClick={()=> refreshFunction(dispatch)}
                   className={`NavLink ${hide}`} >КАТАЛОГ</Link>
             <Link activeClass="active" 
-                  to="TimingAndDelivery" 
+                  to="timingAndDelivery" 
                   spy={true}
                   smooth={true}
                   offset={-100}
@@ -84,14 +84,14 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
                   onClick={()=>refreshFunction(dispatch)}
                   className={`NavLink ${hide}`} >СРОКИ И ДОСТАВКА</Link>
             <Link activeClass="active" 
-                  to="AboutCashpo" 
+                  to="aboutCashpo" 
                   spy={true} 
                   smooth={true} 
                   offset={-100} 
                   duration={500} 
                   className={`NavLink ${hide}`} >О КАШПО</Link>
             <Link activeClass="active" 
-                  to="ContactWithUs" 
+                  to="contactWithUs" 
                   spy={true} 
                   smooth={true} 
                   offset={-65} 
@@ -108,7 +108,7 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
             onClick={()=>refreshFunction(dispatch)}/>
         </NavLink>
         
-        <div className='Hamburger' 
+        <div className='hamburger' 
              onClick={()=>{
               (openHamburgerMenu === '')
                 ? setOpenHamburgerMenu('close')
@@ -123,9 +123,9 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
         }
 
       </div>
-      <div className={`HamburgerNavLinks ${openHamburgerMenu}`} >
+      <div className={`hamburgerNavLinks ${openHamburgerMenu}`} >
             <Link activeClass="active" 
-                  to={`${hide? 'hideNavBarMainLink' : 'Main'}`}
+                  to={`${hide? 'hideNavBarMainLink' : 'main'}`}
                   spy={true} 
                   smooth={true} 
                   offset={-230} 
@@ -134,7 +134,7 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
                   onClick={()=>refreshFunction(dispatch)}
                   className={`NavLink `}>ГЛАВНАЯ</Link>
             <Link activeClass="active" 
-                  to="CatalogOfWorks" 
+                  to="catalogOfWorks" 
                   spy={true} 
                   smooth={true} 
                   offset={-210} 
@@ -142,7 +142,7 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
                   onClick={()=>refreshFunction(dispatch)}
                   className={`NavLink ${hide}`}>КАТАЛОГ</Link>
             <Link activeClass="active" 
-                  to="TimingAndDelivery" 
+                  to="timingAndDelivery" 
                   spy={true} 
                   smooth={true} 
                   offset={-210} 
@@ -150,7 +150,7 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
                   onClick={()=>refreshFunction(dispatch)}
                   className={`NavLink ${hide}`}>СРОКИ И ДОСТАКА</Link>
             <Link activeClass="active" 
-                  to="AboutCashpo" 
+                  to="aboutCashpo" 
                   spy={true} 
                   smooth={true} 
                   offset={-210} 
@@ -158,7 +158,7 @@ const B = 'M396.4,494.2c56.7,0,102.7-46.1,102.7-102.8V107.7C499.1,51,453,4.9,396
                   onClick={()=>refreshFunction(dispatch)}
                   className={`NavLink ${hide}`}>О КАШПО</Link>
             <Link activeClass="active" 
-                  to="ContactWithUs" 
+                  to="contactWithUs" 
                   spy={true} 
                   smooth={true} 
                   offset={-180} 

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import useDrivePicker from 'react-google-drive-picker'
 
 export default function Picker({setPhotos, photos, className}) {
@@ -19,7 +19,6 @@ export default function Picker({setPhotos, photos, className}) {
                 let newArray = [...photos];
                 data.docs.forEach(el=>newArray.push(`https://drive.google.com/uc?export=view&id=${el.url.replace('https://drive.google.com/file/d/', '').replace('/view?usp=drive_web', '')}`))
                 setPhotos(newArray);
-                // console.log(photos)
             },
         })
     }
