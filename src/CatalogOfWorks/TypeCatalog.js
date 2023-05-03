@@ -7,7 +7,7 @@ import ContactWithUs from '../Components/ContactWithUs';
 import ReactModal from 'react-modal';
 import WarningModalView from '../Modals/WarningModalView';
 import Pensil from '../Icons/Pensil';
-import { updateDescription, updateMetric, updateName } from '../Admin/AdmineController';
+import { updateDescription, updateMetric, updateName, updateVariant } from '../Admin/AdmineController';
 import { refreshFunction } from '../MailFiles/App'
 import { Link } from 'react-scroll';
 import axios from 'axios';
@@ -21,6 +21,10 @@ export default function TypeCatalog() {
   const [addedOrder, setAddedOrder] = useState(false)
   const [modalView, setModalView] = useState(false)
   const [updateModalViewType, setUpdateModalViewType] = useState('')
+
+  
+    //admine variables
+    const variantId = useSelector(state=>state.variantId);
 
   const order = JSON.parse(localStorage.getItem('infoAboutTypeOfOrder'))
 
@@ -46,6 +50,7 @@ export default function TypeCatalog() {
     axios.get(`https://api.native-flora.tk/Item/GetById?id=${OpenID || localStorage.getItem('searchOrderById')}`)
       .then(res=>{
         setCatalogOrders([res.data.data]);
+        isAdmin && localStorage.setItem('variants', JSON.stringify(res.data.data.variants))
         dispatch({type: 'SET_TOTAL_SUM_TYPE-COMP', payload: res.data.data.item.price});
         dispatch({type: 'LOADING_IS_COMPLETED'});
         return res;
@@ -103,11 +108,11 @@ export default function TypeCatalog() {
                             </span>
                       <sup>{ isAdmin && <Pensil setUpdateModalViewType={()=>setUpdateModalViewType('metric Diameter')}/> }</sup>
                   </p>
-                  <p className={`metricItem ${checkMetric(item.Weigth)}`}>
+                  <p className={`metricItem ${checkMetric(item.Weight)}`}>
                     Вес: <span>
-                              {item.Weigth}
+                              {item.Weight}
                             </span>
-                      <sup>{ isAdmin && <Pensil setUpdateModalViewType={()=>setUpdateModalViewType('metric Weigth')}/> }</sup>
+                      <sup>{ isAdmin && <Pensil setUpdateModalViewType={()=>setUpdateModalViewType('metric Weight')}/> }</sup>
                   </p> 
                 </div>
               ))
@@ -130,21 +135,27 @@ export default function TypeCatalog() {
         </div>
       </div>
 
-      <UpdateModalView 
-        type={updateModalViewType} 
-        setUpdateModalViewType={setUpdateModalViewType}
-        allDataOfOrder={JSON.parse(localStorage.getItem('infoAboutTypeOfOrder'))}
-        refreshFunction={()=>refreshFunction(dispatch, ()=>fetchProducts(searchOrderById))}
-        updateFunc={
-          updateModalViewType === 'name' 
-            ? updateName 
-              : updateModalViewType === 'description' 
-                ? updateDescription 
-                  : updateModalViewType.includes('metric') 
-                    ? updateMetric 
-                      : ''
-        }
-      />
+      {
+        isAdmin 
+        &&
+        <UpdateModalView 
+          type={updateModalViewType} 
+          setUpdateModalViewType={setUpdateModalViewType}
+          allDataOfOrder={JSON.parse(localStorage.getItem('infoAboutTypeOfOrder'))}
+          refreshFunction={()=>refreshFunction(dispatch, ()=>fetchProducts(searchOrderById))}
+          updateFunc={
+            updateModalViewType === 'name' 
+              ? updateName 
+                : updateModalViewType === 'description' 
+                  ? updateDescription 
+                    : updateModalViewType.includes('metric') 
+                      ? updateMetric 
+                        : updateModalViewType === 'variant'
+                          ? updateVariant
+                            : ''
+          }
+        />
+      }
 
       <div className='containerForTypeCatalog'>
         {
@@ -162,9 +173,9 @@ export default function TypeCatalog() {
                                 setWarningMessageIsOpen={setWarningMessageIsOpen}
                                 setAddedOrder={setAddedOrder}
                                 setModalView={setModalView}
+                                setUpdateModalViewType={setUpdateModalViewType}
                               />
                     }
-
                     {
                       addedOrder
                         ? <ReactModal 

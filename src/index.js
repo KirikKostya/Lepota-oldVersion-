@@ -17,7 +17,10 @@ const allContextParametrs = {
     searchOrderById: 0,
     refreshTokenIsExpired: false,
     totalSum_TypeComp: 0,
-    isLoadingInArchive: false
+    isLoadingInArchive: false,
+
+    //admine:
+    variantId: 1
 }
 
 const reducer = (state = allContextParametrs, action) => {
@@ -56,6 +59,10 @@ const reducer = (state = allContextParametrs, action) => {
         return {...state, isLoadingInArchive: false};
       case 'LOADING-Archive_IS_UNCOMPLETED': 
         return {...state, isLoadingInArchive: true};
+
+      //admine:
+      case 'SET_VARIANT_ID': 
+        return {...state, variantId: action.payload};
       default : 
         return {...state}
       }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import "./Styles/SingleSelect.css";
+import CheckMarkForSingleSelect from "../Icons/CheckMarkForSingleSelect";
 
 export default function SingleSelect({ options, placeholder, width, index, selectedOptions, setSelectedOptions, type }) {
   
@@ -44,20 +45,7 @@ export default function SingleSelect({ options, placeholder, width, index, selec
       }}
     >
       <span>{option.label}</span>
-      <svg
-        width="12"
-        height="8"
-        viewBox="1 1 12 8"
-        fill="none"
-      >
-        <path
-          d="M1 4L4.5 7.5L11 1"
-          stroke="#5A9DFF"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className={activeOption === option.label ? "active" : "false"}
-        />
-      </svg>
+      <CheckMarkForSingleSelect className={activeOption === option.label ? "active" : "false"} />
     </div>
   );
 

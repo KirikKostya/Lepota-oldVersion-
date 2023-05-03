@@ -1,4 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react'
+import OrderCardMoreImgs from '../Icons/OrderCardMoreImgs';
 import AddedVariantModal from '../Modals/AddedVariantModal'; 
 import SimpleImageSlider from 'react-simple-image-slider';
 import Pensil from '../Icons/Pensil';
@@ -6,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { refreshFunction } from '../MailFiles/App'
 import axios from 'axios';
 import './Style/OrderCard.css'
+import BasketIcon from '../Icons/BasketIcon';
 
 
 export default function OrderCard(
@@ -13,7 +15,8 @@ export default function OrderCard(
     catalogOrders,
     setWarningMessageIsOpen,
     setAddedOrder,
-    setModalView
+    setModalView,
+    setUpdateModalViewType,
   }
 ) {
 
@@ -136,7 +139,7 @@ export default function OrderCard(
             <h3 className='headerMetrics'>В комплекте может идти:</h3>
             <div className='cointainer_TC'>
               {
-                order.variants.map((item, index)=>(
+                order.variants.sort((a, b)=>a.id-b.id).map((item, index)=>(
                   <div key={item.id} className='itemOfMetrics' >
                     <label
                       className='metricLabel' 
@@ -148,24 +151,23 @@ export default function OrderCard(
                         <p id='variantName'>{item.name} </p>
                         <p className='item-price'>{item.price} BYN</p>
                     </label>
-                    <svg 
-                      width={25} 
-                      height={25} 
-                      viewBox={'0 0 24 24'} 
-                      fill={'none'}
+                    <OrderCardMoreImgs 
                       onClick={()=>{
                         setIsOpen(true);
                         setImagesOfVariant(getImages(item.icon))
-                      }}>
-                        <path 
-                          d='M12 11V16M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21ZM12.0498 8V8.1L11.9502 8.1002V8H12.0498Z' 
-                          stroke='#000'
-                          strokeWidth={2}
-                          strokeLinecap={'round'}
-                          strokeLinejoin={'round'}
-                        />
-                    </svg>
-                    <span>{ isAdmin && <Pensil /> }</span>
+                      }} />
+                    <span>
+                      { 
+                        isAdmin 
+                          && 
+                        <Pensil 
+                          setUpdateModalViewType={async()=>{
+                            dispatch({type: 'SET_VARIANT_ID', payload: item.id});
+                            await setUpdateModalViewType('variant')
+                          }} 
+                        /> 
+                      }
+                    </span>
                   </div>
                 ))
               }
@@ -176,7 +178,7 @@ export default function OrderCard(
               <div className='containerForHeader_Button' key={order}>
                 <h3 className='headerCard'>
                   {order.item.name} 
-                  <span className='nameOfKit'>{`( ${nameOfKit} )`}</span>
+                  <span className='nameOfKit' onClick={()=>setUpdateModalViewType('variant')}>{`( ${nameOfKit} )`}</span>
                   <input 
                     ref={refCount}
                     type={'number'} 
@@ -188,23 +190,11 @@ export default function OrderCard(
                     min={0}
                   />
                   <span>{totalSum_TypeComp} Br</span>
-                  <svg 
-                      width={25} 
-                      height={25} 
-                      viewBox={'0 0 24 24'} 
-                      fill={'none'}
-                      onClick={()=>{
-                        setIsOpen(true);
-                        setImagesOfVariant(getImages(listOfPhotos))
-                      }}>
-                        <path 
-                          d='M12 11V16M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21ZM12.0498 8V8.1L11.9502 8.1002V8H12.0498Z' 
-                          stroke='#000'
-                          strokeWidth={2}
-                          strokeLinecap={'round'}
-                          strokeLinejoin={'round'}
-                        />
-                    </svg>
+                  <OrderCardMoreImgs 
+                    onClick={()=>{
+                      setIsOpen(true);
+                      setImagesOfVariant(getImages(listOfPhotos))
+                    }} />
                 </h3>
                 <button className={`addToCartBTN ${amountOfOrder === '0' ? 'disabled' : ''}`}
                         disabled={amountOfOrder === '0'}
@@ -214,19 +204,7 @@ export default function OrderCard(
                               : setWarningMessageIsOpen(true)
                           refreshFunction(dispatch) //Fetch to refresh Token
                         }}>В корзину
-                  <svg 
-                    width="18" 
-                    height="18" 
-                    viewBox="0 0 24 24" 
-                    fill="transparent" 
-                    stroke="aliceblue" 
-                    strokeWidth="2" 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round">
-                      <circle cx="9" cy="21" r="1" />
-                      <circle cx="20" cy="21" r="1" />
-                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-                  </svg>        
+                  <BasketIcon />     
                 </button>
               </div>
             ))

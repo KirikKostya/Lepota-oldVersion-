@@ -22,7 +22,7 @@ export default function WorkCatalog() {
 
   useEffect(()=>{
     fetchFanc()
-  },[])
+  }, [])
 
   return (
     <div className='catalogContainer' id='catalogOfWorks'>

@@ -6,7 +6,6 @@ import { FaChevronLeft } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { refreshFunction } from '../MailFiles/App'
 import { NavLink } from 'react-router-dom'
-import { checkIsAdmine } from '../Admin/AdmineController'
 import './Styles/Profile.css'
 
 export default function Profile() {
@@ -23,8 +22,6 @@ export default function Profile() {
 
   useEffect(()=>{
     window.scrollTo(0, 0);
-    // refreshFunction(dispatch, ()=>checkIsAdmine(dispatch))
-    // console.log(isAdmin)
   }, [])
 
   return (
@@ -35,8 +32,8 @@ export default function Profile() {
           <span className='headerAboutUser' onClick={()=>setTypeOfData('main')}>
             {
               typeOfData !== 'main'
-                ? <FaChevronLeft onClick={()=>setTypeOfData('main')} style={{marginRight: '15px'}}/>
-                  : ''
+                &&
+              <FaChevronLeft onClick={()=>setTypeOfData('main')} style={{marginRight: '15px'}}/>
             }
             {
               typeOfData === 'secureData'

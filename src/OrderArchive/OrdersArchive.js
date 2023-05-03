@@ -47,7 +47,7 @@ export default function OrdersArchive() {
       {
         isLoading
           ? <LoadingComp2 />
-            : <ListOfArchive LIST={listOfOrdersInArchive} setList = {setListOfOrdersInArchive} />
+            : <ListOfArchive LIST={listOfOrdersInArchive} setList={setListOfOrdersInArchive} />
       }
       <ContactWithUs />
     </div>
