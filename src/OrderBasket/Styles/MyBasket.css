@@ -190,7 +190,7 @@ label p{
     border: none;
     background: rgba(252, 252, 253, 0.642);
 }
-.item .deleteitem {
+.item .deleteItem {
     width: 25px;
     height: 25px;
     border: none;
@@ -204,7 +204,7 @@ label p{
     cursor: pointer;
     background: rgb(196, 219, 244);
 }
-.item .deleteitem:hover {
+.item .deleteItem:hover {
     background: #e55050 !important;
 }
 /**/

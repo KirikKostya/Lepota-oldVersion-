@@ -1,0 +1,29 @@
+@import url('/src/Fonts/fonts.css');
+.formContainer{
+    width: 70%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-around; 
+    margin: 10px 0
+}
+.formContainer input, .updateInput{
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+    font-family: 'Montserrat-Regular';
+}
+.updateTextarea{
+    width: 350px;
+    height: 175px;
+    resize: none;
+    margin-top: 5px;
+}
+.updateBTNS{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}

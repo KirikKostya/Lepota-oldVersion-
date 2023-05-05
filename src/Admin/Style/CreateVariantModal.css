@@ -1,0 +1,21 @@
+@import url('/src/Fonts/fonts.css');
+.addVariantHeader{
+    font-family: 'Montserrat-Bold';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.createContainer{
+    width: 65%; 
+    display: flex; 
+    justify-content: space-around; 
+    align-items: center;
+    margin: 20px 0 0 0;
+}
+.createContainer input{
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+    font-family: 'Montserrat-Regular';
+}

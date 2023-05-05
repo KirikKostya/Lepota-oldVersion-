@@ -22,10 +22,6 @@ export default function TypeCatalog() {
   const [modalView, setModalView] = useState(false)
   const [updateModalViewType, setUpdateModalViewType] = useState('')
 
-  
-    //admine variables
-    const variantId = useSelector(state=>state.variantId);
-
   const order = JSON.parse(localStorage.getItem('infoAboutTypeOfOrder'))
 
   //Список товаров по заданному типу
@@ -50,7 +46,8 @@ export default function TypeCatalog() {
     axios.get(`https://api.native-flora.tk/Item/GetById?id=${OpenID || localStorage.getItem('searchOrderById')}`)
       .then(res=>{
         setCatalogOrders([res.data.data]);
-        isAdmin && localStorage.setItem('variants', JSON.stringify(res.data.data.variants))
+        localStorage.setItem('variants', JSON.stringify(res.data.data.variants))
+        // console.log(res.data.data.variants)
         dispatch({type: 'SET_TOTAL_SUM_TYPE-COMP', payload: res.data.data.item.price});
         dispatch({type: 'LOADING_IS_COMPLETED'});
         return res;
@@ -136,7 +133,7 @@ export default function TypeCatalog() {
       </div>
 
       {
-        isAdmin 
+        localStorage.getItem('variants') && isAdmin
         &&
         <UpdateModalView 
           type={updateModalViewType} 
@@ -169,11 +166,14 @@ export default function TypeCatalog() {
                           </div>
                           : 
                             <OrderCard 
+                                setCatalogOrders={setCatalogOrders}
                                 catalogOrders={catalogOrders}
                                 setWarningMessageIsOpen={setWarningMessageIsOpen}
                                 setAddedOrder={setAddedOrder}
                                 setModalView={setModalView}
                                 setUpdateModalViewType={setUpdateModalViewType}
+                                fetchProducts={fetchProducts}
+                                variants={JSON.parse(localStorage.getItem('variants'))}
                               />
                     }
                     {

@@ -3,12 +3,11 @@ import ReactModal from 'react-modal'
 import Picker from './Picker';
 import Slider from '../Slider/Slider';
 import { useSelector } from 'react-redux';
-import '../Modals/Styles/WarningModalView.css'
+import './Style/UpdateModalView.css'
 
 export default function UpdateModalView({type, setUpdateModalViewType, allDataOfOrder, refreshFunction, updateFunc}) {
 
     const [changeMetricValue, setChangeMetricValue] = useState(type === 'description' ? allDataOfOrder[type].join(' ') : allDataOfOrder[type]);
-    
     
     const variantId = useSelector(state=>state.variantId);
     let selectVariant = JSON.parse(localStorage.getItem('variants')).filter(el=>el.id == variantId);
@@ -44,7 +43,7 @@ export default function UpdateModalView({type, setUpdateModalViewType, allDataOf
         ariaHideApp={false}
         contentLabel="Selected Option"
     >
-        <h3>Изменение параметра: {type}</h3>
+        <h3>Изменение параметра: {type.replace('metric ', '')}</h3>
         {
             selectVariant[0].icon.length !== 0 && type === 'variant'
             && 
@@ -58,26 +57,40 @@ export default function UpdateModalView({type, setUpdateModalViewType, allDataOf
         }
         {
             type === 'name'
-                ? <input onChange={event => setChangeMetricValue(event.target.value)} defaultValue={allDataOfOrder[type]}/>
+                ? <input 
+                    className='updateInput'
+                    onChange={event => setChangeMetricValue(event.target.value)} 
+                    defaultValue={allDataOfOrder[type]}
+                  />
                     : type === 'description' 
-                        ? <textarea style={{width: '350px', height: '175px', resize: 'none', marginBottom: '5px'}} onChange={event=>setChangeMetricValue(event.target.value)} defaultValue={allDataOfOrder[type].join(' ')}/> 
+                        ? <textarea 
+                            className='updateTextarea'
+                            onChange={event=>setChangeMetricValue(event.target.value)} 
+                            defaultValue={allDataOfOrder[type].join(' ')}
+                          /> 
                             : type.includes('metric')
-                                ? <input onChange={event=>setChangeMetricValue(event.target.value)} defaultValue={allDataOfOrder[type]}/>
+                                ? <input 
+                                    className='updateInput'
+                                    onChange={event=>setChangeMetricValue(event.target.value)} 
+                                    defaultValue={allDataOfOrder[type]}
+                                  />
                                     : type === 'variant'
-                                        ? <div style={{width: '70%', display: 'flex', justifyContent: 'space-around', alignItems: 'center', margin: '15px 0' }}>
+                                        ? <div className='formContainer'>
                                             <input placeholder='Название' onChange={event=>setVariantName(event.target.value)} defaultValue={selectVariant[0].name}/>
                                             <input placeholder='Цена' style={{width: '50px'}} type='number' min={'0'} onChange={event=>setVariantPrice(event.target.value)} defaultValue={selectVariant[0].price}/>
                                             <Picker photos={variantPhotos} setPhotos={setVariantPhotos} style={styleForPicker} />
                                           </div>
                                             : <></>
         }
-        <button 
-            className='modal-closeBTN' 
-            onClick={type === 'variant' ? changeVariant : handlerChange }
-        >
-            Изменить
-        </button>
-        <p onClick={()=>setUpdateModalViewType('')} style={{margin:'5px 0 0 0 ', cursor:'pointer'}}>закрыть</p>
+        <div className='updateBTNS'>
+            <button 
+                className='modal-closeBTN' 
+                onClick={type === 'variant' ? changeVariant : handlerChange }
+            >
+                Изменить
+            </button>
+            <p onClick={()=>setUpdateModalViewType('')} style={{margin:'0', cursor:'pointer'}}>закрыть</p>
+        </div>
     </ReactModal>
   )
 }

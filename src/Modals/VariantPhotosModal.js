@@ -3,7 +3,7 @@ import ReactModal from 'react-modal';
 import Slider from '../Slider/Slider';
 import './Styles/AddedVariantModal.css';
 
-export default function AddedVariantModal({ isOpen, setIsOpen, IMGS }) {
+export default function VariantPhotosModal({ isOpen, setIsOpen, IMGS }) {
 
   return (
     <ReactModal 

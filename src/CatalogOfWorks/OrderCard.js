@@ -1,13 +1,18 @@
 import React, {useEffect, useState, useRef} from 'react'
 import OrderCardMoreImgs from '../Icons/OrderCardMoreImgs';
-import AddedVariantModal from '../Modals/AddedVariantModal'; 
+import VariantPhotosModal from '../Modals/VariantPhotosModal'; 
 import SimpleImageSlider from 'react-simple-image-slider';
+import BasketIcon from '../Icons/BasketIcon';
 import Pensil from '../Icons/Pensil';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshFunction } from '../MailFiles/App'
 import axios from 'axios';
 import './Style/OrderCard.css'
-import BasketIcon from '../Icons/BasketIcon';
+import AddVariantIcon from '../Icons/AddVariantIcon';
+import CreateKitModal from '../Admin/CreateKitModal';
+import CrossIcon from '../Icons/CrossIcon';
+import { deleteVariant } from '../Admin/AdmineController';
+import CreateVariantModal from '../Admin/CreateVariantModal';
 
 
 export default function OrderCard(
@@ -17,6 +22,8 @@ export default function OrderCard(
     setAddedOrder,
     setModalView,
     setUpdateModalViewType,
+    fetchProducts,
+    variants
   }
 ) {
 
@@ -25,16 +32,26 @@ export default function OrderCard(
     const refCount = useRef(null);
 
     const totalSum_TypeComp = useSelector(state=>state.totalSum_TypeComp);
+    const searchOrderById = useSelector(state=>state.searchOrderById);
     const isAdmin = useSelector(state=>state.isAdmin);
     const dispatch = useDispatch();
 
-    const [isOpen, setIsOpen] = useState(false);
+    const [error, setError] = useState('');
+
+    //Opens modal by type
+    const [isOpenCreateKitModal, setIsOpenCreateKitModal] = useState(false);
+    const [isOpenAddedVariantModal, setIsOpenAddedVariantModal] = useState(false);
+    const [isOpenVarintPhotos, setIsOpenVariantPhotos] = useState(false);
+
     const [imagesOfVariant, setImagesOfVariant] = useState(Array);
 
     const [amountOfOrder, setAmountOfOrder] = useState(1)
     const [kits, setKits] = useState(Array);
     const [nameOfKit, setNameOfKit] = useState('');
     const [listOfPhotos, setListOfPhotos] = useState(Array);
+
+    //For all selected kits
+    const [selectedVariants, setSelectedVariants] = useState([]);
 
     //Added item to cart of order
     const addItemToCart = async (cardId) =>{
@@ -84,10 +101,14 @@ export default function OrderCard(
     }
 
     //changes total price, when user ckick on label
-    const handlerChangeTotalSum = async (isCheckedLabel, id) =>{
-      (isCheckedLabel)
-        ? setKits([...kits, id])
-          : setKits([...kits.filter(el => el !== id)])
+    const handlerChangeTotalSum = async (isCheckedLabel, id, item) =>{
+      if(isCheckedLabel){
+        setKits([...kits, id]);
+        setSelectedVariants([...selectedVariants, item]);
+      } else {
+        setKits([...kits.filter(el => el !== id)]);
+        setSelectedVariants([...selectedVariants.filter(el => el.id !== id)]);
+      }
     }
 
     //checks length of selected items and makes correct result
@@ -98,6 +119,7 @@ export default function OrderCard(
             dispatch({type: 'SET_TOTAL_SUM_TYPE-COMP', payload: kit.price});
             setListOfPhotos(kit.icon);
             setNameOfKit(kit.name);
+            console.log(kit)
           }
         })
       } else if(kits.length === 1){
@@ -115,6 +137,7 @@ export default function OrderCard(
       }
     }, [kits])
 
+    useEffect(()=>fetchProducts(searchOrderById), [catalogOrders]);
 
   return (
     catalogOrders.map(order =>(
@@ -136,15 +159,18 @@ export default function OrderCard(
         </div>
         <div className='additionalMetrics'>
           <div className='listOfMitrics'>
-            <h3 className='headerMetrics'>В комплекте может идти:</h3>
+            <h3 className='headerMetrics'>
+              { isAdmin && <AddVariantIcon onClick={()=>setIsOpenAddedVariantModal(true)}/> }
+              В комплекте может идти:
+            </h3>
             <div className='cointainer_TC'>
               {
-                order.variants.sort((a, b)=>a.id-b.id).map((item, index)=>(
+                variants.sort((a, b)=>a.id-b.id).map((item, index)=>(
                   <div key={item.id} className='itemOfMetrics' >
                     <label
                       className='metricLabel' 
                       onChange={async (e)=>{
-                        handlerChangeTotalSum(e.target.checked, item.id, order);
+                        handlerChangeTotalSum(e.target.checked, item.id, item);
                       }}>
                         <input ref={(element) => { refInput.current[index] = element }} type={'checkbox'} className='checkBox' />
                         <span>+</span>
@@ -153,25 +179,39 @@ export default function OrderCard(
                     </label>
                     <OrderCardMoreImgs 
                       onClick={()=>{
-                        setIsOpen(true);
+                        setIsOpenVariantPhotos(true);
                         setImagesOfVariant(getImages(item.icon))
                       }} />
-                    <span>
-                      { 
-                        isAdmin 
-                          && 
-                        <Pensil 
-                          setUpdateModalViewType={async()=>{
-                            dispatch({type: 'SET_VARIANT_ID', payload: item.id});
-                            await setUpdateModalViewType('variant')
-                          }} 
-                        /> 
-                      }
-                    </span>
+                    { 
+                      isAdmin 
+                        && 
+                      <Pensil 
+                        setUpdateModalViewType={async()=>{
+                          dispatch({type: 'SET_VARIANT_ID', payload: item.id});
+                          await setUpdateModalViewType('variant')
+                        }} 
+                      /> 
+                    }
+                    {
+                      isAdmin 
+                      && 
+                      <CrossIcon onClick={async()=>{
+                        deleteVariant(localStorage.getItem('searchOrderById'), item.id);
+                        await fetchProducts(searchOrderById)
+                      }}/>
+                    }
                   </div>
                 ))
               }
             </div>
+            {
+              kits.length>=2
+              &&
+              <button className='addKitBTN' onClick={()=>setIsOpenCreateKitModal(true)}>Создать набор</button>
+            }
+            {
+              error && <sup style={{color: 'red'}}>{error}</sup>
+            }
           </div>
           {
             catalogOrders.map(order=>(
@@ -183,16 +223,14 @@ export default function OrderCard(
                     ref={refCount}
                     type={'number'} 
                     className='amountInput'
-                    onChange={(e)=>{
-                      setAmountOfOrder(e.target.value)
-                    }}
+                    onChange={(e)=> setAmountOfOrder(e.target.value)}
                     defaultValue={amountOfOrder}
                     min={0}
                   />
                   <span>{totalSum_TypeComp} Br</span>
                   <OrderCardMoreImgs 
                     onClick={()=>{
-                      setIsOpen(true);
+                      setIsOpenVariantPhotos(true);
                       setImagesOfVariant(getImages(listOfPhotos))
                     }} />
                 </h3>
@@ -203,14 +241,18 @@ export default function OrderCard(
                             ? addItemToCart(order.item.id)
                               : setWarningMessageIsOpen(true)
                           refreshFunction(dispatch) //Fetch to refresh Token
-                        }}>В корзину
+                        }}
+                  >
+                    В корзину
                   <BasketIcon />     
                 </button>
               </div>
             ))
           }
         </div>
-        <AddedVariantModal isOpen={isOpen} setIsOpen={setIsOpen} IMGS={imagesOfVariant} />
+        <CreateKitModal isOpen={isOpenCreateKitModal} setIsOpen={setIsOpenCreateKitModal} kitVariants={kits} itemId={searchOrderById} selectedVariants={selectedVariants}/>
+        <CreateVariantModal isOpen={isOpenAddedVariantModal} setIsOpen={setIsOpenAddedVariantModal} setError={setError} cleanSelectedOptions={()=>cleanSelectedOptions(refInput, refCount)}/>
+        <VariantPhotosModal isOpen={isOpenVarintPhotos} setIsOpen={setIsOpenVariantPhotos} IMGS={imagesOfVariant} />
       </div>
       ))
   )

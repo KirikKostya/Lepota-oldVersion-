@@ -154,6 +154,7 @@
 .fioField .textArea textarea{
     width: 60%;
     height: 200px;
+    resize: none;
 }
 .fioField form{
     flex: 1;

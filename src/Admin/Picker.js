@@ -1,5 +1,6 @@
 import React from 'react'
 import useDrivePicker from 'react-google-drive-picker'
+import CameraIcon from '../Icons/CameraIcon';
 
 export default function Picker({setPhotos, photos, className, style}) {
     const [openPicker] = useDrivePicker();  
@@ -24,15 +25,15 @@ export default function Picker({setPhotos, photos, className, style}) {
     }
 
   return (
-    <button onClick={handleOpenPicker} className={className} style={style}>
-        {
-            className
-                ? <>
-                    <p>+</p>
-                    <span>Загрузить фото</span>  
-                  </> 
-                    : <>+</>
-        }
-    </button>
+    <>
+      {
+        className
+        ? <button onClick={handleOpenPicker} className={className} style={style}>
+            <p>+</p>
+            <span>Загрузить фото</span>  
+          </button>
+          : <CameraIcon onClick={handleOpenPicker}/>
+      }
+    </>
   )
 }
