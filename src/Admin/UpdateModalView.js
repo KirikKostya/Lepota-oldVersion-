@@ -37,6 +37,8 @@ export default function UpdateModalView({type, setUpdateModalViewType, allDataOf
         justifyContent: 'center'
     }
 
+    // useEffect(()=>{console.log(selectVariant)}, [])
+
   return (
     <ReactModal 
         isOpen={type == '' ? false : true }
@@ -45,15 +47,19 @@ export default function UpdateModalView({type, setUpdateModalViewType, allDataOf
     >
         <h3>Изменение параметра: {type.replace('metric ', '')}</h3>
         {
+          selectVariant.length === 0
+            ? <></>
+              :
             selectVariant[0].icon.length !== 0 && type === 'variant'
-            && 
+              && 
             <Slider>
-                {
-                  selectVariant[0].icon.map(img=>(
-                    <img key={img} src={ img } alt='something'/>
-                  ))
-                }
+              {
+                selectVariant[0].icon.map(img=>(
+                  <img key={img} src={ img } alt='something'/>
+                ))
+              }
             </Slider>
+            
         }
         {
             type === 'name'

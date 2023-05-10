@@ -6,6 +6,9 @@ import Router from './Router';
 import axios from 'axios';
 import './Styles/App.css';
 import { checkIsAdmine } from '../Admin/AdmineController';
+import LoadingComp from '../Loading/LoadingComp';
+import LoadingComp2 from '../Loading/LoadingComp2';
+import Loading from 'react-loading';
 
 //refresh Token for authori- and registration (only this function uses fetch-request)
 export const refreshFunction = async (dispatch, newFunc) => {
@@ -41,6 +44,7 @@ function App() {
   
   const myAccountIsOpen = useSelector(state=>state.myAccountIsOpen);
   const refreshTokenIsExpired = useSelector(state=>state.refreshTokenIsExpired);
+  const isLoading = useSelector(state=>state.isLoading);
   const dispatch = useDispatch();
 
   useEffect(()=>{
@@ -48,29 +52,43 @@ function App() {
   }, [])
   
   return (
-    <div 
-      className="app" 
-      onClick={()=>{
-        if(myAccountIsOpen){
-          dispatch({type: 'CLOSE_MY_ACCOUNT'})
-        }
+    <>
+      {
+        isLoading 
+        &&
+        <Loading
+          type="spokes"
+          color="black"
+          height="50px"
+          width="50px"
+          padding="20px"
+          className='spin'
+        />
       }
-    }>
-      <Router />
-      <ReactModal 
-        ariaHideApp={false}
-        isOpen={refreshTokenIsExpired}
-      >
-        <h1 className='warningHeader'>Приветствуем !</h1>
-        <p className='warningMessage'>Вас долго не было с нами, вам необходимо повторно войти в аккаунт! </p>
-        <button 
-          className='modal-closeBTN' 
-          onClick={()=>{
-            dispatch({type: 'SET_REFRESH-TOKEN_STATUS', payload: false})
-            signOut(dispatch)
-          }}>Закрыть</button>  
-      </ReactModal>
-    </div>
+      <div 
+        className={`app ${isLoading && 'blur'}`} 
+        onClick={()=>{
+          if(myAccountIsOpen){
+            dispatch({type: 'CLOSE_MY_ACCOUNT'})
+          }
+        }
+      }>
+        <Router />
+        <ReactModal 
+          ariaHideApp={false}
+          isOpen={refreshTokenIsExpired}
+        >
+          <h1 className='warningHeader'>Приветствуем !</h1>
+          <p className='warningMessage'>Вас долго не было с нами, вам необходимо повторно войти в аккаунт! </p>
+          <button 
+            className='modal-closeBTN' 
+            onClick={()=>{
+              dispatch({type: 'SET_REFRESH-TOKEN_STATUS', payload: false})
+              signOut(dispatch)
+            }}>Закрыть</button>  
+        </ReactModal>
+      </div>
+    </>
   );
 }
 

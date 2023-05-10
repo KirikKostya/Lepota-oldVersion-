@@ -93,11 +93,15 @@ export default function OrderCard(
 
     //Make list from response data
     const getImages = (images) => {
-      return images.map(image=>{
-        let galleryItem = {};
-        galleryItem['url'] = image;
-        return galleryItem; 
-      }); 
+      return images === null
+        ? [{
+            url: require('../Photos/somethingWentWrong.png')
+          }] 
+          : images.map(image=>{
+              let galleryItem = {};
+              galleryItem['url'] = image;
+              return galleryItem; 
+            }) 
     }
 
     //changes total price, when user ckick on label
@@ -158,50 +162,52 @@ export default function OrderCard(
           </div>
         </div>
         <div className='additionalMetrics'>
-          <div className='listOfMitrics'>
+          <div className={`listOfMitrics ${variants.length===0 && 'empty'}`}>
             <h3 className='headerMetrics'>
               { isAdmin && <AddVariantIcon onClick={()=>setIsOpenAddedVariantModal(true)}/> }
               В комплекте может идти:
             </h3>
-            <div className='cointainer_TC'>
+            <div className='cointainer_TC ' >
               {
-                variants.sort((a, b)=>a.id-b.id).map((item, index)=>(
-                  <div key={item.id} className='itemOfMetrics' >
-                    <label
-                      className='metricLabel' 
-                      onChange={async (e)=>{
-                        handlerChangeTotalSum(e.target.checked, item.id, item);
-                      }}>
-                        <input ref={(element) => { refInput.current[index] = element }} type={'checkbox'} className='checkBox' />
-                        <span>+</span>
-                        <p id='variantName'>{item.name} </p>
-                        <p className='item-price'>{item.price} BYN</p>
-                    </label>
-                    <OrderCardMoreImgs 
-                      onClick={()=>{
-                        setIsOpenVariantPhotos(true);
-                        setImagesOfVariant(getImages(item.icon))
-                      }} />
-                    { 
-                      isAdmin 
-                        && 
-                      <Pensil 
-                        setUpdateModalViewType={async()=>{
-                          dispatch({type: 'SET_VARIANT_ID', payload: item.id});
-                          await setUpdateModalViewType('variant')
-                        }} 
-                      /> 
-                    }
-                    {
-                      isAdmin 
-                      && 
-                      <CrossIcon onClick={async()=>{
-                        deleteVariant(localStorage.getItem('searchOrderById'), item.id);
-                        await fetchProducts(searchOrderById)
-                      }}/>
-                    }
-                  </div>
-                ))
+                variants.length === 0 
+                  ? <span style={{display: 'block', width: '100%', textAlign: 'center'}}>Нет комбинированных вариантов</span>
+                    : variants.sort((a, b)=>a.id-b.id).map((item, index)=>(
+                        <div key={item.id} className='itemOfMetrics' >
+                          <label
+                            className='metricLabel' 
+                            onChange={async (e)=>{
+                              handlerChangeTotalSum(e.target.checked, item.id, item);
+                            }}>
+                              <input ref={(element) => { refInput.current[index] = element }} type={'checkbox'} className='checkBox' />
+                              <span>+</span>
+                              <p id='variantName'>{item.name} </p>
+                              <p className='item-price'>{item.price} BYN</p>
+                          </label>
+                          <OrderCardMoreImgs 
+                            onClick={()=>{
+                              setIsOpenVariantPhotos(true);
+                              setImagesOfVariant(getImages(item.icon))
+                            }} />
+                          { 
+                            isAdmin 
+                              && 
+                            <Pensil 
+                              setUpdateModalViewType={async()=>{
+                                dispatch({type: 'SET_VARIANT_ID', payload: item.id});
+                                await setUpdateModalViewType('variant')
+                              }} 
+                            /> 
+                          }
+                          {
+                            isAdmin 
+                            && 
+                            <CrossIcon onClick={async()=>{
+                              deleteVariant(localStorage.getItem('searchOrderById'), item.id);
+                              await fetchProducts(searchOrderById)
+                            }}/>
+                          }
+                        </div>
+                      ))
               }
             </div>
             {

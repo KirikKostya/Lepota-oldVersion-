@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import CardOfWork from './CardOfWork'
-import LoadingComp from '../Loading/LoadingComp'
-import { useDispatch, useSelector } from 'react-redux'
+// import LoadingComp from '../Loading/LoadingComp'
+import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import './Styles/WorkCatalog.css'
 
@@ -10,7 +10,6 @@ export default function WorkCatalog() {
   const [CARDS, setCARDS] = useState([])
   
   const dispatch = useDispatch();
-  const isLoading = useSelector(state=>state.isLoading);
 
   const fetchFanc = () =>{
     axios.get(`https://api.native-flora.tk/Item/GetAll`)
@@ -21,6 +20,7 @@ export default function WorkCatalog() {
   }
 
   useEffect(()=>{
+    dispatch({type: 'LOADING_IS_UNCOMPLETED'});
     fetchFanc()
   }, [])
 
@@ -32,15 +32,11 @@ export default function WorkCatalog() {
           Вы сможете сделать заказ и обсудить с мастером вариант вашейго собственного заказа.
         </p>
         <div className='listOfWorks'>
-            {
-              isLoading
-                ? <div className='loadingComp'>
-                    <LoadingComp />
-                  </div>
-                  : CARDS.sort((a,b) => a.id - b.id).map(card => (
-                      <CardOfWork key={card.id} card={card}/>
-                    ))
-            }
+          {
+            CARDS.sort((a,b) => a.id - b.id).map(card => (
+              <CardOfWork key={card.id} card={card}/>
+            ))
+          }
         </div>
     </div>
   )

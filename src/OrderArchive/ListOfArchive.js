@@ -1,16 +1,15 @@
-import React, { useState,useEffect } from 'react';
+import React from 'react';
 import { SortByDate, SortByDileverStatus, SortByDileverType } from '../DropDowns/OptionList.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import SingleSelect from '../DropDowns/SingleSelect.js';
-import LoadingComp2 from '../Loading/LoadingComp2.js';
 import axios from 'axios';
 import './Styles/OrdersArchive.css';
 
 
-export default function ListOfArchive({LIST, setList}) {
+export default function ListOfArchive({ LIST, setList }) {
 
-  const isLoading = useSelector(state=>state.isLoadingInArchive);
+  const isLoading = useSelector(state=>state.isLoading);
   const dispatch = useDispatch();
 
   //makes array from object
@@ -99,89 +98,86 @@ export default function ListOfArchive({LIST, setList}) {
                       : {color: 'black'}
   }
 
-  useEffect(()=>{
-    window.scrollTo(0, 0)
-   }, [])
-
   return (
     <div className='mainContainerForArhive' id='hideNavBarMainLink'>
       {
-        LIST.length === 0
-          ? <div className='emptyArchive'>
-              <h1>Ваш архив заказов пуст!</h1>
-              <h3>Для пополнения архива вы должны создать и отправить нам заказ <NavLink to={'/MyBasket'}>в корзине</NavLink></h3>
-            </div>
-            :  <div className='mainListContainer'>
-                {
-                    isLoading 
-                        ? <LoadingComp2 />
-                            : LIST.map((el, index)=>(
-                                <div className='listContainer' key={index}>
-                                <div className={'archiveCheck'}>
-                                    
-                                    <div className='date_numberOrder'>
-                                    <p>Заказ #<span>{el.id}</span></p>
-                                        {
-                                        makeArray(el.fullDate).map((fullDate, index)=>(
-                                            <p className='date' key={index}>{fullDate.Time} - {fullDate.Date}</p>
-                                        ))
-                                        }
-                                    </div>
+        isLoading 
+          ? <div className='mainListContainer'></div>
+            : LIST.length === 0
+                ? <div className='emptyArchive'>
+                    <h1>Ваш архив заказов пуст!</h1>
+                    <h3>Для пополнения архива вы должны создать и отправить нам заказ <NavLink to={'/MyBasket'}>в корзине</NavLink></h3>
+                  </div>
+                  : <div className='mainListContainer'>
+                      {
+                        LIST.map((el, index)=>(
+                          <div className='listContainer' key={index}>
+                            <div className={'archiveCheck'}>
+                              <div className='date_numberOrder'>
+                                <p>Заказ #<span>{el.id}</span></p>
+                                {
+                                  makeArray(el.fullDate).map((fullDate, index)=>(
+                                      <p className='date' key={index}>{fullDate.Time} - {fullDate.Date}</p>
+                                  ))
+                                }
+                              </div>
 
-                                    <div className='customerName'>
-                                    <p>Заказчик :</p>
-                                    <span>{el.fio}</span>
-                                    </div>
+                              <div className='customerName'>
+                                <p>Заказчик :</p>
+                                <span>{el.fio}</span>
+                              </div>
 
-                                    <div className='orderItems'>
-                                    <p>Заказанные товары :</p>
-                                        {
-                                        el.cartItems.map((item, index)=>(
-                                            <div key={index} className={'item'}>
-                                            <p>
-                                                {item.item.name}
-                                                <span className='variantInArchive'>
-                                                {`( ${
+                              <div className='orderItems'>
+                                <p>Заказанные товары :</p>
+                                {
+                                  el.cartItems.map((item, index)=>(
+                                    <div key={index} className='item'>
+                                      <p>
+                                          {item.item.name}
+                                          <span className='variantInArchive'>
+                                          {`( 
+                                              ${
                                                 item.variants
                                                     ? item.variants.map(el=>(
-                                                    el.name
-                                                    ))
-                                                    : item.kit
-                                                        ? item.kit.name
-                                                        : 'Нет комплекта'
-                                                } )`}
-                                                </span>
-                                                {` x${item.amount}`}
-                                            </p>
-                                            <span>{item.price}p.</span>
-                                            </div>
-                                        ))
-                                        }
+                                                        el === null ? 'Нет комплекта' : el.name
+                                                      ))
+                                                      : item.kit
+                                                          ? item.kit.name
+                                                            : 'Нет комплекта'
+                                              } 
+                                            )`
+                                          }
+                                          </span>
+                                          {` x${item.amount}`}
+                                      </p>
+                                      <span>{item.price}p.</span>
                                     </div>
+                                  ))
+                                }
+                              </div>
 
-                                    <div className='shippingType'>
-                                    <p>Тип получения :</p>
-                                    <span>{el.shipping && 'Доставка' || 'Самовывоз'}</span>
-                                    </div>
+                              <div className='shippingType'>
+                                <p>Тип получения :</p>
+                                <span>{el.shipping && 'Доставка' || 'Самовывоз'}</span>
+                              </div>
 
-                                    <div className='customer'>
-                                    <p>ИТОГО К ОПЛАТЕ :</p>
-                                    <span>= {el.totalPrice}p.</span>
-                                    </div>
+                              <div className='customer'>
+                                <p>ИТОГО К ОПЛАТЕ :</p>
+                                <span>= {el.totalPrice}p.</span>
+                              </div>
 
-                                    <div className='orderStatus'>
-                                    <p>Статус Заказа :</p>
-                                    <span style={creatingStyles(el.shippingStatus)}>
-                                      {
-                                        checkedStatusOfDelivering(el.shippingStatus)
-                                      }
-                                    </span>
-                                    </div>
-                                </div>
-                                </div>
-                            ))
-                            }
-                </div>
+                              <div className='orderStatus'>
+                                <p>Статус Заказа :</p>
+                                <span style={creatingStyles(el.shippingStatus)}>
+                                  {checkedStatusOfDelivering(el.shippingStatus)} 
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        ))
+                      }
+                      <button onClick={()=>console.log(LIST)}>123</button>
+                    </div>
       }
       <div className='filterContainer'>
         <SingleSelect 

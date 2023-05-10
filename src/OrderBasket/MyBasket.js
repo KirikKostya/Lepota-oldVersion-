@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import MainBasketField from './MainBasketField'
 import UpNavigation from '../Components/UpNavigation.js'
-import LoadingComp2 from '../Loading/LoadingComp2.js'
 import ContactWithUs from '../Components/ContactWithUs'
 import { useDispatch, useSelector } from 'react-redux'
 import { refreshFunction } from '../MailFiles/App.js'
@@ -14,7 +13,6 @@ export default function MyBasket() {
   const [ItemsInBasket, setItemsInBasket] = useState([])
 
   const dispatch = useDispatch()
-  const isLoading = useSelector(state => state.isLoading)
 
   //takes all carts from basket-API
   const requestBasketFunc = async () => {
@@ -32,33 +30,30 @@ export default function MyBasket() {
   }
 
   useEffect(()=>{
-   refreshFunction(dispatch, requestBasketFunc)
-   window.scrollTo(0, 0)
+    dispatch({type: 'LOADING_IS_UNCOMPLETED'})
+    refreshFunction(dispatch, requestBasketFunc)
+    window.scrollTo(0, 0)
   }, [])
 
   return (
     <>
       <UpNavigation hide='hide'/>
-      {
-        isLoading
-          ? <LoadingComp2 />
-            : <div className='fullContainer' id='hideNavBarMainLink' style={{ 'alignItems': ItemsInBasket.length === 0 ? 'center' : 'start'}}>
-                <div className='mainFielfForBasket'>
-                  <div className='basketParametrs'>
-                    <p id='fullName'>Товар</p>
-                    <p id='price'>Цена</p>
-                    <p id='amount'>Кол-во</p>
-                    <p id='totalPrice'>Сумма</p>
-                  </div>
-                  <MainBasketField 
-                    ItemsInBasket = {ItemsInBasket}
-                    setItemsInBasket = {setItemsInBasket} 
-                    requestBasketFunc = {requestBasketFunc}
-                  />
-                </div>
-                <Check ItemsInBasket = {ItemsInBasket} requestBasketFunc={requestBasketFunc}/>
-              </div>
-      }
+        <div className='fullContainer' id='hideNavBarMainLink' style={{ 'alignItems': ItemsInBasket.length === 0 ? 'center' : 'start'}}>
+          <div className='mainFielfForBasket'>
+            <div className='basketParametrs'>
+              <p id='fullName'>Товар</p>
+              <p id='price'>Цена</p>
+              <p id='amount'>Кол-во</p>
+              <p id='totalPrice'>Сумма</p>
+            </div>
+            <MainBasketField 
+              ItemsInBasket = {ItemsInBasket}
+              setItemsInBasket = {setItemsInBasket} 
+              requestBasketFunc = {requestBasketFunc}
+            />
+          </div>
+          <Check ItemsInBasket = {ItemsInBasket} requestBasketFunc={requestBasketFunc}/>
+        </div>
       <ContactWithUs />
     </>
   )

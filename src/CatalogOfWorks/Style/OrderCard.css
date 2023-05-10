@@ -33,6 +33,10 @@
     align-items: center;
     justify-content: center;
 }
+.empty{
+    display: flex !important;
+    justify-content: space-evenly !important;
+}
 .cointainer_TC .itemOfMetrics{
     width: 95%;
     display: flex;

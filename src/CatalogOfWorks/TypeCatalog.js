@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import UpNavigation from '../Components/UpNavigation';
-import LoadingComp from '../Loading/LoadingComp';
 import OrderCard from './OrderCard';
 import ContactWithUs from '../Components/ContactWithUs';
 import ReactModal from 'react-modal';
@@ -47,7 +46,6 @@ export default function TypeCatalog() {
       .then(res=>{
         setCatalogOrders([res.data.data]);
         localStorage.setItem('variants', JSON.stringify(res.data.data.variants))
-        // console.log(res.data.data.variants)
         dispatch({type: 'SET_TOTAL_SUM_TYPE-COMP', payload: res.data.data.item.price});
         dispatch({type: 'LOADING_IS_COMPLETED'});
         return res;
@@ -153,29 +151,21 @@ export default function TypeCatalog() {
           }
         />
       }
-
       <div className='containerForTypeCatalog'>
         {
           warningMessageIsOpen
               ? <WarningModalView warningMessageIsOpen={warningMessageIsOpen}/>
                 :<>
-                    {
-                      isLoading
-                        ? <div className='loadingField'> 
-                            <LoadingComp />
-                          </div>
-                          : 
-                            <OrderCard 
-                                setCatalogOrders={setCatalogOrders}
-                                catalogOrders={catalogOrders}
-                                setWarningMessageIsOpen={setWarningMessageIsOpen}
-                                setAddedOrder={setAddedOrder}
-                                setModalView={setModalView}
-                                setUpdateModalViewType={setUpdateModalViewType}
-                                fetchProducts={fetchProducts}
-                                variants={JSON.parse(localStorage.getItem('variants'))}
-                              />
-                    }
+                    <OrderCard 
+                      setCatalogOrders={setCatalogOrders}
+                      catalogOrders={catalogOrders}
+                      setWarningMessageIsOpen={setWarningMessageIsOpen}
+                      setAddedOrder={setAddedOrder}
+                      setModalView={setModalView}
+                      setUpdateModalViewType={setUpdateModalViewType}
+                      fetchProducts={fetchProducts}
+                      variants={JSON.parse(localStorage.getItem('variants'))}
+                    />
                     {
                       addedOrder
                         ? <ReactModal 
@@ -186,15 +176,15 @@ export default function TypeCatalog() {
                             <h2 className='modal-header'>Ваш товар добавлен в корзину!</h2>
                           </ReactModal>
                           : modalView
-                            ? <ReactModal 
-                                isOpen={modalView}
-                                ariaHideApp={false}
-                                contentLabel="Selected Option"
-                              >
-                                <h2 className='modal-header'>Такой товар уже есть в корзине</h2>
-                                <p>Изменить количество товаров можно в корзине</p>
-                              </ReactModal>
-                               :<></>
+                            &&
+                            <ReactModal 
+                              isOpen={modalView}
+                              ariaHideApp={false}
+                              contentLabel="Selected Option"
+                            >
+                              <h2 className='modal-header'>Такой товар уже есть в корзине</h2>
+                              <p>Изменить количество товаров можно в корзине</p>
+                            </ReactModal>
                     }
                 </>
         }
