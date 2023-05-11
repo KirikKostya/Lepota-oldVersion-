@@ -23,14 +23,14 @@
     margin-left: 10px;
 }
 /*fio-field*/
-.containerForDataAboutUser .fioField{
-    width: 60%;
+.containerForDataAboutUser .inputField{
+    width: 70%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 20px;
 }
-.containerForDataAboutUser .fioField:nth-child(1){
+.containerForDataAboutUser .inputField:nth-child(1){
     margin-top: 0;
 }
 /**/
@@ -146,27 +146,26 @@
     color: #56a8ffd5;
 }
 
-
 /**/
-.fioField .textArea{
+.inputField .textArea{
     width: 100%;
 }
-.fioField .textArea textarea{
-    width: 60%;
+.inputField .textArea textarea{
+    width: 70%;
     height: 200px;
     resize: none;
 }
-.fioField form{
+.inputField form{
     flex: 1;
 }
-.fioField form p{
+.inputField form p{
     font-size: 10.5pt;
     font-family: 'Montserrat-Light';
     letter-spacing: 1px;
     margin: 5px 0 5px 3px;
     padding: 0;
 }
-.fioField form input{
+.inputField form input{
     width: 90%;
     height: 40px;
     border: 1px solid black;
@@ -177,13 +176,25 @@
     background: #f9f9f9b2;
     outline: none;
 }
+.inputField .address{
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+}
+.inputField .address #address{
+    flex: 0.65 !important;
+}
+.inputField .address #index{
+    flex: 0.3;
+}
 /**/
+
 /**/
 .containerForDataAboutUser .saveButton_Prof{
     width: 100%;
 }
 .containerForDataAboutUser .saveButton_Prof button{
-    width: 60%;
+    width: 70%;
     height: 35px;
     color: aliceblue;
     font-family: 'Montserrat-Medium';
@@ -218,6 +229,7 @@
 .containerForDataAboutUser .submitButton_Prof button:hover{
     background: #5da6f3;
 }
+
 /**/
 @media screen and (max-width: 1200px) {
     .containerForDataAboutUser .listInfoCard-Profile{
@@ -235,9 +247,9 @@
         " profileCatalog profileCatalog profileReviews profileArchive profileCard "
         "profileBasket profileBasket profileBasket profileRecomendation profileRecomendation profileRecomendation";
     }
-    .containerForDataAboutUser .fioField, 
+    .containerForDataAboutUser .inputField, 
     .containerForDataAboutUser .saveButton_Prof button,
-    .fioField .textArea{
+    .inputField .textArea{
         width: 95%;
     }
 }
@@ -251,28 +263,32 @@
     .listInfoCard-Profile .infoCard{
         height: 100px;
     }
-    .containerForDataAboutUser .fioField{
+    .containerForDataAboutUser .inputField{
         flex-direction: column;
         align-items: start;
     }
-    .fioField .textArea{
+    .inputField .textArea{
         width: 95%;
         display: flex;
         flex-direction: column;
         align-items: start;
     }
-    .fioField .textArea textarea{
+    .inputField .textArea textarea{
         width: 90%;
         height: 200px;
         margin-left: 10px;
     }
-    .fioField form{
+    .inputField form{
         width: 95%;
     }
-    .fioField form input{
+    .inputField form input{
         width: 100%;
         margin-bottom: 5px;
     }
+    .inputField .address{
+        width: 100%;
+    }
+    
     .containerForDataAboutUser .saveButton_Prof{
         width: 95%;
         display: flex;

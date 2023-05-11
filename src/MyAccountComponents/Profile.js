@@ -6,22 +6,100 @@ import { FaChevronLeft } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { refreshFunction } from '../MailFiles/App'
 import { NavLink } from 'react-router-dom'
+import InputMask from 'react-input-mask';
+import axios, { all } from 'axios'
 import './Styles/Profile.css'
 
 export default function Profile() {
+  
+  const [allDateAboutUser, setAllDateAboutUser] = useState({})
 
+  //date about user
+  const [userName, setUserName] = useState('');
+  const [userSurname, setUserSurname] = useState('');
+  const [userFathername, setUserFathername] = useState('');
+  const [userAddress, setUserAddress] = useState('');
+  const [userZipcode, setUserZipcode] = useState('');
+  const [userPhone, setUserPhone] = useState('');
+  const [userBirthday, setUserBirthday] = useState('');
+  const [userInst, setUserInst] = useState('');
+  const [userVK, setUserVK] = useState('');
+  const [userTelegram, setUserTelegram] = useState(''); 
+  const [recommendation, setUserRecommendation] = useState('');
+
+  const dispatch = useDispatch();
   const isAdmin = useSelector(state=>state.isAdmin);
   
   const [typeOfData, setTypeOfData] = useState('main');
-  const dispatch = useDispatch();
-
+  
   const refreshAndSetType = (value) => {
     setTypeOfData(value);
     refreshFunction(dispatch)
   }
 
+  const setOptionList = (type) => {
+    return type === 'secureData'
+            ? 'Личные данные'
+              : type === 'addedCart'
+                ? 'Личные данные'
+                  : type === 'reference'
+                    ? 'Рекомендации'
+                      : type === 'messages'
+                        ? 'Связаться со мной'
+                          : type === 'main'
+                            ? 'Личный кабинет'
+                              : 'Личный кабинет'
+  }
+
+  const setPersonalDate = (name, surName, fatherName, address, zipcode, phone, birthday) => {
+    dispatch({type: 'LOADING_IS_UNCOMPLETED'});
+    axios.post(`https://api.native-flora.tk/User/SetInfo`, {
+      "firstName": name,
+      "surName": surName,
+      "fatherName": fatherName,
+      "address": address,
+      "zipCode": zipcode,
+      "birthday": birthday,
+      "phone": phone
+    }, {
+        headers:{'x-access-token': localStorage.getItem('accessToken')}     
+      })
+    .then(res=>{
+      // clearAllInput();
+      dispatch({type: 'LOADING_IS_COMPLETED'});
+    })
+    .catch(err=>console.log(err))
+  }
+
+  const getPersonalDate = () => {
+    dispatch({type: 'LOADING_IS_UNCOMPLETED'});
+    axios.get('https://api.native-flora.tk/User/GetInfo', {
+      headers:{'x-access-token': localStorage.getItem('accessToken')}
+    })
+    .then(res=>{
+      dispatch({type: 'LOADING_IS_COMPLETED'});
+      setAllDateAboutUser(res.data.data)})
+    .catch(err=>console.log(err))
+  }
+
+  const LOG = () => {
+    console.log(userName, userSurname, userFathername, userAddress, userZipcode, userPhone, userBirthday)
+  }
+
+  const clearAllInput = () =>{
+    setUserName('')
+    setUserSurname('')
+    setUserFathername('')
+    setUserAddress('')
+    setUserZipcode('')
+    setUserPhone('')
+    setUserBirthday('')
+  }
+
   useEffect(()=>{
     window.scrollTo(0, 0);
+
+    refreshFunction(dispatch, getPersonalDate)
   }, [])
 
   return (
@@ -35,22 +113,8 @@ export default function Profile() {
                 &&
               <FaChevronLeft onClick={()=>setTypeOfData('main')} style={{marginRight: '15px'}}/>
             }
-            {
-              typeOfData === 'secureData'
-                ? 'Личные данные'
-                  : typeOfData === 'addedCart'
-                    ? 'Личные данные'
-                      : typeOfData === 'reference'
-                        ? 'Рекомендации'
-                          : typeOfData === 'messages'
-                            ? 'Связаться со мной'
-                              : typeOfData === 'main'
-                                ? 'Личный кабинет'
-                                  : 'Личный кабинет'
-            }
-            {
-              isAdmin && ` (Администатор)`
-            }
+            { setOptionList(typeOfData) }
+            { isAdmin && ` (Администатор)` }
           </span>
           <br/>
           <div className='typesOfData'>
@@ -101,7 +165,7 @@ export default function Profile() {
             typeOfData==='main'
               ? <div className='listInfoCard-Profile'>
                 {
-                  isAdmin 
+                  !isAdmin 
                   ? <div className='infoCard profileUser' onClick={()=>refreshAndSetType('addedCart')}>
                       <div className='dataContainer'>
                         <svg 
@@ -186,36 +250,55 @@ export default function Profile() {
                 </div>
                 : typeOfData === 'secureData'
                   ?<>
-                    <div className='fioField'>
+                    <div className='inputField'>
                       <form>
                         <p>Фамилия:</p>
-                        <input placeholder='Ваша фамилия'/>
+                        <input defaultValue={allDateAboutUser.surName} placeholder='Ваша фамилия' autoComplete='off' onChange={(event)=>setUserSurname(event.target.value)} />
                       </form>
                       <form>
                         <p>Имя:</p>
-                        <input placeholder='Ваше имя'/>
+                        <input defaultValue={allDateAboutUser.firstName} placeholder='Ваше имя' autoComplete='off' onChange={(event)=>setUserName(event.target.value)}/>
                       </form>
                       <form>
                         <p>Отчество:</p>
-                        <input placeholder='Ваше отчество'/>
+                        <input defaultValue={allDateAboutUser.fatherName} placeholder='Ваше отчество' autoComplete='off' onChange={(event)=>setUserFathername(event.target.value)}/>
                       </form>
                     </div>
-                    <div className='fioField'>
+                    <div className='inputField'>
                       <form>
-                        <p>Email:</p>
-                        <input placeholder='Ваша email'/>
+                        <p>Адрес:</p>
+                        <div className='address'>
+                          <input defaultValue={allDateAboutUser.address} id='address' placeholder='Ваша адрес' autoComplete='off' onChange={(event)=>setUserAddress(event.target.value)} />
+                          <input defaultValue={allDateAboutUser.zipCode} id='index' placeholder='Индекс' autoComplete='off' onChange={(event)=>setUserZipcode(event.target.value)}/>
+                        </div>
                       </form>
                       <form>
                         <p>Телефон:</p>
-                        <input placeholder='Ваш телефон'/>
+                        <InputMask 
+                          placeholder='+375 (__) ___-__-__'
+                          defaultValue={allDateAboutUser.phone}
+                          onChange={(event)=>setUserPhone(event.target.value)}
+                          mask='+375 (99) 999-99-99'
+                        />
                       </form>
                       <form>
                         <p>Дата рождения:</p>
-                        <input type='date' placeholder='дд.мм.ггггЁ'/>
+                        <input defaultValue={allDateAboutUser.birthday} type='date' placeholder='дд.мм.гггг' autoComplete='off' onChange={(event)=>setUserBirthday(event.target.value)}/>
                       </form>
                     </div>
                     <div className='saveButton_Prof'>
-                      <button>
+                      <button onClick={async()=>{
+                        setPersonalDate(
+                          userName || allDateAboutUser.firstName,
+                          userSurname || allDateAboutUser.surName,
+                          userFathername || allDateAboutUser.fatherName, 
+                          userAddress || allDateAboutUser.address, 
+                          userZipcode  || allDateAboutUser.zipCode, 
+                          userPhone || allDateAboutUser.phone, 
+                          userBirthday || allDateAboutUser.birthday
+                        )
+                        // console.log(userPhone || allDateAboutUser.phone)
+                      }}>
                         Сохранить
                       </button>
                     </div>
@@ -224,40 +307,40 @@ export default function Profile() {
                       ? <AddedNewCart />
                         : typeOfData === 'reference'
                           ? <>
-                              <div className='fioField'>
+                              <div className='inputField'>
                                 <div className='textArea'>
-                                  <textarea />
+                                  <textarea value={recommendation} autoComplete='off' onChange={(event)=>setUserRecommendation(event.target.value)}/>
                                   <div className='saveButton_Prof'>
                                     <button>
-                                      Сохранить
+                                      Отправить
                                     </button>
                                   </div>
                                 </div>
                               </div>
                             </>
                             : typeOfData === 'messages'
-                              ? <>
-                                  <div className='fioField'>
-                                    <form>
-                                      <p>Insta:</p>
-                                      <input placeholder='Ссылка'/>
-                                    </form>
-                                    <form>
-                                      <p>VKontacte:</p>
-                                      <input placeholder='Ссылка '/>
-                                    </form>
-                                    <form>
-                                      <p>Telegram:</p>
-                                      <input placeholder='Ссылка'/>
-                                    </form>
-                                  </div>
-                                  <div className='saveButton_Prof'>
-                                    <button>
-                                      Сохранить
-                                    </button>
-                                  </div>
-                                </>
-                                  :<></>
+                              && 
+                              <>
+                                <div className='inputField'>
+                                  <form>
+                                    <p>Insta:</p>
+                                    <input value={userInst} placeholder='Ссылка' autoComplete='off' onChange={(event)=>setUserInst(event.target.value)}/>
+                                  </form>
+                                  <form>
+                                    <p>VKontacte:</p>
+                                    <input value={userVK} placeholder='Ссылка ' autoComplete='off' onChange={(event)=>setUserVK(event.target.value)}/>
+                                  </form>
+                                  <form>
+                                    <p>Telegram:</p>
+                                    <input value={userTelegram} placeholder='Ссылка' autoComplete='off' onChange={(event)=>setUserTelegram(event.target.value)}/>
+                                  </form>
+                                </div>
+                                <div className='saveButton_Prof'>
+                                  <button>
+                                    Сохранить
+                                  </button>
+                                </div>
+                              </>
           }
         </div>
       </div>

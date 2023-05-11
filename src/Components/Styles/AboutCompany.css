@@ -25,7 +25,7 @@
         margin-top: 0;
     }
 }
-@media screen and (max-width:530px){
+@media screen and (max-width: 570px){
     .aboutCompanyContainer h1{
         text-align: center;
     }

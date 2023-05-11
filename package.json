@@ -12,6 +12,7 @@
     "react-dom": "^18.2.0",
     "react-google-drive-picker": "^1.2.1",
     "react-icons": "^4.8.0",
+    "react-input-mask": "^2.0.4",
     "react-loading": "^2.0.3",
     "react-loading-icons": "^1.1.0",
     "react-modal": "^3.16.1",

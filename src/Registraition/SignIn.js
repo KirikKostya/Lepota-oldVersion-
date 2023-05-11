@@ -78,7 +78,6 @@ export default function SignIn({ setRegistr }) {
                   type={`${TypeOfPasswordInput}`} 
                   placeholder='Password' 
                   value={PasswordInputValue}/>
-                  
                   {
                     closeEyesStatus
                       ? <CloseEyeIcons onClick={()=>showPassword(TypeOfPasswordInput, setTypeOfPasswordInput, setCloseEyesStatus)}/>

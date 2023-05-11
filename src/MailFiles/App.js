@@ -6,8 +6,6 @@ import Router from './Router';
 import axios from 'axios';
 import './Styles/App.css';
 import { checkIsAdmine } from '../Admin/AdmineController';
-import LoadingComp from '../Loading/LoadingComp';
-import LoadingComp2 from '../Loading/LoadingComp2';
 import Loading from 'react-loading';
 
 //refresh Token for authori- and registration (only this function uses fetch-request)
@@ -49,6 +47,7 @@ function App() {
 
   useEffect(()=>{
     refreshFunction(dispatch, ()=>checkIsAdmine(dispatch))
+    dispatch({type: 'LOADING_IS_COMPLETED'})
   }, [])
   
   return (
