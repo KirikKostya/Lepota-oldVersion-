@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import UpNavigation from '../Components/UpNavigation';
-import OrderCard from './OrderCard';
-import ContactWithUs from '../Components/ContactWithUs';
+import React, { useState, useEffect } from 'react'
 import ReactModal from 'react-modal';
 import WarningModalView from '../Modals/WarningModalView';
+import UpdateModalView from '../Admin/UpdateModalView';
+import UpNavigation from '../Components/UpNavigation';
+import ContactWithUs from '../Components/ContactWithUs';
+import OrderCard from './OrderCard';
 import Pensil from '../Icons/Pensil';
 import { updateDescription, updateMetric, updateName, updateVariant } from '../Admin/AdmineController';
+import { useDispatch, useSelector } from 'react-redux';
 import { refreshFunction } from '../MailFiles/App'
 import { Link } from 'react-scroll';
 import axios from 'axios';
 import './Style/TypeCatalog.css'
-import UpdateModalView from '../Admin/UpdateModalView';
 
 
 export default function TypeCatalog() {

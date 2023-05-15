@@ -1,62 +1,63 @@
 import React, { useState } from 'react'
+import { showPassword, statusValidate, clearInputs } from './Registration';
 import { CloseEyeIcons, OpenEyeIcons } from '../Icons/EyesIcons';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { showPassword, statusValidate, clearInputs } from './Registration';
 import axios from 'axios'
 import './Styles/SignIn.css'
 
 export default function SignIn({ setRegistr }) {
   
-    const [LoginInputValue, setLoginInputValue] = useState('');
-    const [PasswordInputValue, setPasswordInputValue] = useState('');
-    const [TypeOfPasswordInput, setTypeOfPasswordInput] = useState('password')
-    const [closeEyesStatus, setCloseEyesStatus] = useState(true)
-    const [StatusValidateForm, setStatusValidateForm] = useState('') 
-    const [ColorOfValidateForm, setColorOfValidateForm] = useState('bad')
+  const [LoginInputValue, setLoginInputValue] = useState('');
+  const [PasswordInputValue, setPasswordInputValue] = useState('');
+  const [TypeOfPasswordInput, setTypeOfPasswordInput] = useState('password')
+  const [closeEyesStatus, setCloseEyesStatus] = useState(true)
+  const [StatusValidateForm, setStatusValidateForm] = useState('') 
+  const [ColorOfValidateForm, setColorOfValidateForm] = useState('bad')
 
-    const [buttonStatus, setButtonStatus] = useState('Войти');
+  const [buttonStatus, setButtonStatus] = useState('Войти');
 
-    const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-    //authorizates user 
-    const Authorization = async ()=> {
-      let status = await statusValidate(setStatusValidateForm, setColorOfValidateForm, LoginInputValue);
-        if(PasswordInputValue && status){  
-          axios.defaults.withCredentials = true;
-          axios.post('https://api.native-flora.tk/Auth/Login', 
-                {
-                  'username': LoginInputValue,
-                  'password': PasswordInputValue
-                })
-          .then( res=>{
-            localStorage.setItem('accessToken', res.data.data);
-            setStatusValidateForm('Вы вошли в свой аккаунт!');
-            setColorOfValidateForm('green');
-            dispatch({ type: 'COMPLETED_AUTHORIZATION'});
-            clearInputs( setLoginInputValue, setPasswordInputValue, setPasswordInputValue );
-            setButtonStatus('Перейти на главную');
-          }) 
-          .catch(err=>{
-            console.log(err)
-            setStatusValidateForm('Не верный логин или пароль!');
-            setColorOfValidateForm('red');
-            clearInputs( setLoginInputValue, setPasswordInputValue );
-          })
-              setTimeout(()=>{
-                setColorOfValidateForm('');
-                setStatusValidateForm('')
-              }, 4000)
+  //authorizates user 
+  const Authorization = async ()=> {
+    dispatch({type: 'LOADING_IS_UNCOMPLETED'});
+    let status = await statusValidate(setStatusValidateForm, setColorOfValidateForm, LoginInputValue);
+      if(PasswordInputValue && status){  
+        axios.defaults.withCredentials = true;
+        axios.post('https://api.native-flora.tk/Auth/Login', 
+              {
+                'username': LoginInputValue,
+                'password': PasswordInputValue
+              })
+        .then( res=>{
+          localStorage.setItem('accessToken', res.data.data);
+          setStatusValidateForm('Вы вошли в свой аккаунт!');
+          setColorOfValidateForm('green');
+          dispatch({ type: 'COMPLETED_AUTHORIZATION'});
+          clearInputs( setLoginInputValue, setPasswordInputValue, setPasswordInputValue );
+          setButtonStatus('Перейти на главную');
+        }) 
+        .catch(err=>{
+          console.log(err)
+          setStatusValidateForm('Не верный логин или пароль!');
+          setColorOfValidateForm('red');
+          clearInputs( setLoginInputValue, setPasswordInputValue );
+        })
+            setTimeout(()=>{
+              setColorOfValidateForm('');
+              setStatusValidateForm('')
+            }, 4000)
 
-        } else {
-            setStatusValidateForm('Введите корректные логин и пароль');
-            setColorOfValidateForm('red')
-        }
-    }
+      } else {
+          setStatusValidateForm('Введите корректные логин и пароль');
+          setColorOfValidateForm('red')
+      }
+    dispatch({type: 'LOADING_IS_COMPLETED'});
+  }
    
   return (
     <div className='containerForSignIn'>
-        
         <div className='signIn'>
             <h1>Войти</h1>
             <div className='forInputs'>

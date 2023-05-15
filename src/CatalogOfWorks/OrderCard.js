@@ -1,18 +1,18 @@
 import React, {useEffect, useState, useRef} from 'react'
 import OrderCardMoreImgs from '../Icons/OrderCardMoreImgs';
-import VariantPhotosModal from '../Modals/VariantPhotosModal'; 
 import SimpleImageSlider from 'react-simple-image-slider';
+import VariantPhotosModal from '../Modals/VariantPhotosModal'; 
+import CreateVariantModal from '../Admin/CreateVariantModal';
+import CreateKitModal from '../Admin/CreateKitModal';
+import AddVariantIcon from '../Icons/AddVariantIcon';
 import BasketIcon from '../Icons/BasketIcon';
+import CrossIcon from '../Icons/CrossIcon';
 import Pensil from '../Icons/Pensil';
+import { deleteVariant } from '../Admin/AdmineController';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshFunction } from '../MailFiles/App'
 import axios from 'axios';
-import './Style/OrderCard.css'
-import AddVariantIcon from '../Icons/AddVariantIcon';
-import CreateKitModal from '../Admin/CreateKitModal';
-import CrossIcon from '../Icons/CrossIcon';
-import { deleteVariant } from '../Admin/AdmineController';
-import CreateVariantModal from '../Admin/CreateVariantModal';
+import './Style/OrderCard.css';
 
 
 export default function OrderCard(
@@ -53,7 +53,7 @@ export default function OrderCard(
     //For all selected kits
     const [selectedVariants, setSelectedVariants] = useState([]);
 
-    //Added item to cart of order
+    //Adds item to cart of order
     const addItemToCart = async (cardId) =>{
       axios.post(`https://api.native-flora.tk/Cart/Add`, {
         id: cardId,
@@ -91,7 +91,7 @@ export default function OrderCard(
         setKits([])
     }
 
-    //Make list from response data
+    //Makes list from response data
     const getImages = (images) => {
       return images === null
         ? [{
@@ -167,7 +167,7 @@ export default function OrderCard(
               { isAdmin && <AddVariantIcon onClick={()=>setIsOpenAddedVariantModal(true)}/> }
               В комплекте может идти:
             </h3>
-            <div className='cointainer_TC ' >
+            <div className='cointainerTC ' >
               {
                 variants.length === 0 
                   ? <span style={{display: 'block', width: '100%', textAlign: 'center'}}>Нет комбинированных вариантов</span>
@@ -202,7 +202,7 @@ export default function OrderCard(
                             isAdmin 
                             && 
                             <CrossIcon onClick={async()=>{
-                              deleteVariant(localStorage.getItem('searchOrderById'), item.id);
+                              deleteVariant(localStorage.getItem('searchOrderById'), item.id, dispatch);
                               await fetchProducts(searchOrderById)
                             }}/>
                           }

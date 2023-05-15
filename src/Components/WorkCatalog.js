@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import CardOfWork from './CardOfWork'
-// import LoadingComp from '../Loading/LoadingComp'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import './Styles/WorkCatalog.css'
@@ -11,18 +10,17 @@ export default function WorkCatalog() {
   
   const dispatch = useDispatch();
 
-  const fetchFanc = () =>{
+  //gets all carts of work 
+  const getAllItem = () =>{
+    dispatch({type: 'LOADING_IS_UNCOMPLETED'});
     axios.get(`https://api.native-flora.tk/Item/GetAll`)
       .then(res=>{
         setCARDS(res.data.data)
-        dispatch({type: 'LOADING_IS_COMPLETED'});
       })
+    dispatch({type: 'LOADING_IS_COMPLETED'});
   }
 
-  useEffect(()=>{
-    dispatch({type: 'LOADING_IS_UNCOMPLETED'});
-    fetchFanc()
-  }, [])
+  useEffect( getAllItem, []);
 
   return (
     <div className='catalogContainer' id='catalogOfWorks'>

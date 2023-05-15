@@ -27,9 +27,7 @@ const stepsOfDeliver = [
 export default function TimingAndDelivery() {
   return (
     <div className='containerForTimingAndDelivery' id='timingAndDelivery'>
-
         <h1>Время и Доставка</h1>
-
         <div className='steps'>
             <div className='containerForGraphicRath'>
                 <div className='graphicPath'>

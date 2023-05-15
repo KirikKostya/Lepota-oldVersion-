@@ -1,29 +1,29 @@
 import React from 'react'
 import './Styles/Description.css'
 
- const exemplesOfWorks = [
+const exemplesOfWorks = [
   {
-    id: Math.random(),
+    id: 1,
     original:require('../Photos/WorksPictures/candle.png'),
   },
   {
-    id: Math.random(),
+    id: 2,
     original:require('../Photos/WorksPictures/candleBird.png'),
   },
   {
-    id: Math.random(),
+    id: 3,
     original:require('../Photos/WorksPictures/Cup.png'),
   },
   {
-    id: Math.random(),
+    id: 4,
     original:require('../Photos/WorksPictures/Human.png'),
   },
   {
-    id: Math.random(),
+    id: 5,
     original:require('../Photos/WorksPictures/Dog.png'),
   },
   {
-    id: Math.random(),
+    id: 6,
     original:require('../Photos/WorksPictures/BubbleGum.png'),
   }
  ]

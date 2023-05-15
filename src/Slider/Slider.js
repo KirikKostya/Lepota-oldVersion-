@@ -39,7 +39,7 @@ export default function Slider({children}) {
 
   return (
     <div className='main-container'>
-        <FaChevronLeft className={`arrow `} onClick={handleLeftArrowClick}/>
+        <FaChevronLeft className={`arrow`} onClick={handleLeftArrowClick}/>
         <div className='window'>
             <div className='all-pages-container'
                 style={{

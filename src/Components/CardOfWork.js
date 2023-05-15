@@ -10,11 +10,9 @@ export default function CardOfWork({ card }) {
 
   //make examination and return true images from DB-API
   const getImageFromAPI = (photoList) => {
-    if (photoList === null || photoList[0] == undefined){ 
-      return  require('../Photos/somethingWentWrong.png')
-    } else {
-      return photoList[0]
-    }
+    return (photoList === null || photoList[0] == undefined) 
+      ? require('../Photos/somethingWentWrong.png')
+        : photoList[0]
   }
 
   return (

@@ -1,13 +1,10 @@
 import React from 'react'
 import ReactModal from 'react-modal'
 import PositiveIconActivation from '../Icons/PositiveIconActivation'
-import { useDispatch } from 'react-redux'
-import './Styles/WarningModalView.css'
 import NagativeIconActivation from '../Icons/NagativeIconActivation'
+import './Styles/WarningModalView.css'
 
 export default function ErrorModal({ errorMessage, setErrorMessage, activationFunction }) {
-    
-    const dispatch = useDispatch()
 
   return (
     <ReactModal
@@ -26,9 +23,8 @@ export default function ErrorModal({ errorMessage, setErrorMessage, activationFu
                     : <button 
                         className='modal-closeBTN' 
                         onClick={()=>{
+                            activationFunction();
                             setErrorMessage('');
-                            dispatch({type: 'LOADING_IS_UNCOMPLETED'})
-                            activationFunction()
                         }}>повторить</button>
         }
     </ReactModal>

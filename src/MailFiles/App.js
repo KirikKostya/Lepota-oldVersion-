@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { signOut } from '../MyAccountComponents/MyAccount';
 import ReactModal from 'react-modal';
+import Loading from 'react-loading';
 import Router from './Router';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkIsAdmine } from '../Admin/AdmineController';
+import { signOut } from '../MyAccountComponents/MyAccount';
 import axios from 'axios';
 import './Styles/App.css';
-import { checkIsAdmine } from '../Admin/AdmineController';
-import Loading from 'react-loading';
 
 //refresh Token for authori- and registration (only this function uses fetch-request)
 export const refreshFunction = async (dispatch, newFunc) => {

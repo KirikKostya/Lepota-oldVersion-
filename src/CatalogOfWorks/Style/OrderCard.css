@@ -37,7 +37,7 @@
     display: flex !important;
     justify-content: space-evenly !important;
 }
-.cointainer_TC .itemOfMetrics{
+.cointainerTC .itemOfMetrics{
     width: 95%;
     display: flex;
     align-items: center;

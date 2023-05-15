@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import ContactWithUs from '../Components/ContactWithUs.js';
 import UpNavigation from '../Components/UpNavigation.js'
 import ListOfArchive from './ListOfArchive.js'
-import ContactWithUs from '../Components/ContactWithUs.js';
 import { useDispatch, useSelector } from 'react-redux';
+import { refreshFunction } from '../MailFiles/App.js';
 import axios from 'axios';
 import './Styles/OrdersArchive.css';
-import { refreshFunction } from '../MailFiles/App.js';
 
 export default function OrdersArchive() {
   
@@ -16,10 +16,11 @@ export default function OrdersArchive() {
 
   //fetchs data from API (order in archive)
   const fetchingAllOrdersInArchive = () => {
+    dispatch({type: 'LOADING_IS_UNCOMPLETED'});
     axios.get('https://api.native-flora.tk/Order/All', {
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
-    .then(res => setListOfOrdersInArchive(res.data.data))
+    .then(res=>setListOfOrdersInArchive(res.data.data))
     .catch(err=>{
       if(err.response.status === 400){
         setListOfOrdersInArchive(err.response.data.data);
@@ -30,7 +31,6 @@ export default function OrdersArchive() {
 
   useEffect(()=>{    
     localStorage.setItem('filterMetric', JSON.stringify({ date: '', deliveType: '', deliveStatus: '' }));
-    dispatch({type: 'LOADING_IS_UNCOMPLETED'});
     refreshFunction(dispatch, fetchingAllOrdersInArchive)
     window.scrollTo(0, 0)
   }, [])

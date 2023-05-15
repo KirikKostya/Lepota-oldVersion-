@@ -1,12 +1,12 @@
 import React, {useState} from 'react'
 import SingleSelect from '../DropDowns/SingleSelect'
+import CrossIcon from '../Icons/CrossIcon';
 import {OptionsOfMetrics} from '../DropDowns/OptionList'
 import { refreshFunction } from '../MailFiles/App';
 import { useDispatch } from 'react-redux';
+import Picker from './Picker';
 import axios from 'axios';
 import './Style/AddedNewCart.css'
-import Picker from './Picker';
-import CrossIcon from '../Icons/CrossIcon';
 
 export default function AddedNewCart() {
     
@@ -19,13 +19,6 @@ export default function AddedNewCart() {
     const [selectedOptions, setSelectedOptions] = useState([]);
 
     const dispatch = useDispatch()
-
-    //creates URL of local photo
-    const makeListOfAddedPhotos = (event)=>{
-        if (event.target.files && event.target.files[0]) {
-          setPhotos([...photos, URL.createObjectURL(event.target.files[0])])
-        }
-    }
 
     //filter option on select
     const filter = (optionList, selectedList) => {
@@ -57,7 +50,7 @@ export default function AddedNewCart() {
         } 
     }
 
-    //
+    //adds scroll to photo list 
     const makeScroll = () => {
         return (window.innerWidth > 724 && photos.length >= 7) 
                 || 
@@ -68,8 +61,8 @@ export default function AddedNewCart() {
 
     //request to add product in catalog
     const addProductInCatalog = () => {
+        dispatch({type: 'LOADING_IS_UNCOMPLETED'});
         axios.post('https://api.native-flora.tk/Item/Add', {
-            
                 "name": name,
                 "description": description.split('.'),
                 "price": +price,
@@ -88,7 +81,7 @@ export default function AddedNewCart() {
                 'x-access-token': localStorage.getItem('accessToken')
             }
         })
-        .then(res=>console.log(res))
+        .then(res=>dispatch({type: 'LOADING_IS_COMPLETED'}))
         .catch(err=>console.log(err))
     }
 
@@ -100,26 +93,19 @@ export default function AddedNewCart() {
         setPrice('');
         setMetricsListStep([])
     }
+
   return (
     <div className='addedFieldAdmine'>
         <div className='photoAndDescriptionContainer'>
             <div 
                 className='listOfSelectedImages' 
-                style={
-                  {
-                    overflowX: makeScroll()
-                  }
-                }>
+                style={ { overflowX: makeScroll() } }>
                 {
                     photos.map(photo=>(
                         <img key={photo} 
                              src={photo} 
                              className='selectedImage' 
-                             style={
-                                {
-                                    scrollSnapAlign: 'start'
-                                }
-                             }
+                             style={ { scrollSnapAlign: 'start' } }
                              alt='photo' 
                              onClick={() => setPhotos(photos.filter(item => item !== photo))
                         }/>
@@ -136,7 +122,7 @@ export default function AddedNewCart() {
                 />
             </div>
         </div>
-        <div className='metricContainer_Admine'>
+        <div className='metricContainerAdmine'>
             <div className='nameContainer'>
                 <h4>Наименование:</h4>
                 <form>

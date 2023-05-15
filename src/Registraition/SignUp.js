@@ -25,6 +25,7 @@ export default function SignUp({ setRegistr }) {
 
   //Registers user
   const Registration = async ()=> {
+    dispatch({type: 'LOADING_IS_UNCOMPLETED'});
     let status = await statusValidate(setStatusValidateForm, setColorOfValidateForm, LoginInputValue);
       if(PasswordInputValue === SecondPasswordInputValue && PasswordInputValue != '' && status){
         axios.defaults.withCredentials = true;
@@ -54,6 +55,7 @@ export default function SignUp({ setRegistr }) {
         setStatusValidateForm('Введите корректные логин и пароль');
         setColorOfValidateForm('red');
       }
+    dispatch({type: 'LOADING_IS_COMPLETED'});
   }
 
   return (

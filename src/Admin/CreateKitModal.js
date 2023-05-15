@@ -4,12 +4,15 @@ import Slider from '../Slider/Slider';
 import Picker from './Picker';
 import { FaChevronLeft } from 'react-icons/fa';
 import { createKit } from './AdmineController';
+import { useDispatch } from 'react-redux';
 
 export default function CreateKitModal({isOpen, setIsOpen, kitVariants, itemId, selectedVariants}) {
     
     const [addedPhotos, setAddedPhotos] = useState([]);
     const [kitName, setKitName] = useState('');
     const [kitPrice, setKitPrice] = useState('');
+
+    const dispatch = useDispatch();
 
     const styleForPicker = {
         width: '20px', 
@@ -45,10 +48,8 @@ export default function CreateKitModal({isOpen, setIsOpen, kitVariants, itemId, 
             style={{margin: '15px 0 10px 0', color: `${kitName==='' && kitPrice === '' ? "white" : "black"}`, cursor: `${kitName==='' && kitPrice === '' ? 'not-allowed' : 'pointer'}`}}
             disabled={kitName==='' && kitPrice === ''}
             onClick={async()=>{
-                createKit(itemId, kitName || selectedVariants.map(el=>el.name).join(' + ').toLowerCase(), kitVariants, addedPhotos, kitPrice);
+                createKit(itemId, kitName || selectedVariants.map(el=>el.name).join(' + ').toLowerCase(), kitVariants, addedPhotos, kitPrice, dispatch);
                 setIsOpen(false)
-                // console.log(kitName || selectedVariants.map(el=>el.name).join(' + ').toLowerCase())
-                // console.log(selectedVariants.map(el=>el.name).join(' + ').toLowerCase())
             }}
         >
             создать

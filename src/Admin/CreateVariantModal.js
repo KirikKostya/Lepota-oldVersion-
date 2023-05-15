@@ -2,9 +2,10 @@ import React, {useState} from 'react'
 import ReactModal from 'react-modal'
 import Slider from '../Slider/Slider'
 import Picker from './Picker';
-import {createVariant} from './AdmineController.js'
-import './Style/CreateVariantModal.css'
+import { createVariant } from './AdmineController.js'
 import { FaChevronLeft } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
+import './Style/CreateVariantModal.css'
 
 export default function CreateVariantModal({isOpen, setIsOpen, setError, cleanSelectedOptions}) {
 
@@ -12,6 +13,8 @@ export default function CreateVariantModal({isOpen, setIsOpen, setError, cleanSe
     const [variantName, setVariantName] = useState('');
     const [variantPrice, setVariantPrice] = useState('');
 
+    const dispatch = useDispatch()
+    
     const styleForPicker = {
         width: '20px', 
         height: '20px', 
@@ -46,7 +49,7 @@ export default function CreateVariantModal({isOpen, setIsOpen, setError, cleanSe
             className='modal-closeBTN variantBtn' 
             style={{margin: '15px 0 10px 0'}}
             onClick={async()=>{
-                createVariant(localStorage.getItem('searchOrderById'), variantName, variantPrice, addedPhotos, setError);
+                createVariant(localStorage.getItem('searchOrderById'), variantName, variantPrice, addedPhotos, setError, dispatch);
                 setIsOpen(false);
                 cleanSelectedOptions()
             }}

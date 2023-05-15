@@ -33,8 +33,8 @@ export default function AboutKashpo() {
         <div className='ExamplesOfUsing'>
             {
                 exemplesOfUsed.map(Item=>(
-                    <div key={Item.id} className='Fact'>
-                        <img className='Img' src={Item.img} />
+                    <div key={Item.id} className='fact'>
+                        <img className='aboutKashpoImg' src={Item.img} />
                         <h3>{Item.tittle}</h3>
                     </div>
                 ))

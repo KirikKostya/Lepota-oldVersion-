@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { getPersonalDate } from '../MyAccountComponents/Profile';
 import { refreshFunction } from '../MailFiles/App'
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -7,6 +8,7 @@ import axios from 'axios';
 export default function Check({ ItemsInBasket, requestBasketFunc}) {
 
     const [isDisabled, setIsDisabled] = useState(Boolean(localStorage.getItem('accessToken')));
+    const [personalData, setPersonalData] = useState({});
 
     const [isShipping, setIsShipping] = useState(true);
     const [fio, setFio] = useState('');
@@ -39,16 +41,24 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
         setZIP('')
     }
 
+    //fills all input 
+    const fillInputs = ()=>{
+        setFio(`${personalData.surName} ${personalData.firstName} ${personalData.fatherName}`);
+        setAdress(personalData.address);
+        setZipCode(personalData.zipCode);
+        setPhoneNumber(personalData.phone);
+    }
+
     //creats order and clears forms and basket
     const createOrder = () => {
         axios.post('https://api.native-flora.tk/Order/Create', {
             "shipping": String(isShipping),
-            "address": adress,
-            "fio": fio,
-            "phoneNumber": phoneNumber,
-            "contact": instContact,
-            "zipCode": zipCode,
-            "city": city,    
+            "address": adress || personalData.address,
+            "fio": fio || `${personalData.surName} ${personalData.firstName} ${personalData.fatherName} `,
+            "phoneNumber": phoneNumber || personalData.phone,
+            // "contact": instContact,
+            "zipCode": zipCode || personalData.zipCode,
+            // "city": city,    
             "fullDate": {
                 "Time": makeTime(new Date()),
                 "Date":  new Date().toISOString().split('T')[0].split('-').reverse().join('.')
@@ -68,8 +78,12 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
         .catch(err=>console.log(err))
     }
 
+    useEffect(()=>{
+        getPersonalDate(dispatch, setPersonalData)
+    }, [])
+
   return (
-    <div className='chek'>
+    <div className='check'>
         <div className='typeOfDelivery'>
             <p 
                 onClick={()=>setIsShipping(!isShipping)}
@@ -86,19 +100,20 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
                     <label>
                         <p>ФИО</p>
                         <input 
+                            type='text'
                             className='checkInput'
                             onChange={(e)=>handlerChange(e.target.value, setFio)}
-                            value={fio}
+                            defaultValue={fio}
                         />
                     </label>
-                    <label>
+                    {/* <label>
                         <p>Город</p>
                         <input 
                             className='checkInput'
                             onChange={(e)=>handlerChange(e.target.value, setCity)}
                             value={city}
                         />
-                    </label>
+                    </label> */}
 
                     <div className='adressPostIndex'>
                         <label>
@@ -106,7 +121,7 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
                             <input 
                                 className='checkInput adress'
                                 onChange={(e)=>handlerChange(e.target.value, setAdress)}
-                                value={adress}
+                                defaultValue={adress}
                             />
                         </label>
                         <label>
@@ -114,7 +129,7 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
                             <input 
                                 className='checkInput index'
                                 onChange={(e)=>handlerChange(e.target.value, setZipCode)}
-                                value={zipCode}
+                                defaultValue={zipCode}
                             />
                         </label>
                     </div>
@@ -124,7 +139,7 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
                         <input 
                             className='checkInput'
                             onChange={(e)=>handlerChange(e.target.value, setPhoneNumber)}
-                            value={phoneNumber}
+                            defaultValue={phoneNumber}
                         />
                     </label>
                   </div>
@@ -134,7 +149,7 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
                             <input 
                                 className='checkInput'
                                 onChange={(e)=>handlerChange(e.target.value, setFio)}
-                                value={fio}
+                                defaultValue={fio}
                             />
                         </label>
                         <label>
@@ -142,19 +157,28 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
                             <input 
                                 className='checkInput'
                                 onChange={(e)=>handlerChange(e.target.value, setPhoneNumber)}
-                                value={phoneNumber}
+                                defaultValue={phoneNumber}
                             />
                         </label>
                         
                    </div>
         }
-        <button 
-            className={
-                (!isDisabled || ItemsInBasket.length === 0) 
-                            ? 'disabled' 
-                                : "makeBTN"}
-            disabled={!isDisabled || ItemsInBasket.length === 0}
-            onClick={createOrder}>Оформить заказ</button>
+        <div className='btnField'>
+            <button 
+                className={
+                    (!isDisabled || ItemsInBasket.length === 0) 
+                                ? 'disabled' 
+                                    : "makeBTN"}
+                disabled={!isDisabled || ItemsInBasket.length === 0}
+                onClick={createOrder}
+            >
+                Оформить заказ
+            </button>
+            <span 
+                className='autofill'
+                onClick={fillInputs}
+            >Автозаполнение</span>
+        </div>
     </div>
   )
 }

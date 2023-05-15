@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react'
+import React, { useState } from 'react'
 import ReactModal from 'react-modal'
 import Picker from './Picker';
 import Slider from '../Slider/Slider';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './Style/UpdateModalView.css'
 
 export default function UpdateModalView({type, setUpdateModalViewType, allDataOfOrder, refreshFunction, updateFunc}) {
@@ -10,6 +10,8 @@ export default function UpdateModalView({type, setUpdateModalViewType, allDataOf
     const [changeMetricValue, setChangeMetricValue] = useState(type === 'description' ? allDataOfOrder[type].join(' ') : allDataOfOrder[type]);
     
     const variantId = useSelector(state=>state.variantId);
+    const dispatch = useDispatch();
+
     let selectVariant = JSON.parse(localStorage.getItem('variants')).filter(el=>el.id == variantId);
 
     //for updates variants
@@ -18,13 +20,13 @@ export default function UpdateModalView({type, setUpdateModalViewType, allDataOf
     const [variantPrice, setVariantPrice] = useState('');
 
     const handlerChange = async() =>{
-        await updateFunc(allDataOfOrder['id'], changeMetricValue, type);
+        await updateFunc(allDataOfOrder['id'], changeMetricValue, type, dispatch);
         await refreshFunction();
         setUpdateModalViewType('');
     }
 
     const changeVariant = async() => {
-        await updateFunc(allDataOfOrder['id'], variantId, variantName||selectVariant[0].name, variantPrice||selectVariant[0].price, variantPhotos.length==0&&selectVariant[0].icon);
+        await updateFunc(allDataOfOrder['id'], variantId, variantName||selectVariant[0].name, variantPrice||selectVariant[0].price, variantPhotos.length==0&&selectVariant[0].icon, dispatch);
         await refreshFunction();
         setUpdateModalViewType('');
     }
@@ -37,8 +39,6 @@ export default function UpdateModalView({type, setUpdateModalViewType, allDataOf
         justifyContent: 'center'
     }
 
-    // useEffect(()=>{console.log(selectVariant)}, [])
-
   return (
     <ReactModal 
         isOpen={type == '' ? false : true }
@@ -49,17 +49,15 @@ export default function UpdateModalView({type, setUpdateModalViewType, allDataOf
         {
           selectVariant.length === 0
             ? <></>
-              :
-            selectVariant[0].icon.length !== 0 && type === 'variant'
-              && 
-            <Slider>
-              {
-                selectVariant[0].icon.map(img=>(
-                  <img key={img} src={ img } alt='something'/>
-                ))
-              }
-            </Slider>
-            
+              : selectVariant[0].icon.length !== 0 && type === 'variant'
+                && 
+                <Slider>
+                  {
+                    selectVariant[0].icon.map(img=>(
+                      <img key={img} src={ img } alt='something'/>
+                    ))
+                  }
+                </Slider>  
         }
         {
             type === 'name'
@@ -81,12 +79,11 @@ export default function UpdateModalView({type, setUpdateModalViewType, allDataOf
                                     defaultValue={allDataOfOrder[type]}
                                   />
                                     : type === 'variant'
-                                        ? <div className='formContainer'>
-                                            <input placeholder='Название' onChange={event=>setVariantName(event.target.value)} defaultValue={selectVariant[0].name}/>
-                                            <input placeholder='Цена' style={{width: '50px'}} type='number' min={'0'} onChange={event=>setVariantPrice(event.target.value)} defaultValue={selectVariant[0].price}/>
-                                            <Picker photos={variantPhotos} setPhotos={setVariantPhotos} style={styleForPicker} />
-                                          </div>
-                                            : <></>
+                                        && <div className='formContainer'>
+                                              <input placeholder='Название' onChange={event=>setVariantName(event.target.value)} defaultValue={selectVariant[0].name}/>
+                                              <input placeholder='Цена' style={{width: '50px'}} type='number' min={'0'} onChange={event=>setVariantPrice(event.target.value)} defaultValue={selectVariant[0].price}/>
+                                              <Picker photos={variantPhotos} setPhotos={setVariantPhotos} style={styleForPicker} />
+                                            </div>
         }
         <div className='updateBTNS'>
             <button 

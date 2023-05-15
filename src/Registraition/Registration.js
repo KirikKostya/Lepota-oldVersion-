@@ -46,14 +46,12 @@ export default function Registration() {
 
   return (
     <div className='containerForRegistration'>
-        <div className='fieldEffect'></div>
-            {
-            (Registr)
-                ? <SignUp setRegistr={setRegistr} />
-                  : <SignIn setRegistr={setRegistr} />
-            }
-        
-        
+      <div className='fieldEffect'></div>
+        {
+          (Registr)
+              ? <SignUp setRegistr={setRegistr} />
+                : <SignIn setRegistr={setRegistr} />
+        }
     </div>
   )
 }

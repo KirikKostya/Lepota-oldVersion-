@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Select from "react-select";
-import "./Styles/SingleSelect.css";
 import CheckMarkForSingleSelect from "../Icons/CheckMarkForSingleSelect";
+import "./Styles/SingleSelect.css";
 
 export default function SingleSelect({ options, placeholder, width, index, selectedOptions, setSelectedOptions, type }) {
   

@@ -17,10 +17,10 @@ export default function AccountActivation() {
 
     //activate account
     const activationFunction = () => {
+      dispatch({type: 'LOADING_IS_UNCOMPLETED'})
       axios.defaults.withCredentials = true;
       axios.post(`https://api.native-flora.tk/Auth/Activate/${link.get('id')}`)
       .then(res=>{
-          dispatch({type: 'LOADING_IS_COMPLETED'})
           setErrorMessage('Вы активировали аккаунт!')
           localStorage.setItem('accessToken', res.data.data);
         })
@@ -30,8 +30,8 @@ export default function AccountActivation() {
             : (err.response.status === 404)
               ? setErrorMessage('Такого пользователя не существует!')
                 : setErrorMessage('Что-то пошло не так! Проверьте подключение к интернету')
-        dispatch({type: 'LOADING_IS_COMPLETED'})
-      })
+              })
+      dispatch({type: 'LOADING_IS_COMPLETED'})
     }
 
     useEffect(()=>{
@@ -54,11 +54,11 @@ export default function AccountActivation() {
                     height="45px"
                     width="45px" 
                   />
-                : <ErrorModal 
-                    errorMessage={errorMessage}
-                    setErrorMessage={setErrorMessage}
-                    activationFunction={activationFunction}
-                  />
+                  : <ErrorModal 
+                      errorMessage={errorMessage}
+                      setErrorMessage={setErrorMessage}
+                      activationFunction={activationFunction}
+                    />
             }
       </div>
     </div>
