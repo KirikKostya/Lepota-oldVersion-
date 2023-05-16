@@ -17,7 +17,6 @@ const allContextParametrs = {
     searchOrderById: 0,
     refreshTokenIsExpired: false,
     totalSum_TypeComp: 0,
-    isLoadingInArchive: false,
 
     //admine:
     variantId: 1
@@ -55,10 +54,6 @@ const reducer = (state = allContextParametrs, action) => {
         return {...state, totalSum_TypeComp: state.totalSum_TypeComp + action.payload}
       case 'DECREMENT_TOTAL_SUM_TYPE-COMP':
         return {...state, totalSum_TypeComp: state.totalSum_TypeComp - action.payload}
-      case 'LOADING-Archive_IS_COMPLETED':
-        return {...state, isLoadingInArchive: false};
-      case 'LOADING-Archive_IS_UNCOMPLETED': 
-        return {...state, isLoadingInArchive: true};
 
       //admine:
       case 'SET_VARIANT_ID': 

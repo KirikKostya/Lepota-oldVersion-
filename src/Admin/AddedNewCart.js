@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import Picker from './Picker';
 import axios from 'axios';
 import './Style/AddedNewCart.css'
+import { getUnit } from './AdmineController';
 
 export default function AddedNewCart() {
     
@@ -68,21 +69,22 @@ export default function AddedNewCart() {
                 "price": +price,
                 "icon": photos,
                 "sizes": {
-                    "Material": getValueByMetricName(selectedOptions, "Material") || null,
-                    "Weight":  getValueByMetricName(selectedOptions, "Weight") || null,
-                    "Height": getValueByMetricName(selectedOptions, "Height") || null,
-                    "Depth": getValueByMetricName(selectedOptions, "Depth") || null,
-                    "Diameter": getValueByMetricName(selectedOptions, "Diameter") || null,
-                    "Width":  getValueByMetricName(selectedOptions, "Width") || null,
-                    "Length": getValueByMetricName(selectedOptions, "Length") || null,
+                    "Material": `${getValueByMetricName(selectedOptions, "Material")} ${getUnit("Material")}`,
+                    "Weight": `${getValueByMetricName(selectedOptions, "Weight")} ${getUnit("Weight")}`,
+                    "Height": `${getValueByMetricName(selectedOptions, "Height")} ${getUnit("Height")}`,
+                    "Depth": `${getValueByMetricName(selectedOptions, "Depth")} ${getUnit("Depth")}`,
+                    "Diameter": `${getValueByMetricName(selectedOptions, "Diameter")} ${getUnit("Diameter")}`,
+                    "Width":  `${getValueByMetricName(selectedOptions, "Width")} ${getUnit("Width")}`,
+                    "Length": `${getValueByMetricName(selectedOptions, "Length")} ${getUnit("Length")}`,
                 }
         }, {
             headers:{
                 'x-access-token': localStorage.getItem('accessToken')
             }
         })
-        .then(res=>dispatch({type: 'LOADING_IS_COMPLETED'}))
+        .then(res=>console.log(res))
         .catch(err=>console.log(err))
+        dispatch({type: 'LOADING_IS_COMPLETED'})
     }
 
     // clears all fields
@@ -192,7 +194,7 @@ export default function AddedNewCart() {
                     className='createCartBTN'
                     onClick={()=>{
                         refreshFunction(dispatch, addProductInCatalog)
-                        clearAll()
+                        // clearAll()
                     }}
                 >Создать</button>
             </div>

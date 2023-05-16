@@ -1,5 +1,6 @@
 .descriptionContainer{
   width: 60%;
+  max-width: 1240px;
   display: flex;
   overflow-x: scroll ;
   margin-top: 10px;

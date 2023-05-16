@@ -11,22 +11,19 @@ export default function OrdersArchive() {
   
   const [listOfOrdersInArchive, setListOfOrdersInArchive] = useState([]);
 
-  const isLoading = useSelector(state=>state.isLoading);
   const dispatch = useDispatch();
 
   //fetchs data from API (order in archive)
   const fetchingAllOrdersInArchive = () => {
-    dispatch({type: 'LOADING_IS_UNCOMPLETED'});
     axios.get('https://api.native-flora.tk/Order/All', {
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
-    .then(res=>setListOfOrdersInArchive(res.data.data))
+    .then(res=>setListOfOrdersInArchive(res.data.data.reverse()))
     .catch(err=>{
       if(err.response.status === 400){
         setListOfOrdersInArchive(err.response.data.data);
       }
     })
-    dispatch({type: 'LOADING_IS_COMPLETED'});
   }
 
   useEffect(()=>{    

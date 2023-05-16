@@ -10,8 +10,8 @@ import './Styles/Main.css'
 
 export default function Main() {
   return (
-    <div className='main'>    
-      <UpNavigation />
+    <div className='main'>   
+      <UpNavigation /> 
       <Description />
       <AboutCompany />
       <WorkCatalog />

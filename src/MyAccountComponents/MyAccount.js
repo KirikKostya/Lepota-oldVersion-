@@ -2,11 +2,18 @@ import React from 'react'
 import { refreshFunction } from '../MailFiles/App';
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 import './Styles/MyAccount.css'
 
 export const signOut = (dispatch) =>{
+  dispatch({type: 'LOADING_IS_UNCOMPLETED'})
+  axios.post('https://api.native-flora.tk/Auth/Logout', {}, {
+    headers:{'x-access-token': localStorage.getItem('accessToken')}  
+  })
+  .then(()=>localStorage.removeItem('accessToken'))
+  .catch(err=>console.log(err))
+  dispatch({type: 'LOADING_IS_COMPLETED'})
   dispatch({ type: 'UNCOMPLETED_AUTHORIZATION'})
-  localStorage.removeItem('accessToken')
 }
 
 export default function MyAccount() {

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const getUnit = (metricValue) => {
+export const getUnit = (metricValue) => {
   return metricValue === 'Weight' 
           ? 'кг'
             : metricValue === 'Material'

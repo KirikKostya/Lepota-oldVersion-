@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
+import CookieAlert from '../Cookie/CookieAlert';
 import ReactModal from 'react-modal';
 import Loading from 'react-loading';
 import Router from './Router';
+import Cookies from 'js-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkIsAdmine } from '../Admin/AdmineController';
 import { signOut } from '../MyAccountComponents/MyAccount';
@@ -47,7 +49,6 @@ function App() {
 
   useEffect(()=>{
     refreshFunction(dispatch, ()=>checkIsAdmine(dispatch))
-    dispatch({type: 'LOADING_IS_COMPLETED'})
   }, [])
   
   return (
@@ -87,6 +88,7 @@ function App() {
             }}>Закрыть</button>  
         </ReactModal>
       </div>
+      { !Cookies.get('cookieActivate') && <CookieAlert /> }
     </>
   );
 }

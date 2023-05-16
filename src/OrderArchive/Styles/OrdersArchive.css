@@ -11,7 +11,7 @@ span{
 }
 /* */
 .emptyArchive{
-    width: 95%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     align-items: center;

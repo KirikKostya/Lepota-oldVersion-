@@ -2,6 +2,7 @@ import React from 'react';
 import SingleSelect from '../DropDowns/SingleSelect.js';
 import { SortByDate, SortByDileverStatus, SortByDileverType } from '../DropDowns/OptionList.js';
 import { useDispatch, useSelector } from 'react-redux';
+import { refreshFunction } from '../MailFiles/App'
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import './Styles/OrdersArchive.css';
@@ -17,63 +18,60 @@ export default function ListOfArchive({ LIST, setList }) {
     return [object]
   }
 
+  //sorts data by date
   const sortDate= (res, metric) => {
-    if(metric.date){
-      if(metric.date === 'Новые'){
-        return res.data.data.sort((a,b) => b.id - a.id)
-      } else {
-        return res.data.data.sort((a,b) => a.id - b.id)
-      }
-    } else {
-      return res.data.data
-    }
+    return(
+      metric.date
+      &&
+      metric.date === 'Новые'
+          ? res.data.data.sort((a,b) => b.id - a.id)
+            : res.data.data.sort((a,b) => a.id - b.id)
+      || res.data.data
+    )
   }
 
-  const filterByType = (date, metric) => {
+  //sorts data by type of delivering
+  const filterByType = (data, metric) => {
     if(metric.deliveType){
-      if(metric.deliveType === 'Доставка'){
-        return date.filter(item=>item.shipping === true)
-      } else {
-        return date.filter(item=>item.shipping === false)
-      }
-    } else {
-      return date
-    }
+      return(
+        metric.deliveType === 'Доставка'
+          ? data.filter(item=>item.shipping === true)
+            : data.filter(item=>item.shipping === false)
+      )
+    } 
+    return data
   } 
 
+  //sorts data by status of delivering
   const filterByStatus = (type, metric) => {
-    if(metric.deliveStatus){
-      if(metric.deliveStatus === 'Принят в обработку'){
-        return type.filter(item=>item.shippingStatus === 'BeingProcessed')
-      } else if(metric.deliveStatus === 'В пути'){
-        return type.filter(item=>item.shippingStatus === 'Shipping')
-      } else if(metric.deliveStatus === 'Получен'){
-        return type.filter(item=>item.shippingStatus === 'Delivered')
-      }
-    } else {
-      return type
-    }
+    return(
+      metric.deliveStatus
+      &&
+      metric.deliveStatus === 'Принят в обработку'
+        ? type.filter(item=>item.shippingStatus === 'BeingProcessed')
+          : metric.deliveStatus === 'В пути'
+            ? type.filter(item=>item.shippingStatus === 'Shipping')
+              : metric.deliveStatus === 'Получен'
+                && 
+                type.filter(item=>item.shippingStatus === 'Delivered')
+      || type
+    )
   } 
 
   //sorts list of archive by data
   const filterArchive = async (metric) => {
-    dispatch({type: 'LOADING-Archive_IS_UNCOMPLETED'});
+    dispatch({type: 'LOADING_IS_UNCOMPLETED'});
     await axios.get('https://api.native-flora.tk/Order/All', {
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
     .then(async res=>{
-      let dateFiltered = await sortDate(res, metric)
-      let typeFiltered = await filterByType(dateFiltered, metric)
-      let statusFiltered = await filterByStatus(typeFiltered, metric)
-      setList(statusFiltered)
-      dispatch({type: 'LOADING-Archive_IS_COMPLETED'});
+      let dateFiltered = await sortDate(res, metric);
+      let typeFiltered = await filterByType(dateFiltered, metric);
+      let statusFiltered = await filterByStatus(typeFiltered, metric);
+      setList(statusFiltered);
     })
-    .catch(err=>{
-      if(err.response.status === 400){
-        dispatch({type: 'LOADING-Archive_IS_COMPLETED'});
-      }
-    })
-
+    .catch(err=>console.log(err))
+    dispatch({type: 'LOADING_IS_COMPLETED'})
   } 
 
   //on page writting status of delivering
@@ -176,7 +174,6 @@ export default function ListOfArchive({ LIST, setList }) {
                           </div>
                         ))
                       }
-                      <button onClick={()=>console.log(LIST)}>123</button>
                     </div>
       }
       <div className='filterContainer'>
@@ -201,14 +198,15 @@ export default function ListOfArchive({ LIST, setList }) {
         <button 
           className='sortBTN' 
           onClick={() => {
-            filterArchive(JSON.parse(localStorage.getItem('filterMetric')))
+            refreshFunction(dispatch, ()=>filterArchive(JSON.parse(localStorage.getItem('filterMetric'))))
           }}>Применить фильтр
         </button>
         <span 
           className='clearFilter'
           onClick={()=>{
-            localStorage.setItem('filterMetric', JSON.stringify({ date: '', deliveType: '', deliveStatus: '' }))
-            filterArchive({ date: '', deliveType: '', deliveStatus: '' })
+            localStorage.setItem('filterMetric', JSON.stringify({ date: '', deliveType: '', deliveStatus: '' }));
+            refreshFunction(dispatch, ()=>filterArchive({ date: '', deliveType: '', deliveStatus: '' }));
+            window.location.reload();
           }}
         >Очистить фильтрацию</span>
       </div>

@@ -8,6 +8,7 @@ import { FaChevronLeft } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { refreshFunction } from '../MailFiles/App'
 import { NavLink } from 'react-router-dom'
+import { signOut } from './MyAccount'
 import axios from 'axios'
 import './Styles/Profile.css'
 
@@ -74,10 +75,9 @@ export default function Profile() {
       "phone": phone
     }, {
         headers:{'x-access-token': localStorage.getItem('accessToken')}     
-      })
+    })
     .then(()=>getPersonalDate(dispatch, setAllDateAboutUser))
     .catch(err=>console.log(err))
-    dispatch({type: 'LOADING_IS_COMPLETED'})
   }
 
   const setSotialDate = (vk, instagram, telegram) => {
@@ -91,7 +91,6 @@ export default function Profile() {
       })
     .then(()=>getPersonalDate(dispatch, setAllDateAboutUser))
     .catch(err=>console.log(err))
-    dispatch({type: 'LOADING_IS_COMPLETED'})
   }
 
   const LOG = () => {
@@ -109,10 +108,10 @@ export default function Profile() {
   }
 
   useEffect(()=>{
+    refreshFunction(dispatch, ()=>getPersonalDate(dispatch, setAllDateAboutUser));
     window.scrollTo(0, 0);
   }, [])
   
-  refreshFunction(dispatch, ()=>getPersonalDate(dispatch, setAllDateAboutUser));
   return (
     <>
       <UpNavigation hide={'hide'}/>
@@ -136,7 +135,7 @@ export default function Profile() {
               Главная
             </span>
             {
-              !isAdmin
+              isAdmin
                 ? <span className={`typeOfData ${typeOfData==='addedCart' && 'active' || ''}`} onClick={()=>refreshAndSetType('addedCart')}>
                     <svg width="16" height="16" fill='currentColor' viewBox="0 0 22 22" style={{marginRight: '3px'}}> 
                       <g> 
@@ -176,7 +175,7 @@ export default function Profile() {
             typeOfData==='main'
               ? <div className='listInfoCard-Profile'>
                 {
-                  !isAdmin 
+                  isAdmin 
                   ? <div className='infoCard profileUser' onClick={()=>refreshAndSetType('addedCart')}>
                       <div className='dataContainer'>
                         <svg 
@@ -211,7 +210,7 @@ export default function Profile() {
                             <span>{allDateAboutUser.phone}</span>
                           </div>
                         </div>
-                        <NavLink to={'/'} className='exiteBtn'>Выйти</NavLink>
+                        <NavLink to={'/'} className='exiteBtn' onClick={()=>signOut(dispatch)}>Выйти</NavLink>
                       </div>
                   }
                   <NavLink to='/' className='infoCard profileCatalog' onClick={()=>refreshAndSetType('main')}>

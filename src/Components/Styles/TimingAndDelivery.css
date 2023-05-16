@@ -2,6 +2,7 @@
 
 .containerForTimingAndDelivery{
     width: 100%;
+    max-width: 1250px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -37,6 +38,7 @@
 .containerForTimingAndDelivery .graphicPath::before{
     content: '';
     width: 75%;
+    max-width: 900px;
     position: absolute;
     border-top: 2px solid black;
 }

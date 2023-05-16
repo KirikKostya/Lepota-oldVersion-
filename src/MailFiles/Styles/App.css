@@ -63,6 +63,7 @@ h1{
     align-items: center !important;
     justify-content: space-around !important;
     border-radius: 20px !important;
+    z-index: 99 !important;
 }
 @media screen and (max-width: 1060px){
     .ReactModal__Content{

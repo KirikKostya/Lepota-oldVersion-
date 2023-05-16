@@ -64,7 +64,7 @@ export default function PersonalDataInputs({allDateAboutUser, setPersonalDate}) 
             </form>
         </div>
         <div className='saveButton_Prof'>
-            <button onClick={async()=>{
+            <button onClick={()=>{
                 setPersonalDate(
                     userName || allDateAboutUser.firstName,
                     userSurname || allDateAboutUser.surName,

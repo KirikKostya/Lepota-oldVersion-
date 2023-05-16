@@ -1,0 +1,120 @@
+@import url('/src/Fonts/fonts.css');
+.displayNone{
+    display: none !important;
+}
+.cookieContainer{
+    width: 100%;
+    height: 100px;
+    bottom: 0;
+    position: sticky;
+    background: #0099FF;
+    display: flex;
+    align-items: start;
+    justify-content: space-around;
+}
+.cookieContainer .paragraph{
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    font-size: 12pt;
+    font-family: 'Montserrat-Medium';
+    color: aliceblue;
+}
+.paragraph p{
+    margin: 5px 3px;
+    display: flex;
+    align-items: center;
+}
+.paragraph a{
+    color: black;
+    text-decoration: none;
+    transition: .15s ease-in-out;
+    margin: 0 5px;
+}
+.paragraph a:hover{
+    color: rgb(173, 16, 16);
+}
+.cookieContainer .cookieBts{
+    width: 15%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cookieBts button{
+    width: 120px;
+    height: 50px;
+    margin: 3px 10px;
+    font-size: 11pt;
+    font-family: 'Montserrat-Medium';
+    background: rgba(0, 0, 0, 0.628);
+    border: 5px solid rgba(0, 0, 0, 0.68);
+    border-radius: 5px;
+    color: aliceblue;
+    padding: 3px;
+    cursor: pointer;
+    transition: .5s ease;
+}
+.cookieBts button:hover{
+    background: rgb(0, 176, 0);
+    border: 4px solid rgba(2, 108, 2, 0.546);
+}
+@media screen and (max-width: 1190px) {
+    .cookieContainer .paragraph{
+        font-size: 10pt;
+    }
+    .cookieBts button{
+        font-size: 9pt;
+    }
+}
+@media screen and (max-width: 940px) {
+    .cookieContainer .paragraph{
+        width: 80%;
+    }
+}
+@media screen and (max-width: 820px) {
+    .paragraph p{
+        display: block;
+    }
+    .cookieContainer .paragraph svg{
+        width: 14pt;
+    }
+}
+
+@media screen and (max-width: 820px) {
+    .cookieContainer{
+        flex-direction: column;
+    }
+    .cookieContainer .paragraph{
+        width: 100%;
+        font-size: 8pt;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        margin: 0;
+    }
+    .cookieContainer .paragraph p{
+        width: 99%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+    .cookieContainer .cookieBts{
+        width: 100%;
+    }
+    .cookieBts button{
+        width: 180px;
+        height: 35px;
+        font-size: 8pt;
+    }
+}
+@media screen and (max-width: 570px) {
+    .cookieContainer .paragraph, .cookieBts button{
+        font-size: 7pt;
+    }
+
+}

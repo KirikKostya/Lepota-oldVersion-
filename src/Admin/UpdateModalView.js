@@ -31,6 +31,12 @@ export default function UpdateModalView({type, setUpdateModalViewType, allDataOf
         setUpdateModalViewType('');
     }
 
+    const changeDescription = async() => {
+      await updateFunc(allDataOfOrder['id'], changeMetricValue, dispatch);
+      await refreshFunction();
+      setUpdateModalViewType('');
+    } 
+
     const styleForPicker = {
         width: '20px', 
         height: '20px', 
@@ -88,7 +94,7 @@ export default function UpdateModalView({type, setUpdateModalViewType, allDataOf
         <div className='updateBTNS'>
             <button 
                 className='modal-closeBTN' 
-                onClick={type === 'variant' ? changeVariant : handlerChange }
+                onClick={type === 'variant' ? changeVariant : type === 'metric' ? handlerChange : changeDescription }
             >
                 Изменить
             </button>

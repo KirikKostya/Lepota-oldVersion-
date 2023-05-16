@@ -63,7 +63,7 @@ export default function TypeCatalog() {
       <div className='infoContainer' id='hideNavBarMainLink'>
         <div className='infoOrder'>
           <h1>Кашпо {order.name} { isAdmin && <Pensil setUpdateModalViewType={()=>setUpdateModalViewType('name')}/> } </h1>
-          <div className='description_metrics'>
+          <div className='descriptionMetrics'>
             {
               makeArray(order.sizes).map((item, index)=>(
                 <div className='orderMatrics' key={index}>
