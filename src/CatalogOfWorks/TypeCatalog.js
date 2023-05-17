@@ -6,7 +6,7 @@ import UpNavigation from '../Components/UpNavigation';
 import ContactWithUs from '../Components/ContactWithUs';
 import OrderCard from './OrderCard';
 import Pensil from '../Icons/Pensil';
-import { updateDescription, updateMetric, updateName, updateVariant } from '../Admin/AdmineController';
+import { getUnit, updateDescription, updateMetric, updateName, updateVariant } from '../Admin/AdmineController';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshFunction } from '../MailFiles/App'
 import { Link } from 'react-scroll';
@@ -69,43 +69,43 @@ export default function TypeCatalog() {
                 <div className='orderMatrics' key={index}>
                   <p className={`metricItem ${checkMetric(item.Material)}`}>
                     Материал: <span>
-                                {item.Material}
+                                {`${item.Material} ${getUnit('Material')}`}
                               </span>
                         <sup>{ isAdmin && <Pensil setUpdateModalViewType={()=>setUpdateModalViewType('metric Material')}/> }</sup>
                   </p>
                   <p className={`metricItem ${checkMetric(item.Width)}`}>
                     Ширина: <span>
-                              {item.Width}
+                              {`${item.Width} ${getUnit('Width')}`}
                             </span>
                       <sup>{ isAdmin && <Pensil setUpdateModalViewType={()=>setUpdateModalViewType('metric Width')}/> }</sup>
                   </p>
                   <p className={`metricItem ${checkMetric(item.Height)}`}>
                     Высота: <span>
-                              {item.Height}
+                              {`${item.Height} ${getUnit('Height')}`}
                             </span>
                       <sup>{ isAdmin && <Pensil setUpdateModalViewType={()=>setUpdateModalViewType('metric Height')}/> }</sup>
                   </p>
                   <p className={`metricItem ${checkMetric(item.Depth)}`}>
                     Глубина: <span>
-                              {item.Depth}
+                              {`${item.Depth} ${getUnit('Depth')}`}
                             </span>
                       <sup>{ isAdmin && <Pensil setUpdateModalViewType={()=>setUpdateModalViewType('metric Depth')}/> }</sup>
                   </p>
                   <p className={`metricItem ${checkMetric(item.Length)}`}>
                     Длина: <span>
-                              {item.Length}
+                              {`${item.Length} ${getUnit('Length')}`}
                             </span>
                       <sup>{ isAdmin && <Pensil setUpdateModalViewType={()=>setUpdateModalViewType('metric Length')}/> }</sup>
                   </p>
                   <p className={`metricItem ${checkMetric(item.Diameter)}`}>
                     Диаметр: <span>
-                              {item.Diameter}
+                              {`${item.Diameter} ${getUnit('Diameter')}`}
                             </span>
                       <sup>{ isAdmin && <Pensil setUpdateModalViewType={()=>setUpdateModalViewType('metric Diameter')}/> }</sup>
                   </p>
                   <p className={`metricItem ${checkMetric(item.Weight)}`}>
                     Вес: <span>
-                              {item.Weight}
+                              {`${item.Weight} ${getUnit('Weight')}`}
                             </span>
                       <sup>{ isAdmin && <Pensil setUpdateModalViewType={()=>setUpdateModalViewType('metric Weight')}/> }</sup>
                   </p> 

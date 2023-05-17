@@ -69,13 +69,13 @@ export default function AddedNewCart() {
                 "price": +price,
                 "icon": photos,
                 "sizes": {
-                    "Material": `${getValueByMetricName(selectedOptions, "Material")} ${getUnit("Material")}`,
-                    "Weight": `${getValueByMetricName(selectedOptions, "Weight")} ${getUnit("Weight")}`,
-                    "Height": `${getValueByMetricName(selectedOptions, "Height")} ${getUnit("Height")}`,
-                    "Depth": `${getValueByMetricName(selectedOptions, "Depth")} ${getUnit("Depth")}`,
-                    "Diameter": `${getValueByMetricName(selectedOptions, "Diameter")} ${getUnit("Diameter")}`,
-                    "Width":  `${getValueByMetricName(selectedOptions, "Width")} ${getUnit("Width")}`,
-                    "Length": `${getValueByMetricName(selectedOptions, "Length")} ${getUnit("Length")}`,
+                    "Material": getValueByMetricName(selectedOptions, "Material"),
+                    "Weight": getValueByMetricName(selectedOptions, "Weight"),
+                    "Height": getValueByMetricName(selectedOptions, "Height"),
+                    "Depth": getValueByMetricName(selectedOptions, "Depth"),
+                    "Diameter": getValueByMetricName(selectedOptions, "Diameter"),
+                    "Width":  getValueByMetricName(selectedOptions, "Width"),
+                    "Length": getValueByMetricName(selectedOptions, "Length"),
                 }
         }, {
             headers:{

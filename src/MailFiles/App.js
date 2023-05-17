@@ -27,8 +27,8 @@ export const refreshFunction = async (dispatch, newFunc) => {
             })
             .then(res=>{
               localStorage.setItem('accessToken', res.data.data)
+              resolve()
             })
-            .then(resolve)
             .catch(res=>{
               (res.response.status === 401)
                 ? dispatch({type: 'SET_REFRESH-TOKEN_STATUS', payload: true})  
