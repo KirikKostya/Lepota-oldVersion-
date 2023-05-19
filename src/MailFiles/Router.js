@@ -14,23 +14,11 @@ export default function Router() {
     <HashRouter>
         <Routes>
             <Route path='/' element={<Main />} />
-        </Routes> 
-        <Routes>
             <Route path='/Registration' element={<Registration />}/>
-        </Routes>
-        <Routes>
             <Route path='/Profile' element={<Profile />} />
-        </Routes>
-        <Routes>
             <Route path='/MyBasket' element={<MyBasket />} />
-        </Routes>
-        <Routes>
             <Route path='/OrdersArchive' element={<OrdersArchive />} />
-        </Routes>
-        <Routes>
             <Route path='/TypeCatalog' element={<TypeCatalog />} />
-        </Routes>
-        <Routes>
             <Route path='/Activation' element={<AccountActivation />} />
         </Routes>
     </HashRouter>

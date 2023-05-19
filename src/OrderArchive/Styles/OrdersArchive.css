@@ -238,7 +238,7 @@ span{
         width: 50%;
     }
     .mainContainerForArhive .filterContainer{
-        width: 50%;
+        width: 65%;
         top: 0;
         position: relative;
         display: flex;
@@ -255,7 +255,7 @@ span{
         width: 60%;
     }
     .mainContainerForArhive .filterContainer{
-        width: 70%;
+        width: 85%;
     }
     .orderItems .item, .shippingType, .customer, .orderStatus{
         width: 90%;
@@ -266,6 +266,6 @@ span{
         width: 85%;
     }
     .mainContainerForArhive .filterContainer{
-        width: 85%;
+        width: 95%;
     }
 }

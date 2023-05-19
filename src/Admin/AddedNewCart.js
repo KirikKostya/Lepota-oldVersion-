@@ -7,8 +7,27 @@ import { useDispatch } from 'react-redux';
 import Picker from './Picker';
 import axios from 'axios';
 import './Style/AddedNewCart.css'
-import { getUnit } from './AdmineController';
 
+//gets value of metric by metric name
+export const getValueByMetricName = (selectedOptions, type) => {
+    for(let i=0; i<selectedOptions.length; i++){
+        if(selectedOptions[i].metric === 'Материалы' && type === 'Material'){
+            return selectedOptions[i].value
+        } else if(selectedOptions[i].metric === 'Ширина' && type === 'Width'){
+            return selectedOptions[i].value
+        } else if(selectedOptions[i].metric === 'Высота' && type === 'Height'){
+            return selectedOptions[i].value
+        } else if(selectedOptions[i].metric === 'Глубина' && type === 'Depth'){
+            return selectedOptions[i].value
+        } else if(selectedOptions[i].metric === 'Длина' && type === 'Length'){
+            return selectedOptions[i].value
+        } else if(selectedOptions[i].metric === 'Диаметр' && type === 'Diameter'){
+            return selectedOptions[i].value
+        } else if(selectedOptions[i].metric === 'Вес' && type === 'Weight'){
+            return selectedOptions[i].value
+        }
+    } 
+}
 export default function AddedNewCart() {
     
     const [photos, setPhotos] = useState(Array);
@@ -28,27 +47,6 @@ export default function AddedNewCart() {
             newArray = [...newArray.filter(el=> el.value !== selectedList[i].metric)]
         }
         return newArray
-    }
-
-    //gets value of metric by metric name
-    const getValueByMetricName = (selectedOptions, type) => {
-        for(let i=0; i<selectedOptions.length; i++){
-            if(selectedOptions[i].metric === 'Материалы' && type === 'Material'){
-                return selectedOptions[i].value
-            } else if(selectedOptions[i].metric === 'Ширина' && type === 'Width'){
-                return selectedOptions[i].value
-            } else if(selectedOptions[i].metric === 'Высота' && type === 'Height'){
-                return selectedOptions[i].value
-            } else if(selectedOptions[i].metric === 'Глубина' && type === 'Depth'){
-                return selectedOptions[i].value
-            } else if(selectedOptions[i].metric === 'Длина' && type === 'Length'){
-                return selectedOptions[i].value
-            } else if(selectedOptions[i].metric === 'Диаметр' && type === 'Diameter'){
-                return selectedOptions[i].value
-            } else if(selectedOptions[i].metric === 'Вес' && type === 'Weight'){
-                return selectedOptions[i].value
-            }
-        } 
     }
 
     //adds scroll to photo list 
@@ -193,8 +191,8 @@ export default function AddedNewCart() {
                 <button 
                     className='createCartBTN'
                     onClick={()=>{
-                        refreshFunction(dispatch, addProductInCatalog)
-                        // clearAll()
+                        refreshFunction(dispatch, addProductInCatalog);
+                        clearAll()
                     }}
                 >Создать</button>
             </div>

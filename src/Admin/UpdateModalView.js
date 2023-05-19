@@ -19,14 +19,14 @@ export default function UpdateModalView({type, setUpdateModalViewType, allDataOf
     const [variantName, setVariantName] = useState('');
     const [variantPrice, setVariantPrice] = useState('');
 
-    const handlerChange = async() =>{
-        await updateFunc(allDataOfOrder['id'], changeMetricValue, type, dispatch);
+    const changeMetric = async() =>{
+        await updateFunc(allDataOfOrder['id'], changeMetricValue || selectVariant[0].sizes[type.replace('metric ', '')], type, dispatch);
         await refreshFunction();
         setUpdateModalViewType('');
     }
 
     const changeVariant = async() => {
-        await updateFunc(allDataOfOrder['id'], variantId, variantName||selectVariant[0].name, variantPrice||selectVariant[0].price, variantPhotos.length==0&&selectVariant[0].icon, dispatch);
+        await updateFunc(allDataOfOrder['id'], variantId, variantName || selectVariant[0].name, variantPrice||selectVariant[0].price, variantPhotos.length==0&&selectVariant[0].icon, dispatch);
         await refreshFunction();
         setUpdateModalViewType('');
     }
@@ -35,7 +35,7 @@ export default function UpdateModalView({type, setUpdateModalViewType, allDataOf
       await updateFunc(allDataOfOrder['id'], changeMetricValue, dispatch);
       await refreshFunction();
       setUpdateModalViewType('');
-    } 
+    }
 
     const styleForPicker = {
         width: '20px', 
@@ -82,23 +82,24 @@ export default function UpdateModalView({type, setUpdateModalViewType, allDataOf
                                 ? <input 
                                     className='updateInput'
                                     onChange={event=>setChangeMetricValue(event.target.value)} 
-                                    defaultValue={allDataOfOrder[type]}
+                                    defaultValue={allDataOfOrder.sizes[type.replace('metric ', '')]}
                                   />
                                     : type === 'variant'
-                                        && <div className='formContainer'>
-                                              <input placeholder='Название' onChange={event=>setVariantName(event.target.value)} defaultValue={selectVariant[0].name}/>
-                                              <input placeholder='Цена' style={{width: '50px'}} type='number' min={'0'} onChange={event=>setVariantPrice(event.target.value)} defaultValue={selectVariant[0].price}/>
-                                              <Picker photos={variantPhotos} setPhotos={setVariantPhotos} style={styleForPicker} />
-                                            </div>
+                                          && 
+                                          <div className='formContainer'>
+                                            <input placeholder='Название' onChange={event=>setVariantName(event.target.value)} defaultValue={selectVariant[0].name}/>
+                                            <input placeholder='Цена' style={{width: '50px'}} type='number' min={'0'} onChange={event=>setVariantPrice(event.target.value)} defaultValue={selectVariant[0].price}/>
+                                            <Picker photos={variantPhotos} setPhotos={setVariantPhotos} style={styleForPicker}/>
+                                          </div>
         }
         <div className='updateBTNS'>
             <button 
                 className='modal-closeBTN' 
-                onClick={type === 'variant' ? changeVariant : type === 'metric' ? handlerChange : changeDescription }
+                onClick={type === 'variant' ? changeVariant : type.includes('metric') ? changeMetric : changeDescription }
             >
                 Изменить
             </button>
-            <p onClick={()=>setUpdateModalViewType('')} style={{margin:'0', cursor:'pointer'}}>закрыть</p>
+            <p onClick={()=>refreshFunction(dispatch, ()=>setUpdateModalViewType(''))} style={{margin:'0', cursor:'pointer'}}>закрыть</p>
         </div>
     </ReactModal>
   )

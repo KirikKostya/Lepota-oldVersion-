@@ -13,9 +13,14 @@ export const checkIsAdmine = (dispatch) => {
   axios.get('https://api.native-flora.tk/Auth/IsAdmin', {
     headers:{'x-access-token': localStorage.getItem('accessToken')}
   })
-  .then(() => dispatch({type: 'IS_ADMIN'}))
-  .catch(() => dispatch({type: 'IS_NOT_ADMIN'}))
-  dispatch({type: 'LOADING_IS_COMPLETED'})
+  .then(() => {
+    dispatch({type: 'IS_ADMIN'})
+    dispatch({type: 'LOADING_IS_COMPLETED'})
+  })
+  .catch(() => {
+    dispatch({type: 'IS_NOT_ADMIN'})
+    dispatch({type: 'LOADING_IS_COMPLETED'})
+  })
 }
 
 export const updateMetric = (id, metricValue, type, dispatch) => {
@@ -23,13 +28,18 @@ export const updateMetric = (id, metricValue, type, dispatch) => {
   axios.post(`https://api.native-flora.tk/Item/Update`, {
       "id": id,
       "sizes": {
-          [type.replace('metric ', '')] : `${metricValue} ${getUnit(type.replace('metric ', ''))}`
+          [type] : metricValue
     }}, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
     })
-  .then(res=>localStorage.setItem('infoAboutTypeOfOrder', JSON.stringify(res.data.data)))
-  .catch(err=>console.log(err))
-  dispatch({type: 'LOADING_IS_COMPLETED'})
+  .then(res=>{
+    localStorage.setItem('infoAboutTypeOfOrder', JSON.stringify(res.data.data))
+    dispatch({type: 'LOADING_IS_COMPLETED'})
+  })
+  .catch(err=>{
+    console.log(err)
+    dispatch({type: 'LOADING_IS_COMPLETED'})
+  })
 }
 
 export const updateName = (id, nameValue, dispatch) => {
@@ -40,22 +50,50 @@ export const updateName = (id, nameValue, dispatch) => {
     }, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
     })
-  .then(res=>localStorage.setItem('infoAboutTypeOfOrder', JSON.stringify(res.data.data)))
-  .catch(err=>console.log(err))
-  dispatch({type: 'LOADING_IS_COMPLETED'})
+  .then(res=>{
+    localStorage.setItem('infoAboutTypeOfOrder', JSON.stringify(res.data.data))
+    dispatch({type: 'LOADING_IS_COMPLETED'})
+  })
+  .catch(err=>{
+    console.log(err)
+    dispatch({type: 'LOADING_IS_COMPLETED'})
+  })
 }
 
 export const updateDescription = (id, descriptionValue, dispatch) => {
   dispatch({type: 'LOADING_IS_UNCOMPLETED'})
   axios.post(`https://api.native-flora.tk/Item/Update`, {
-        "id": id,
-        "description": descriptionValue.split('.')
-      }, {
-        headers:{'x-access-token': localStorage.getItem('accessToken')}     
-      })
-    .then(res=>localStorage.setItem('infoAboutTypeOfOrder', JSON.stringify(res.data.data)))
-    .catch(err=>console.log(err))
-  dispatch({type: 'LOADING_IS_COMPLETED'})
+      "id": id,
+      "description": descriptionValue
+    }, {
+      headers:{'x-access-token': localStorage.getItem('accessToken')}     
+    })
+  .then(res=>{
+    localStorage.setItem('infoAboutTypeOfOrder', JSON.stringify(res.data.data))
+    dispatch({type: 'LOADING_IS_COMPLETED'})
+  })
+  .catch(err=>{
+    console.log(err)
+    dispatch({type: 'LOADING_IS_COMPLETED'})
+  })
+}
+
+export const updatePhotos = (id, photos, dispatch) => {
+  dispatch({type: 'LOADING_IS_UNCOMPLETED'})
+  axios.post(`https://api.native-flora.tk/Item/Update`, {
+      "id": id,
+      "icon": photos
+    }, {
+      headers:{'x-access-token': localStorage.getItem('accessToken')}     
+    })
+  .then(res=>{
+    localStorage.setItem('infoAboutTypeOfOrder', JSON.stringify(res.data.data))
+    dispatch({type: 'LOADING_IS_COMPLETED'})
+  })
+  .catch(err=>{
+    console.log(err)
+    dispatch({type: 'LOADING_IS_COMPLETED'})
+  })
 }
 
 export const createVariant = (itemId, Name, Price, Photos, setError, dispatch)=>{
@@ -68,11 +106,12 @@ export const createVariant = (itemId, Name, Price, Photos, setError, dispatch)=>
     }, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
     })
+  .then(()=>dispatch({type: 'LOADING_IS_COMPLETED'}))
   .catch(err=>{
     err.response.status === 400 && setError('Такой вариант уже существует!') 
     setTimeout(()=>setError(''), 4000)
+    dispatch({type: 'LOADING_IS_COMPLETED'})
   })
-  dispatch({type: 'LOADING_IS_COMPLETED'})
 }
 
 export const deleteVariant = (itemId, variantId, dispatch) => {
@@ -83,8 +122,11 @@ export const deleteVariant = (itemId, variantId, dispatch) => {
     }, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
     })
-  .catch(err=>console.log(err))
-  dispatch({type: 'LOADING_IS_COMPLETED'})
+  .then(()=>dispatch({type: 'LOADING_IS_COMPLETED'}))
+  .catch(err=>{
+    console.log(err)
+    dispatch({type: 'LOADING_IS_COMPLETED'})
+  })
 }
 
 export const updateVariant = (itemId, variantId, name, price, photos, dispatch) => {
@@ -98,8 +140,11 @@ export const updateVariant = (itemId, variantId, name, price, photos, dispatch) 
     }, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
     })
-  .catch(err=>console.log(err))
-  dispatch({type: 'LOADING_IS_COMPLETED'})
+    .then(()=>dispatch({type: 'LOADING_IS_COMPLETED'}))
+    .catch(err=>{
+      console.log(err)
+      dispatch({type: 'LOADING_IS_COMPLETED'})
+    })
 }
 
 export const createKit = (itemId, name, variants, photos, price, dispatch) => {
@@ -113,6 +158,9 @@ export const createKit = (itemId, name, variants, photos, price, dispatch) => {
     }, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
     })
-  .catch(err=>console.log(err))
-  dispatch({type: 'LOADING_IS_COMPLETED'})
+    .then(()=>dispatch({type: 'LOADING_IS_COMPLETED'}))
+    .catch(err=>{
+      console.log(err)
+      dispatch({type: 'LOADING_IS_COMPLETED'})
+    })
 }

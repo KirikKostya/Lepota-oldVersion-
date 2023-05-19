@@ -13,7 +13,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { refreshFunction } from '../MailFiles/App'
 import axios from 'axios';
 import './Style/OrderCard.css';
+import Slider from '../Slider/Slider';
 
+//Makes list from response data
+export const getImages = (images) => {
+  return images === null
+    ? [{
+        url: require('../Photos/somethingWentWrong.png')
+      }] 
+      : images.map(image=>{
+          let galleryItem = {};
+          galleryItem['url'] = image;
+          return galleryItem; 
+        }) 
+}
 
 export default function OrderCard(
   {
@@ -23,7 +36,8 @@ export default function OrderCard(
     setModalView,
     setUpdateModalViewType,
     fetchProducts,
-    variants
+    variants,
+    setIsOpenUpdateVariant
   }
 ) {
 
@@ -91,19 +105,6 @@ export default function OrderCard(
         setKits([])
     }
 
-    //Makes list from response data
-    const getImages = (images) => {
-      return images === null
-        ? [{
-            url: require('../Photos/somethingWentWrong.png')
-          }] 
-          : images.map(image=>{
-              let galleryItem = {};
-              galleryItem['url'] = image;
-              return galleryItem; 
-            }) 
-    }
-
     //changes total price, when user ckick on label
     const handlerChangeTotalSum = async (isCheckedLabel, id, item) =>{
       if(isCheckedLabel){
@@ -123,7 +124,6 @@ export default function OrderCard(
             dispatch({type: 'SET_TOTAL_SUM_TYPE-COMP', payload: kit.price});
             setListOfPhotos(kit.icon);
             setNameOfKit(kit.name);
-            console.log(kit)
           }
         })
       } else if(kits.length === 1){
@@ -158,13 +158,14 @@ export default function OrderCard(
               slideDuration={0.7}
               images={getImages(order.item.icon)}
               showBullets={false}
-              showNavs={true} />
+              showNavs={true}
+            />
           </div>
         </div>
         <div className='additionalMetrics'>
           <div className={`listOfMitrics ${variants.length===0 && 'empty'}`}>
             <h3 className='headerMetrics'>
-              { isAdmin && <AddVariantIcon onClick={()=>setIsOpenAddedVariantModal(true)}/> }
+              { isAdmin && <AddVariantIcon /*onClick={()=>isOpenUpdateVariant(true)}*/ /> }
               В комплекте может идти:
             </h3>
             <div className='cointainerTC ' >
@@ -192,9 +193,9 @@ export default function OrderCard(
                             isAdmin 
                               && 
                             <Pensil 
-                              setUpdateModalViewType={async()=>{
+                              onClick={async()=>{
                                 dispatch({type: 'SET_VARIANT_ID', payload: item.id});
-                                await setUpdateModalViewType('variant')
+                                await setIsOpenUpdateVariant('variant')
                               }} 
                             /> 
                           }

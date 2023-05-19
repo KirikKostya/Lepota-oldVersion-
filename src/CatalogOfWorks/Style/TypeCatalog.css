@@ -13,13 +13,24 @@
     justify-content: start;
     padding: 0;
 }
+.infoOrder h1{
+    width: 100%;
+    align-items: center;
+    display: flex;
+    margin-right: 5px;
+}
+.infoOrder h1 .addIcons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 .infoOrder .descriptionMetrics{
     width: 80%;
 }
 .descriptionMetrics span{
-    /* display:inline-flex; */
     width: 70%;
-    word-break:break-all
+    word-wrap: break-word;
+    hyphens: auto;
 }
 .orderMatrics{
     width: 30%;
