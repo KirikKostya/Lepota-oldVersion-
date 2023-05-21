@@ -24,6 +24,7 @@
     "react-select": "^5.7.2",
     "react-simple-image-slider": "^2.4.1",
     "redux": "^4.2.1",
+    "typescript": "^5.0.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

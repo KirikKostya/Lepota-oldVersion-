@@ -20,42 +20,73 @@ export default function SignIn({ setRegistr }) {
   const dispatch = useDispatch()
 
   //authorizates user 
-  const Authorization = async ()=> {
-    dispatch({type: 'LOADING_IS_UNCOMPLETED'});
-    let status = await statusValidate(setStatusValidateForm, setColorOfValidateForm, LoginInputValue);
-      if(PasswordInputValue && status){  
-        axios.defaults.withCredentials = true;
-        axios.post('https://api.native-flora.tk/Auth/Login', 
-              {
-                'username': LoginInputValue,
-                'password': PasswordInputValue
-              })
-        .then( res=>{
-          localStorage.setItem('accessToken', res.data.data);
-          setStatusValidateForm('Вы вошли в свой аккаунт!');
-          setColorOfValidateForm('green');
-          dispatch({ type: 'COMPLETED_AUTHORIZATION'});
-          clearInputs( setLoginInputValue, setPasswordInputValue, setPasswordInputValue );
-          setButtonStatus('Перейти на главную');
-        }) 
-        .catch(err=>{
-          console.log(err)
-          setStatusValidateForm('Не верный логин или пароль!');
-          setColorOfValidateForm('red');
-          clearInputs( setLoginInputValue, setPasswordInputValue );
-        })
-            setTimeout(()=>{
-              setColorOfValidateForm('');
-              setStatusValidateForm('')
-            }, 4000)
+  // const Authorization = async ()=> {
+  //   dispatch({type: 'LOADING_IS_UNCOMPLETED'});
+  //   let status = await statusValidate(setStatusValidateForm, setColorOfValidateForm, LoginInputValue);
+  //     if(PasswordInputValue && status){  
+  //       axios.defaults.withCredentials = true;
+  //       axios.post('https://api.native-flora.tk/Auth/Login', 
+  //             {
+  //               'username': LoginInputValue,
+  //               'password': PasswordInputValue
+  //             })
+  //       .then( res=>{
+  //         localStorage.setItem('accessToken', res.data.data);
+  //         setStatusValidateForm('Вы вошли в свой аккаунт!');
+  //         setColorOfValidateForm('green');
+  //         dispatch({ type: 'COMPLETED_AUTHORIZATION'});
+  //         clearInputs( setLoginInputValue, setPasswordInputValue, setPasswordInputValue );
+  //         setButtonStatus('Перейти на главную');
+  //       }) 
+  //       .catch(err=>{
+  //         console.log(err)
+  //         setStatusValidateForm('Не верный логин или пароль!');
+  //         setColorOfValidateForm('red');
+  //         clearInputs( setLoginInputValue, setPasswordInputValue );
+  //       })
+  //           setTimeout(()=>{
+  //             setColorOfValidateForm('');
+  //             setStatusValidateForm('')
+  //           }, 4000)
 
-      } else {
-          setStatusValidateForm('Введите корректные логин и пароль');
-          setColorOfValidateForm('red')
-      }
-    dispatch({type: 'LOADING_IS_COMPLETED'});
-  }
+  //     } else {
+  //         setStatusValidateForm('Введите корректные логин и пароль');
+  //         setColorOfValidateForm('red')
+  //     }
+  //   dispatch({type: 'LOADING_IS_COMPLETED'});
+  // }
    
+  const Authorization = async () => {
+    dispatch({ type: 'LOADING_IS_UNCOMPLETED' });
+    try {
+      const status = await statusValidate(setStatusValidateForm, setColorOfValidateForm, LoginInputValue);
+      if (!PasswordInputValue || !status) {
+        setStatusValidateForm('Введите корректные логин и пароль');
+        setColorOfValidateForm('red');
+        return;
+      }
+      axios.defaults.withCredentials = true;
+      const res = await axios.post('https://api.native-flora.tk/Auth/Login', {
+        'username': LoginInputValue,
+        'password': PasswordInputValue
+      });
+      localStorage.setItem('accessToken', res.data.data);
+        clearInputs(setLoginInputValue, setPasswordInputValue, setPasswordInputValue);
+        setStatusValidateForm('Вы вошли в свой аккаунт!');
+        setColorOfValidateForm('green');
+        setButtonStatus('Перейти на главную');
+        dispatch({ type: 'COMPLETED_AUTHORIZATION' });
+    } catch (err) {
+      setStatusValidateForm('Не верный логин или пароль!');
+      setColorOfValidateForm('red');
+    } finally {
+      setTimeout(() => {
+        setColorOfValidateForm('');
+        setStatusValidateForm('');
+      }, 4000);
+      dispatch({ type: 'LOADING_IS_COMPLETED' });
+    }
+  };
   return (
     <div className='containerForSignIn'>
         <div className='signIn'>

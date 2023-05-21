@@ -6,25 +6,42 @@ import { useSearchParams } from 'react-router-dom'
 import ErrorModal from '../Modals/ErrorModal';
 import './Styles/AccountActivation.css'
 
+//Success request
+interface QuestionResponseI{
+  data: DataI,
+  status: number,
+  statusText: string,
+}
+interface DataI{
+  data: string
+}
+
+//Errors
+interface ErrorI{
+  response: ResponseI;
+}
+interface ResponseI{
+  status: number
+}
 
 export default function AccountActivation() {
     const [link, setLink]  = useSearchParams();
     
-    const isLoading = useSelector(state=>state.isLoading);
+    const isLoading = useSelector<any>(state=>state.isLoading);
     const dispatch = useDispatch()
     
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState<String>('');
 
     //activate account
-    const activationFunction = () => {
+    const activationFunction = ():void => {
       dispatch({type: 'LOADING_IS_UNCOMPLETED'})
       axios.defaults.withCredentials = true;
-      axios.post(`https://api.native-flora.tk/Auth/Activate/${link.get('id')}`)
+      axios.post<QuestionResponseI>(`https://api.native-flora.tk/Auth/Activate/${link.get('id')}`)
       .then(res=>{
-          setErrorMessage('Вы активировали аккаунт!')
+          setErrorMessage('Вы активировали аккаунт!');
           localStorage.setItem('accessToken', res.data.data);
         })
-      .catch(err=>{
+      .catch((err:ErrorI)=>{
         (err.response.status === 400)
           ? setErrorMessage('Такой аккаунт уже активирован!')
             : (err.response.status === 404)

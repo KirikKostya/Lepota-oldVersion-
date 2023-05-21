@@ -28,14 +28,15 @@ export const getValueByMetricName = (selectedOptions, type) => {
         }
     } 
 }
+
 export default function AddedNewCart() {
     
-    const [photos, setPhotos] = useState(Array);
-    const [description, setDescription] = useState('');
-    const [name, setName] = useState('');
-    const [price, setPrice] = useState('');
+    const [photos, setPhotos] = useState<Array<string>>([]);
+    const [description, setDescription] = useState<String>('');
+    const [name, setName] = useState<String>('');
+    const [price, setPrice] = useState<String>('');
 
-    const [metricsListStep, setMetricsListStep] = useState([]);
+    const [metricsListStep, setMetricsListStep] = useState<Array<number>>([]);
     const [selectedOptions, setSelectedOptions] = useState([]);
 
     const dispatch = useDispatch()

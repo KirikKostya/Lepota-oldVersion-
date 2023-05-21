@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import ReactModal from 'react-modal'
 import Slider from '../Slider/Slider'
-import Picker from './Picker';
-import { createVariant } from './AdmineController.js'
+import Picker from '../Admin/Picker';
+import { createVariant } from '../Admin/AdmineController'
 import { FaChevronLeft } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import './Style/CreateVariantModal.css'

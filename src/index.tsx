@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -6,9 +6,25 @@ import './MailFiles/Styles/index.css';
 import App from './MailFiles/App';
 import reportWebVitals from './Others/reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+interface AllParamsI{
+  isAuthorizate: boolean,
+  isAdmin: boolean,
+  isLoading: boolean,
+  myAccountIsOpen: boolean,
+  countOfOrders: number,
+  searchOrderById: number,
+  refreshTokenIsExpired: boolean,
+  totalSum_TypeComp: number,
+  //admine:
+  variantId: number
+}
 
-const allContextParametrs = {
+interface ActionI{
+  type: string,
+  payload: any
+}
+
+const allContextParametrs: AllParamsI = {
     isAuthorizate: Boolean(localStorage.getItem('accessToken')),
     isAdmin: false,
     isLoading: true,
@@ -17,12 +33,10 @@ const allContextParametrs = {
     searchOrderById: 0,
     refreshTokenIsExpired: false,
     totalSum_TypeComp: 0,
-
     //admine:
     variantId: 1
 }
-
-const reducer = (state = allContextParametrs, action) => {
+const reducer = (state = allContextParametrs, action: ActionI) => {
     switch(action.type){
       case 'COMPLETED_AUTHORIZATION':
         return {...state, isAuthorizate: true};
@@ -60,17 +74,21 @@ const reducer = (state = allContextParametrs, action) => {
         return {...state, variantId: action.payload};
       default : 
         return {...state}
-      }
-  }
+    }
+}
 
-const store = createStore(reducer)
+const store: AllParamsI = createStore(reducer);
 
-root.render(
-    <React.StrictMode>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </React.StrictMode>
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
 );
+
+root.render( 
+  <React.StrictMode>
+    <Provider store={store as any}>
+      <App />
+    </Provider>
+  </React.StrictMode> 
+)
 
 reportWebVitals();
