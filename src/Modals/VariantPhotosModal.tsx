@@ -3,7 +3,17 @@ import ReactModal from 'react-modal';
 import Slider from '../Slider/Slider';
 import './Styles/AddedVariantModal.css';
 
-export default function VariantPhotosModal({ isOpen, setIsOpen, IMGS }) {
+interface IVariantsPhotos{
+  isOpen: boolean,
+  setIsOpen: (bool: boolean)=>void;
+  IMGS: IImgs[]
+}
+interface IImgs{
+  url: string
+}
+export default function VariantPhotosModal(props:IVariantsPhotos) {
+
+  const { isOpen, setIsOpen, IMGS } = props;
 
   return (
     <ReactModal 

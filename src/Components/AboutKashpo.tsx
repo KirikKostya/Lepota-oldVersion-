@@ -1,7 +1,13 @@
 import React from 'react'
 import './Styles/AboutKashpo.css'
 
-const exemplesOfUsed = [
+interface IExample{
+    id: number,
+    img: string,
+    tittle: string
+}
+
+const exemplesOfUsed: IExample[] = [
     {
         id: 0,
         img: require('../Photos/FlowersInKashpo.png'),

@@ -9,38 +9,10 @@ import { checkIsAdmine } from '../Admin/AdmineController';
 import { signOut } from '../MyAccountComponents/MyAccount';
 import axios from 'axios';
 import './Styles/App.css';
+import { Dispatch } from 'redux';
+import { AllParamsI } from '..';
 
-//refresh Token for authori- and registration (only this function uses fetch-request)
-// export const refreshFunction = async (dispatch, newFunc) => {
-//   new Promise((resolve, reject) => {
-//     localStorage.getItem('accessToken') 
-//       &&
-//         axios.get('https://api.native-flora.tk/Auth/checkToken', {
-//           withCredentials: true,
-//           headers:{'x-access-token': localStorage.getItem('accessToken')}
-//         })
-//         .then(resolve)
-//         .catch(async res => {
-//           if(res.response.status === 401){
-//             axios.get('https://api.native-flora.tk/Auth/Refresh', {
-//               withCredentials: true
-//             })
-//             .then(res=>{
-//               localStorage.setItem('accessToken', res.data.data)
-//               resolve()
-//             })
-//             .catch(res=>{
-//               (res.response.status === 401)
-//                 ? dispatch({type: 'SET_REFRESH-TOKEN_STATUS', payload: true})  
-//                   : console.log('Что-то пошло не так!')
-//             })
-//           }
-//         })
-//   })
-//   .then(newFunc)
-// }
-
-export const refreshFunction = async (dispatch, newFunc) => {
+export const refreshFunction = async (dispatch: Dispatch, newFunc:()=>void) => {
   try {
     if(localStorage.getItem('accessToken')){
       await axios.get('https://api.native-flora.tk/Auth/checkToken', {
@@ -49,7 +21,7 @@ export const refreshFunction = async (dispatch, newFunc) => {
       });
     }
     await newFunc();
-  } catch (err) {
+  } catch (err: any) {
     if(err.response.status === 401){
       try {
         const res = await axios.get('https://api.native-flora.tk/Auth/Refresh', {
@@ -57,7 +29,7 @@ export const refreshFunction = async (dispatch, newFunc) => {
         });
         localStorage.setItem('accessToken', res.data.data);
         await newFunc();
-      } catch (error) {
+      } catch (error: any) {
         if(error.response.status === 401){
           dispatch({type: 'SET_REFRESH-TOKEN_STATUS', payload: true});
         } else {
@@ -71,9 +43,10 @@ export const refreshFunction = async (dispatch, newFunc) => {
 
 function App() {
   
-  const myAccountIsOpen = useSelector(state=>state.myAccountIsOpen);
-  const refreshTokenIsExpired = useSelector(state=>state.refreshTokenIsExpired);
-  const isLoading = useSelector(state=>state.isLoading);
+  const myAccountIsOpen = useSelector((state:AllParamsI)=>state.myAccountIsOpen);
+  const refreshTokenIsExpired = useSelector((state:AllParamsI)=>state.refreshTokenIsExpired);
+  const isLoading = useSelector((state:AllParamsI)=>state.isLoading);
+  
   const dispatch = useDispatch();
 
   useEffect(()=>{

@@ -1,7 +1,11 @@
 import React from 'react'
 import './Styles/Description.css'
 
-const exemplesOfWorks = [
+interface IExampleDescription{
+  id: number,
+  original: string
+}
+const exemplesOfWorks: IExampleDescription[] = [
   {
     id: 1,
     original:require('../Photos/WorksPictures/candle.png'),

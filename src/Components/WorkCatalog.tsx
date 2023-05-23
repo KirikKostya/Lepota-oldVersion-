@@ -3,10 +3,12 @@ import CardOfWork from './CardOfWork'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import './Styles/WorkCatalog.css'
+import { ICard } from '../Admin/Update/Interfaces/Interface'
+
 
 export default function WorkCatalog() {
   
-  const [CARDS, setCARDS] = useState([])
+  const [CARDS, setCARDS] = useState<ICard[]>([])
   
   const dispatch = useDispatch();
 
@@ -31,8 +33,8 @@ export default function WorkCatalog() {
         </p>
         <div className='listOfWorks'>
           {
-            CARDS.sort((a,b) => a.id - b.id).map(card => (
-              <CardOfWork key={card.id} card={card}/>
+            CARDS.sort((a,b) => a.id - b.id).map((card:ICard) => (
+              <CardOfWork card={card}/>
             ))
           }
         </div>

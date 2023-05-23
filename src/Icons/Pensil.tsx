@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Pensil({onClick}) {
+export default function Pensil(onClick:()=>void) {
   return (
     <svg 
         width="16" 

@@ -4,9 +4,9 @@ import Cookies from 'js-cookie';
 import './Styles/CookieAlert.css'
 
 export default function CookieAlert() {
-  const [closeMSG, setCloseMSG] = useState('');
+  const [closeMSG, setCloseMSG] = useState<string>('');
 
-  const toggleStateOfMSG = () => {
+  const toggleStateOfMSG = ():void => {
     Cookies.set('cookieActivate', true);
     return closeMSG === '' ? setCloseMSG('displayNone') : setCloseMSG('')
   }

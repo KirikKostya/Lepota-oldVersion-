@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function OrderCardMoreImgs({onClick}) {
+export default function OrderCardMoreImgs(onClick:()=>void) {
   return (
     <svg width={25} 
          height={25} 

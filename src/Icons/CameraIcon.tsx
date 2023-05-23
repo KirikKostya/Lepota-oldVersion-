@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function CameraIcon({onClick}) {
+export default function CameraIcon(onClick:()=>void) {
   return (
     <svg 
         width="24" 

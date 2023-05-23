@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function TelegramIcon({onClick}) {
+export default function TelegramIcon(onClick:()=>void) {
   return (
     <svg 
         fill="white"

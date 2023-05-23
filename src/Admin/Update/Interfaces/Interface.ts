@@ -25,7 +25,7 @@ export interface ICreateKitProps{
     setIsOpen: (bool: boolean)=>void, 
     kitVariants: number[], 
     itemId: number, 
-    selectedVariants: IKit[]
+    selectedVariants: IVariant[]
 }
 export interface IKit{
     description: string,

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function CloseEyeIcons ({onClick}) {
+export function CloseEyeIcons (onClick:()=>void) {
   return (
     <svg 
         onClick={onClick} 
@@ -17,7 +17,7 @@ export function CloseEyeIcons ({onClick}) {
   )
 }
 
-export function OpenEyeIcons ({onClick}) {
+export function OpenEyeIcons (onClick:()=>void) {
   return (
     <svg 
         onClick={onClick}  

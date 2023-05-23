@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function CheckMarkForSingleSelect({className}) {
+export default function CheckMarkForSingleSelect(className:string) {
   return (
     <svg
         width="12"

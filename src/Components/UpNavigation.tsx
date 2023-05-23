@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import MyAccount from '../MyAccountComponents/MyAccount'
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshFunction } from '../MailFiles/App'
@@ -8,23 +8,25 @@ import MyAccountIcon from '../Icons/MyAccountIcon';
 import SignInIcon from '../Icons/SignInIcon';
 import axios from 'axios';
 import './Styles/UpNavigation.css'
+import { AllParamsI } from '..';
 
 
-export default function UpNavigation({ hide }) {
+export default function UpNavigation( hide:string ) {
   
-  const [openHamburgerMenu, setOpenHamburgerMenu] = useState('close');
+  const [openHamburgerMenu, setOpenHamburgerMenu] = useState<string>('close');
   
-  const isAuthorizate = useSelector(state=>state.isAuthorizate);
-  const myAccountIsOpen = useSelector(state=>state.myAccountIsOpen);
+  const isAuthorizate = useSelector((state:AllParamsI)=>state.isAuthorizate);
+  const myAccountIsOpen = useSelector((state:AllParamsI)=>state.myAccountIsOpen);
   const dispatch = useDispatch();
   
-  const getCountOfOrder = () => {
+  const getCountOfOrder = ():void => {
     axios.post( 'https://api.native-flora.tk/Cart/Count', {}, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
     .then(res => dispatch({type: 'SET_COUNT_OF_ORDERS', payload: res.data.data}))
   }
 
+  useEffect(()=>console.log(hide), [])
   return (
     <>
       <div id='upNav' className='upNavContainer'>

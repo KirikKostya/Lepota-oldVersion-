@@ -3,10 +3,9 @@ import TelegramIcon from '../Icons/TelegramIcon'
 import InstagramIcon from '../Icons/InstagramIcon'
 import './Styles/ContactWithUs.css'
 
-
 export default function ContactWithUs() {
 
-  const [isTelephoneOpen, setIsTelephoneOpen] = useState(false)
+  const [isTelephoneOpen, setIsTelephoneOpen] = useState<boolean>(false);
 
   return (
     <div className='containerForContactWithUs' id='contactWithUs' >

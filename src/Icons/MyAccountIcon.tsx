@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function MyAccountIcon({onClick}) {
+export default function MyAccountIcon(onClick:()=>void) {
   return (
     <svg width="40" 
          height="40" 

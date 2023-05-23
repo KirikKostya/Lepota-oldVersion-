@@ -21,7 +21,7 @@ interface IGalleryItem{
   url: string
 }
 //Makes list from response data
-export const getImages = (images:string[]) => {
+export const getImages = (images:string[]):IGalleryItem[] => {
   return images === null
     ? [{url: require('../Photos/somethingWentWrong.png')}] 
       : images.map(image=>{
@@ -42,7 +42,7 @@ export default function OrderCard(props: IOrderCarsProps) {
     setIsOpenUpdateVariant
   } = props;
     //Refs
-    const refInput = useRef([]);
+    const refInput = useRef<HTMLInputElement[]>([]);
     const refCount = useRef(null);
 
     const totalSum_TypeComp = useSelector((state: AllParamsI)=>state.totalSum_TypeComp);
@@ -57,15 +57,15 @@ export default function OrderCard(props: IOrderCarsProps) {
     const [isOpenAddedVariantModal, setIsOpenAddedVariantModal] = useState<boolean>(false);
     const [isOpenVarintPhotos, setIsOpenVariantPhotos] = useState<boolean>(false);
 
-    const [imagesOfVariant, setImagesOfVariant] = useState<string[]>(Array);
+    const [imagesOfVariant, setImagesOfVariant] = useState<IGalleryItem[]>(Array);
 
     const [amountOfOrder, setAmountOfOrder] = useState<number>(1)
-    const [kits, setKits] = useState<IKits[]>(Array);
+    const [kits, setKits] = useState<number[]>(Array);
     const [nameOfKit, setNameOfKit] = useState<string>('');
     const [listOfPhotos, setListOfPhotos] = useState<string[]>(Array);
 
     //For all selected kits
-    const [selectedVariants, setSelectedVariants] = useState([]);
+    const [selectedVariants, setSelectedVariants] = useState<IVariant[]>([]);
 
     //Adds item to cart of order
     const addItemToCart = async (cardId:number) =>{
@@ -99,20 +99,20 @@ export default function OrderCard(props: IOrderCarsProps) {
         refInp.current[i].checked = false;
       }
         dispatch({type: 'SET_TOTAL_SUM_TYPE-COMP', payload: JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')||'{}').price })
-        setListOfPhotos(getImages(JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')||'{}').icon))
+        setListOfPhotos(JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')||'{}').icon)
         refCount.current.value = 1;
         setNameOfKit('Нет комплекта')
         setKits([])
     }
 
     //changes total price, when user ckick on label
-    const handlerChangeTotalSum = async (isCheckedLabel: boolean, id: number, item) =>{
+    const handlerChangeTotalSum = async (isCheckedLabel: boolean, id: number, item:IVariant) =>{
       if(isCheckedLabel){
         setKits([...kits, id]);
         setSelectedVariants([...selectedVariants, item]);
       } else {
         setKits([...kits.filter(el => el !== id)]);
-        setSelectedVariants([...selectedVariants.filter(el => el.id !== id)]);
+        setSelectedVariants([...selectedVariants.filter((el:IVariant) => +el.id !== id)]);
       }
     }
 
@@ -128,7 +128,7 @@ export default function OrderCard(props: IOrderCarsProps) {
         })
       } else if(kits.length === 1){
         catalogOrders[0].variants.forEach(example=>{
-          if(example.id === kits[0]){
+          if(+example.id === kits[0]){
             dispatch({type: 'SET_TOTAL_SUM_TYPE-COMP', payload: example.price});
             setListOfPhotos(example.icon)
             setNameOfKit(example.name);
@@ -141,7 +141,7 @@ export default function OrderCard(props: IOrderCarsProps) {
       }
     }, [kits])
 
-    useEffect(()=>refreshFunction(dispatch,()=>fetchProducts(searchOrderById)), [catalogOrders]);
+    useEffect(()=>fetchProducts(searchOrderById), [catalogOrders]);
 
   return (
     catalogOrders.map(order =>(
@@ -165,7 +165,7 @@ export default function OrderCard(props: IOrderCarsProps) {
         <div className='additionalMetrics'>
           <div className={`listOfMitrics ${variants.length===0 && 'empty'}`}>
             <h3 className='headerMetrics'>
-              { isAdmin && <AddVariantIcon /*onClick={()=>isOpenUpdateVariant(true)}*/ /> }
+              { isAdmin && <AddVariantIcon onClick={()=>setIsOpenAddedVariantModal(true)} /> }
               В комплекте может идти:
             </h3>
             <div className='cointainerTC ' >
@@ -176,10 +176,11 @@ export default function OrderCard(props: IOrderCarsProps) {
                         <div key={item.id} className='itemOfMetrics' >
                           <label
                             className='metricLabel' 
-                            onChange={async (e)=>{
-                              handlerChangeTotalSum(e.target.checked, item.id, item);
+                            onChange={(e: any)=>{
+                              console.log(refInput)
+                              handlerChangeTotalSum(e.target.checked, +item.id, item);
                             }}>
-                              <input ref={(element) => { refInput.current[index] = element }} type={'checkbox'} className='checkBox' />
+                              <input ref={(element:HTMLInputElement) => refInput.current[index] = element } type={'checkbox'} className='checkBox' />
                               <span>+</span>
                               <p id='variantName'>{item.name} </p>
                               <p className='item-price'>{item.price} BYN</p>
@@ -195,7 +196,7 @@ export default function OrderCard(props: IOrderCarsProps) {
                             <Pensil 
                               onClick={async()=>{
                                 dispatch({type: 'SET_VARIANT_ID', payload: item.id});
-                                await setIsOpenUpdateVariant('variant')
+                                await setIsOpenUpdateVariant(true)
                               }} 
                             /> 
                           }
@@ -237,8 +238,9 @@ export default function OrderCard(props: IOrderCarsProps) {
                   <span>{totalSum_TypeComp} Br</span>
                   <OrderCardMoreImgs 
                     onClick={()=>{
-                      setIsOpenVariantPhotos(true);
-                      setImagesOfVariant(getImages(listOfPhotos))
+                      // setIsOpenVariantPhotos(true);
+                      // setImagesOfVariant(getImages(listOfPhotos))
+                      console.log(selectedVariants)
                     }} />
                 </h3>
                 <button className={`addToCartBTN ${amountOfOrder === 0 ? 'disabled' : ''}`}

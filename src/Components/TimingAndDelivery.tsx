@@ -1,7 +1,12 @@
 import React from 'react'
 import './Styles/TimingAndDelivery.css'
 
-const stepsOfDeliver = [
+interface IStepsOfDelivary{
+    id: number,
+    tittle: string,
+    description: string
+}
+const stepsOfDeliver: IStepsOfDelivary[] = [
     {
         id: 0,
         tittle: 'Отправьте заявку',
@@ -25,6 +30,7 @@ const stepsOfDeliver = [
 ]
 
 export default function TimingAndDelivery() {
+    
   return (
     <div className='containerForTimingAndDelivery' id='timingAndDelivery'>
         <h1>Время и Доставка</h1>
