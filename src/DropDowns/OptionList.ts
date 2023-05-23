@@ -1,4 +1,6 @@
-export const SortByDate = [
+import { IOption } from "../Admin/Update/Interfaces/Interface"
+
+export const SortByDate:IOption[] = [
     {
         value: 'newOrderds',
         label: 'Новые'
@@ -8,7 +10,7 @@ export const SortByDate = [
         label: 'Старые'
     }
 ]
-export const SortByDileverStatus = [
+export const SortByDileverStatus:IOption[] = [
     {
         value: 'BeingProcessed',
         label: 'Принят в обработку'
@@ -22,7 +24,7 @@ export const SortByDileverStatus = [
         label: 'В пути'
     }
 ]
-export const SortByDileverType = [
+export const SortByDileverType:IOption[] = [
     {
         value: 'newOrderds',
         label: 'Доставка'
@@ -32,7 +34,7 @@ export const SortByDileverType = [
         label: 'Самовывоз'
     }
 ]
-export const OptionsOfMetrics = [
+export const OptionsOfMetrics:IOption[] = [
     {
         label: 'Материалы',
         value: 'Материалы'

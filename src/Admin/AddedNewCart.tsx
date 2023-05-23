@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
-import SingleSelect from '../DropDowns/SingleSelect'
+import React, {useState} from 'react';
 import CrossIcon from '../Icons/CrossIcon';
-import {OptionsOfMetrics} from '../DropDowns/OptionList'
+import SingleSelect from '../DropDowns/SingleSelect';
+import {IOption, ISelectOption} from './Update/Interfaces/Interface';
+import {OptionsOfMetrics} from '../DropDowns/OptionList.ts'
 import { refreshFunction } from '../MailFiles/App';
 import { useDispatch } from 'react-redux';
 import Picker from './Picker';
@@ -9,7 +10,7 @@ import axios from 'axios';
 import './Style/AddedNewCart.css'
 
 //gets value of metric by metric name
-export const getValueByMetricName = (selectedOptions, type) => {
+export const getValueByMetricName = (selectedOptions:Array<ISelectOption>, type:string) => {
     for(let i=0; i<selectedOptions.length; i++){
         if(selectedOptions[i].metric === 'Материалы' && type === 'Material'){
             return selectedOptions[i].value
@@ -29,21 +30,21 @@ export const getValueByMetricName = (selectedOptions, type) => {
     } 
 }
 
-export default function AddedNewCart() {
+export default function AddedNewCart(){
     
     const [photos, setPhotos] = useState<Array<string>>([]);
-    const [description, setDescription] = useState<String>('');
-    const [name, setName] = useState<String>('');
-    const [price, setPrice] = useState<String>('');
+    const [description, setDescription] = useState<string>('');
+    const [name, setName] = useState<string>('');
+    const [price, setPrice] = useState<string>('');
 
-    const [metricsListStep, setMetricsListStep] = useState<Array<number>>([]);
-    const [selectedOptions, setSelectedOptions] = useState([]);
+    const [metricsListStep, setMetricsListStep] = useState<Array<string>>([]);
+    const [selectedOptions, setSelectedOptions] = useState<Array<string>>([]);
 
     const dispatch = useDispatch()
 
     //filter option on select
-    const filter = (optionList, selectedList) => {
-        let newArray = [...optionList];
+    const filter = (optionList:Array<IOption>, selectedList:Array<ISelectOption>) => {
+        let newArray:Array<IOption> = [...optionList];
         for(let i=0; i<selectedList.length; i++){
             newArray = [...newArray.filter(el=> el.value !== selectedList[i].metric)]
         }
@@ -100,7 +101,8 @@ export default function AddedNewCart() {
         <div className='photoAndDescriptionContainer'>
             <div 
                 className='listOfSelectedImages' 
-                style={ { overflowX: makeScroll() } }>
+                // style={ { overflowX: makeScroll() } }
+            >
                 {
                     photos.map(photo=>(
                         <img key={photo} 
@@ -108,11 +110,11 @@ export default function AddedNewCart() {
                              className='selectedImage' 
                              style={ { scrollSnapAlign: 'start' } }
                              alt='photo' 
-                             onClick={() => setPhotos(photos.filter(item => item !== photo))
-                        }/>
+                             onClick={() => setPhotos(photos.filter(item => item !== photo))}
+                        />
                     ))
                 }
-                <Picker setPhotos={setPhotos} photos={photos} className='addedFileBTN' />
+                <Picker setPhotos={setPhotos} photos={photos} className='addedFileBTN' style={null} />
             </div>
             <div className='descriptionContainer'>
                 <p>Описание:</p>
@@ -149,16 +151,17 @@ export default function AddedNewCart() {
             </div>
             <div className='metricCart'>
                 <h4>Параметры:</h4>
+                <button onClick={()=>console.log(OptionsOfMetrics, selectedOptions)}>123</button>
                 {
-                    metricsListStep.map( (el, index) => (
+                    metricsListStep.map( (el:string, index:number) => (
                         <div className='metric' key={el} >
-                            <SingleSelect 
-                                options = { filter(OptionsOfMetrics, selectedOptions) } 
+                            <SingleSelect
+                                options={filter(OptionsOfMetrics, selectedOptions)}
                                 width={'60%'}
                                 index={index}
-                                selectedOptions = {selectedOptions}
-                                setSelectedOptions = {setSelectedOptions}
-                                type={'metric'}
+                                selectedOptions={selectedOptions}
+                                setSelectedOptions={setSelectedOptions}
+                                type={'metric'} 
                             />
                             <input 
                                 className='metricInput' 
@@ -181,11 +184,14 @@ export default function AddedNewCart() {
                 }
                 <button 
                     className='deleteMetricBtnField'
-                    onClick={()=>{
-                        setMetricsListStep([...metricsListStep, Math.random().toFixed(4)])
-                        setSelectedOptions([...selectedOptions, Math.random().toFixed(2)])
+                    onClick={():void=>{
+                        // setMetricsListStep([...metricsListStep])
+                        // setSelectedOptions([...selectedOptions])
+                        console.log([...metricsListStep, Math.random().toFixed(4)], [...selectedOptions, Math.random().toFixed(2)])
+                        setMetricsListStep([...metricsListStep, `${Math.random().toFixed(4)}`])
+                        setSelectedOptions([...selectedOptions, `${Math.random().toFixed(2)}`])
                     }}
-                    style={{display: metricsListStep.length >= 7 && 'none'}}
+                    style={{display: metricsListStep.length >= 7 ? 'none' : 'block'}}
                 ><span className='deleteMetricBtn'>Добавить</span></button>
             </div>
             <div className='createCartField'>

@@ -1,6 +1,6 @@
 import React from 'react';
-import SingleSelect from '../DropDowns/SingleSelect.js';
-import { SortByDate, SortByDileverStatus, SortByDileverType } from '../DropDowns/OptionList.js';
+import SingleSelect from '../DropDowns/SingleSelect.tsx';
+import { SortByDate, SortByDileverStatus, SortByDileverType } from '../DropDowns/OptionList.ts';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshFunction } from '../MailFiles/App'
 import { NavLink } from 'react-router-dom';

@@ -3,7 +3,7 @@ import ContactWithUs from '../Components/ContactWithUs'
 import PersonalDataInputs from './PersonalDataInputs'
 import PersonalSotialData from './PersonalSotialData'
 import UpNavigation from '../Components/UpNavigation'
-import AddedNewCart from '../Admin/AddedNewCart'
+import AddedNewCart from '../Admin/AddedNewCart.tsx'
 import { FaChevronLeft } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { refreshFunction } from '../MailFiles/App'
@@ -135,7 +135,7 @@ export default function Profile() {
               Главная
             </span>
             {
-              isAdmin
+              !isAdmin
                 ? <span className={`typeOfData ${typeOfData==='addedCart' && 'active' || ''}`} onClick={()=>refreshAndSetType('addedCart')}>
                     <svg width="16" height="16" fill='currentColor' viewBox="0 0 22 22" style={{marginRight: '3px'}}> 
                       <g> 
