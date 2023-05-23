@@ -1,17 +1,19 @@
 import React, {useState} from 'react'
+import { IUpdateDescriptionProps } from './Interfaces/Interface';
 import { updateDescription } from '../AdmineController';
 import { refreshFunction } from '../../MailFiles/App'
 import { useDispatch } from 'react-redux';
 import ReactModal from 'react-modal';
 import './Style/UpdateCSS.css'
 
-export default function UpdateDescription({isOpen, defaultDescription, setIsOpen}) {
+export default function UpdateDescription(props: IUpdateDescriptionProps) {
+    const {isOpen, defaultDescription, setIsOpen} = props
 
-    const [description, setDescription] = useState(defaultDescription);
+    const [description, setDescription] = useState<string>(defaultDescription);
     const dispatch = useDispatch();
 
     const handlerChange = async() =>{
-        updateDescription(localStorage.getItem('searchOrderById'), description, dispatch);
+        updateDescription(localStorage.getItem('searchOrderById') || '{}', description, dispatch);
         setIsOpen(false)
     }
 

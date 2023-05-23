@@ -1,17 +1,19 @@
 import React, {useState} from 'react'
 import ReactModal from 'react-modal'
 import Slider from '../Slider/Slider'
-import Picker from '../Admin/Picker';
-import { createVariant } from '../Admin/AdmineController'
+import Picker from './Picker';
+import { ICreateVariantProps } from './Update/Interfaces/Interface';
+import { createVariant } from './AdmineController'
 import { FaChevronLeft } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import './Style/CreateVariantModal.css'
 
-export default function CreateVariantModal({isOpen, setIsOpen, setError, cleanSelectedOptions}) {
+export default function CreateVariantModal(props: ICreateVariantProps) {
+    const {isOpen, setIsOpen, setError, cleanSelectedOptions} = props
 
-    const [addedPhotos, setAddedPhotos] = useState([]);
-    const [variantName, setVariantName] = useState('');
-    const [variantPrice, setVariantPrice] = useState('');
+    const [addedPhotos, setAddedPhotos] = useState<string[]>([]);
+    const [variantName, setVariantName] = useState<string>('');
+    const [variantPrice, setVariantPrice] = useState<string>('');
 
     const dispatch = useDispatch()
     
@@ -38,18 +40,24 @@ export default function CreateVariantModal({isOpen, setIsOpen, setError, cleanSe
                         ))
                       }
                     </Slider>
-                    : <h2 className='addVariantHeader'><FaChevronLeft style={{width: '10px', marginRight: '10px'}} onClick={()=>setIsOpen(false)}/> Добавить вариант</h2>
+                    : <h2 className='addVariantHeader'>
+                        <FaChevronLeft 
+                            style={{width: '10px', marginRight: '10px'}} 
+                            onClick={()=>setIsOpen(false)}
+                        /> 
+                            Добавить вариант
+                      </h2>
         }
         <div className='createContainer'>
             <input placeholder='Название' onChange={event=>setVariantName(event.target.value)} />
             <input placeholder='Цена' style={{width: '60px'}} type='number' min={'0'} onChange={event=>setVariantPrice(event.target.value)}/>
-            <Picker photos={addedPhotos} setPhotos={setAddedPhotos} style={styleForPicker} />
+            <Picker photos={addedPhotos} setPhotos={setAddedPhotos} style={styleForPicker} className={undefined}/>
         </div>
         <button 
             className='modal-closeBTN variantBtn' 
             style={{margin: '15px 0 10px 0'}}
             onClick={async()=>{
-                createVariant(localStorage.getItem('searchOrderById'), variantName, variantPrice, addedPhotos, setError, dispatch);
+                createVariant(localStorage.getItem('searchOrderById') || '{}', variantName, variantPrice, addedPhotos, setError, dispatch);
                 setIsOpen(false);
                 cleanSelectedOptions()
             }}

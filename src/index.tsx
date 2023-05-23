@@ -6,7 +6,7 @@ import './MailFiles/Styles/index.css';
 import App from './MailFiles/App';
 import reportWebVitals from './Others/reportWebVitals';
 
-interface AllParamsI{
+export interface AllParamsI{
   isAuthorizate: boolean,
   isAdmin: boolean,
   isLoading: boolean,
@@ -36,7 +36,7 @@ const allContextParametrs: AllParamsI = {
     //admine:
     variantId: 1
 }
-const reducer = (state = allContextParametrs, action: ActionI) => {
+const reducer = (state:AllParamsI = allContextParametrs, action: ActionI) => {
     switch(action.type){
       case 'COMPLETED_AUTHORIZATION':
         return {...state, isAuthorizate: true};

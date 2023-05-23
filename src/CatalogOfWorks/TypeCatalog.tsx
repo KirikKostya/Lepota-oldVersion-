@@ -5,58 +5,54 @@ import UpNavigation from '../Components/UpNavigation';
 import ContactWithUs from '../Components/ContactWithUs';
 import OrderCard from './OrderCard';
 import Pensil from '../Icons/Pensil';
-import Picker from '../Admin/Picker';
-import { getUnit, updateDescription, updateMetric, updateName, updateVariant } from '../Admin/AdmineController';
-import { useDispatch, useSelector } from 'react-redux';
-import { refreshFunction } from '../MailFiles/App'
-import { Link } from 'react-scroll';
-import axios from 'axios';
-import './Style/TypeCatalog.css'
 import CameraIcon from '../Icons/CameraIcon';
 import UpdatePhotos from '../Admin/Update/UpdatePhotos';
 import UpdateName from '../Admin/Update/UpdateName';
 import UpdateDescription from '../Admin/Update/UpdateDescription';
 import UpdateMetric from '../Admin/Update/UpdateMetric';
 import UpdateVariant from '../Admin/Update/UpdateVariant';
+import { getUnit } from '../Admin/AdmineController';
+import { useDispatch, useSelector } from 'react-redux';
+import { refreshFunction } from '../MailFiles/App'
+import { Link } from 'react-scroll';
+import axios from 'axios';
+import './Style/TypeCatalog.css'
+import { ICard, IItemOfWork, IOpenUpdateMetric, IVariant } from '../Admin/Update/Interfaces/Interface';
+import { AllParamsI } from '..';
 
 
 export default function TypeCatalog() {
 
-  const [warningMessageIsOpen, setWarningMessageIsOpen] = useState(false);
-  const [addedOrder, setAddedOrder] = useState(false);
-  const [modalView, setModalView] = useState(false);
-  const [updateModalViewType, onClick] = useState('');
+  const [warningMessageIsOpen, setWarningMessageIsOpen] = useState<boolean>(false);
+  const [addedOrder, setAddedOrder] = useState<boolean>(false);
+  const [modalView, setModalView] = useState<boolean>(false);
   
-  const [photosOfCards, setPhotosOfCards] = useState([]);
+  const [photosOfCards, setPhotosOfCards] = useState<string[]>([]);
   
   //opens modal states
-  const [isOpenUpdatePhotos, setIsOpenUpdatePhotos] = useState(false);
-  const [isOpenUpdateName, setIsOpenUpdateName] = useState(false);
-  const [isOpenUpdateDescription, setIsOpenUpdateDescription] = useState(false);
-  const [isOpenUpdateMetric, setIsOpenUpdateMetric] = useState({});
-  const [isOpenUpdateVariant, setIsOpenUpdateVariant] = useState(false);
+  const [isOpenUpdatePhotos, setIsOpenUpdatePhotos] = useState<boolean>(false);
+  const [isOpenUpdateName, setIsOpenUpdateName] = useState<boolean>(false);
+  const [isOpenUpdateDescription, setIsOpenUpdateDescription] = useState<boolean>(false);
+  const [isOpenUpdateMetric, setIsOpenUpdateMetric] = useState<IOpenUpdateMetric>({isOpen: false, value: ''});
+  const [isOpenUpdateVariant, setIsOpenUpdateVariant] = useState<boolean>(false);
 
-  const order = JSON.parse(localStorage.getItem('infoAboutTypeOfOrder'));
+  const order:ICard = JSON.parse(localStorage.getItem('infoAboutTypeOfOrder') || '{}');
 
   //Список товаров по заданному типу
-  const [catalogOrders, setCatalogOrders] = useState([]);   
+  const [catalogOrders, setCatalogOrders] = useState<IItemOfWork[]>([]);   
 
   //ID типа товаров, по которому нужно делать запрос 
-  const searchOrderById = useSelector(state=>state.searchOrderById);
-  const variantId = useSelector(state=>state.variantId);
-  const isAdmin = useSelector(state=>state.isAdmin);
+  const searchOrderById = useSelector((state: AllParamsI)=>state.searchOrderById);
+  const variantId = useSelector((state: AllParamsI)=>state.variantId);
+  const isAdmin = useSelector((state: AllParamsI)=>state.isAdmin);
   const dispatch = useDispatch();
 
-  const makeArray = (object) => {
-    return [object]
-  }
-
-  const checkMetric = (value) => {
+  const checkMetric = (value:string):string => {
     return (value) ? '' : 'hide'
   }
 
   //fetching product by id
-  const fetchProducts = (OpenID) => {
+  const fetchProducts = (OpenID:number) => {
     axios.get(`https://api.native-flora.tk/Item/GetById?id=${OpenID || localStorage.getItem('searchOrderById')}`)
       .then(res=>{
         setCatalogOrders([res.data.data]);
@@ -90,7 +86,7 @@ export default function TypeCatalog() {
           </h1>
           <div className='descriptionMetrics'>
             {
-              makeArray(order.sizes).map((item, index)=>(
+              [order.sizes].map((item, index)=>(
                 <div className='orderMatrics' key={index}>
                   <p className={`metricItem ${checkMetric(item.Material)}`}>
                     Материал: <span>
@@ -159,52 +155,28 @@ export default function TypeCatalog() {
         &&
         <>
           <UpdatePhotos isOpen={isOpenUpdatePhotos} photos={photosOfCards} setIsOpen={setIsOpenUpdatePhotos} />
-          <UpdateName isOpen={isOpenUpdateName} defaultName={JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')).name} setIsOpen={setIsOpenUpdateName} />
-          <UpdateDescription isOpen={isOpenUpdateDescription} defaultDescription={JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')).description} setIsOpen={setIsOpenUpdateDescription} />
-          <UpdateMetric isOpen={isOpenUpdateMetric.isOpen} metricKey={isOpenUpdateMetric.value} defaultMetricValue={JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')).sizes[isOpenUpdateMetric.value]} setIsOpen={setIsOpenUpdateMetric} />
+          <UpdateName isOpen={isOpenUpdateName} defaultName={JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')||'{}').name} setIsOpen={setIsOpenUpdateName} />
+          <UpdateDescription isOpen={isOpenUpdateDescription} defaultDescription={JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')||'{}').description} setIsOpen={setIsOpenUpdateDescription} />
+          <UpdateMetric isOpen={isOpenUpdateMetric.isOpen} metricKey={isOpenUpdateMetric.value} defaultMetricValue={JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')||'{}').sizes[isOpenUpdateMetric.value]} setIsOpen={setIsOpenUpdateMetric} />
         </>
       }
       {
         localStorage.getItem('variants') && isAdmin
         &&
-        <UpdateVariant isOpen={isOpenUpdateVariant} variant={JSON.parse(localStorage.getItem('variants')).filter(el=>el.id == variantId)[0]} setIsOpen={setIsOpenUpdateVariant} />
+        <UpdateVariant isOpen={isOpenUpdateVariant} variant={JSON.parse(localStorage.getItem('variants')||'{}').filter((el:IVariant)=>+el.id == variantId)[0]} setIsOpen={setIsOpenUpdateVariant} />
       }
-      {/* {
-        localStorage.getItem('variants') && isAdmin
-        &&
-        <UpdateModalView 
-          type={updateModalViewType} 
-          onClick={onClick}
-          allDataOfOrder={JSON.parse(localStorage.getItem('infoAboutTypeOfOrder'))}
-          refreshFunction={()=>refreshFunction(dispatch, ()=>fetchProducts(searchOrderById))}
-          updateFunc={
-            updateModalViewType === 'name' 
-              ? updateName 
-                : updateModalViewType === 'description' 
-                  ? updateDescription 
-                    : updateModalViewType.includes('metric') 
-                      ? updateMetric 
-                        : updateModalViewType === 'variant'
-                          ? updateVariant
-                            : ''
-          }
-        />
-      } */}
       <div className='containerForTypeCatalog'>
         {
           warningMessageIsOpen
               ? <WarningModalView warningMessageIsOpen={warningMessageIsOpen}/>
                 :<>
                     <OrderCard 
-                      setCatalogOrders={setCatalogOrders}
                       catalogOrders={catalogOrders}
                       setWarningMessageIsOpen={setWarningMessageIsOpen}
                       setAddedOrder={setAddedOrder}
                       setModalView={setModalView}
-                      onClick={onClick}
                       fetchProducts={fetchProducts}
-                      variants={JSON.parse(localStorage.getItem('variants'))}
-
+                      variants={JSON.parse(localStorage.getItem('variants')||'{}')}
                       setIsOpenUpdateVariant={setIsOpenUpdateVariant}
                     />
                     {

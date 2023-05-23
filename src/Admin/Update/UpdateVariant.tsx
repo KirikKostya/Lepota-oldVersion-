@@ -2,15 +2,17 @@ import React, {useState} from 'react'
 import { updateVariant } from '../AdmineController';
 import { refreshFunction } from '../../MailFiles/App'
 import { useDispatch } from 'react-redux';
-import ReactModal from 'react-modal'
+import ReactModal from 'react-modal';
 import Picker from '../Picker';
-import './Style/UpdateCSS.css'
+import './Style/UpdateCSS.css';
+import { IUpdateVariantProps } from './Interfaces/Interface';
 
-export default function UpdateVariant({isOpen, variant, setIsOpen}) {
+export default function UpdateVariant(props: IUpdateVariantProps) {
+    const {isOpen, variant, setIsOpen} = props
 
-    const [variantPhotos, setVariantPhotos] = useState([...variant.icon]);
-    const [variantName, setVariantName] = useState(variant.name);
-    const [variantPrice, setVariantPrice] = useState(variant.price);
+    const [variantPhotos, setVariantPhotos] = useState<string[]>([...variant.icon]);
+    const [variantName, setVariantName] = useState<string>(variant.name);
+    const [variantPrice, setVariantPrice] = useState<string>(variant.price);
 
     const dispatch = useDispatch();
 
@@ -23,7 +25,7 @@ export default function UpdateVariant({isOpen, variant, setIsOpen}) {
     }
 
     const handlerChange = async() =>{
-        updateVariant(localStorage.getItem('searchOrderById'), variant.id, variantName, variantPrice, variantPhotos, dispatch);
+        updateVariant(localStorage.getItem('searchOrderById') || '{}', variant.id, variantName, variantPrice, variantPhotos, dispatch);
         setIsOpen(false)
     }
   return (
@@ -36,7 +38,7 @@ export default function UpdateVariant({isOpen, variant, setIsOpen}) {
         <div className='formContainer'>
             <input placeholder='Название' onChange={event=>setVariantName(event.target.value)} defaultValue={variant.name}/>
             <input placeholder='Цена' style={{width: '50px'}} type='number' min={'0'} onChange={event=>setVariantPrice(event.target.value)} defaultValue={variant.price}/>
-            <Picker photos={variantPhotos} setPhotos={setVariantPhotos} style={styleForPicker}/>
+            <Picker photos={variantPhotos} setPhotos={setVariantPhotos} style={styleForPicker} className={updateVariant}/>
         </div>
         <div className='updateBTNS'>
             <button 

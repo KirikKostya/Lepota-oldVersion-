@@ -1,6 +1,7 @@
 import axios from 'axios'
+import { Dispatch } from 'redux';
 
-export const getUnit = (metricValue) => {
+export const getUnit = (metricValue: string) => {
   return metricValue === 'Weight' 
           ? 'кг'
             : metricValue === 'Material'
@@ -8,7 +9,7 @@ export const getUnit = (metricValue) => {
                 : 'см'
 }
 
-export const checkIsAdmine = (dispatch) => {
+export const checkIsAdmine = (dispatch: Dispatch) => {
   dispatch({type: 'LOADING_IS_UNCOMPLETED'});
   axios.get('https://api.native-flora.tk/Auth/IsAdmin', {
     headers:{'x-access-token': localStorage.getItem('accessToken')}
@@ -23,10 +24,10 @@ export const checkIsAdmine = (dispatch) => {
   })
 }
 
-export const updateMetric = (id, metricValue, type, dispatch) => {
+export const updateMetric = (id: string, metricValue: string, type: string, dispatch: Dispatch) => {
   dispatch({type: 'LOADING_IS_UNCOMPLETED'})
   axios.post(`https://api.native-flora.tk/Item/Update`, {
-      "id": id,
+      "id": +id,
       "sizes": {
           [type] : metricValue
     }}, {
@@ -42,10 +43,10 @@ export const updateMetric = (id, metricValue, type, dispatch) => {
   })
 }
 
-export const updateName = (id, nameValue, dispatch) => {
+export const updateName = (id: string, nameValue: string, dispatch: Dispatch) => {
   dispatch({type: 'LOADING_IS_UNCOMPLETED'})
   axios.post(`https://api.native-flora.tk/Item/Update`, {
-      "id": id,
+      "id": +id,
       "name": nameValue 
     }, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
@@ -60,10 +61,10 @@ export const updateName = (id, nameValue, dispatch) => {
   })
 }
 
-export const updateDescription = (id, descriptionValue, dispatch) => {
+export const updateDescription = (id: string, descriptionValue: string, dispatch: Dispatch) => {
   dispatch({type: 'LOADING_IS_UNCOMPLETED'})
   axios.post(`https://api.native-flora.tk/Item/Update`, {
-      "id": id,
+      "id": +id,
       "description": descriptionValue
     }, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
@@ -78,10 +79,10 @@ export const updateDescription = (id, descriptionValue, dispatch) => {
   })
 }
 
-export const updatePhotos = (id, photos, dispatch) => {
+export const updatePhotos = (id: string, photos: string[], dispatch: Dispatch) => {
   dispatch({type: 'LOADING_IS_UNCOMPLETED'})
   axios.post(`https://api.native-flora.tk/Item/Update`, {
-      "id": id,
+      "id": +id,
       "icon": photos
     }, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
@@ -96,12 +97,12 @@ export const updatePhotos = (id, photos, dispatch) => {
   })
 }
 
-export const createVariant = (itemId, Name, Price, Photos, setError, dispatch)=>{
+export const createVariant = (itemId: string, Name: string, Price: string, Photos: string[], setError:(str: string)=>void, dispatch:Dispatch)=>{
   dispatch({type: 'LOADING_IS_UNCOMPLETED'})
   axios.post(`https://api.native-flora.tk/Variant/Add`, {
-      "itemId": itemId,
+      "itemId": +itemId,
       "name": Name,
-      "price": Price,
+      "price": +Price,
       "icon": Photos
     }, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
@@ -114,11 +115,11 @@ export const createVariant = (itemId, Name, Price, Photos, setError, dispatch)=>
   })
 }
 
-export const deleteVariant = (itemId, variantId, dispatch) => {
+export const deleteVariant = (itemId:string, variantId:string, dispatch:Dispatch) => {
   dispatch({type: 'LOADING_IS_UNCOMPLETED'})
   axios.post(`https://api.native-flora.tk/Variant/Delete`, {
-      "itemId": itemId,
-      "variantId": variantId
+      "itemId": +itemId,
+      "variantId": +variantId
     }, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
     })
@@ -129,13 +130,13 @@ export const deleteVariant = (itemId, variantId, dispatch) => {
   })
 }
 
-export const updateVariant = (itemId, variantId, name, price, photos, dispatch) => {
+export const updateVariant = (itemId: string, variantId:string, name:string, price:string, photos:string[], dispatch:Dispatch) => {
   dispatch({type: 'LOADING_IS_UNCOMPLETED'});
   axios.post(`https://api.native-flora.tk/Variant/Update`, {
-      "itemId": itemId,
-      "variantId": variantId,
+      "itemId": +itemId,
+      "variantId": +variantId,
       "name": name,
-      "price": price,
+      "price": +price,
       "icon": photos,
     }, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
@@ -147,14 +148,14 @@ export const updateVariant = (itemId, variantId, name, price, photos, dispatch) 
     })
 }
 
-export const createKit = (itemId, name, variants, photos, price, dispatch) => {
+export const createKit = (itemId: number, name:string, variants:number[], photos:string[], price:string, dispatch:Dispatch) => {
   dispatch({type: 'LOADING_IS_UNCOMPLETED'});
   axios.post(`https://api.native-flora.tk/Kit/Add`, {
-      "itemId": itemId,
+      "itemId": +itemId,
       "name": name,
       "variants": variants,
       "icon": photos,
-      "price": price,
+      "price": +price,
     }, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
     })

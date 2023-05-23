@@ -10,10 +10,10 @@ export default function SingleSelect(props: ISingleSelect) {
   
   const [activeOption, setActiveOption] = useState<string>('');
 
-  const handlerChanges = (event: ChangeEvent<HTMLInputElement>) => {
+  const handlerChanges = (event:any) => {
      if(selectedOptions === undefined || index===undefined || setSelectedOptions===undefined) return
      let newArray: ISelectOption[] = [...selectedOptions];
-     newArray[index] = {metric: event.target.value, value: ''};
+     newArray[index] = {...newArray[index], metric: event.value, value: ''};
      setSelectedOptions(newArray);
   }
   
@@ -114,8 +114,7 @@ export default function SingleSelect(props: ISingleSelect) {
           isObject={false}
           isSearchable={true}
           options={options}
-          // onChange={type === 'metric' ? handlerChanges : ()=>{}}
-          onChange={handlerChanges}
+          onChange={type === 'metric' ? handlerChanges : ()=>{}}
           formatOptionLabel={type === 'sorting' ? formatOptionLabel : undefined}
           showArrow={true}
           maxMenuHeight={264}

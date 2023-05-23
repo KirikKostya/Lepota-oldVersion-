@@ -13,62 +13,62 @@ import { useDispatch, useSelector } from 'react-redux';
 import { refreshFunction } from '../MailFiles/App'
 import axios from 'axios';
 import './Style/OrderCard.css';
-import Slider from '../Slider/Slider';
+import { IKits, IOrderCarsProps, IVariant } from '../Admin/Update/Interfaces/Interface';
+import { AllParamsI } from '..';
 
+
+interface IGalleryItem{
+  url: string
+}
 //Makes list from response data
-export const getImages = (images) => {
+export const getImages = (images:string[]) => {
   return images === null
-    ? [{
-        url: require('../Photos/somethingWentWrong.png')
-      }] 
+    ? [{url: require('../Photos/somethingWentWrong.png')}] 
       : images.map(image=>{
-          let galleryItem = {};
+          let galleryItem: IGalleryItem = {url: ''};
           galleryItem['url'] = image;
           return galleryItem; 
         }) 
 }
 
-export default function OrderCard(
-  {
+export default function OrderCard(props: IOrderCarsProps) {
+  const {
     catalogOrders,
     setWarningMessageIsOpen,
     setAddedOrder,
     setModalView,
-    setUpdateModalViewType,
     fetchProducts,
     variants,
     setIsOpenUpdateVariant
-  }
-) {
-
+  } = props;
     //Refs
     const refInput = useRef([]);
     const refCount = useRef(null);
 
-    const totalSum_TypeComp = useSelector(state=>state.totalSum_TypeComp);
-    const searchOrderById = useSelector(state=>state.searchOrderById);
-    const isAdmin = useSelector(state=>state.isAdmin);
+    const totalSum_TypeComp = useSelector((state: AllParamsI)=>state.totalSum_TypeComp);
+    const searchOrderById = useSelector((state: AllParamsI)=>state.searchOrderById);
+    const isAdmin = useSelector((state: AllParamsI)=>state.isAdmin);
     const dispatch = useDispatch();
 
-    const [error, setError] = useState('');
+    const [error, setError] = useState<string>('');
 
     //Opens modal by type
-    const [isOpenCreateKitModal, setIsOpenCreateKitModal] = useState(false);
-    const [isOpenAddedVariantModal, setIsOpenAddedVariantModal] = useState(false);
-    const [isOpenVarintPhotos, setIsOpenVariantPhotos] = useState(false);
+    const [isOpenCreateKitModal, setIsOpenCreateKitModal] = useState<boolean>(false);
+    const [isOpenAddedVariantModal, setIsOpenAddedVariantModal] = useState<boolean>(false);
+    const [isOpenVarintPhotos, setIsOpenVariantPhotos] = useState<boolean>(false);
 
-    const [imagesOfVariant, setImagesOfVariant] = useState(Array);
+    const [imagesOfVariant, setImagesOfVariant] = useState<string[]>(Array);
 
-    const [amountOfOrder, setAmountOfOrder] = useState(1)
-    const [kits, setKits] = useState(Array);
-    const [nameOfKit, setNameOfKit] = useState('');
-    const [listOfPhotos, setListOfPhotos] = useState(Array);
+    const [amountOfOrder, setAmountOfOrder] = useState<number>(1)
+    const [kits, setKits] = useState<IKits[]>(Array);
+    const [nameOfKit, setNameOfKit] = useState<string>('');
+    const [listOfPhotos, setListOfPhotos] = useState<string[]>(Array);
 
     //For all selected kits
     const [selectedVariants, setSelectedVariants] = useState([]);
 
     //Adds item to cart of order
-    const addItemToCart = async (cardId) =>{
+    const addItemToCart = async (cardId:number) =>{
       axios.post(`https://api.native-flora.tk/Cart/Add`, {
         id: cardId,
         amount: amountOfOrder,
@@ -94,19 +94,19 @@ export default function OrderCard(
     }
 
     //Unchecks all inputs and makes null count of orders
-    const cleanSelectedOptions = (refInp, refCount) => {
+    const cleanSelectedOptions = (refInp:any, refCount:any) => {
       for (let i = 0; i < refInp.current.length; i++) {
         refInp.current[i].checked = false;
       }
-        dispatch({type: 'SET_TOTAL_SUM_TYPE-COMP', payload: JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')).price })
-        setListOfPhotos(getImages(JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')).icon))
+        dispatch({type: 'SET_TOTAL_SUM_TYPE-COMP', payload: JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')||'{}').price })
+        setListOfPhotos(getImages(JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')||'{}').icon))
         refCount.current.value = 1;
         setNameOfKit('Нет комплекта')
         setKits([])
     }
 
     //changes total price, when user ckick on label
-    const handlerChangeTotalSum = async (isCheckedLabel, id, item) =>{
+    const handlerChangeTotalSum = async (isCheckedLabel: boolean, id: number, item) =>{
       if(isCheckedLabel){
         setKits([...kits, id]);
         setSelectedVariants([...selectedVariants, item]);
@@ -135,17 +135,17 @@ export default function OrderCard(
           }
         })
       } else {
-          dispatch({type: 'SET_TOTAL_SUM_TYPE-COMP', payload: JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')).price})
-          setListOfPhotos(JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')).icon)
+          dispatch({type: 'SET_TOTAL_SUM_TYPE-COMP', payload: JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')||'{}').price})
+          setListOfPhotos(JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')||'{}').icon)
           setNameOfKit('Нет комплекта')
       }
     }, [kits])
 
-    useEffect(()=>fetchProducts(searchOrderById), [catalogOrders]);
+    useEffect(()=>refreshFunction(dispatch,()=>fetchProducts(searchOrderById)), [catalogOrders]);
 
   return (
     catalogOrders.map(order =>(
-      <div className='mainContainer' key={order}>
+      <div className='mainContainer' key={order.item.id}>
         <div className='containerForCards'>
           <div className='item-Card'> 
             <SimpleImageSlider
@@ -172,7 +172,7 @@ export default function OrderCard(
               {
                 variants.length === 0 
                   ? <span style={{display: 'block', width: '100%', textAlign: 'center'}}>Нет комбинированных вариантов</span>
-                    : variants.sort((a, b)=>a.id-b.id).map((item, index)=>(
+                    : variants.sort((a:IVariant, b:IVariant)=>(+a.id)-(+b.id)).map((item, index)=>(
                         <div key={item.id} className='itemOfMetrics' >
                           <label
                             className='metricLabel' 
@@ -203,7 +203,7 @@ export default function OrderCard(
                             isAdmin 
                             && 
                             <CrossIcon onClick={async()=>{
-                              deleteVariant(localStorage.getItem('searchOrderById'), item.id, dispatch);
+                              deleteVariant(localStorage.getItem('searchOrderById')||'{}', item.id, dispatch);
                               await fetchProducts(searchOrderById)
                             }}/>
                           }
@@ -222,15 +222,15 @@ export default function OrderCard(
           </div>
           {
             catalogOrders.map(order=>(
-              <div className='containerForHeader_Button' key={order}>
+              <div className='containerForHeader_Button' key={order.item.id}>
                 <h3 className='headerCard'>
                   {order.item.name} 
-                  <span className='nameOfKit' onClick={()=>setUpdateModalViewType('variant')}>{`( ${nameOfKit} )`}</span>
+                  <span className='nameOfKit'>{`( ${nameOfKit} )`}</span>
                   <input 
                     ref={refCount}
                     type={'number'} 
                     className='amountInput'
-                    onChange={(e)=> setAmountOfOrder(e.target.value)}
+                    onChange={(e)=> setAmountOfOrder(+e.target.value)}
                     defaultValue={amountOfOrder}
                     min={0}
                   />
@@ -241,8 +241,8 @@ export default function OrderCard(
                       setImagesOfVariant(getImages(listOfPhotos))
                     }} />
                 </h3>
-                <button className={`addToCartBTN ${amountOfOrder === '0' ? 'disabled' : ''}`}
-                        disabled={amountOfOrder === '0'}
+                <button className={`addToCartBTN ${amountOfOrder === 0 ? 'disabled' : ''}`}
+                        disabled={amountOfOrder === 0}
                         onClick={async ()=>{
                           localStorage.getItem('accessToken')
                             ? addItemToCart(order.item.id)

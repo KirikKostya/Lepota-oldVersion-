@@ -4,18 +4,20 @@ import { refreshFunction } from '../../MailFiles/App'
 import { useDispatch } from 'react-redux';
 import ReactModal from 'react-modal'
 import './Style/UpdateCSS.css'
+import { IUpdateMetricProps } from './Interfaces/Interface';
 
-export default function UpdateMetric({isOpen, metricKey, defaultMetricValue, setIsOpen}) {
-    
-    const [metricValue, setMetricValue] = useState(defaultMetricValue);
+export default function UpdateMetric(props: IUpdateMetricProps) {
+    const {isOpen, metricKey, defaultMetricValue, setIsOpen} = props
+
+    const [metricValue, setMetricValue] = useState<string>(defaultMetricValue);
     const dispatch = useDispatch();
 
     const handlerChange = async() =>{
-        updateMetric(localStorage.getItem('searchOrderById'), metricValue, metricKey, dispatch);
-        setIsOpen(false)
+        updateMetric(localStorage.getItem('searchOrderById') || '{}', metricValue, metricKey, dispatch);
+        setIsOpen({isOpen:false, value:''})
     }
 
-    const convertMetricNameToRuss = (metricName) => {
+    const convertMetricNameToRuss = (metricName: string):string => {
         return(
             metricName === 'Material'
                 ? 'Материалы'
@@ -30,8 +32,9 @@ export default function UpdateMetric({isOpen, metricKey, defaultMetricValue, set
                                                     : metricName === 'Diameter'
                                                         ? 'Диаметр'
                                                             : metricName === 'Weight'
-                                                              &&
-                                                              'Вес'
+                                                              ?
+                                                                'Вес'
+                                                                    : ''
         )
     }
 

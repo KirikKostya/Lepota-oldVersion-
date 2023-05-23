@@ -4,14 +4,16 @@ import { refreshFunction } from '../../MailFiles/App'
 import { useDispatch } from 'react-redux';
 import ReactModal from 'react-modal';
 import './Style/UpdateCSS.css'
+import { IUpdateNameProps } from './Interfaces/Interface';
 
-export default function UpdateName({isOpen, defaultName, setIsOpen}) {
+export default function UpdateName(props: IUpdateNameProps) {
+    const {isOpen, defaultName, setIsOpen} = props
 
-    const [name, setName] = useState(defaultName);
+    const [name, setName] = useState<string>(defaultName);
     const dispatch = useDispatch();
 
     const handlerChange = async() =>{
-        updateName(localStorage.getItem('searchOrderById'), name, dispatch);
+        updateName(localStorage.getItem('searchOrderById') || '{}', name, dispatch);
         setIsOpen(false)
     }
 

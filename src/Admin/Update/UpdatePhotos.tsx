@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { IUpdatePhotosProps } from './Interfaces/Interface'
 import { updatePhotos } from '../AdmineController'
 import { refreshFunction } from '../../MailFiles/App'
 import { useDispatch } from 'react-redux'
@@ -6,9 +7,10 @@ import ReactModal from 'react-modal'
 import Picker from '../Picker'
 import './Style/UpdateCSS.css'
 
-export default function UpdatePhotos({isOpen, photos, setIsOpen}) {
-    
-    const [photoList, setPhotoList] = useState(photos);
+export default function UpdatePhotos(props: IUpdatePhotosProps) {
+    const {isOpen, photos, setIsOpen} = props;
+
+    const [photoList, setPhotoList] = useState<string[]>(photos);
     const dispatch = useDispatch();
 
     const styleForPicker = {
@@ -20,7 +22,7 @@ export default function UpdatePhotos({isOpen, photos, setIsOpen}) {
     }
 
     const handlerChange = () => {
-        updatePhotos(localStorage.getItem('searchOrderById'), photoList, dispatch);
+        updatePhotos(localStorage.getItem('searchOrderById') || '{}', photoList, dispatch);
         setIsOpen(false);
     }
     
@@ -37,7 +39,7 @@ export default function UpdatePhotos({isOpen, photos, setIsOpen}) {
                     <img key={photo} src={photo} alt='photo' className='examplePhoto' onClick={()=>setPhotoList(photoList.filter(item => item !== photo))}/>
                 ))
             }
-            <Picker photos={photoList} setPhotos={setPhotoList} style={styleForPicker}/>
+            <Picker photos={photoList} setPhotos={setPhotoList} style={styleForPicker} className={undefined}/>
         </div>
         <div className='updateBTNS'>
             <button 
