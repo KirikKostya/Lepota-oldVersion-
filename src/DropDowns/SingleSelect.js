@@ -9,8 +9,9 @@ export default function SingleSelect({ options, placeholder, width, index, selec
 
   const handlerChanges = (event) => {
      let newArray = [...selectedOptions];
-     newArray[index] = {metric: event.value, value: ''};
+     newArray[index] = {id: index, metric: event.value, value: ''};
      setSelectedOptions(newArray)
+    // console.log(newArray[index], event)
   }
   
   const formatOptionLabel = (option) => (

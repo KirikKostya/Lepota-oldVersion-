@@ -148,6 +148,40 @@ export default function AddedNewCart() {
             </div>
             <div className='metricCart'>
                 <h4>Параметры:</h4>
+                {/* {
+                    metricsListStep.map( (el, index) => (
+                        <div className='metric' key={el.id} >
+                            <SingleSelect 
+                                options = { filter(OptionsOfMetrics, selectedOptions) } 
+                                width={'60%'}
+                                index={index}
+                                selectedOptions = {selectedOptions}
+                                setSelectedOptions = {setSelectedOptions}
+                                type={'metric'}
+                            />
+                            <input 
+                                className='metricInput' 
+                                type={selectedOptions[index].metric === 'Материалы' ? 'text' : 'number'}
+                                min={0}
+                                onChange={event => {
+                                    let newArray = [...selectedOptions];
+                                    newArray=[...newArray, ]
+                                    // newArray[index] = {...newArray[el.id], value: event.target.value};
+                                    console.log(newArray[index])
+                                    // setSelectedOptions(newArray)
+                                }}
+                                placeholder='ввод'
+                            />
+                            <CrossIcon 
+                                onClick={()=>{
+                                    console.log(selectedOptions)
+                                    // setMetricsListStep([...metricsListStep.filter(item=>item.id!==el.id)]);
+                                    // setSelectedOptions([...selectedOptions.filter(item=>item!==selectedOptions[index])])
+                                }} 
+                            />
+                        </div>
+                    ))
+                } */}
                 {
                     metricsListStep.map( (el, index) => (
                         <div className='metric' key={el} >
@@ -172,8 +206,9 @@ export default function AddedNewCart() {
                             />
                             <CrossIcon 
                                 onClick={()=>{
-                                    setMetricsListStep([...metricsListStep.filter(item=>item!==el)]);
-                                    setSelectedOptions([...selectedOptions.filter(item=>item!==selectedOptions[index])])
+                                    // console.log(selectedOptions)
+                                    // setMetricsListStep([...metricsListStep.filter(item=>item!==el)]);
+                                    // setSelectedOptions([...selectedOptions.filter(item=>item!==selectedOptions[index])])
                                 }} />
                         </div>
                     ))
@@ -181,8 +216,9 @@ export default function AddedNewCart() {
                 <button 
                     className='deleteMetricBtnField'
                     onClick={()=>{
+                        console.log([...metricsListStep, {id: Math.random().toFixed(4)}])
                         setMetricsListStep([...metricsListStep, Math.random().toFixed(4)])
-                        setSelectedOptions([...selectedOptions, Math.random().toFixed(2)])
+                        setSelectedOptions([...selectedOptions, {id: Math.random().toFixed(2), metric: '', value: ''}])
                     }}
                     style={{display: metricsListStep.length >= 7 && 'none'}}
                 ><span className='deleteMetricBtn'>Добавить</span></button>
