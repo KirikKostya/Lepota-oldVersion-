@@ -6,7 +6,7 @@ import "./Styles/SingleSelect.css";
 
 export default function SingleSelect(props: ISingleSelect) {
   
-  const {options, placeholder, width, index, selectedOptions, setSelectedOptions, type} = props
+  const {options, placeholder, width, index, selectedOptions, setSelectedOptions, type} = props;
   
   const [activeOption, setActiveOption] = useState<string>('');
 

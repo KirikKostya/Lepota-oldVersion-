@@ -7,7 +7,8 @@ import ReactModal from 'react-modal';
 import './Style/UpdateCSS.css'
 
 export default function UpdateDescription(props: IUpdateDescriptionProps) {
-    const {isOpen, defaultDescription, setIsOpen} = props
+    
+    const {isOpen, defaultDescription, setIsOpen} = props;
 
     const [description, setDescription] = useState<string>(defaultDescription);
     const dispatch = useDispatch();

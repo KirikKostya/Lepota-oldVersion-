@@ -8,7 +8,8 @@ import './Style/UpdateCSS.css';
 import { IUpdateVariantProps } from './Interfaces/Interface';
 
 export default function UpdateVariant(props: IUpdateVariantProps) {
-    const {isOpen, variant, setIsOpen} = props
+    
+    const {isOpen, variant, setIsOpen} = props;
 
     const [variantPhotos, setVariantPhotos] = useState<string[]>([...variant.icon]);
     const [variantName, setVariantName] = useState<string>(variant.name);

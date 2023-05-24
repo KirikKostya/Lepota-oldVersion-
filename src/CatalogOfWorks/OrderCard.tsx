@@ -32,6 +32,7 @@ export const getImages = (images:string[]):IGalleryItem[] => {
 }
 
 export default function OrderCard(props: IOrderCarsProps) {
+
   const {
     catalogOrders,
     setWarningMessageIsOpen,
@@ -41,10 +42,12 @@ export default function OrderCard(props: IOrderCarsProps) {
     variants,
     setIsOpenUpdateVariant
   } = props;
+
     //Refs
     const refInput = useRef<HTMLInputElement[]>([]);
     const refCount = useRef(null);
 
+    //context
     const totalSum_TypeComp = useSelector((state: AllParamsI)=>state.totalSum_TypeComp);
     const searchOrderById = useSelector((state: AllParamsI)=>state.searchOrderById);
     const isAdmin = useSelector((state: AllParamsI)=>state.isAdmin);
@@ -196,7 +199,7 @@ export default function OrderCard(props: IOrderCarsProps) {
                             <Pensil 
                               onClick={async()=>{
                                 dispatch({type: 'SET_VARIANT_ID', payload: item.id});
-                                await setIsOpenUpdateVariant(true)
+                                setIsOpenUpdateVariant(true)
                               }} 
                             /> 
                           }
@@ -205,7 +208,7 @@ export default function OrderCard(props: IOrderCarsProps) {
                             && 
                             <CrossIcon onClick={async()=>{
                               deleteVariant(localStorage.getItem('searchOrderById')||'{}', item.id, dispatch);
-                              await fetchProducts(searchOrderById)
+                              fetchProducts(searchOrderById)
                             }}/>
                           }
                         </div>
@@ -238,9 +241,8 @@ export default function OrderCard(props: IOrderCarsProps) {
                   <span>{totalSum_TypeComp} Br</span>
                   <OrderCardMoreImgs 
                     onClick={()=>{
-                      // setIsOpenVariantPhotos(true);
-                      // setImagesOfVariant(getImages(listOfPhotos))
-                      console.log(selectedVariants)
+                      setIsOpenVariantPhotos(true);
+                      setImagesOfVariant(getImages(listOfPhotos))
                     }} />
                 </h3>
                 <button className={`addToCartBTN ${amountOfOrder === 0 ? 'disabled' : ''}`}
@@ -249,7 +251,7 @@ export default function OrderCard(props: IOrderCarsProps) {
                           localStorage.getItem('accessToken')
                             ? addItemToCart(order.item.id)
                               : setWarningMessageIsOpen(true)
-                          refreshFunction(dispatch) //Fetch to refresh Token
+                          refreshFunction(dispatch,()=>{}) //Fetch to refresh Token
                         }}
                   >
                     В корзину

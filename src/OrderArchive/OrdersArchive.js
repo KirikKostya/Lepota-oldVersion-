@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import ContactWithUs from '../Components/ContactWithUs.js';
-import UpNavigation from '../Components/UpNavigation.js'
-import ListOfArchive from './ListOfArchive.js'
+import ContactWithUs from '../Components/ContactWithUs.tsx';
+import UpNavigation from '../Components/UpNavigation'
+import ListOfArchive from './ListOfArchive'
 import { useDispatch, useSelector } from 'react-redux';
-import { refreshFunction } from '../MailFiles/App.js';
+import { refreshFunction } from '../MailFiles/App';
 import axios from 'axios';
 import './Styles/OrdersArchive.css';
 

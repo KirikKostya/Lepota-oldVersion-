@@ -1,6 +1,10 @@
 import React from 'react'
+import { IOnClick } from '../Admin/Update/Interfaces/Interface'
 
-export default function CameraIcon(onClick:()=>void) {
+export default function CameraIcon(props: IOnClick) {
+
+  const {onClick} = props;
+
   return (
     <svg 
         width="24" 

@@ -7,7 +7,8 @@ import './Style/UpdateCSS.css'
 import { IUpdateMetricProps } from './Interfaces/Interface';
 
 export default function UpdateMetric(props: IUpdateMetricProps) {
-    const {isOpen, metricKey, defaultMetricValue, setIsOpen} = props
+
+    const {isOpen, metricKey, defaultMetricValue, setIsOpen} = props;
 
     const [metricValue, setMetricValue] = useState<string>(defaultMetricValue);
     const dispatch = useDispatch();
@@ -58,7 +59,7 @@ export default function UpdateMetric(props: IUpdateMetricProps) {
                 Изменить
             </button>
             <p
-             onClick={()=>setIsOpen(false)}
+             onClick={()=>setIsOpen({isOpen:false, value:''})}
              style={{margin:'0', cursor:'pointer'}}>закрыть</p>
         </div>
     </ReactModal>

@@ -3,7 +3,7 @@ import ContactWithUs from '../Components/ContactWithUs'
 import PersonalDataInputs from './PersonalDataInputs'
 import PersonalSotialData from './PersonalSotialData'
 import UpNavigation from '../Components/UpNavigation'
-import AddedNewCart from '../Admin/AddedNewCart.tsx'
+import AddedNewCart from '../Admin/AddedNewCart'
 import { FaChevronLeft } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import { refreshFunction } from '../MailFiles/App'
@@ -11,8 +11,11 @@ import { NavLink } from 'react-router-dom'
 import { signOut } from './MyAccount'
 import axios from 'axios'
 import './Styles/Profile.css'
+import { Dispatch } from 'redux'
+import { IProfile } from '../Admin/Update/Interfaces/Interface'
+import { AllParamsI } from '..'
 
-export const getPersonalDate = (dispatch, setList) => {
+export const getPersonalDate = (dispatch: Dispatch, setList:(data: IProfile)=>void) => {
   dispatch({type: 'LOADING_IS_UNCOMPLETED'});
   axios.get('https://api.native-flora.tk/User/GetInfo', {
     headers:{'x-access-token': localStorage.getItem('accessToken')}
@@ -24,32 +27,42 @@ export const getPersonalDate = (dispatch, setList) => {
 
 export default function Profile() {
   
-  const [allDateAboutUser, setAllDateAboutUser] = useState({});
+  const [allDataAboutUser, setAllDataAboutUser] = useState<IProfile>(
+    {
+      firstName: '',
+      surName: '',
+      fatherName: '',
+      address: '',
+      zipCode: '',
+      birthday: '',
+      phone: '',
+      vk: '',
+      instagram: '',
+      telegram: ''
+    }
+  );
 
   //date about user
-  const [userName, setUserName] = useState('');
-  const [userSurname, setUserSurname] = useState('');
-  const [userFathername, setUserFathername] = useState('');
-  const [userAddress, setUserAddress] = useState('');
-  const [userZipcode, setUserZipcode] = useState('');
-  const [userPhone, setUserPhone] = useState('');
-  const [userBirthday, setUserBirthday] = useState('');
-  const [userInst, setUserInst] = useState('');
-  const [userVK, setUserVK] = useState('');
-  const [userTelegram, setUserTelegram] = useState(''); 
-  const [recommendation, setUserRecommendation] = useState('');
+  const [userName, setUserName] = useState<string>('');
+  const [userSurname, setUserSurname] = useState<string>('');
+  const [userFathername, setUserFathername] = useState<string>('');
+  const [userAddress, setUserAddress] = useState<string>('');
+  const [userZipcode, setUserZipcode] = useState<string>('');
+  const [userPhone, setUserPhone] = useState<string>('');
+  const [userBirthday, setUserBirthday] = useState<string>('');
+  const [recommendation, setUserRecommendation] = useState<string>('');
 
-  const isAdmin = useSelector(state=>state.isAdmin);
+  const isAdmin = useSelector((state:AllParamsI)=>state.isAdmin);
   const dispatch = useDispatch();
   
   const [typeOfData, setTypeOfData] = useState('main');
   
-  const refreshAndSetType = (value) => {
+  const refreshAndSetType = (value:string) => {
     setTypeOfData(value);
-    refreshFunction(dispatch)
+    refreshFunction(dispatch,()=>{})
   }
 
-  const setOptionList = (type) => {
+  const setOptionList = (type:string):string => {
     return type === 'secureData'
             ? 'Личные данные'
               : type === 'addedCart'
@@ -63,24 +76,27 @@ export default function Profile() {
                               : 'Личный кабинет'
   }
 
-  const setPersonalDate = (name, surName, fatherName, address, zipcode, phone, birthday) => {
+  const setPersonalData = (props:IProfile) => {
+    
+    const {firstName, surName, fatherName, address, zipCode, phone, birthday} = props;
+
     dispatch({type: 'LOADING_IS_UNCOMPLETED'});
     axios.post(`https://api.native-flora.tk/User/SetInfo`, {
-      "firstName": name,
+      "firstName": firstName,
       "surName": surName,
       "fatherName": fatherName,
       "address": address,
-      "zipCode": zipcode,
+      "zipCode": zipCode,
       "birthday": birthday,
       "phone": phone
     }, {
         headers:{'x-access-token': localStorage.getItem('accessToken')}     
     })
-    .then(()=>getPersonalDate(dispatch, setAllDateAboutUser))
+    .then(()=>getPersonalDate(dispatch, setAllDataAboutUser))
     .catch(err=>console.log(err))
   }
 
-  const setSotialDate = (vk, instagram, telegram) => {
+  const setSotialDate = (vk: string, instagram:string, telegram:string) => {
     dispatch({type: 'LOADING_IS_UNCOMPLETED'});
     axios.post(`https://api.native-flora.tk/User/SetInfo`, {
       "vk": vk,
@@ -89,7 +105,7 @@ export default function Profile() {
     }, {
         headers:{'x-access-token': localStorage.getItem('accessToken')}     
       })
-    .then(()=>getPersonalDate(dispatch, setAllDateAboutUser))
+    .then(()=>getPersonalDate(dispatch, setAllDataAboutUser))
     .catch(err=>console.log(err))
   }
 
@@ -108,13 +124,13 @@ export default function Profile() {
   }
 
   useEffect(()=>{
-    refreshFunction(dispatch, ()=>getPersonalDate(dispatch, setAllDateAboutUser));
+    refreshFunction(dispatch, ()=>getPersonalDate(dispatch, setAllDataAboutUser));
     window.scrollTo(0, 0);
   }, [])
   
   return (
     <>
-      <UpNavigation hide={'hide'}/>
+      <UpNavigation hide='hide'/>
       <div className='containerForProfile' id='hideNavBarMainLink'>
         <div className='containerForDataAboutUser'>
           <span className='headerAboutUser' onClick={()=>setTypeOfData('main')}>
@@ -207,7 +223,7 @@ export default function Profile() {
                           </svg>
                           <div className='dataProf'>
                             <span className='header'>Name Surname</span>
-                            <span>{allDateAboutUser.phone}</span>
+                            <span>{allDataAboutUser?.phone}</span>
                           </div>
                         </div>
                         <NavLink to={'/'} className='exiteBtn' onClick={()=>signOut(dispatch)}>Выйти</NavLink>
@@ -259,7 +275,7 @@ export default function Profile() {
                   </div>
                 </div>
                 : typeOfData === 'secureData'
-                  ? <PersonalDataInputs allDateAboutUser={allDateAboutUser} setPersonalDate={setPersonalDate}/>
+                  ? <PersonalDataInputs allDataAboutUser={allDataAboutUser} setPersonalData={setPersonalData}/>
                     : typeOfData === 'addedCart'
                       ? <AddedNewCart />
                         : typeOfData === 'reference'
@@ -277,7 +293,7 @@ export default function Profile() {
                             </>
                             : typeOfData === 'messages'
                               && 
-                              <PersonalSotialData allDateAboutUser={allDateAboutUser} setSotialDate={setSotialDate}/>
+                              <PersonalSotialData allDataAboutUser={allDataAboutUser} setSotialDate={setSotialDate}/>
           }
         </div>
       </div>

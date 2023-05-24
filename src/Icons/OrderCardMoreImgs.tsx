@@ -1,6 +1,10 @@
 import React from 'react'
+import { IOnClick } from '../Admin/Update/Interfaces/Interface'
 
-export default function OrderCardMoreImgs(onClick:()=>void) {
+export default function OrderCardMoreImgs(props: IOnClick) {
+
+  const {onClick} = props;
+
   return (
     <svg width={25} 
          height={25} 

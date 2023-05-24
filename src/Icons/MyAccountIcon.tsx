@@ -1,6 +1,10 @@
 import React from 'react'
+import { IOnClick } from '../Admin/Update/Interfaces/Interface'
 
-export default function MyAccountIcon(onClick:()=>void) {
+export default function MyAccountIcon(props: IOnClick) {
+
+  const {onClick} = props;
+
   return (
     <svg width="40" 
          height="40" 

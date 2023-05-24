@@ -1,6 +1,10 @@
 import React from 'react'
+import { IOnClick } from '../Admin/Update/Interfaces/Interface'
 
-export default function TelegramIcon(onClick:()=>void) {
+export default function TelegramIcon(props: IOnClick) {
+
+  const {onClick} = props;
+
   return (
     <svg 
         fill="white"

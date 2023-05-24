@@ -1,6 +1,10 @@
 import React from 'react'
+import { IOnClick } from '../Admin/Update/Interfaces/Interface'
 
-export default function CrossIcon(onClick:()=>void) {
+export default function CrossIcon(props: IOnClick) {
+
+  const{onClick} = props;
+
   return (
     <svg
         width="15" height="15" viewBox="0 0 15 15" fill="none" 

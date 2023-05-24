@@ -8,6 +8,7 @@ import Picker from '../Picker'
 import './Style/UpdateCSS.css'
 
 export default function UpdatePhotos(props: IUpdatePhotosProps) {
+    
     const {isOpen, photos, setIsOpen} = props;
 
     const [photoList, setPhotoList] = useState<string[]>(photos);

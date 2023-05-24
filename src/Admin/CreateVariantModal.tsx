@@ -9,7 +9,8 @@ import { useDispatch } from 'react-redux';
 import './Style/CreateVariantModal.css'
 
 export default function CreateVariantModal(props: ICreateVariantProps) {
-    const {isOpen, setIsOpen, setError, cleanSelectedOptions} = props
+    
+    const {isOpen, setIsOpen, setError, cleanSelectedOptions} = props;
 
     const [addedPhotos, setAddedPhotos] = useState<string[]>([]);
     const [variantName, setVariantName] = useState<string>('');

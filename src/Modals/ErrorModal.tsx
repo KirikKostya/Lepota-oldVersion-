@@ -11,7 +11,7 @@ interface IErrorModal{
 }
 export default function ErrorModal(props:IErrorModal) {
 
-  const { errorMessage, setErrorMessage, activationFunction } = props
+  const { errorMessage, setErrorMessage, activationFunction } = props;
 
   return (
     <ReactModal

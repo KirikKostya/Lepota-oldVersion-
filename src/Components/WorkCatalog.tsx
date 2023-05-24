@@ -34,7 +34,7 @@ export default function WorkCatalog() {
         <div className='listOfWorks'>
           {
             CARDS.sort((a,b) => a.id - b.id).map((card:ICard) => (
-              <CardOfWork card={card}/>
+              <CardOfWork key={card.id} card={card}/>
             ))
           }
         </div>

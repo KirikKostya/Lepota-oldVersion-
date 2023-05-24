@@ -5,8 +5,13 @@ import { useDispatch } from 'react-redux'
 import './Styles/CardOfWork.css'
 import { ICard } from '../Admin/Update/Interfaces/Interface'
 
-export default function CardOfWork ( card: ICard ) {
+interface ICardProps{
+  card: ICard
+}
+export default function CardOfWork (props: ICardProps) {
 
+  const {card} = props;
+  
   const dispatch = useDispatch();
 
   //make examination and return true images from DB-API
@@ -29,7 +34,7 @@ export default function CardOfWork ( card: ICard ) {
                 dispatch({type: 'SET_SEARCH_ORDER-ID', payload: card.id})
                 localStorage.setItem('searchOrderById', `${card.id}`);
                 localStorage.setItem('infoAboutTypeOfOrder', JSON.stringify(card))
-                refreshFunction(dispatch);
+                refreshFunction(dispatch,()=>{});
               }}>Подробнее</NavLink>
           </div>   
         </div>

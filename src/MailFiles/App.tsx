@@ -20,7 +20,7 @@ export const refreshFunction = async (dispatch: Dispatch, newFunc:()=>void) => {
         headers:{'x-access-token': localStorage.getItem('accessToken')}
       });
     }
-    await newFunc();
+        await newFunc()
   } catch (err: any) {
     if(err.response.status === 401){
       try {
@@ -28,7 +28,7 @@ export const refreshFunction = async (dispatch: Dispatch, newFunc:()=>void) => {
           withCredentials: true
         });
         localStorage.setItem('accessToken', res.data.data);
-        await newFunc();
+        newFunc()
       } catch (error: any) {
         if(error.response.status === 401){
           dispatch({type: 'SET_REFRESH-TOKEN_STATUS', payload: true});
@@ -63,7 +63,6 @@ function App() {
           color="black"
           height="50px"
           width="50px"
-          padding="20px"
           className='spin'
         />
       }

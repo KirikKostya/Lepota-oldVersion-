@@ -1,6 +1,12 @@
 import React from 'react'
 
-export default function CheckMarkForSingleSelect(className:string) {
+interface IProps{
+  className: string
+}
+export default function CheckMarkForSingleSelect(props: IProps) {
+  
+  const {className} = props;
+
   return (
     <svg
         width="12"

@@ -1,6 +1,10 @@
 import React from 'react'
+import { IOnClick } from '../Admin/Update/Interfaces/Interface'
 
-export default function Pensil(onClick:()=>void) {
+export default function Pensil(props: IOnClick) {
+
+  const {onClick} = props;
+
   return (
     <svg 
         width="16" 

@@ -7,7 +7,8 @@ import './Style/UpdateCSS.css'
 import { IUpdateNameProps } from './Interfaces/Interface';
 
 export default function UpdateName(props: IUpdateNameProps) {
-    const {isOpen, defaultName, setIsOpen} = props
+    
+    const {isOpen, defaultName, setIsOpen} = props;
 
     const [name, setName] = useState<string>(defaultName);
     const dispatch = useDispatch();

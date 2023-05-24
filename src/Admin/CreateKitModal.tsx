@@ -8,7 +8,8 @@ import { useDispatch } from 'react-redux';
 import { ICreateKitProps } from './Update/Interfaces/Interface';
 
 export default function CreateKitModal(props:ICreateKitProps) {
-    const {isOpen, setIsOpen, kitVariants, itemId, selectedVariants} = props
+    
+    const {isOpen, setIsOpen, kitVariants, itemId, selectedVariants} = props;
 
     const [addedPhotos, setAddedPhotos] = useState<string[]>([]);
     const [kitName, setKitName] = useState<string>('');

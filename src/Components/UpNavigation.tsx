@@ -10,8 +10,12 @@ import axios from 'axios';
 import './Styles/UpNavigation.css'
 import { AllParamsI } from '..';
 
-
-export default function UpNavigation( hide:string ) {
+interface IUpNavProps{
+  hide: string 
+}
+export default function UpNavigation( props: IUpNavProps) {
+  
+  const {hide} = props
   
   const [openHamburgerMenu, setOpenHamburgerMenu] = useState<string>('close');
   
@@ -26,7 +30,6 @@ export default function UpNavigation( hide:string ) {
     .then(res => dispatch({type: 'SET_COUNT_OF_ORDERS', payload: res.data.data}))
   }
 
-  useEffect(()=>console.log(hide), [])
   return (
     <>
       <div id='upNav' className='upNavContainer'>
@@ -50,7 +53,7 @@ export default function UpNavigation( hide:string ) {
                 offset={-90} 
                 duration={500} 
                 isDynamic={true} 
-                onClick={()=>refreshFunction(dispatch)}
+                onClick={()=>refreshFunction(dispatch, ()=>{})}
                 className={`NavLink`}>ГЛАВНАЯ</Link>
           <Link activeClass="active" 
                 to="catalogOfWorks" 
@@ -58,7 +61,7 @@ export default function UpNavigation( hide:string ) {
                 smooth={true} 
                 offset={-60} 
                 duration={500} 
-                onClick={()=> refreshFunction(dispatch)}
+                onClick={()=>refreshFunction(dispatch, ()=>{})}
                 className={`NavLink ${hide}`}>КАТАЛОГ</Link>
           <Link activeClass="active" 
                 to="timingAndDelivery" 
@@ -66,7 +69,7 @@ export default function UpNavigation( hide:string ) {
                 smooth={true}
                 offset={-100}
                 duration={500}
-                onClick={()=>refreshFunction(dispatch)}
+                onClick={()=>refreshFunction(dispatch, ()=>{})}
                 className={`NavLink ${hide}`}>СРОКИ И ДОСТАВКА</Link>
           <Link activeClass="active" 
                 to="aboutCashpo" 
@@ -74,6 +77,7 @@ export default function UpNavigation( hide:string ) {
                 smooth={true} 
                 offset={-100} 
                 duration={500} 
+                onClick={()=>refreshFunction(dispatch, ()=>{})}
                 className={`NavLink ${hide}`}>О КАШПО</Link>
           <Link activeClass="active" 
                 to="contactWithUs" 
@@ -81,6 +85,7 @@ export default function UpNavigation( hide:string ) {
                 smooth={true} 
                 offset={-65} 
                 duration={500} 
+                onClick={()=>refreshFunction(dispatch, ()=>{})}
                 className={`NavLink`}>КОНТАКТЫ</Link>
         </div>
         <NavLink to='/' className='header-LOGO'>
@@ -89,7 +94,7 @@ export default function UpNavigation( hide:string ) {
             height={70} 
             src={require('../Photos/Logo.png')}
             alt='LOGO'
-            onClick={()=>refreshFunction(dispatch)}/>
+            onClick={()=>refreshFunction(dispatch, ()=>{})}/>
         </NavLink>
         <div className='hamburger' 
              onClick={()=>{
@@ -98,7 +103,7 @@ export default function UpNavigation( hide:string ) {
                   : setOpenHamburgerMenu('')
 
               if(localStorage.getItem('accessToken')){
-                refreshFunction(dispatch);
+                refreshFunction(dispatch,()=>{});
               }
           }}>☰</div>
         { myAccountIsOpen && <MyAccount /> }
@@ -111,7 +116,7 @@ export default function UpNavigation( hide:string ) {
               offset={-230} 
               duration={500} 
               isDynamic={true} 
-              onClick={()=>refreshFunction(dispatch)}
+              onClick={()=>refreshFunction(dispatch,()=>{})}
               className={`NavLink `}>ГЛАВНАЯ</Link>
         <Link activeClass="active" 
               to="catalogOfWorks" 
@@ -119,7 +124,7 @@ export default function UpNavigation( hide:string ) {
               smooth={true} 
               offset={-210} 
               duration={500}
-              onClick={()=>refreshFunction(dispatch)}
+              onClick={()=>refreshFunction(dispatch,()=>{})}
               className={`NavLink ${hide}`}>КАТАЛОГ</Link>
         <Link activeClass="active" 
               to="timingAndDelivery" 
@@ -127,7 +132,7 @@ export default function UpNavigation( hide:string ) {
               smooth={true} 
               offset={-210} 
               duration={500}
-              onClick={()=>refreshFunction(dispatch)}
+              onClick={()=>refreshFunction(dispatch,()=>{})}
               className={`NavLink ${hide}`}>СРОКИ И ДОСТАКА</Link>
         <Link activeClass="active" 
               to="aboutCashpo" 
@@ -135,7 +140,7 @@ export default function UpNavigation( hide:string ) {
               smooth={true} 
               offset={-210} 
               duration={500} 
-              onClick={()=>refreshFunction(dispatch)}
+              onClick={()=>refreshFunction(dispatch,()=>{})}
               className={`NavLink ${hide}`}>О КАШПО</Link>
         <Link activeClass="active" 
               to="contactWithUs" 
@@ -143,7 +148,7 @@ export default function UpNavigation( hide:string ) {
               smooth={true} 
               offset={-180} 
               duration={500}
-              onClick={()=>refreshFunction(dispatch)}
+              onClick={()=>refreshFunction(dispatch,()=>{})}
               className={`NavLink `}>КОНТАКТЫ</Link>
       </div>
     </>

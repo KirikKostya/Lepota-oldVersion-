@@ -135,3 +135,22 @@ export interface IOrderCarsProps{
     variants: IVariant[],
     setIsOpenUpdateVariant: (bool:boolean)=>void
 }
+
+//Profile
+export interface IProfile{
+    firstName: string,
+    surName: string,
+    fatherName: string,
+    address: string,
+    zipCode: string,
+    birthday: string,
+    phone: string,
+    vk: string,
+    instagram: string,
+    telegram: string
+}
+
+//svgOnClick
+export interface IOnClick{
+    onClick: ()=>void
+}
