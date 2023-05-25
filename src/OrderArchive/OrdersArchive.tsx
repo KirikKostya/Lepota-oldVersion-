@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import ContactWithUs from '../Components/ContactWithUs.tsx';
+import ContactWithUs from '../Components/ContactWithUs';
 import UpNavigation from '../Components/UpNavigation'
 import ListOfArchive from './ListOfArchive'
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshFunction } from '../MailFiles/App';
 import axios from 'axios';
 import './Styles/OrdersArchive.css';
+import { IOrderArchiveType } from '../Admin/Update/Interfaces/Interface.js';
 
 export default function OrdersArchive() {
   
-  const [listOfOrdersInArchive, setListOfOrdersInArchive] = useState([]);
+  const [listOfOrdersInArchive, setListOfOrdersInArchive] = useState<IOrderArchiveType[]>([]);
 
   const dispatch = useDispatch();
 

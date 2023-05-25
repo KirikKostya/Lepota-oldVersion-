@@ -3,29 +3,49 @@ import { getPersonalDate } from '../MyAccountComponents/Profile';
 import { refreshFunction } from '../MailFiles/App'
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import { ICartItem, IProfile } from '../Admin/Update/Interfaces/Interface';
 
+interface ICheckProps{
+    ItemsInBasket:ICartItem[], 
+    requestBasketFunc: () => Promise<void>
+}
+export default function Check(props: ICheckProps) {
+    
+    const {ItemsInBasket, requestBasketFunc} = props;
 
-export default function Check({ ItemsInBasket, requestBasketFunc}) {
+    const [isDisabled, setIsDisabled] = useState<boolean>(Boolean(localStorage.getItem('accessToken')));
+    const [personalData, setPersonalData] = useState<IProfile>({
+        firstName: '',
+        surName: '',
+        fatherName: '',
+        address: '',
+        zipCode: '',
+        birthday: '',
+        phone: '',
+        vk: '',
+        instagram: '',
+        telegram: ''
+    });
 
-    const [isDisabled, setIsDisabled] = useState(Boolean(localStorage.getItem('accessToken')));
-    const [personalData, setPersonalData] = useState({});
-
-    const [isShipping, setIsShipping] = useState(true);
-    const [fio, setFio] = useState('');
-    const [city, setCity] = useState('');
-    const [adress, setAdress] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [zipCode, setZipCode] = useState(''); 
-    const [instContact, setInstContact] = useState('Not Inst');
+    const [isShipping, setIsShipping] = useState<boolean>(true);
+    const [fio, setFio] = useState<string>('');
+    const [city, setCity] = useState<string>('');
+    const [adress, setAdress] = useState<string>('');
+    const [phoneNumber, setPhoneNumber] = useState<string>('');
+    const [zipCode, setZipCode] = useState<string>(''); 
+    const [instContact, setInstContact] = useState<string>('Not Inst');
 
     const dispatch = useDispatch();
 
-    const handlerChange = (data, setFunction) => {
+    const handlerChange = (data:string, setFunction:(str:string)=>void) => {
+        console.log(data)
         setFunction(data);
     }
 
     //converts the time to the correct format
-    const makeTime = (date) => {
+    const makeTime = (date:any
+        ) => {
+        console.log(date)
         let hours = date.getHours() < 10 ? `0${date.getHours()}` : `${date.getHours()}`;
         let minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : `${date.getMinutes()}`;
         let seconds = date.getSeconds() < 10 ? `0${date.getSeconds()}` : `${date.getSeconds()}`;
@@ -33,7 +53,7 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
     } 
 
     //clears all forms from checkComp
-    const clearForms = (setFIO, setCITY, setADRESS, setPHONE, setZIP) => {
+    const clearForms = (setFIO:(str:string)=>void, setCITY:(str:string)=>void, setADRESS:(str:string)=>void, setPHONE:(str:string)=>void, setZIP:(str:string)=>void) => {
         setFIO('');
         setCITY('');
         setADRESS('');
@@ -42,7 +62,7 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
     }
 
     //fills all input 
-    const fillInputs = ()=>{
+    const fillInputs = () =>{
         setFio(`${personalData.surName} ${personalData.firstName} ${personalData.fatherName}`);
         setAdress(personalData.address);
         setZipCode(personalData.zipCode);
@@ -72,7 +92,7 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
             if(res.status === 200){
                 requestBasketFunc();
                 clearForms(setFio, setCity, setAdress, setPhoneNumber, setZipCode);
-                refreshFunction(dispatch)
+                refreshFunction(dispatch, ()=>{})
             }
         })
         .catch(err=>console.log(err))
@@ -106,15 +126,6 @@ export default function Check({ ItemsInBasket, requestBasketFunc}) {
                             defaultValue={fio}
                         />
                     </label>
-                    {/* <label>
-                        <p>Город</p>
-                        <input 
-                            className='checkInput'
-                            onChange={(e)=>handlerChange(e.target.value, setCity)}
-                            value={city}
-                        />
-                    </label> */}
-
                     <div className='adressPostIndex'>
                         <label>
                             <p>Адрес</p>

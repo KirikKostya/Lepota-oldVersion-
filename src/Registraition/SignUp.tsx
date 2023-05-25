@@ -8,17 +8,17 @@ import './Styles/SignUp.css'
 
 export default function SignUp({ setRegistr }) {
 
-    const [LoginInputValue, setLoginInputValue] = useState('');
-    const [PasswordInputValue, setPasswordInputValue] = useState('');
-    const [SecondPasswordInputValue, setSecondPasswordInputValue] = useState('')
+    const [LoginInputValue, setLoginInputValue] = useState<string>('');
+    const [PasswordInputValue, setPasswordInputValue] = useState<string>('');
+    const [SecondPasswordInputValue, setSecondPasswordInputValue] = useState<string>('')
 
-    const [TypeForFirstPasswordInput, setTypeForFirstPasswordInput] = useState('password')
-    const [closeFirstEyes, setCloseFirstEyes] = useState(true);
-    const [TypeForSecondPasswordInput, setTypeForSecondPasswordInput] = useState('password')
-    const [closeSecondEyes, setCloseSecondEyes] = useState(true);
+    const [TypeForFirstPasswordInput, setTypeForFirstPasswordInput] = useState<string>('password')
+    const [closeFirstEyes, setCloseFirstEyes] = useState<boolean>(true);
+    const [TypeForSecondPasswordInput, setTypeForSecondPasswordInput] = useState<string>('password')
+    const [closeSecondEyes, setCloseSecondEyes] = useState<boolean>(true);
 
-    const [StatusValidateForm, setStatusValidateForm] = useState('') 
-    const [ColorOfValidateForm, setColorOfValidateForm] = useState('bad')
+    const [StatusValidateForm, setStatusValidateForm] = useState<string>('') 
+    const [ColorOfValidateForm, setColorOfValidateForm] = useState<string>('bad')
 
 
   const dispatch = useDispatch()

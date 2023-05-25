@@ -3,13 +3,23 @@ import { refreshFunction } from '../MailFiles/App'
 import { useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import axios from 'axios'
+import { ICartItem } from '../Admin/Update/Interfaces/Interface'
+import { Dispatch } from 'redux'
 
-export default function MainBasketField({ ItemsInBasket, setItemsInBasket, requestBasketFunc }) {
-  
+interface IMainBascketField{
+  ItemsInBasket: ICartItem[], 
+  setItemsInBasket: (data:ICartItem[])=>void, 
+  requestBasketFunc: ()=>void 
+}
+
+export default function MainBasketField(props: IMainBascketField) {
+
+  const { ItemsInBasket, setItemsInBasket, requestBasketFunc }=props;
+
   const dispatch = useDispatch()
   
   //Function removes order from basket
-  const deleteItem = async (id) => {{
+  const deleteItem = async (id: number) => {{
     dispatch({type: 'LOADING_IS_UNCOMPLETED'});
     await axios.post('https://api.native-flora.tk/Cart/Delete', {
       id: id
@@ -21,7 +31,7 @@ export default function MainBasketField({ ItemsInBasket, setItemsInBasket, reque
   }}
 
   //function updates amount of order in basket 
-  const updateAmountOfOrder = async (ID, Amount) => {
+  const updateAmountOfOrder = async (ID:number, Amount:number) => {
     axios.post('https://api.native-flora.tk/Cart/Update', {
         id: ID, 
         amount: Amount
@@ -34,7 +44,7 @@ export default function MainBasketField({ ItemsInBasket, setItemsInBasket, reque
   }
 
   //find photo
-  const findPhoto = (cart) => {
+  const findPhoto = (cart:ICartItem):string => {
     return cart.variants
             ? cart.variants[0].icon[0]
               : (cart.kit)
@@ -43,7 +53,7 @@ export default function MainBasketField({ ItemsInBasket, setItemsInBasket, reque
   }
 
   //gets variants or kit of select cart
-  const getVariantsOrKit = (cart) => {
+  const getVariantsOrKit = (cart:ICartItem):string => {
     return cart.variants
             ? cart.variants.map(item=>item.name).join(' ')
               : cart.kit 
@@ -80,7 +90,7 @@ export default function MainBasketField({ ItemsInBasket, setItemsInBasket, reque
                           className='changeInput' 
                           min={1}
                           max={100}
-                          onChange={(e)=>updateAmountOfOrder(item.cartItemId, e.target.value)}
+                          onChange={(e:any)=>updateAmountOfOrder(item.cartItemId, e.target.value)}
                           defaultValue={item.amount}/>
                     </div>
                     <h3 id='summaryPrice'>{item.price} Br</h3>
@@ -88,7 +98,7 @@ export default function MainBasketField({ ItemsInBasket, setItemsInBasket, reque
                       className='deleteItem' 
                         onClick={()=>{
                           deleteItem(item.cartItemId);
-                          refreshFunction(dispatch)
+                          refreshFunction(dispatch, ()=>{})
                         }}>&times;</button>
                     </div>
             ))

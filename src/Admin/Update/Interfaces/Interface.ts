@@ -154,3 +154,31 @@ export interface IProfile{
 export interface IOnClick{
     onClick: ()=>void
 }
+
+//orderArchive
+export interface IOrderArchiveType{
+      id: number,
+      shipping: boolean,
+      address: string,
+      fio: string,
+      phoneNubmer: string,
+      contact: string,
+      zipCode: string,
+      city: string,
+      fullDate:{
+        Date: string,
+        Time: string
+      },
+      cartItems: ICartItem[]
+      totalPrice: number,
+      shippingStatus: string
+}
+
+export interface ICartItem{
+    cartItemId: number,
+    item: ICard,
+    variants: IVariant[],
+    kit: IKit,
+    amount: number,
+    price: number
+}

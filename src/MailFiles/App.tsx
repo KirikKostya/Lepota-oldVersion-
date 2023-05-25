@@ -20,7 +20,7 @@ export const refreshFunction = async (dispatch: Dispatch, newFunc:()=>void) => {
         headers:{'x-access-token': localStorage.getItem('accessToken')}
       });
     }
-        await newFunc()
+      newFunc()
   } catch (err: any) {
     if(err.response.status === 401){
       try {

@@ -1,71 +1,79 @@
 import React from 'react';
-import SingleSelect from '../DropDowns/SingleSelect.tsx';
-import { SortByDate, SortByDileverStatus, SortByDileverType } from '../DropDowns/OptionList.ts';
+import SingleSelect from '../DropDowns/SingleSelect';
+import { SortByDate, SortByDileverStatus, SortByDileverType } from '../DropDowns/OptionList';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshFunction } from '../MailFiles/App'
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import './Styles/OrdersArchive.css';
+import { IOrderArchiveType } from '../Admin/Update/Interfaces/Interface';
+import { AllParamsI } from '../index.js';
 
+interface IListOfArchiveProps{
+  LIST: IOrderArchiveType[], 
+  setList: (data: IOrderArchiveType[])=>void
+}
+interface IFilterData{
+  date: string,
+  deliveType: string, 
+  deliveStatus: string
+}
 
-export default function ListOfArchive({ LIST, setList }) {
+export default function ListOfArchive(props:IListOfArchiveProps) {
 
-  const isLoading = useSelector(state=>state.isLoading);
+  const { LIST, setList } = props;
+
+  const isLoading = useSelector((state:AllParamsI)=>state.isLoading);
   const dispatch = useDispatch();
 
-  //makes array from object
-  const makeArray = (object) => {
-    return [object]
-  }
-
   //sorts data by date
-  const sortDate= (res, metric) => {
+  const sortDate= (res:IOrderArchiveType[], metric:IFilterData):IOrderArchiveType[] => {
     return(
       metric.date
       &&
       metric.date === 'Новые'
-          ? res.data.data.sort((a,b) => b.id - a.id)
-            : res.data.data.sort((a,b) => a.id - b.id)
-      || res.data.data
+          ? res.sort((a:IOrderArchiveType, b:IOrderArchiveType) => b.id - a.id)
+            : res.sort((a:IOrderArchiveType, b:IOrderArchiveType) => a.id - b.id)
+      || res
     )
   }
 
   //sorts data by type of delivering
-  const filterByType = (data, metric) => {
+  const filterByType = (data:IOrderArchiveType[], metric:IFilterData):IOrderArchiveType[] => {
     if(metric.deliveType){
       return(
         metric.deliveType === 'Доставка'
-          ? data.filter(item=>item.shipping === true)
-            : data.filter(item=>item.shipping === false)
+          ? data.filter((item:IOrderArchiveType)=>item.shipping === true)
+            : data.filter((item:IOrderArchiveType)=>item.shipping === false)
       )
     } 
     return data
   } 
 
   //sorts data by status of delivering
-  const filterByStatus = (type, metric) => {
+  const filterByStatus = (type:IOrderArchiveType[], metric:IFilterData):IOrderArchiveType[] => {
     return(
       metric.deliveStatus
       &&
       metric.deliveStatus === 'Принят в обработку'
-        ? type.filter(item=>item.shippingStatus === 'BeingProcessed')
+        ? type.filter((item:IOrderArchiveType)=>item.shippingStatus === 'BeingProcessed')
           : metric.deliveStatus === 'В пути'
-            ? type.filter(item=>item.shippingStatus === 'Shipping')
+            ? type.filter((item:IOrderArchiveType)=>item.shippingStatus === 'Shipping')
               : metric.deliveStatus === 'Получен'
                 && 
-                type.filter(item=>item.shippingStatus === 'Delivered')
+                type.filter((item:IOrderArchiveType)=>item.shippingStatus === 'Delivered')
       || type
     )
   } 
 
   //sorts list of archive by data
-  const filterArchive = async (metric) => {
+  const filterArchive = async (metric:IFilterData) => {
     dispatch({type: 'LOADING_IS_UNCOMPLETED'});
     await axios.get('https://api.native-flora.tk/Order/All', {
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
     .then(async res=>{
-      let dateFiltered = await sortDate(res, metric);
+      let dateFiltered = await sortDate(res.data.data, metric);
       let typeFiltered = await filterByType(dateFiltered, metric);
       let statusFiltered = await filterByStatus(typeFiltered, metric);
       setList(statusFiltered);
@@ -75,7 +83,7 @@ export default function ListOfArchive({ LIST, setList }) {
   } 
 
   //on page writting status of delivering
-  const checkedStatusOfDelivering = (param) => {
+  const checkedStatusOfDelivering = (param:string):string => {
     return param == 'BeingProcessed'
             ? 'Принят в обработку'
               : param == 'Shipping'
@@ -86,7 +94,7 @@ export default function ListOfArchive({ LIST, setList }) {
   }
 
   //makes Styles For Status Of Delivering
-  const creatingStyles = (param) => {
+  const creatingStyles = (param:string) => {
     return param == 'BeingProcessed'
             ? {color: '#61aeff'}
               : param == 'Shipping'
@@ -114,7 +122,7 @@ export default function ListOfArchive({ LIST, setList }) {
                               <div className='date_numberOrder'>
                                 <p>Заказ #<span>{el.id}</span></p>
                                 {
-                                  makeArray(el.fullDate).map((fullDate, index)=>(
+                                  [el.fullDate].map((fullDate, index)=>(
                                       <p className='date' key={index}>{fullDate.Time} - {fullDate.Date}</p>
                                   ))
                                 }
@@ -198,7 +206,7 @@ export default function ListOfArchive({ LIST, setList }) {
         <button 
           className='sortBTN' 
           onClick={() => {
-            refreshFunction(dispatch, ()=>filterArchive(JSON.parse(localStorage.getItem('filterMetric'))))
+            refreshFunction(dispatch, ()=>filterArchive(JSON.parse(localStorage.getItem('filterMetric')||'{}')))
           }}>Применить фильтр
         </button>
         <span 

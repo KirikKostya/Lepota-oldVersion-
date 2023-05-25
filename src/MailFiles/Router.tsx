@@ -5,11 +5,10 @@ import Profile from '../MyAccountComponents/Profile'
 import MyBasket from '../OrderBasket/MyBasket'
 import OrdersArchive from '../OrderArchive/OrdersArchive';
 import TypeCatalog from '../CatalogOfWorks/TypeCatalog'
-import AccountActivation from '../Activation/AccountActivation.tsx';
+import AccountActivation from '../Activation/AccountActivation';
 import { Routes, Route, HashRouter} from 'react-router-dom'
 
 export default function Router() {
-
   return (
     <HashRouter>
         <Routes>

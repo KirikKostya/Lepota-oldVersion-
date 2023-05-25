@@ -7,10 +7,11 @@ import { refreshFunction } from '../MailFiles/App'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import './Styles/MyBasket.css'
+import { ICartItem } from '../Admin/Update/Interfaces/Interface'
 
 export default function MyBasket() {
 
-  const [ItemsInBasket, setItemsInBasket] = useState([])
+  const [ItemsInBasket, setItemsInBasket] = useState<ICartItem[]>([])
 
   const dispatch = useDispatch()
 
@@ -52,7 +53,7 @@ export default function MyBasket() {
               requestBasketFunc = {requestBasketFunc}
             />
           </div>
-          <Check ItemsInBasket = {ItemsInBasket} requestBasketFunc={requestBasketFunc}/>
+          <Check ItemsInBasket={ItemsInBasket} requestBasketFunc={requestBasketFunc}/>
         </div>
       <ContactWithUs />
     </>

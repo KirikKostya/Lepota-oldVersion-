@@ -2,12 +2,12 @@ import React, {useState, useEffect, cloneElement, Children} from 'react'
 import {FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import './Slider.css'
 
-const PAGE_WIDTH = 400
+const PAGE_WIDTH:number = 400;
 
 export default function Slider({children}) {
 
     const [pages, setPages] = useState([]);
-    const [offset, setOffset] = useState(0);
+    const [offset, setOffset] = useState<number>(0);
 
     const handleLeftArrowClick = () => {
         setOffset((currentOffset)=>{
