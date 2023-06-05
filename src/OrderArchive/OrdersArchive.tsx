@@ -1,0 +1,48 @@
+import React, { useEffect, useState } from 'react';
+import ContactWithUs from '../Components/ContactWithUs';
+import UpNavigation from '../Components/UpNavigation'
+import ListOfArchive from './ListOfArchive'
+import { useDispatch, useSelector } from 'react-redux';
+import { refreshFunction } from '../MailFiles/App';
+import axios from 'axios';
+import './Styles/OrdersArchive.css';
+import { IOrderArchiveType } from '../Admin/Update/Interfaces/Interface.js';
+
+export default function OrdersArchive() {
+  
+  const [listOfOrdersInArchive, setListOfOrdersInArchive] = useState<IOrderArchiveType[]>([]);
+
+  const dispatch = useDispatch();
+
+  //fetchs data from API (order in archive)
+  const fetchingAllOrdersInArchive = () => {
+    dispatch({type: 'LOADING_IS_UNCOMPLETED'})
+    axios.get('https://api.native-flora.tk/Order/All', {
+      headers:{'x-access-token': localStorage.getItem('accessToken')}
+    })
+    .then(res=>{
+      setListOfOrdersInArchive(res.data.data.reverse())
+      dispatch({type: 'LOADING_IS_COMPLETED'})
+    })
+    .catch(err=>{
+      if(err.response.status === 400){
+        setListOfOrdersInArchive(err.response.data.data);
+      }
+      dispatch({type: 'LOADING_IS_COMPLETED'})
+    })
+  }
+
+  useEffect(()=>{    
+    localStorage.setItem('filterMetric', JSON.stringify({ date: '', deliveType: '', deliveStatus: '' }));
+    refreshFunction(dispatch, fetchingAllOrdersInArchive)
+    window.scrollTo(0, 0)
+  }, [])
+
+  return (
+    <div className='containerForArchivePage'>
+      <UpNavigation hide='hide'/>
+        <ListOfArchive LIST={listOfOrdersInArchive} setList={setListOfOrdersInArchive} />
+      <ContactWithUs />
+    </div>
+  )
+}

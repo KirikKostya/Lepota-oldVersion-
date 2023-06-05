@@ -1,0 +1,21 @@
+.containerForRegistration{
+    width: 100%;
+    height: 100vh;
+    background: url('./Registration.png');
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.containerForRegistration .fieldEffect{
+    width: 75%;
+    height: 60%;
+    border-radius: 5px;
+    background-color: rgba(45, 45, 206, 0.728);
+}
+@media screen and (max-width: 700px){
+    .containerForRegistration .fieldEffect{
+        display: none !important;
+    }
+}

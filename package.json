@@ -12,6 +12,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-google-drive-picker": "^1.2.1",
+    "react-hook-form": "^7.44.3",
     "react-icons": "^4.8.0",
     "react-input-mask": "^2.0.4",
     "react-loading": "^2.0.3",
@@ -24,6 +25,7 @@
     "react-select": "^5.7.2",
     "react-simple-image-slider": "^2.4.1",
     "redux": "^4.2.1",
+    "typescript": "^5.0.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
