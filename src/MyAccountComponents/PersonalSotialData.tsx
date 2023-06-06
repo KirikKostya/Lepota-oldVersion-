@@ -17,7 +17,7 @@ export default function PersonalSotialData(props: ISotialDataProps) {
     <>
         <div className='inputField'>
             <form>
-            <p onClick={()=>console.log(allDataAboutUser)}>Insta:</p>
+            <p>Insta:</p>
             <input defaultValue={allDataAboutUser.instagram} placeholder='Ссылка' autoComplete='off' onChange={(event)=>setUserInst(event.target.value)}/>
             </form>
             <form>

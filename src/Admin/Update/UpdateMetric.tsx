@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { updateMetric } from '../AdmineController';
-import { refreshFunction } from '../../MailFiles/App'
+import { refreshFunction } from '../../MainFiles/App'
 import { useDispatch } from 'react-redux';
 import ReactModal from 'react-modal'
 import './Style/UpdateCSS.css'
@@ -59,8 +59,11 @@ export default function UpdateMetric(props: IUpdateMetricProps) {
                 Изменить
             </button>
             <p
-             onClick={()=>setIsOpen({isOpen:false, value:''})}
-             style={{margin:'0', cursor:'pointer'}}>закрыть</p>
+                onClick={()=>setIsOpen({isOpen:false, value:''})}
+                style={{margin:'0', cursor:'pointer'}}
+            >
+                закрыть
+            </p>
         </div>
     </ReactModal>
   )

@@ -9,13 +9,13 @@ export default function Slider({children}) {
     const [pages, setPages] = useState([]);
     const [offset, setOffset] = useState<number>(0);
 
-    const handleLeftArrowClick = () => {
+    const handleLeftArrowClick = (): void => {
         setOffset((currentOffset)=>{
             const newOffset = currentOffset + PAGE_WIDTH;
             return Math.min(newOffset, 0) 
         })
     }
-    const handleRightArrowClick = () => {
+    const handleRightArrowClick = (): void => {
         setOffset((currentOffset)=>{
             const newOffset = currentOffset - PAGE_WIDTH;
             const maxOffset = -(PAGE_WIDTH * (pages.length - 1));
@@ -47,7 +47,7 @@ export default function Slider({children}) {
                 }}
             >{pages}</div>
         </div>
-        <FaChevronRight className={`arrow`}  onClick={handleRightArrowClick}/>
+        <FaChevronRight className='arrow' onClick={handleRightArrowClick}/>
     </div>
   )
 }

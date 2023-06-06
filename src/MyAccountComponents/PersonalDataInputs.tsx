@@ -26,16 +26,16 @@ export default function PersonalDataInputs(props: IPersonalDataProps) {
     <>
         <div className='inputField'>
             <form>
-            <p>Фамилия:</p>
-            <input defaultValue={allDataAboutUser.surName} placeholder='Ваша фамилия' autoComplete='off' onChange={(event)=>setUserSurname(event.target.value)} />
+                <p>Фамилия:</p>
+                <input defaultValue={allDataAboutUser.surName} placeholder='Ваша фамилия' autoComplete='off' onChange={(event)=>setUserSurname(event.target.value)} />
             </form>
             <form>
-            <p>Имя:</p>
-            <input defaultValue={allDataAboutUser.firstName} placeholder='Ваше имя' autoComplete='off' onChange={(event)=>setfirstName(event.target.value)}/>
+                <p>Имя:</p>
+                <input defaultValue={allDataAboutUser.firstName} placeholder='Ваше имя' autoComplete='off' onChange={(event)=>setfirstName(event.target.value)}/>
             </form>
             <form>
-            <p>Отчество:</p>
-            <input defaultValue={allDataAboutUser.fatherName} placeholder='Ваше отчество' autoComplete='off' onChange={(event)=>setUserFathername(event.target.value)}/>
+                <p>Отчество:</p>
+                <input defaultValue={allDataAboutUser.fatherName} placeholder='Ваше отчество' autoComplete='off' onChange={(event)=>setUserFathername(event.target.value)}/>
             </form>
         </div>
         <div className='inputField'>

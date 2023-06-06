@@ -1,28 +1,29 @@
 import React, { useEffect, useState } from 'react'
-import ContactWithUs from '../Components/ContactWithUs'
-import PersonalDataInputs from './PersonalDataInputs'
-import PersonalSotialData from './PersonalSotialData'
-import UpNavigation from '../Components/UpNavigation'
-import AddedNewCart from '../Admin/AddedNewCart'
-import { FaChevronLeft } from 'react-icons/fa'
-import { useDispatch, useSelector } from 'react-redux'
-import { refreshFunction } from '../MailFiles/App'
-import { NavLink } from 'react-router-dom'
-import { signOut } from './MyAccount'
-import axios from 'axios'
-import './Styles/Profile.css'
-import { Dispatch } from 'redux'
-import { IProfile } from '../Admin/Update/Interfaces/Interface'
-import { AllParamsI } from '..'
+import ContactWithUs from '../Components/ContactWithUs';
+import PersonalDataInputs from './PersonalDataInputs';
+import PersonalSotialData from './PersonalSotialData';
+import UpNavigation from '../Components/UpNavigation';
+import AddedNewCart from '../Admin/AddedNewCart';
+import { FaChevronLeft } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { refreshFunction } from '../MainFiles/App';
+import { NavLink } from 'react-router-dom';
+import { signOut } from './MyAccount';
+import axios from 'axios';
+import './Styles/Profile.css';
+import { Dispatch } from 'redux';
+import { IProfile } from '../Admin/Update/Interfaces/Interface';
+import { IInitialState } from '../ReduxToolkit/Interfaces';
+import { loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices';
 
 export const getPersonalDate = (dispatch: Dispatch, setList:(data: IProfile)=>void) => {
-  dispatch({type: 'LOADING_IS_UNCOMPLETED'});
+  dispatch(loadingUncomplate());
   axios.get('https://api.native-flora.tk/User/GetInfo', {
     headers:{'x-access-token': localStorage.getItem('accessToken')}
   })
   .then(res=>setList(res.data.data))
   .catch(err=>console.log(err))
-  dispatch({type: 'LOADING_IS_COMPLETED'});
+  dispatch(loadingComplate());
 }
 
 export default function Profile() {
@@ -52,7 +53,7 @@ export default function Profile() {
   const [userBirthday, setUserBirthday] = useState<string>('');
   const [recommendation, setUserRecommendation] = useState<string>('');
 
-  const isAdmin = useSelector((state:AllParamsI)=>state.isAdmin);
+  const isAdmine = useSelector((state:IInitialState)=>state.isAdmine);
   const dispatch = useDispatch();
   
   const [typeOfData, setTypeOfData] = useState('main');
@@ -78,9 +79,9 @@ export default function Profile() {
 
   const setPersonalData = (props:IProfile) => {
     
-    const {firstName, surName, fatherName, address, zipCode, phone, birthday} = props;
+    const { firstName, surName, fatherName, address, zipCode, phone, birthday } = props;
 
-    dispatch({type: 'LOADING_IS_UNCOMPLETED'});
+    dispatch(loadingUncomplate());
     axios.post(`https://api.native-flora.tk/User/SetInfo`, {
       "firstName": firstName,
       "surName": surName,
@@ -97,7 +98,7 @@ export default function Profile() {
   }
 
   const setSotialDate = (vk: string, instagram:string, telegram:string) => {
-    dispatch({type: 'LOADING_IS_UNCOMPLETED'});
+    dispatch(loadingUncomplate());
     axios.post(`https://api.native-flora.tk/User/SetInfo`, {
       "vk": vk,
       "instagram": instagram,
@@ -126,6 +127,7 @@ export default function Profile() {
   useEffect(()=>{
     refreshFunction(dispatch, ()=>getPersonalDate(dispatch, setAllDataAboutUser));
     window.scrollTo(0, 0);
+    console.log(isAdmine)
   }, [])
   
   return (
@@ -140,7 +142,7 @@ export default function Profile() {
               <FaChevronLeft onClick={()=>setTypeOfData('main')} style={{marginRight: '15px'}}/>
             }
             { setOptionList(typeOfData) }
-            { isAdmin && ` (Администатор)` }
+            { isAdmine && ` (Администатор)` }
           </span>
           <br/>
           <div className='typesOfData'>
@@ -151,7 +153,7 @@ export default function Profile() {
               Главная
             </span>
             {
-              !isAdmin
+              isAdmine
                 ? <span className={`typeOfData ${typeOfData==='addedCart' && 'active' || ''}`} onClick={()=>refreshAndSetType('addedCart')}>
                     <svg width="16" height="16" fill='currentColor' viewBox="0 0 22 22" style={{marginRight: '3px'}}> 
                       <g> 
@@ -191,7 +193,7 @@ export default function Profile() {
             typeOfData==='main'
               ? <div className='listInfoCard-Profile'>
                 {
-                  isAdmin 
+                  isAdmine 
                   ? <div className='infoCard profileUser' onClick={()=>refreshAndSetType('addedCart')}>
                       <div className='dataContainer'>
                         <svg 

@@ -3,11 +3,12 @@ import CrossIcon from '../Icons/CrossIcon';
 import SingleSelect from '../DropDowns/SingleSelect';
 import {IOption, ISelectOption} from './Update/Interfaces/Interface';
 import {OptionsOfMetrics} from '../DropDowns/OptionList'
-import { refreshFunction } from '../MailFiles/App';
+import { refreshFunction } from '../MainFiles/App';
 import { useDispatch } from 'react-redux';
 import Picker from './Picker';
 import axios from 'axios';
 import './Style/AddedNewCart.css'
+import { loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices'
 
 //gets value of metric by metric name
 export const getValueByMetricName = (selectedOptions:Array<ISelectOption>, type:string) => {
@@ -62,7 +63,7 @@ export default function AddedNewCart(){
 
     //request to add product in catalog
     const addProductInCatalog = () => {
-        dispatch({type: 'LOADING_IS_UNCOMPLETED'});
+        dispatch(loadingUncomplate());
         axios.post('https://api.native-flora.tk/Item/Add', {
                 "name": name,
                 "description": description.split('.'),
@@ -84,7 +85,7 @@ export default function AddedNewCart(){
         })
         .then(res=>console.log(res))
         .catch(err=>console.log(err))
-        dispatch({type: 'LOADING_IS_COMPLETED'})
+        dispatch(loadingComplate())
     }
 
     // clears all fields
@@ -151,40 +152,6 @@ export default function AddedNewCart(){
             </div>
             <div className='metricCart'>
                 <h4>Параметры:</h4>
-                {/* {
-                    metricsListStep.map( (el, index) => (
-                        <div className='metric' key={el.id} >
-                            <SingleSelect 
-                                options = { filter(OptionsOfMetrics, selectedOptions) } 
-                                width={'60%'}
-                                index={index}
-                                selectedOptions = {selectedOptions}
-                                setSelectedOptions = {setSelectedOptions}
-                                type={'metric'}
-                            />
-                            <input 
-                                className='metricInput' 
-                                type={selectedOptions[index].metric === 'Материалы' ? 'text' : 'number'}
-                                min={0}
-                                onChange={event => {
-                                    let newArray = [...selectedOptions];
-                                    newArray=[...newArray, ]
-                                    // newArray[index] = {...newArray[el.id], value: event.target.value};
-                                    console.log(newArray[index])
-                                    // setSelectedOptions(newArray)
-                                }}
-                                placeholder='ввод'
-                            />
-                            <CrossIcon 
-                                onClick={()=>{
-                                    console.log(selectedOptions)
-                                    // setMetricsListStep([...metricsListStep.filter(item=>item.id!==el.id)]);
-                                    // setSelectedOptions([...selectedOptions.filter(item=>item!==selectedOptions[index])])
-                                }} 
-                            />
-                        </div>
-                    ))
-                } */}
                 {
                     metricsListStep.map( (el:string, index:number) => (
                         <div className='metric' key={el} >

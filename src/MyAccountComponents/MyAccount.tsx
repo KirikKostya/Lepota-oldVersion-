@@ -1,26 +1,27 @@
 import React from 'react'
-import { refreshFunction } from '../MailFiles/App';
+import { refreshFunction } from '../MainFiles/App';
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import './Styles/MyAccount.css'
 import { Dispatch } from 'redux';
-import { AllParamsI } from '..';
+import { IInitialState } from '../ReduxToolkit/Interfaces';
+import { loadingComplate, loadingUncomplate, uncomplatedAuth} from '../ReduxToolkit/Slices'
 
 export const signOut = (dispatch: Dispatch) =>{
-  dispatch({type: 'LOADING_IS_UNCOMPLETED'})
+  dispatch(loadingUncomplate());
   axios.post('https://api.native-flora.tk/Auth/Logout', {}, {
     headers:{'x-access-token': localStorage.getItem('accessToken')}  
   })
   .then(()=>localStorage.removeItem('accessToken'))
-  .catch(err=>console.log(err))
-  dispatch({type: 'LOADING_IS_COMPLETED'})
-  dispatch({ type: 'UNCOMPLETED_AUTHORIZATION'})
+  .catch(err=>console.log(err));
+  dispatch(loadingComplate());
+  dispatch(uncomplatedAuth());
 }
 
 export default function MyAccount() {
 
-  const countOfOrders = useSelector((state:AllParamsI)=>state.countOfOrders);
+  const countOfOrders = useSelector((state:IInitialState)=>state.countOfOrders);
   const dispatch = useDispatch() 
 
   return (

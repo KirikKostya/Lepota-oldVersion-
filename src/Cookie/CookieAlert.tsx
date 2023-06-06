@@ -8,7 +8,7 @@ export default function CookieAlert() {
 
   const toggleStateOfMSG = ():void => {
     Cookies.set('cookieActivate', true);
-    return closeMSG === '' ? setCloseMSG('displayNone') : setCloseMSG('')
+    closeMSG === '' ? setCloseMSG('displayNone') : setCloseMSG('')
   }
 
   return (

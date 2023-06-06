@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { IUpdatePhotosProps } from './Interfaces/Interface'
 import { updatePhotos } from '../AdmineController'
-import { refreshFunction } from '../../MailFiles/App'
+import { refreshFunction } from '../../MainFiles/App'
 import { useDispatch } from 'react-redux'
 import ReactModal from 'react-modal'
 import Picker from '../Picker'

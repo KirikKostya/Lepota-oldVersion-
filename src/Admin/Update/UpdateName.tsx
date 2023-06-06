@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { updateName } from '../AdmineController';
-import { refreshFunction } from '../../MailFiles/App'
+import { refreshFunction } from '../../MainFiles/App'
 import { useDispatch } from 'react-redux';
 import ReactModal from 'react-modal';
 import './Style/UpdateCSS.css'

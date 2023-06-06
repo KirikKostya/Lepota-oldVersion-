@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import CardOfWork from './CardOfWork'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import './Styles/WorkCatalog.css'
 import { ICard } from '../Admin/Update/Interfaces/Interface'
-
+import { loadingComplate, loadingUncomplate } from '../ReduxToolkit/Slices'
 
 export default function WorkCatalog() {
   
@@ -14,13 +14,19 @@ export default function WorkCatalog() {
 
   //gets all carts of work 
   const getAllItem = () =>{
-    dispatch({type: 'LOADING_IS_UNCOMPLETED'});
-    axios.get(`https://api.native-flora.tk/Item/GetAll`)
-      .then(res=>{
-        setCARDS(res.data.data)
-      })
-    dispatch({type: 'LOADING_IS_COMPLETED'});
+    dispatch(loadingUncomplate());
+      axios.get(`https://api.native-flora.tk/Item/GetAll`)
+        .then(res=>setCARDS(res.data.data));
+    dispatch(loadingComplate());
   }
+
+  const renderCarts = useMemo(() => {
+    return (
+      CARDS.sort((a,b) => a.id - b.id).map((card:ICard) => (
+        <CardOfWork key={card.id} card={card}/>
+      ))
+    )
+  }, [CARDS]);
 
   useEffect( getAllItem, []);
 
@@ -32,11 +38,7 @@ export default function WorkCatalog() {
           Вы сможете сделать заказ и обсудить с мастером вариант вашейго собственного заказа.
         </p>
         <div className='listOfWorks'>
-          {
-            CARDS.sort((a,b) => a.id - b.id).map((card:ICard) => (
-              <CardOfWork key={card.id} card={card}/>
-            ))
-          }
+          {renderCarts}
         </div>
     </div>
   )

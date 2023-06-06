@@ -11,7 +11,7 @@ import './Styles/Main.css'
 export default function Main() {
   return (
     <div className='main'>   
-      <UpNavigation /> 
+      <UpNavigation hide={''} /> 
       <Description />
       <AboutCompany />
       <WorkCatalog />

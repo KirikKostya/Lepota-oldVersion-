@@ -5,6 +5,7 @@ interface IExampleDescription{
   id: number,
   original: string
 }
+
 const exemplesOfWorks: IExampleDescription[] = [
   {
     id: 1,

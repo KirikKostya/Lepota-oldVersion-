@@ -13,12 +13,13 @@ import UpdateMetric from '../Admin/Update/UpdateMetric';
 import UpdateVariant from '../Admin/Update/UpdateVariant';
 import { getUnit } from '../Admin/AdmineController';
 import { useDispatch, useSelector } from 'react-redux';
-import { refreshFunction } from '../MailFiles/App'
+import { refreshFunction } from '../MainFiles/App'
 import { Link } from 'react-scroll';
 import axios from 'axios';
 import './Style/TypeCatalog.css'
 import { ICard, IItemOfWork, IOpenUpdateMetric, IVariant } from '../Admin/Update/Interfaces/Interface';
-import { AllParamsI } from '..';
+import { IInitialState } from '../ReduxToolkit/Interfaces';
+import { loadingComplate, setTotalSum } from '../ReduxToolkit/Slices'
 
 
 export default function TypeCatalog() {
@@ -42,9 +43,9 @@ export default function TypeCatalog() {
   const [catalogOrders, setCatalogOrders] = useState<IItemOfWork[]>([]);   
 
   //ID типа товаров, по которому нужно делать запрос 
-  const searchOrderById = useSelector((state: AllParamsI)=>state.searchOrderById);
-  const variantId = useSelector((state: AllParamsI)=>state.variantId);
-  const isAdmin = useSelector((state: AllParamsI)=>state.isAdmin);
+  const searchOrderById = useSelector((state: IInitialState)=>state.searchOrderById);
+  const variantId = useSelector((state: IInitialState)=>state.variantId);
+  const isAdmine = useSelector((state: IInitialState)=>state.isAdmine);
   const dispatch = useDispatch();
 
   const checkMetric = (value:string):string => {
@@ -58,8 +59,8 @@ export default function TypeCatalog() {
         setCatalogOrders([res.data.data]);
         setPhotosOfCards(res.data.data.item.icon);
         localStorage.setItem('variants', JSON.stringify(res.data.data.variants));
-        dispatch({type: 'SET_TOTAL_SUM_TYPE-COMP', payload: res.data.data.item.price});
-        dispatch({type: 'LOADING_IS_COMPLETED'});
+        dispatch(setTotalSum(res.data.data.item.price));
+        dispatch(loadingComplate());
         return res;
       })
   }
@@ -73,10 +74,10 @@ export default function TypeCatalog() {
       <UpNavigation hide={'hide'}/>
       <div className='infoContainer' id='hideNavBarMainLink'>
         <div className='infoOrder'>
-          <h1 onClick={()=>console.log(photosOfCards)}>
+          <h1>
             Кашпо {order.name} 
             { 
-              isAdmin 
+              isAdmine 
               && 
               <span className='addIcons'>
                 <Pensil onClick={()=>setIsOpenUpdateName(true)}/>
@@ -92,48 +93,48 @@ export default function TypeCatalog() {
                     Материал: <span>
                                 {`${item.Material} ${getUnit('Material')}`}
                               </span>
-                        <sup>{ isAdmin && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Material'})}/> }</sup>
+                        <sup>{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Material'})}/> }</sup>
                   </p>
                   <p className={`metricItem ${checkMetric(item.Width)}`}>
                     Ширина: <span>
                               {`${item.Width} ${getUnit('Width')}`}
                             </span>
-                      <sup>{ isAdmin && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Width'})}/> }</sup>
+                      <sup>{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Width'})}/> }</sup>
                   </p>
                   <p className={`metricItem ${checkMetric(item.Height)}`}>
                     Высота: <span>
                               {`${item.Height} ${getUnit('Height')}`}
                             </span>
-                      <sup>{ isAdmin && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Height'})}/> }</sup>
+                      <sup>{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Height'})}/> }</sup>
                   </p>
                   <p className={`metricItem ${checkMetric(item.Depth)}`}>
                     Глубина: <span>
                               {`${item.Depth} ${getUnit('Depth')}`}
                             </span>
-                      <sup>{ isAdmin && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Depth'})}/> }</sup>
+                      <sup>{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Depth'})}/> }</sup>
                   </p>
                   <p className={`metricItem ${checkMetric(item.Length)}`}>
                     Длина: <span>
                               {`${item.Length} ${getUnit('Length')}`}
                             </span>
-                      <sup>{ isAdmin && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Length'})}/> }</sup>
+                      <sup>{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Length'})}/> }</sup>
                   </p>
                   <p className={`metricItem ${checkMetric(item.Diameter)}`}>
                     Диаметр: <span>
                               {`${item.Diameter} ${getUnit('Diameter')}`}
                             </span>
-                      <sup>{ isAdmin && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Diameter'})}/> }</sup>
+                      <sup>{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Diameter'})}/> }</sup>
                   </p>
                   <p className={`metricItem ${checkMetric(item.Weight)}`}>
                     Вес: <span>
                               {`${item.Weight} ${getUnit('Weight')}`}
                             </span>
-                      <sup>{ isAdmin && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Weight'})}/> }</sup>
+                      <sup>{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Weight'})}/> }</sup>
                   </p> 
                 </div>
               ))
             }
-            <span>{order.description}{ isAdmin && <Pensil onClick={()=>setIsOpenUpdateDescription(true)}/> }</span>
+            <span>{order.description}{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateDescription(true)}/> }</span>
           </div>
           <p className='forOrderMakes'>Для заказа: 
             <span> заполните форму в корзине заказов и отправьте Ваш оформленный заказ нам. 
@@ -144,14 +145,14 @@ export default function TypeCatalog() {
                   smooth={true} 
                   offset={-50} 
                   duration={500}
-                  onClick={()=>{ refreshFunction(dispatch) }}
+                  onClick={()=>{ refreshFunction(dispatch, ()=>{}) }}
                   className={`NavLink item-contact`}>СВЯЗАТЬСЯ С НАМИ.</Link>
             </span>
           </p>
         </div>
       </div>
       {
-        isAdmin
+        isAdmine
         &&
         <>
           <UpdatePhotos isOpen={isOpenUpdatePhotos} photos={photosOfCards} setIsOpen={setIsOpenUpdatePhotos} />
@@ -161,7 +162,7 @@ export default function TypeCatalog() {
         </>
       }
       {
-        localStorage.getItem('variants') && isAdmin
+        localStorage.getItem('variants') && isAdmine
         &&
         <UpdateVariant isOpen={isOpenUpdateVariant} variant={JSON.parse(localStorage.getItem('variants')||'{}').filter((el:IVariant)=>+el.id == variantId)[0]} setIsOpen={setIsOpenUpdateVariant} />
       }

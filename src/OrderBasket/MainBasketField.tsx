@@ -1,10 +1,11 @@
 import React from 'react'
-import { refreshFunction } from '../MailFiles/App'
+import { refreshFunction } from '../MainFiles/App'
 import { useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import axios from 'axios'
 import { ICartItem } from '../Admin/Update/Interfaces/Interface'
 import { Dispatch } from 'redux'
+import { loadingComplate, loadingUncomplate } from '../ReduxToolkit/Slices'
 
 interface IMainBascketField{
   ItemsInBasket: ICartItem[], 
@@ -20,14 +21,14 @@ export default function MainBasketField(props: IMainBascketField) {
   
   //Function removes order from basket
   const deleteItem = async (id: number) => {{
-    dispatch({type: 'LOADING_IS_UNCOMPLETED'});
+    dispatch(loadingUncomplate());
     await axios.post('https://api.native-flora.tk/Cart/Delete', {
       id: id
     }, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
     await requestBasketFunc();
-    dispatch({type: 'LOADING_IS_COMPLETED'});
+    dispatch(loadingComplate());
   }}
 
   //function updates amount of order in basket 

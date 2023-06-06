@@ -10,7 +10,8 @@ import { signOut } from '../MyAccountComponents/MyAccount';
 import axios from 'axios';
 import './Styles/App.css';
 import { Dispatch } from 'redux';
-import { AllParamsI } from '..';
+import { IInitialState } from '../ReduxToolkit/Interfaces';
+import { changeRefreshTokenStatus, closeAccount} from '../ReduxToolkit/Slices'
 
 export const refreshFunction = async (dispatch: Dispatch, newFunc:()=>void) => {
   try {
@@ -31,7 +32,7 @@ export const refreshFunction = async (dispatch: Dispatch, newFunc:()=>void) => {
         newFunc()
       } catch (error: any) {
         if(error.response.status === 401){
-          dispatch({type: 'SET_REFRESH-TOKEN_STATUS', payload: true});
+          dispatch(changeRefreshTokenStatus(true));
         } else {
           console.log('Something went wrong!');
         }
@@ -43,14 +44,17 @@ export const refreshFunction = async (dispatch: Dispatch, newFunc:()=>void) => {
 
 function App() {
   
-  const myAccountIsOpen = useSelector((state:AllParamsI)=>state.myAccountIsOpen);
-  const refreshTokenIsExpired = useSelector((state:AllParamsI)=>state.refreshTokenIsExpired);
-  const isLoading = useSelector((state:AllParamsI)=>state.isLoading);
+  const myAccountIsOpen = useSelector((state:IInitialState)=>state.myAccountIsOpen);
+  const refreshTokenIsExpired = useSelector((state:IInitialState)=>state.refreshTokenIsExpired);
+  const isLoading = useSelector((state:IInitialState)=>state.isLoading);
   
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-    refreshFunction(dispatch, ()=>checkIsAdmine(dispatch))
+  useEffect(() =>{
+    refreshFunction(dispatch, ()=>{
+      localStorage.getItem('accessToken') && checkIsAdmine(dispatch)
+    });
+    // setInterval(()=>console.log(isLoading), 1000)
   }, [])
   
   return (
@@ -70,7 +74,7 @@ function App() {
         className={`app ${isLoading && 'blur'}`} 
         onClick={()=>{
           if(myAccountIsOpen){
-            dispatch({type: 'CLOSE_MY_ACCOUNT'})
+            dispatch(closeAccount())
           }
         }
       }>
@@ -84,7 +88,7 @@ function App() {
           <button 
             className='modal-closeBTN' 
             onClick={()=>{
-              dispatch({type: 'SET_REFRESH-TOKEN_STATUS', payload: false})
+              dispatch(changeRefreshTokenStatus(false))
               signOut(dispatch)
             }}>Закрыть</button>  
         </ReactModal>

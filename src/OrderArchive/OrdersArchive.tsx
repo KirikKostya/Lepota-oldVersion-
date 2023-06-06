@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import ContactWithUs from '../Components/ContactWithUs';
 import UpNavigation from '../Components/UpNavigation'
 import ListOfArchive from './ListOfArchive'
-import { useDispatch, useSelector } from 'react-redux';
-import { refreshFunction } from '../MailFiles/App';
+import { useDispatch } from 'react-redux';
+import { refreshFunction } from '../MainFiles/App';
 import axios from 'axios';
 import './Styles/OrdersArchive.css';
 import { IOrderArchiveType } from '../Admin/Update/Interfaces/Interface.js';
+import { loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices'
+
 
 export default function OrdersArchive() {
   
@@ -16,21 +18,28 @@ export default function OrdersArchive() {
 
   //fetchs data from API (order in archive)
   const fetchingAllOrdersInArchive = () => {
-    dispatch({type: 'LOADING_IS_UNCOMPLETED'})
+    dispatch(loadingUncomplate())
     axios.get('https://api.native-flora.tk/Order/All', {
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
     .then(res=>{
       setListOfOrdersInArchive(res.data.data.reverse())
-      dispatch({type: 'LOADING_IS_COMPLETED'})
+      dispatch(loadingComplate())
     })
     .catch(err=>{
       if(err.response.status === 400){
         setListOfOrdersInArchive(err.response.data.data);
       }
-      dispatch({type: 'LOADING_IS_COMPLETED'})
+      dispatch(loadingComplate())
     })
   }
+
+  const renderListOfArchiveElements = useMemo(()=>{
+    console.log('useMemo works !');
+    return(
+      <ListOfArchive LIST={listOfOrdersInArchive} setList={setListOfOrdersInArchive} />
+    )
+  }, [listOfOrdersInArchive])
 
   useEffect(()=>{    
     localStorage.setItem('filterMetric', JSON.stringify({ date: '', deliveType: '', deliveStatus: '' }));
@@ -41,7 +50,7 @@ export default function OrdersArchive() {
   return (
     <div className='containerForArchivePage'>
       <UpNavigation hide='hide'/>
-        <ListOfArchive LIST={listOfOrdersInArchive} setList={setListOfOrdersInArchive} />
+        {renderListOfArchiveElements}
       <ContactWithUs />
     </div>
   )

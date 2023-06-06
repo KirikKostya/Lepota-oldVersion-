@@ -5,6 +5,8 @@ import './Styles/SignIn.css'
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import { complatedAuth, loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices'
+
 
 interface ILogInProps{
     setRegistr: React.Dispatch<React.SetStateAction<boolean>>
@@ -24,7 +26,7 @@ export default function LogIn(props:ILogInProps) {
     const dispatch = useDispatch();
 
     const onSubmit:SubmitHandler<ILoginData> = data =>{
-        dispatch({ type: 'LOADING_IS_UNCOMPLETED' });
+        dispatch(loadingUncomplate());
         axios.defaults.withCredentials = true;
         axios.post('https://api.native-flora.tk/Auth/Login', {
             'username': data.login,
@@ -33,17 +35,19 @@ export default function LogIn(props:ILogInProps) {
         .then(res => { 
             localStorage.setItem('accessToken', res.data.data);
             setButtonStatus('Перейти на главную');
-            dispatch({ type: 'LOADING_IS_COMPLETED' });
+            dispatch(loadingComplate());
+            dispatch(complatedAuth());
             reset()
         })
         .catch(err=>{
             err.response.status === 400 && setErrorMessage('Вы ввели неправильный пароль !')
             setTimeout(()=>setErrorMessage(''), 3000);
-            dispatch({ type: 'LOADING_IS_COMPLETED' });
+            dispatch(loadingComplate());
         })
     }
 
-    const {setRegistr} = props;
+    const { setRegistr } = props;
+
     return (
         <div className='containerForSignIn'>
             <div className='signIn'>

@@ -4,6 +4,7 @@ import { CloseEyeIcons, OpenEyeIcons } from '../Icons/EyesIcons'
 import './Styles/SignUp.css'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
+import { complatedAuth} from '../ReduxToolkit/Slices'
 
 interface ISignUpProps{
     setRegistr: React.Dispatch<React.SetStateAction<boolean>>
@@ -25,7 +26,6 @@ export default function SignUp(props:ISignUpProps) {
     const dispatch = useDispatch();
 
     const onSubmit:SubmitHandler<ISignUpData> = data =>{
-      console.log(data);
       axios.defaults.withCredentials = true;
         axios
           .post('https://api.native-flora.tk/Auth/Register', 
@@ -34,7 +34,7 @@ export default function SignUp(props:ISignUpProps) {
                  'password': data.password
               })
           .then(() =>{
-                dispatch({ type: 'COMPLETED_AUTHORIZATION'});
+                dispatch(complatedAuth());
                 reset()
             })
           .catch(err=>{
@@ -45,9 +45,9 @@ export default function SignUp(props:ISignUpProps) {
           })
     }
 
-    const {setRegistr} = props;
+    const { setRegistr } = props;
+
     return (
-    // <div onClick={()=>setRegistr(true)}>LogIn</div>
         <div className='containerForSignUp'>
             <div className='signUp'>
             <h1>Войти</h1>

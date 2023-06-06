@@ -59,11 +59,18 @@
 }
 .check label{
     width: 100%;
+    margin: 5px 0;
 }
 label p{
-    margin: 0 0 7px 0;
+    margin: 0 0 5px 0;
     padding: 0;
     font-size: small;
+}
+.requiredField{
+    color: red;
+    font-size: 10px;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 /*Multy label Adress and Post Index*/
 .adressPostIndex{
@@ -87,14 +94,15 @@ label p{
     border-radius: 5px;
     border: 1px solid black;
     padding: 5px;
-    margin: 0 0 5px 0;
+    margin: 0 0 0px 0;
 }
-.check .btnField{
+.btnField{
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 20px;
 }
 .btnField .makeBTN{
     width: 80%;

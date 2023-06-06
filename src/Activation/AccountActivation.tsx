@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom'
 import ErrorModal from '../Modals/ErrorModal';
 import './Styles/AccountActivation.css'
+import { IInitialState } from '../ReduxToolkit/Interfaces';
+import { loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices'
 
 //Success request
 interface QuestionResponseI{
@@ -27,14 +29,14 @@ interface ResponseI{
 export default function AccountActivation() {
     const [link, setLink]  = useSearchParams();
     
-    const isLoading = useSelector<any>(state=>state.isLoading);
+    const isLoading = useSelector((state:IInitialState)=>state.isLoading);
     const dispatch = useDispatch()
     
-    const [errorMessage, setErrorMessage] = useState<String>('');
+    const [errorMessage, setErrorMessage] = useState<string>('');
 
     //activate account
     const activationFunction = ():void => {
-      dispatch({type: 'LOADING_IS_UNCOMPLETED'})
+      dispatch(loadingUncomplate());
       axios.defaults.withCredentials = true;
       axios.post<QuestionResponseI>(`https://api.native-flora.tk/Auth/Activate/${link.get('id')}`)
       .then(res=>{
@@ -48,7 +50,7 @@ export default function AccountActivation() {
               ? setErrorMessage('Такого пользователя не существует!')
                 : setErrorMessage('Что-то пошло не так! Проверьте подключение к интернету')
               })
-      dispatch({type: 'LOADING_IS_COMPLETED'})
+      dispatch(loadingComplate())
     }
 
     useEffect(()=>{

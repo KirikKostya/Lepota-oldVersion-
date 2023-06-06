@@ -3,11 +3,13 @@ import MainBasketField from './MainBasketField'
 import UpNavigation from '../Components/UpNavigation'
 import ContactWithUs from '../Components/ContactWithUs'
 import Check from './Check'
-import { refreshFunction } from '../MailFiles/App'
+import { refreshFunction } from '../MainFiles/App'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 import './Styles/MyBasket.css'
 import { ICartItem } from '../Admin/Update/Interfaces/Interface'
+import { loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices'
+
 
 export default function MyBasket() {
 
@@ -17,6 +19,7 @@ export default function MyBasket() {
 
   //takes all carts from basket-API
   const requestBasketFunc = async () => {
+    dispatch(loadingUncomplate())
     await axios.post('https://api.native-flora.tk/Cart/All', {}, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
@@ -26,12 +29,11 @@ export default function MyBasket() {
       } else {
         setItemsInBasket(res.data.data.cartItems)
       }
-      dispatch({type: 'LOADING_IS_COMPLETED'})
+      dispatch(loadingComplate())
     })
   }
 
   useEffect(()=>{
-    dispatch({type: 'LOADING_IS_UNCOMPLETED'})
     refreshFunction(dispatch, requestBasketFunc)
     window.scrollTo(0, 0)
   }, [])

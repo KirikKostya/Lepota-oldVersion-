@@ -2,12 +2,13 @@ import React from 'react';
 import SingleSelect from '../DropDowns/SingleSelect';
 import { SortByDate, SortByDileverStatus, SortByDileverType } from '../DropDowns/OptionList';
 import { useDispatch, useSelector } from 'react-redux';
-import { refreshFunction } from '../MailFiles/App'
+import { refreshFunction } from '../MainFiles/App'
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import './Styles/OrdersArchive.css';
 import { IOrderArchiveType } from '../Admin/Update/Interfaces/Interface';
-import { AllParamsI } from '../index.js';
+import { IInitialState } from '../ReduxToolkit/Interfaces';
+import { loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices'
 
 interface IListOfArchiveProps{
   LIST: IOrderArchiveType[], 
@@ -23,7 +24,7 @@ export default function ListOfArchive(props:IListOfArchiveProps) {
 
   const { LIST, setList } = props;
 
-  const isLoading = useSelector((state:AllParamsI)=>state.isLoading);
+  const isLoading = useSelector((state:IInitialState)=>state.isLoading);
   const dispatch = useDispatch();
 
   //sorts data by date
@@ -68,18 +69,18 @@ export default function ListOfArchive(props:IListOfArchiveProps) {
 
   //sorts list of archive by data
   const filterArchive = async (metric:IFilterData) => {
-    dispatch({type: 'LOADING_IS_UNCOMPLETED'});
+    dispatch(loadingUncomplate());
     await axios.get('https://api.native-flora.tk/Order/All', {
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
-    .then(async res=>{
+    .then(async (res)=>{
       let dateFiltered = await sortDate(res.data.data, metric);
       let typeFiltered = await filterByType(dateFiltered, metric);
       let statusFiltered = await filterByStatus(typeFiltered, metric);
       setList(statusFiltered);
     })
     .catch(err=>console.log(err))
-    dispatch({type: 'LOADING_IS_COMPLETED'})
+    dispatch(loadingComplate())
   } 
 
   //on page writting status of delivering

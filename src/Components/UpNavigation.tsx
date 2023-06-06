@@ -1,33 +1,34 @@
 import React, { useState, useEffect } from 'react'
 import MyAccount from '../MyAccountComponents/MyAccount'
 import { useDispatch, useSelector } from 'react-redux';
-import { refreshFunction } from '../MailFiles/App'
+import { refreshFunction } from '../MainFiles/App'
 import { NavLink } from 'react-router-dom';
 import { Link } from 'react-scroll';
 import MyAccountIcon from '../Icons/MyAccountIcon';
 import SignInIcon from '../Icons/SignInIcon';
 import axios from 'axios';
 import './Styles/UpNavigation.css'
-import { AllParamsI } from '..';
+import { IInitialState } from '../ReduxToolkit/Interfaces';
+import { closeAccount, openAccount, setCountOfOrder } from '../ReduxToolkit/Slices'
 
 interface IUpNavProps{
   hide: string 
 }
 export default function UpNavigation( props: IUpNavProps) {
   
-  const {hide} = props
+  const { hide } = props
   
   const [openHamburgerMenu, setOpenHamburgerMenu] = useState<string>('close');
   
-  const isAuthorizate = useSelector((state:AllParamsI)=>state.isAuthorizate);
-  const myAccountIsOpen = useSelector((state:AllParamsI)=>state.myAccountIsOpen);
+  const isAuthorizate = useSelector((state:IInitialState)=>state.isAuthorizate);
+  const myAccountIsOpen = useSelector((state:IInitialState)=>state.myAccountIsOpen);
   const dispatch = useDispatch();
   
   const getCountOfOrder = ():void => {
     axios.post( 'https://api.native-flora.tk/Cart/Count', {}, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
-    .then(res => dispatch({type: 'SET_COUNT_OF_ORDERS', payload: res.data.data}))
+    .then(res => dispatch(setCountOfOrder(res.data.data)))
   }
 
   return (
@@ -38,8 +39,8 @@ export default function UpNavigation( props: IUpNavProps) {
             ? <MyAccountIcon 
                 onClick={()=>{
                   myAccountIsOpen
-                    ? dispatch({type: 'CLOSE_MY_ACCOUNT'}) 
-                      : dispatch({type: 'OPEN_MY_ACCOUNT'}) 
+                    ? dispatch(dispatch(closeAccount())) 
+                      : dispatch(openAccount()) 
                   refreshFunction(dispatch, getCountOfOrder)
                 }} 
               />

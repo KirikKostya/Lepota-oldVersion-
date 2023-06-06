@@ -10,11 +10,12 @@ import CrossIcon from '../Icons/CrossIcon';
 import Pensil from '../Icons/Pensil';
 import { deleteVariant } from '../Admin/AdmineController';
 import { useDispatch, useSelector } from 'react-redux';
-import { refreshFunction } from '../MailFiles/App'
+import { refreshFunction } from '../MainFiles/App'
 import axios from 'axios';
 import './Style/OrderCard.css';
-import { IKits, IOrderCarsProps, IVariant } from '../Admin/Update/Interfaces/Interface';
-import { AllParamsI } from '..';
+import { IOrderCarsProps, IVariant } from '../Admin/Update/Interfaces/Interface';
+import { IInitialState } from '../ReduxToolkit/Interfaces';
+import { setTotalSum, setVariantId } from '../ReduxToolkit/Slices'
 
 
 interface IGalleryItem{
@@ -48,9 +49,9 @@ export default function OrderCard(props: IOrderCarsProps) {
     const refCount = useRef(null);
 
     //context
-    const totalSum_TypeComp = useSelector((state: AllParamsI)=>state.totalSum_TypeComp);
-    const searchOrderById = useSelector((state: AllParamsI)=>state.searchOrderById);
-    const isAdmin = useSelector((state: AllParamsI)=>state.isAdmin);
+    const totalSum_TypeComp = useSelector((state: IInitialState)=>state.totalSumInConstuctor);
+    const searchOrderById = useSelector((state: IInitialState)=>state.searchOrderById);
+    const isAdmine = useSelector((state: IInitialState)=>state.isAdmine);
     const dispatch = useDispatch();
 
     const [error, setError] = useState<string>('');
@@ -101,7 +102,7 @@ export default function OrderCard(props: IOrderCarsProps) {
       for (let i = 0; i < refInp.current.length; i++) {
         refInp.current[i].checked = false;
       }
-        dispatch({type: 'SET_TOTAL_SUM_TYPE-COMP', payload: JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')||'{}').price })
+        dispatch(setTotalSum(JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')||'{}').price));
         setListOfPhotos(JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')||'{}').icon)
         refCount.current.value = 1;
         setNameOfKit('Нет комплекта')
@@ -124,7 +125,7 @@ export default function OrderCard(props: IOrderCarsProps) {
       if(kits.length > 1){
         catalogOrders[0].kits.forEach(kit=>{
           if(JSON.stringify(kit.variants) === JSON.stringify(kits.sort((a, b) => a - b ))){
-            dispatch({type: 'SET_TOTAL_SUM_TYPE-COMP', payload: kit.price});
+            dispatch(setTotalSum(kit.price));
             setListOfPhotos(kit.icon);
             setNameOfKit(kit.name);
           }
@@ -132,13 +133,13 @@ export default function OrderCard(props: IOrderCarsProps) {
       } else if(kits.length === 1){
         catalogOrders[0].variants.forEach(example=>{
           if(+example.id === kits[0]){
-            dispatch({type: 'SET_TOTAL_SUM_TYPE-COMP', payload: example.price});
+            dispatch(setTotalSum(+example.price));
             setListOfPhotos(example.icon)
             setNameOfKit(example.name);
           }
         })
       } else {
-          dispatch({type: 'SET_TOTAL_SUM_TYPE-COMP', payload: JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')||'{}').price})
+          dispatch(setTotalSum(JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')||'{}').price))
           setListOfPhotos(JSON.parse(localStorage.getItem('infoAboutTypeOfOrder')||'{}').icon)
           setNameOfKit('Нет комплекта')
       }
@@ -168,7 +169,7 @@ export default function OrderCard(props: IOrderCarsProps) {
         <div className='additionalMetrics'>
           <div className={`listOfMitrics ${variants.length===0 && 'empty'}`}>
             <h3 className='headerMetrics'>
-              { isAdmin && <AddVariantIcon onClick={()=>setIsOpenAddedVariantModal(true)} /> }
+              { isAdmine && <AddVariantIcon onClick={()=>setIsOpenAddedVariantModal(true)} /> }
               В комплекте может идти:
             </h3>
             <div className='cointainerTC ' >
@@ -194,17 +195,17 @@ export default function OrderCard(props: IOrderCarsProps) {
                               setImagesOfVariant(getImages(item.icon))
                             }} />
                           { 
-                            isAdmin 
+                            isAdmine 
                               && 
                             <Pensil 
                               onClick={async()=>{
-                                dispatch({type: 'SET_VARIANT_ID', payload: item.id});
+                                dispatch(setVariantId(+item.id));
                                 setIsOpenUpdateVariant(true)
                               }} 
                             /> 
                           }
                           {
-                            isAdmin 
+                            isAdmine 
                             && 
                             <CrossIcon onClick={async()=>{
                               deleteVariant(localStorage.getItem('searchOrderById')||'{}', item.id, dispatch);
