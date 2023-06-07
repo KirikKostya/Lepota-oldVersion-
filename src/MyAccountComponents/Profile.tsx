@@ -127,7 +127,6 @@ export default function Profile() {
   useEffect(()=>{
     refreshFunction(dispatch, ()=>getPersonalDate(dispatch, setAllDataAboutUser));
     window.scrollTo(0, 0);
-    console.log(isAdmine)
   }, [])
   
   return (

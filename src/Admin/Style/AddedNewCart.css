@@ -143,6 +143,16 @@
     border: 1.5px solid black;
     border-radius: 5px;
     padding: 0 15px;
+}
+.nameContainer .nameField{
+    margin: 0 15px 10px 20px;
+}
+.nameContainer .message{
+    padding: 0 0 10px 20px !important;
+}
+.priceContainer .fullPriceField{
+    display: flex;
+    align-items: center;
     margin: 0 15px 20px 20px;
 }
 /**/
@@ -175,18 +185,17 @@
     height: 22.5px;
     outline: none;
 }
-.metricCart .deleteMetricBtnField{
+.deleteMetricBtnField{
     width: 100%;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     background: transparent;
     border: none;
-
 }
-.metricCart .deleteMetricBtn{
+.deleteMetricBtn{
     width: 90%;
-    height: 22.5px;
+    height: 25px;
     font-family: 'Montserrat-Medium';
     font-size: 12pt;
     color: aliceblue;
@@ -194,7 +203,7 @@
     border: none;
     border-radius: 7px;
     margin: 10px 0;
-    padding: 1.5px 0;
+    padding: 1.5px;
 }
 
 /**/

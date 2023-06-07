@@ -148,124 +148,128 @@ export default function OrderCard(props: IOrderCarsProps) {
     useEffect(()=>fetchProducts(searchOrderById), [catalogOrders]);
 
   return (
-    catalogOrders.map(order =>(
-      <div className='mainContainer' key={order.item.id}>
-        <div className='containerForCards'>
-          <div className='item-Card'> 
-            <SimpleImageSlider
-              width={380}
-              height={330}
-              navSize={25}
-              navMargin={0}
-              style={{background: 'transparent'}}
-              navStyle={2}
-              slideDuration={0.7}
-              images={getImages(order.item.icon)}
-              showBullets={false}
-              showNavs={true}
-            />
-          </div>
-        </div>
-        <div className='additionalMetrics'>
-          <div className={`listOfMitrics ${variants.length===0 && 'empty'}`}>
-            <h3 className='headerMetrics'>
-              { isAdmine && <AddVariantIcon onClick={()=>setIsOpenAddedVariantModal(true)} /> }
-              В комплекте может идти:
-            </h3>
-            <div className='cointainerTC ' >
+    <>
+      {
+        catalogOrders.map(order => (
+          <div className='mainContainer' key={order.item.id}>
+            <div className='containerForCards'>
+              <div className='item-Card'> 
+                <SimpleImageSlider
+                  width={380}
+                  height={330}
+                  navSize={25}
+                  navMargin={0}
+                  style={{background: 'transparent'}}
+                  navStyle={2}
+                  slideDuration={0.7}
+                  images={getImages(order.item.icon)}
+                  showBullets={false}
+                  showNavs={true}
+                />
+              </div>
+            </div>
+            <div className='additionalMetrics'>
+              <div className={`listOfMitrics ${variants.length===0 && 'empty'}`}>
+                <h3 className='headerMetrics'>
+                  { isAdmine && <AddVariantIcon onClick={()=>setIsOpenAddedVariantModal(true)} /> }
+                  В комплекте может идти:
+                </h3>
+                <div className='cointainerTC ' >
+                  {
+                    variants.length === 0 
+                      ? <span style={{display: 'block', width: '100%', textAlign: 'center'}}>Нет комбинированных вариантов</span>
+                        : variants.sort((a:IVariant, b:IVariant)=>(+a.id)-(+b.id)).map((item, index)=>(
+                            <div key={item.id} className='itemOfMetrics' >
+                              <label
+                                className='metricLabel' 
+                                onChange={(e: any)=>{
+                                  console.log(refInput)
+                                  handlerChangeTotalSum(e.target.checked, +item.id, item);
+                                }}>
+                                  <input ref={(element:HTMLInputElement) => refInput.current[index] = element } type={'checkbox'} className='checkBox' />
+                                  <span>+</span>
+                                  <p id='variantName'>{item.name} </p>
+                                  <p className='item-price'>{item.price} BYN</p>
+                              </label>
+                              <OrderCardMoreImgs 
+                                onClick={()=>{
+                                  setIsOpenVariantPhotos(true);
+                                  setImagesOfVariant(getImages(item.icon))
+                                }} />
+                              { 
+                                isAdmine 
+                                  && 
+                                <Pensil 
+                                  onClick={async()=>{
+                                    dispatch(setVariantId(+item.id));
+                                    setIsOpenUpdateVariant(true)
+                                  }} 
+                                /> 
+                              }
+                              {
+                                isAdmine 
+                                && 
+                                <CrossIcon onClick={async()=>{
+                                  deleteVariant(localStorage.getItem('searchOrderById')||'{}', item.id, dispatch);
+                                  fetchProducts(searchOrderById)
+                                }}/>
+                              }
+                            </div>
+                          ))
+                  }
+                </div>
+                {
+                  kits.length>=2
+                  &&
+                  <button className='addKitBTN' onClick={()=>setIsOpenCreateKitModal(true)}>Создать набор</button>
+                }
+                {
+                  error && <sup style={{color: 'red'}}>{error}</sup>
+                }
+              </div>
               {
-                variants.length === 0 
-                  ? <span style={{display: 'block', width: '100%', textAlign: 'center'}}>Нет комбинированных вариантов</span>
-                    : variants.sort((a:IVariant, b:IVariant)=>(+a.id)-(+b.id)).map((item, index)=>(
-                        <div key={item.id} className='itemOfMetrics' >
-                          <label
-                            className='metricLabel' 
-                            onChange={(e: any)=>{
-                              console.log(refInput)
-                              handlerChangeTotalSum(e.target.checked, +item.id, item);
-                            }}>
-                              <input ref={(element:HTMLInputElement) => refInput.current[index] = element } type={'checkbox'} className='checkBox' />
-                              <span>+</span>
-                              <p id='variantName'>{item.name} </p>
-                              <p className='item-price'>{item.price} BYN</p>
-                          </label>
-                          <OrderCardMoreImgs 
-                            onClick={()=>{
-                              setIsOpenVariantPhotos(true);
-                              setImagesOfVariant(getImages(item.icon))
-                            }} />
-                          { 
-                            isAdmine 
-                              && 
-                            <Pensil 
-                              onClick={async()=>{
-                                dispatch(setVariantId(+item.id));
-                                setIsOpenUpdateVariant(true)
-                              }} 
-                            /> 
-                          }
-                          {
-                            isAdmine 
-                            && 
-                            <CrossIcon onClick={async()=>{
-                              deleteVariant(localStorage.getItem('searchOrderById')||'{}', item.id, dispatch);
-                              fetchProducts(searchOrderById)
-                            }}/>
-                          }
-                        </div>
-                      ))
+                catalogOrders.map(order=>(
+                  <div className='containerForHeader_Button' key={order.item.id}>
+                    <h3 className='headerCard'>
+                      {order.item.name} 
+                      <span className='nameOfKit'>{`( ${nameOfKit} )`}</span>
+                      <input 
+                        ref={refCount}
+                        type={'number'} 
+                        className='amountInput'
+                        onChange={(e)=> setAmountOfOrder(+e.target.value)}
+                        defaultValue={amountOfOrder}
+                        min={0}
+                      />
+                      <span>{totalSum_TypeComp} Br</span>
+                      <OrderCardMoreImgs 
+                        onClick={()=>{
+                          setIsOpenVariantPhotos(true);
+                          setImagesOfVariant(getImages(listOfPhotos))
+                        }} />
+                    </h3>
+                    <button className={`addToCartBTN ${amountOfOrder === 0 ? 'disabled' : ''}`}
+                            disabled={amountOfOrder === 0}
+                            onClick={async ()=>{
+                              localStorage.getItem('accessToken')
+                                ? addItemToCart(order.item.id)
+                                  : setWarningMessageIsOpen(true)
+                              refreshFunction(dispatch,()=>{}) //Fetch to refresh Token
+                            }}
+                      >
+                        В корзину
+                      <BasketIcon />     
+                    </button>
+                  </div>
+                ))
               }
             </div>
-            {
-              kits.length>=2
-              &&
-              <button className='addKitBTN' onClick={()=>setIsOpenCreateKitModal(true)}>Создать набор</button>
-            }
-            {
-              error && <sup style={{color: 'red'}}>{error}</sup>
-            }
+            <CreateKitModal isOpen={isOpenCreateKitModal} setIsOpen={setIsOpenCreateKitModal} kitVariants={kits} itemId={searchOrderById} selectedVariants={selectedVariants}/>
+            <CreateVariantModal isOpen={isOpenAddedVariantModal} setIsOpen={setIsOpenAddedVariantModal} setError={setError} cleanSelectedOptions={()=>cleanSelectedOptions(refInput, refCount)}/>
+            <VariantPhotosModal isOpen={isOpenVarintPhotos} setIsOpen={setIsOpenVariantPhotos} IMGS={imagesOfVariant} />
           </div>
-          {
-            catalogOrders.map(order=>(
-              <div className='containerForHeader_Button' key={order.item.id}>
-                <h3 className='headerCard'>
-                  {order.item.name} 
-                  <span className='nameOfKit'>{`( ${nameOfKit} )`}</span>
-                  <input 
-                    ref={refCount}
-                    type={'number'} 
-                    className='amountInput'
-                    onChange={(e)=> setAmountOfOrder(+e.target.value)}
-                    defaultValue={amountOfOrder}
-                    min={0}
-                  />
-                  <span>{totalSum_TypeComp} Br</span>
-                  <OrderCardMoreImgs 
-                    onClick={()=>{
-                      setIsOpenVariantPhotos(true);
-                      setImagesOfVariant(getImages(listOfPhotos))
-                    }} />
-                </h3>
-                <button className={`addToCartBTN ${amountOfOrder === 0 ? 'disabled' : ''}`}
-                        disabled={amountOfOrder === 0}
-                        onClick={async ()=>{
-                          localStorage.getItem('accessToken')
-                            ? addItemToCart(order.item.id)
-                              : setWarningMessageIsOpen(true)
-                          refreshFunction(dispatch,()=>{}) //Fetch to refresh Token
-                        }}
-                  >
-                    В корзину
-                  <BasketIcon />     
-                </button>
-              </div>
-            ))
-          }
-        </div>
-        <CreateKitModal isOpen={isOpenCreateKitModal} setIsOpen={setIsOpenCreateKitModal} kitVariants={kits} itemId={searchOrderById} selectedVariants={selectedVariants}/>
-        <CreateVariantModal isOpen={isOpenAddedVariantModal} setIsOpen={setIsOpenAddedVariantModal} setError={setError} cleanSelectedOptions={()=>cleanSelectedOptions(refInput, refCount)}/>
-        <VariantPhotosModal isOpen={isOpenVarintPhotos} setIsOpen={setIsOpenVariantPhotos} IMGS={imagesOfVariant} />
-      </div>
-      ))
+        ))
+      }
+    </>
   )
 }

@@ -20,6 +20,7 @@ import './Style/TypeCatalog.css'
 import { ICard, IItemOfWork, IOpenUpdateMetric, IVariant } from '../Admin/Update/Interfaces/Interface';
 import { IInitialState } from '../ReduxToolkit/Interfaces';
 import { loadingComplate, setTotalSum } from '../ReduxToolkit/Slices'
+import FullCombinationOfItemById from './FullCombinationOfItemById';
 
 
 export default function TypeCatalog() {
@@ -58,7 +59,7 @@ export default function TypeCatalog() {
       .then(res=>{
         setCatalogOrders([res.data.data]);
         setPhotosOfCards(res.data.data.item.icon);
-        localStorage.setItem('variants', JSON.stringify(res.data.data.variants));
+        isAdmine && localStorage.setItem('variants', JSON.stringify(res.data.data.variants));
         dispatch(setTotalSum(res.data.data.item.price));
         dispatch(loadingComplate());
         return res;
@@ -87,54 +88,57 @@ export default function TypeCatalog() {
           </h1>
           <div className='descriptionMetrics'>
             {
-              [order.sizes].map((item, index)=>(
-                <div className='orderMatrics' key={index}>
-                  <p className={`metricItem ${checkMetric(item.Material)}`}>
-                    Материал: <span>
-                                {`${item.Material} ${getUnit('Material')}`}
-                              </span>
-                        <sup>{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Material'})}/> }</sup>
-                  </p>
-                  <p className={`metricItem ${checkMetric(item.Width)}`}>
-                    Ширина: <span>
-                              {`${item.Width} ${getUnit('Width')}`}
-                            </span>
-                      <sup>{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Width'})}/> }</sup>
-                  </p>
-                  <p className={`metricItem ${checkMetric(item.Height)}`}>
-                    Высота: <span>
-                              {`${item.Height} ${getUnit('Height')}`}
-                            </span>
-                      <sup>{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Height'})}/> }</sup>
-                  </p>
-                  <p className={`metricItem ${checkMetric(item.Depth)}`}>
-                    Глубина: <span>
-                              {`${item.Depth} ${getUnit('Depth')}`}
-                            </span>
-                      <sup>{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Depth'})}/> }</sup>
-                  </p>
-                  <p className={`metricItem ${checkMetric(item.Length)}`}>
-                    Длина: <span>
-                              {`${item.Length} ${getUnit('Length')}`}
-                            </span>
-                      <sup>{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Length'})}/> }</sup>
-                  </p>
-                  <p className={`metricItem ${checkMetric(item.Diameter)}`}>
-                    Диаметр: <span>
-                              {`${item.Diameter} ${getUnit('Diameter')}`}
-                            </span>
-                      <sup>{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Diameter'})}/> }</sup>
-                  </p>
-                  <p className={`metricItem ${checkMetric(item.Weight)}`}>
-                    Вес: <span>
-                              {`${item.Weight} ${getUnit('Weight')}`}
-                            </span>
-                      <sup>{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Weight'})}/> }</sup>
-                  </p> 
-                </div>
-              ))
+              [order.sizes].length === 0 
+                ? <span>No sizes !</span>
+                  :
+                    [order.sizes].map((item, index)=>(
+                      <div className='orderMatrics' key={index}>
+                        <p className={`metricItem ${checkMetric(item.Material)}`}>
+                          Материал: <span>
+                                      {`${item.Material} ${getUnit('Material')}`}
+                                    </span>
+                              <sup>{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Material'})}/> }</sup>
+                        </p>
+                        <p className={`metricItem ${checkMetric(item.Width)}`}>
+                          Ширина: <span>
+                                    {`${item.Width} ${getUnit('Width')}`}
+                                  </span>
+                            <sup>{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Width'})}/> }</sup>
+                        </p>
+                        <p className={`metricItem ${checkMetric(item.Height)}`}>
+                          Высота: <span>
+                                    {`${item.Height} ${getUnit('Height')}`}
+                                  </span>
+                            <sup>{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Height'})}/> }</sup>
+                        </p>
+                        <p className={`metricItem ${checkMetric(item.Depth)}`}>
+                          Глубина: <span>
+                                    {`${item.Depth} ${getUnit('Depth')}`}
+                                  </span>
+                            <sup>{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Depth'})}/> }</sup>
+                        </p>
+                        <p className={`metricItem ${checkMetric(item.Length)}`}>
+                          Длина: <span>
+                                    {`${item.Length} ${getUnit('Length')}`}
+                                  </span>
+                            <sup>{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Length'})}/> }</sup>
+                        </p>
+                        <p className={`metricItem ${checkMetric(item.Diameter)}`}>
+                          Диаметр: <span>
+                                    {`${item.Diameter} ${getUnit('Diameter')}`}
+                                  </span>
+                            <sup>{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Diameter'})}/> }</sup>
+                        </p>
+                        <p className={`metricItem ${checkMetric(item.Weight)}`}>
+                          Вес: <span>
+                                    {`${item.Weight} ${getUnit('Weight')}`}
+                                  </span>
+                            <sup>{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateMetric({isOpen: true, value: 'Weight'})}/> }</sup>
+                        </p> 
+                      </div>
+                    ))
             }
-            <span>{order.description}{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateDescription(true)}/> }</span>
+          <span>{order.description}{ isAdmine && <Pensil onClick={()=>setIsOpenUpdateDescription(true)}/> }</span>
           </div>
           <p className='forOrderMakes'>Для заказа: 
             <span> заполните форму в корзине заказов и отправьте Ваш оформленный заказ нам. 
@@ -162,8 +166,8 @@ export default function TypeCatalog() {
         </>
       }
       {
-        localStorage.getItem('variants') && isAdmine
-        &&
+        JSON.parse(localStorage.getItem('variants') || '[]').length != 0
+        && 
         <UpdateVariant isOpen={isOpenUpdateVariant} variant={JSON.parse(localStorage.getItem('variants')||'{}').filter((el:IVariant)=>+el.id == variantId)[0]} setIsOpen={setIsOpenUpdateVariant} />
       }
       <div className='containerForTypeCatalog'>
@@ -177,7 +181,7 @@ export default function TypeCatalog() {
                       setAddedOrder={setAddedOrder}
                       setModalView={setModalView}
                       fetchProducts={fetchProducts}
-                      variants={JSON.parse(localStorage.getItem('variants')||'{}')}
+                      variants={JSON.parse(localStorage.getItem('variants')||'[]')}
                       setIsOpenUpdateVariant={setIsOpenUpdateVariant}
                     />
                     {
@@ -202,6 +206,7 @@ export default function TypeCatalog() {
                     }
                 </>
         }
+        {/* <FullCombinationOfItemById id={JSON.parse(localStorage.getItem('searchOrderById') || '')}/> */}
       </div>
       <ContactWithUs />
     </>

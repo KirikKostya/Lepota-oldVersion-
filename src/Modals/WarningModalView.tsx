@@ -3,8 +3,11 @@ import ReactModal from 'react-modal'
 import { NavLink } from 'react-router-dom'
 import './Styles/WarningModalView.css'
 
-export default function WarningModalView( warningMessageIsOpen: boolean) {
-     
+interface IWarningModalViewProps{
+  warningMessageIsOpen: boolean
+}
+export default function WarningModalView(props:IWarningModalViewProps) {
+    const {warningMessageIsOpen} = props
   return (
     <ReactModal 
       isOpen={warningMessageIsOpen}

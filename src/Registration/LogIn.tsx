@@ -73,7 +73,7 @@ export default function LogIn(props:ILogInProps) {
                     <input 
                         className='input' 
                         placeholder='Password' 
-                        type='password' 
+                        type={`${closeEyesStatus ? 'password' : 'text'}`} 
                         autoComplete='off'
                         {...register('password', 
                             {

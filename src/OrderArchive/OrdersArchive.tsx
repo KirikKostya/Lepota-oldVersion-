@@ -35,7 +35,6 @@ export default function OrdersArchive() {
   }
 
   const renderListOfArchiveElements = useMemo(()=>{
-    console.log('useMemo works !');
     return(
       <ListOfArchive LIST={listOfOrdersInArchive} setList={setListOfOrdersInArchive} />
     )

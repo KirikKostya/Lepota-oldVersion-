@@ -4,7 +4,7 @@ import { refreshFunction } from '../MainFiles/App'
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { ICartItem, IProfile } from '../Admin/Update/Interfaces/Interface';
-import { RegisterOptions, SubmitHandler, useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 interface ICheckProps{
     ItemsInBasket:ICartItem[], 

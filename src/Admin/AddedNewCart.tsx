@@ -9,9 +9,10 @@ import Picker from './Picker';
 import axios from 'axios';
 import './Style/AddedNewCart.css'
 import { loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 //gets value of metric by metric name
-export const getValueByMetricName = (selectedOptions:Array<ISelectOption>, type:string) => {
+export const getValueByMetricName = (selectedOptions:ISelectOption[], type:string) => {
     for(let i=0; i<selectedOptions.length; i++){
         if(selectedOptions[i].metric === 'Материалы' && type === 'Material'){
             return selectedOptions[i].value
@@ -27,25 +28,31 @@ export const getValueByMetricName = (selectedOptions:Array<ISelectOption>, type:
             return selectedOptions[i].value
         } else if(selectedOptions[i].metric === 'Вес' && type === 'Weight'){
             return selectedOptions[i].value
+        } else {
+            return null
         }
     } 
 }
 
+interface INewItem{
+    name: string
+    price: string
+}
+
 export default function AddedNewCart(){
     
-    const [photos, setPhotos] = useState<Array<string>>([]);
-    const [description, setDescription] = useState<string>('');
-    const [name, setName] = useState<string>('');
-    const [price, setPrice] = useState<string>('');
+    const [photos, setPhotos] = useState<string[]>([]);
+    const [description, setDesctiption] = useState<string>('');
 
     const [metricsListStep, setMetricsListStep] = useState<string[]>([]);
     const [selectedOptions, setSelectedOptions] = useState<ISelectOption[]>([]);
 
+    const { register, handleSubmit, reset, resetField, formState: {errors} } = useForm<INewItem>();
     const dispatch = useDispatch()
 
     //filter option on select
-    const filter = (optionList:Array<IOption>, selectedList:Array<ISelectOption>) => {
-        let newArray:Array<IOption> = [...optionList];
+    const filter = (optionList:IOption[], selectedList:ISelectOption[]):IOption[] => {
+        let newArray:IOption[] = [...optionList];
         for(let i=0; i<selectedList.length; i++){
             newArray = [...newArray.filter(el=> el.value !== selectedList[i].metric)]
         }
@@ -53,7 +60,7 @@ export default function AddedNewCart(){
     }
 
     //adds scroll to photo list 
-    const makeScroll = () => {
+    const makeScroll = ():string => {
         return (window.innerWidth > 724 && photos.length >= 7) 
                 || 
                 (window.innerWidth <= 724 && photos.length >= 3) 
@@ -61,40 +68,39 @@ export default function AddedNewCart(){
                         : 'none'
     }
 
-    //request to add product in catalog
-    const addProductInCatalog = () => {
-        dispatch(loadingUncomplate());
-        axios.post('https://api.native-flora.tk/Item/Add', {
-                "name": name,
-                "description": description.split('.'),
-                "price": +price,
-                "icon": photos,
-                "sizes": {
-                    "Material": getValueByMetricName(selectedOptions, "Material"),
-                    "Weight": getValueByMetricName(selectedOptions, "Weight"),
-                    "Height": getValueByMetricName(selectedOptions, "Height"),
-                    "Depth": getValueByMetricName(selectedOptions, "Depth"),
-                    "Diameter": getValueByMetricName(selectedOptions, "Diameter"),
-                    "Width":  getValueByMetricName(selectedOptions, "Width"),
-                    "Length": getValueByMetricName(selectedOptions, "Length"),
+    const onSubmit: SubmitHandler<INewItem> = (data) => {
+        refreshFunction(dispatch, ()=>{
+            dispatch(loadingUncomplate());
+            axios.post('https://api.native-flora.tk/Item/Add', {
+                    "name": data.name,
+                    "description": description,
+                    "price": +data.price,
+                    "icon": photos,
+                    "sizes": {
+                        "Depth": getValueByMetricName(selectedOptions, "Depth"),
+                        "Diameter": getValueByMetricName(selectedOptions, "Diameter"),
+                        "Height": getValueByMetricName(selectedOptions, "Height"),
+                        "Length": getValueByMetricName(selectedOptions, "Length"),
+                        "Material": getValueByMetricName(selectedOptions, "Material"),
+                        "Weight": getValueByMetricName(selectedOptions, "Weight"),
+                        "Width":  getValueByMetricName(selectedOptions, "Width"),
+                    }
+            }, {
+                headers:{
+                    'x-access-token': localStorage.getItem('accessToken')
                 }
-        }, {
-            headers:{
-                'x-access-token': localStorage.getItem('accessToken')
-            }
+            })
+            .then(clearAll)
+            .catch(err=>console.log(err))
+            dispatch(loadingComplate())
         })
-        .then(res=>console.log(res))
-        .catch(err=>console.log(err))
-        dispatch(loadingComplate())
     }
-
     // clears all fields
-    const clearAll = () => {
+    const clearAll = ():void => {
+        setMetricsListStep([]);
+        setDesctiption('');
         setPhotos([]);
-        setDescription('');
-        setName('');
-        setPrice('');
-        setMetricsListStep([])
+        reset();
     }
 
   return (
@@ -121,34 +127,33 @@ export default function AddedNewCart(){
                 <p>Описание:</p>
                 <textarea 
                     placeholder='Введите описание товара' 
-                    onChange={(event) => setDescription(event.target.value)}
+                    autoComplete='off'
+                    onChange={(event)=>setDesctiption(event.target.value)}
                     value={description}
                 />
             </div>
         </div>
-        <div className='metricContainerAdmine'>
+        <form className='metricContainerAdmine' onSubmit={handleSubmit(onSubmit)}>
             <div className='nameContainer'>
                 <h4>Наименование:</h4>
-                <form>
                     <input 
                         className='nameField' 
-                        placeholder='Наименование' 
-                        onChange={(event)=>setName(event.target.value)}
-                        value={name}
-                    />
-                </form>
+                        placeholder='Наименование'
+                        autoComplete='off' 
+                        {...register('name', {required: 'Обязательное поле !'})}
+                        />
+                    {errors?.name && <span className='requiredField message'>{errors.name.message}</span>}
             </div>
             <div className='priceContainer'>
                 <h4>Цена:</h4>
-                <form>
+                <div className='fullPriceField'>
                     <input 
-                        className='priceField' 
                         placeholder='10' 
-                        onChange={(event)=>setPrice(event.target.value)}
-                        value={price}
+                        autoComplete='off'
+                        { ...register('price') }
                     />
-                    <span>BYN</span>
-                </form>
+                    <span style={{height: '100%', display: 'flex', alignItems:'center', padding: '0 0 0 10px '}}>BYN</span>
+                </div>
             </div>
             <div className='metricCart'>
                 <h4>Параметры:</h4>
@@ -167,12 +172,14 @@ export default function AddedNewCart(){
                                 className='metricInput' 
                                 type={selectedOptions[index].metric === 'Материалы' ? 'text' : 'number'}
                                 min={0}
+                                step={0.1}
                                 onChange={event => {
                                     let newArray = [...selectedOptions];
                                     newArray[index] = {...newArray[index], value: event.target.value};
                                     setSelectedOptions(newArray)
                                 }}
                                 placeholder='ввод'
+                                autoComplete='off'
                             />
                             <CrossIcon 
                                 onClick={()=>{
@@ -182,25 +189,19 @@ export default function AddedNewCart(){
                         </div>
                     ))
                 }
-                <button 
+                <div 
                     className='deleteMetricBtnField'
                     onClick={():void=>{
                         setMetricsListStep([...metricsListStep, Math.random().toFixed(4)]);
-                        setSelectedOptions([...selectedOptions, {id: Math.random().toFixed(2), metric: '', value: ''}])
+                        setSelectedOptions([...selectedOptions, { id: Math.random().toFixed(2), metric: '', value: '' }])
                     }}
                     style={{display: metricsListStep.length >= 7 ? 'none' : 'block'}}
-                ><span className='deleteMetricBtn'>Добавить</span></button>
+                ><button type='button' className='deleteMetricBtn'>Добавить</button></div>
             </div>
             <div className='createCartField'>
-                <button 
-                    className='createCartBTN'
-                    onClick={()=>{
-                        refreshFunction(dispatch, addProductInCatalog);
-                        clearAll()
-                    }}
-                >Создать</button>
+                <button className='createCartBTN' >Создать</button>
             </div>
-        </div>
+        </form>
     </div>
   )
 }
