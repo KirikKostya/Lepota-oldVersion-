@@ -30,7 +30,8 @@ const exemplesOfUsed: IExample[] = [
     },
 ]
 
-export default function AboutKashpo() {
+const AboutKashpo: React.FC = () => {
+
   return (
     <div className='containerForAboutKashpo' id='aboutCashpo'>
         <h1>О Кашпо</h1>
@@ -49,3 +50,5 @@ export default function AboutKashpo() {
     </div>
   )
 }
+
+export default AboutKashpo;

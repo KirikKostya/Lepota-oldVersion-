@@ -4,12 +4,13 @@ import PositiveIconActivation from '../Icons/PositiveIconActivation'
 import NagativeIconActivation from '../Icons/NagativeIconActivation'
 import './Styles/WarningModalView.css'
 
-interface IErrorModal{
+interface IActivateModalProps{
     errorMessage: string, 
     setErrorMessage: (str: string)=>void, 
     activationFunction: ()=>void
 }
-export default function ErrorModal(props:IErrorModal) {
+
+const ActivateModal: React.FC<IActivateModalProps> = (props) => {
 
   const { errorMessage, setErrorMessage, activationFunction } = props;
 
@@ -37,3 +38,5 @@ export default function ErrorModal(props:IErrorModal) {
     </ReactModal>
   )
 }
+
+export default ActivateModal;

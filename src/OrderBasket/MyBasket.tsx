@@ -11,7 +11,7 @@ import { ICartItem } from '../Admin/Update/Interfaces/Interface'
 import { loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices'
 
 
-export default function MyBasket() {
+const MyBasket:React.FC = () => {
 
   const [ItemsInBasket, setItemsInBasket] = useState<ICartItem[]>([])
 
@@ -24,11 +24,9 @@ export default function MyBasket() {
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
     .then(res => {
-      if(!res.data.data){
-        setItemsInBasket([])
-      } else {
-        setItemsInBasket(res.data.data.cartItems)
-      }
+      !res.data.data
+        ? setItemsInBasket([])
+          : setItemsInBasket(res.data.data.cartItems)
       dispatch(loadingComplate())
     })
   }
@@ -61,3 +59,4 @@ export default function MyBasket() {
     </>
   )
 }
+export default MyBasket

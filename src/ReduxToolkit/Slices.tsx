@@ -3,7 +3,7 @@ import { IInitialState } from './Interfaces'
 
 const initialState:IInitialState = {
     isAuthorizate: Boolean(localStorage.getItem('accessToken')),
-    isAdmin: false,
+    isAdmine: false,
     isLoading: true,
     myAccountIsOpen: false,
     countOfOrders: 0,
@@ -25,7 +25,7 @@ const isAuthorizateSlice = createSlice({
 
 const isAdmineSlice = createSlice({
     name: 'isAdmine',
-    initialState: initialState.isAdmin,
+    initialState: initialState.isAdmine,
     reducers: {
         isAdmine: (state)=>state = true,
         isNotAdmine: (state)=>state = false

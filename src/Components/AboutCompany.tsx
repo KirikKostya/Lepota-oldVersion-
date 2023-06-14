@@ -1,7 +1,7 @@
 import React from 'react'
 import './Styles/AboutCompany.css'
 
-export default function AboutCompany() {
+const AboutCompany: React.FC = () => {
   return (
     <div className='aboutCompanyContainer'>
         <h1>Наше собственное производство</h1>
@@ -20,3 +20,5 @@ export default function AboutCompany() {
     </div>
   )
 }
+
+export default AboutCompany;

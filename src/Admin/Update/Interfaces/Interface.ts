@@ -22,7 +22,7 @@ export interface ISingleSelect{
 //CreateKitModal
 export interface ICreateKitProps{
     isOpen: boolean, 
-    setIsOpen: (bool: boolean)=>void, 
+    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
     kitVariants: number[], 
     itemId: number, 
     selectedVariants: IVariant[]
@@ -39,7 +39,7 @@ export interface IKit{
 //Create Variant modal
 export interface ICreateVariantProps{
     isOpen: boolean, 
-    setIsOpen: (bool: boolean)=>void, 
+    setIsOpen: React.Dispatch<React.SetStateAction<boolean>> 
     setError: (str:string)=>void, 
     cleanSelectedOptions: ()=>void
 }
@@ -56,7 +56,7 @@ export interface IVariant{
 export interface IUpdateDescriptionProps{
     isOpen: boolean, 
     defaultDescription:string, 
-    setIsOpen: (bool: boolean)=>void
+    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 //UpdateMetric
@@ -64,7 +64,7 @@ export interface IUpdateMetricProps{
     isOpen: boolean, 
     metricKey: string, 
     defaultMetricValue: string, 
-    setIsOpen: (bool: IOpenUpdateMetric)=>void
+    setIsOpen: React.Dispatch<React.SetStateAction<IOpenUpdateMetric>>
 }
 export interface IOpenUpdateMetric{
     isOpen: boolean,
@@ -74,6 +74,7 @@ export interface IOpenUpdateMetric{
 export interface IUpdateNameProps{
     isOpen: boolean, 
     defaultName:string, 
+    defaultPrice: string
     setIsOpen: (bool: boolean)=>void
 }
 
@@ -81,14 +82,14 @@ export interface IUpdateNameProps{
 export interface IUpdatePhotosProps{
     isOpen: boolean, 
     photos: string[], 
-    setIsOpen: (bool: boolean)=>void
+    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 //UpdateVariants
 export interface IUpdateVariantProps{
     isOpen: boolean, 
     variant: IVariant, 
-    setIsOpen: (bool: boolean)=>void
+    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 //TypeCatalog
@@ -101,10 +102,11 @@ export interface IItemOfWork{
 export interface ICard{
     id: number,
     name: string,
-    description: string,
+    description?: string,
     price: number,
     icon: string[],
-    sizes: ISizes
+    sizes?: ISizes,
+    variants?: number[]
 }
 export interface IKits{
     id: number,
@@ -127,13 +129,11 @@ export interface ISizes{
 
 //OrderCard
 export interface IOrderCarsProps{
-    catalogOrders: IItemOfWork[],
-    setWarningMessageIsOpen: (bool:boolean)=>void,
-    setAddedOrder: (bool:boolean)=>void,
-    setModalView: (bool:boolean)=>void,
-    fetchProducts: (num:number)=>void,
-    variants: IVariant[],
-    setIsOpenUpdateVariant: (bool:boolean)=>void
+    catalogOrders: IItemOfWork[]
+    fetchProducts: (num:number)=>void
+    variants: IVariant[]
+    setIsOpenUpdateVariant: React.Dispatch<React.SetStateAction<boolean>>
+    setIsOpenUpdatePhotos: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 //Profile

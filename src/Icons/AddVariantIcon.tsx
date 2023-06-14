@@ -1,9 +1,9 @@
 import React from 'react'
 import { IOnClick } from '../Admin/Update/Interfaces/Interface'
 
-export default function AddVariantIcon(props: IOnClick) {
+const AddVariantIcon: React.FC<IOnClick> = (props) => {
 
-  const {onClick} = props;
+  const { onClick } = props;
   
   return (
     <svg fill="none" width='20' height='20' viewBox="0 0 24 24" onClick={onClick}> 
@@ -11,3 +11,5 @@ export default function AddVariantIcon(props: IOnClick) {
     </svg>
   )
 }
+
+export default AddVariantIcon;

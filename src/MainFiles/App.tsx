@@ -12,6 +12,7 @@ import './Styles/App.css';
 import { Dispatch } from 'redux';
 import { IInitialState } from '../ReduxToolkit/Interfaces';
 import { changeRefreshTokenStatus, closeAccount} from '../ReduxToolkit/Slices'
+import WarningModalView from '../Modals/WarningModalView';
 
 export const refreshFunction = async (dispatch: Dispatch, newFunc:()=>void) => {
   try {
@@ -72,26 +73,18 @@ function App() {
       }
       <div 
         className={`app ${isLoading && 'blur'}`} 
-        onClick={()=>{
-          if(myAccountIsOpen){
-            dispatch(closeAccount())
-          }
-        }
-      }>
+        onClick={ ()=> myAccountIsOpen && dispatch(closeAccount()) }
+      >
         <Router />
-        <ReactModal 
-          ariaHideApp={false}
-          isOpen={refreshTokenIsExpired}
-        >
-          <h1 className='warningHeader'>Приветствуем !</h1>
-          <p className='warningMessage'>Вас долго не было с нами, вам необходимо повторно войти в аккаунт! </p>
+        <WarningModalView warningMessageIsOpen={refreshTokenIsExpired} header={'Приветствуем !'}>
+          <p>Вас долго не было с нами, вам необходимо повторно войти в аккаунт! </p>
           <button 
             className='modal-closeBTN' 
             onClick={()=>{
               dispatch(changeRefreshTokenStatus(false))
               signOut(dispatch)
             }}>Закрыть</button>  
-        </ReactModal>
+        </WarningModalView>
       </div>
       { !Cookies.get('cookieActivate') && <CookieAlert /> }
     </>

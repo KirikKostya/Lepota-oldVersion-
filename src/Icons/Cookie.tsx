@@ -1,6 +1,7 @@
 import React from 'react'
 
-export default function Cookie() {
+const Cookie: React.FC = () => {
+  
   return (
     <svg width="24" height="24" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" style={{margin: '0 10px 0 5px'}} > 
       <path d="M21.8 13.9999C20.8734 18.5644 16.8379 21.9999 12 21.9999C6.47715 21.9999 2 17.5228 2 11.9999C2 6.81459 5.94668 2.55104 11 2.04932" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"/> 
@@ -16,3 +17,5 @@ export default function Cookie() {
     </svg>
   )
 }
+
+export default Cookie;

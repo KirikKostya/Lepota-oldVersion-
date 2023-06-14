@@ -7,7 +7,7 @@ import { createKit } from './AdmineController';
 import { useDispatch } from 'react-redux';
 import { ICreateKitProps } from './Update/Interfaces/Interface';
 
-export default function CreateKitModal(props:ICreateKitProps) {
+const CreateKitModal: React.FC<ICreateKitProps> = (props: ICreateKitProps) => {
     
     const {isOpen, setIsOpen, kitVariants, itemId, selectedVariants} = props;
 
@@ -24,6 +24,7 @@ export default function CreateKitModal(props:ICreateKitProps) {
         alignItems: 'center', 
         justifyContent: 'center'
     }
+
   return (
     <ReactModal 
         isOpen={isOpen}
@@ -66,3 +67,5 @@ export default function CreateKitModal(props:ICreateKitProps) {
     </ReactModal>
   )
 }
+
+export default CreateKitModal;

@@ -19,13 +19,15 @@ interface IDataForOrder{
     zipCode: string
     instContact: string
 }
-export default function Check(props: ICheckProps) {
-    
-    const {ItemsInBasket, requestBasketFunc} = props;
 
-    const {register, handleSubmit, reset, formState: {errors}} = useForm<IDataForOrder>();
+const Check: React.FC<ICheckProps> = (props) => {
+    
+    const { ItemsInBasket, requestBasketFunc } = props;
+
+    const { register, handleSubmit, reset, formState: {errors} } = useForm<IDataForOrder>();
 
     const [isDisabled, setIsDisabled] = useState<boolean>(Boolean(localStorage.getItem('accessToken')));
+
     const [personalData, setPersonalData] = useState<IProfile>({
         firstName: '',
         surName: '',
@@ -39,9 +41,6 @@ export default function Check(props: ICheckProps) {
         telegram: ''
     });
 
-    const validateInput = (value:string) => {
-        return value.trim() !== ''; // Проверка на непустое значение без учета пробелов
-    };
     const [isShipping, setIsShipping] = useState<boolean>(true);
 
     const dispatch = useDispatch();
@@ -200,14 +199,10 @@ export default function Check(props: ICheckProps) {
                 >
                     Оформить заказ
                 </button>
-                {/* <span 
-                    className='autofill'
-                    onClick={fillInputs}
-                >
-                    Автозаполнение
-                </span> */}
             </div>
         </form>
     </div>
   )
 }
+
+export default Check;

@@ -5,8 +5,9 @@ import { useDispatch } from 'react-redux';
 import ReactModal from 'react-modal'
 import './Style/UpdateCSS.css'
 import { IUpdateMetricProps } from './Interfaces/Interface';
+import { FaChevronLeft } from 'react-icons/fa';
 
-export default function UpdateMetric(props: IUpdateMetricProps) {
+const UpdateMetric: React.FC<IUpdateMetricProps> = (props: IUpdateMetricProps) => {
 
     const {isOpen, metricKey, defaultMetricValue, setIsOpen} = props;
 
@@ -45,7 +46,12 @@ export default function UpdateMetric(props: IUpdateMetricProps) {
         ariaHideApp={false}
         contentLabel="Selected Option"
     >
-        <h2>Изменить параметр ({convertMetricNameToRuss(metricKey)})</h2>
+        <h2>
+            <FaChevronLeft
+                style={{width: '10px', marginRight: '10px'}} 
+                onClick={()=>setIsOpen({isOpen:false, value:''})}
+            />
+            Изменить параметр ({convertMetricNameToRuss(metricKey)})</h2>
         <input 
             className='updateInput'
             onChange={event=>setMetricValue(event.target.value)} 
@@ -58,13 +64,9 @@ export default function UpdateMetric(props: IUpdateMetricProps) {
             >
                 Изменить
             </button>
-            <p
-                onClick={()=>setIsOpen({isOpen:false, value:''})}
-                style={{margin:'0', cursor:'pointer'}}
-            >
-                закрыть
-            </p>
         </div>
     </ReactModal>
   )
 }
+
+export default UpdateMetric;

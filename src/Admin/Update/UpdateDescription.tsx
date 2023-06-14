@@ -5,8 +5,9 @@ import { refreshFunction } from '../../MainFiles/App'
 import { useDispatch } from 'react-redux';
 import ReactModal from 'react-modal';
 import './Style/UpdateCSS.css'
+import { FaChevronLeft } from 'react-icons/fa';
 
-export default function UpdateDescription(props: IUpdateDescriptionProps) {
+const UpdateDescription: React.FC<IUpdateDescriptionProps> = (props: IUpdateDescriptionProps) => {
     
     const {isOpen, defaultDescription, setIsOpen} = props;
 
@@ -24,7 +25,12 @@ export default function UpdateDescription(props: IUpdateDescriptionProps) {
         ariaHideApp={false}
         contentLabel="Selected Option"
     >
-        <h2>Изменить описание</h2>
+        <h2> 
+            <FaChevronLeft
+                style={{width: '10px', marginRight: '10px'}} 
+                onClick={()=>setIsOpen(false)}
+            />
+            Изменить описание</h2>
         <textarea 
             className='updateTextarea'
             onChange={event=>setDescription(event.target.value)} 
@@ -37,10 +43,8 @@ export default function UpdateDescription(props: IUpdateDescriptionProps) {
             >
                 Изменить
             </button>
-            <p
-             onClick={()=>setIsOpen(false)}
-             style={{margin:'0', cursor:'pointer'}}>закрыть</p>
         </div>
     </ReactModal>
   )
 }
+export default UpdateDescription;

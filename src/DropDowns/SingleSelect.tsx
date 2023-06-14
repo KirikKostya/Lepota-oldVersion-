@@ -1,10 +1,10 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import Select from "react-select";
 import { IOption, ISelectOption, ISingleSelect} from "../Admin/Update/Interfaces/Interface";
 import CheckMarkForSingleSelect from "../Icons/CheckMarkForSingleSelect";
 import "./Styles/SingleSelect.css";
 
-export default function SingleSelect(props: ISingleSelect) {
+const SingleSelect: React.FC<ISingleSelect> = (props) => {
   
   const {options, placeholder, width, index, selectedOptions, setSelectedOptions, type} = props;
   
@@ -120,3 +120,5 @@ export default function SingleSelect(props: ISingleSelect) {
     </div>
   )
 }
+
+export default SingleSelect;

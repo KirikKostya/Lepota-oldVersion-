@@ -3,9 +3,10 @@ import React from 'react'
 interface IProps{
   className: string
 }
-export default function CheckMarkForSingleSelect(props: IProps) {
+
+const CheckMarkForSingleSelect: React.FC<IProps> = (props) => {
   
-  const {className} = props;
+  const { className } = props;
 
   return (
     <svg
@@ -24,3 +25,5 @@ export default function CheckMarkForSingleSelect(props: IProps) {
       </svg>
   )
 }
+
+export default CheckMarkForSingleSelect;

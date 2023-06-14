@@ -5,21 +5,25 @@ import './Styles/WarningModalView.css'
 
 interface IWarningModalViewProps{
   warningMessageIsOpen: boolean
+  header: string
+  children?: React.ReactNode 
 }
-export default function WarningModalView(props:IWarningModalViewProps) {
-    const {warningMessageIsOpen} = props
+const WarningModalView: React.FC<IWarningModalViewProps> = (props) => {
+    
+  const {warningMessageIsOpen, header, children} = props
+
   return (
     <ReactModal 
       isOpen={warningMessageIsOpen}
       ariaHideApp={false}
       contentLabel="Selected Option"
     >
-      <h1 className='modal-header'>Внимание!</h1>
+      <h1 className='modal-header'>{header}</h1>
       <p className='modal-errorMessage'>
-        Для того чтобы добавить товар в корзину, вам необходимо 
-        <NavLink className={'linkToRegistration'} to={'/Registration'}> войти </NavLink>
-        в аккаунт!
+        {children}
       </p>
     </ReactModal>
     )
 }
+
+export default WarningModalView;

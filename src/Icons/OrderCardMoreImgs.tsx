@@ -1,9 +1,9 @@
 import React from 'react'
 import { IOnClick } from '../Admin/Update/Interfaces/Interface'
 
-export default function OrderCardMoreImgs(props: IOnClick) {
+const OrderCardMoreImgs: React.FC<IOnClick> = (props) => {
 
-  const {onClick} = props;
+  const { onClick } = props;
 
   return (
     <svg width={25} 
@@ -21,3 +21,5 @@ export default function OrderCardMoreImgs(props: IOnClick) {
     </svg>
   )
 }
+
+export default OrderCardMoreImgs;

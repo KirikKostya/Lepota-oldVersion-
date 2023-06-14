@@ -1,6 +1,7 @@
 import React from 'react'
 
-export default function PositiveIconActivation() {
+const PositiveIconActivation: React.FC = () => {
+
   return (
     <svg 
       width="60" 
@@ -10,3 +11,5 @@ export default function PositiveIconActivation() {
     </svg>
   )
 }
+
+export default PositiveIconActivation;

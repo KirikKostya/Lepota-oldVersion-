@@ -1,4 +1,10 @@
 @import url('/src/Fonts/fonts.css');
+h2{
+    min-width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
 /*update photos*/
 .listPhotos{
     width: 98%;
@@ -25,12 +31,21 @@
 }
 
 /*update name, metric*/
-.updateInput{
-    height: 20px;
+.updateName{
+    height: 22.5px;
     border: 1px solid black;
     border-radius: 5px;
     padding: 3px;
     font-family: 'Montserrat-Regular';
+}
+.updatePrice{
+    width: 70px;
+    height: 22.5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 3px;
+    font-family: 'Montserrat-Regular';
+    margin-left: 20px;
 }
 
 /*update description*/

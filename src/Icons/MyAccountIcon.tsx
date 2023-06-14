@@ -1,9 +1,9 @@
 import React from 'react'
 import { IOnClick } from '../Admin/Update/Interfaces/Interface'
 
-export default function MyAccountIcon(props: IOnClick) {
+const MyAccountIcon: React.FC<IOnClick> = (props) => {
 
-  const {onClick} = props;
+  const { onClick } = props;
 
   return (
     <svg width="40" 
@@ -17,3 +17,5 @@ export default function MyAccountIcon(props: IOnClick) {
     </svg>
   )
 }
+
+export default MyAccountIcon;

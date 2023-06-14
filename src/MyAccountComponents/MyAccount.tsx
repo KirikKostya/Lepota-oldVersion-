@@ -19,7 +19,7 @@ export const signOut = (dispatch: Dispatch) =>{
   dispatch(uncomplatedAuth());
 }
 
-export default function MyAccount() {
+const MyAccount: React.FC = () => {
 
   const countOfOrders = useSelector((state:IInitialState)=>state.countOfOrders);
   const dispatch = useDispatch() 
@@ -33,3 +33,5 @@ export default function MyAccount() {
     </div>
   )
 }
+
+export default MyAccount;

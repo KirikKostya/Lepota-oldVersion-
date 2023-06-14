@@ -5,9 +5,10 @@ interface ISotialDataProps{
     allDataAboutUser: IProfile,
     setSotialDate: (userVK: string, userInst: string, userTelegram: string)=>void
 }
-export default function PersonalSotialData(props: ISotialDataProps) {
 
-    const {allDataAboutUser, setSotialDate} = props;
+const PersonalSotialData: React.FC<ISotialDataProps> = (props) => {
+
+    const { allDataAboutUser, setSotialDate } = props;
 
     const [userInst, setUserInst] = useState<string>('');
     const [userVK, setUserVK] = useState<string>('');
@@ -43,3 +44,5 @@ export default function PersonalSotialData(props: ISotialDataProps) {
     </>
   )
 }
+
+export default PersonalSotialData;

@@ -10,7 +10,7 @@ import { IOrderArchiveType } from '../Admin/Update/Interfaces/Interface.js';
 import { loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices'
 
 
-export default function OrdersArchive() {
+const OrdersArchive: React.FC = () => {
   
   const [listOfOrdersInArchive, setListOfOrdersInArchive] = useState<IOrderArchiveType[]>([]);
 
@@ -54,3 +54,5 @@ export default function OrdersArchive() {
     </div>
   )
 }
+
+export default OrdersArchive;

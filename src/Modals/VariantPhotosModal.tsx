@@ -11,7 +11,8 @@ interface IVariantsPhotos{
 interface IImgs{
   url: string
 }
-export default function VariantPhotosModal(props:IVariantsPhotos) {
+
+const VariantPhotosModal: React.FC<IVariantsPhotos> = (props) => {
 
   const { isOpen, setIsOpen, IMGS } = props;
 
@@ -35,3 +36,5 @@ export default function VariantPhotosModal(props:IVariantsPhotos) {
     </ReactModal>
   )
 }
+
+export default VariantPhotosModal;

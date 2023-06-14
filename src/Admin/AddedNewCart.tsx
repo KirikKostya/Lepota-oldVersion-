@@ -39,7 +39,7 @@ interface INewItem{
     price: string
 }
 
-export default function AddedNewCart(){
+const AddedNewCart: React.FC = () => {
     
     const [photos, setPhotos] = useState<string[]>([]);
     const [description, setDesctiption] = useState<string>('');
@@ -205,3 +205,5 @@ export default function AddedNewCart(){
     </div>
   )
 }
+
+export default AddedNewCart;

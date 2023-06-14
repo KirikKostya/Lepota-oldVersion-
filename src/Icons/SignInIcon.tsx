@@ -1,7 +1,8 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-export default function SignInIcon() {
+const SignInIcon: React.FC = () => {
+
   return (
     <NavLink to={'/Registration'}>
         <svg 
@@ -16,3 +17,5 @@ export default function SignInIcon() {
     </NavLink>
   )
 }
+
+export default SignInIcon;

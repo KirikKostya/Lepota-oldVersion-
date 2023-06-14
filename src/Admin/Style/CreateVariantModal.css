@@ -1,9 +1,10 @@
 @import url('/src/Fonts/fonts.css');
 .addVariantHeader{
+    width: 60%;
     font-family: 'Montserrat-Bold';
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 .createContainer{
     width: 65%; 

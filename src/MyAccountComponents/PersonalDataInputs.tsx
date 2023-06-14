@@ -6,9 +6,10 @@ interface IPersonalDataProps{
     allDataAboutUser: IProfile,
     setPersonalData: (props: IProfile)=>void
 }
-export default function PersonalDataInputs(props: IPersonalDataProps) {
 
-    const {allDataAboutUser, setPersonalData} = props;
+const PersonalDataInputs: React.FC<IPersonalDataProps> = (props) => {
+
+    const { allDataAboutUser, setPersonalData } = props;
 
     //date about user
     const [firstName, setfirstName] = useState<string>('');
@@ -82,3 +83,5 @@ export default function PersonalDataInputs(props: IPersonalDataProps) {
     </>
   )
 }
+
+export default PersonalDataInputs;

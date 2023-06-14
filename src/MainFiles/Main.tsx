@@ -8,7 +8,8 @@ import AboutKashpo from '../Components/AboutKashpo';
 import ContactWithUs from '../Components/ContactWithUs';
 import './Styles/Main.css'
 
-export default function Main() {
+const Main: React.FC = () => {
+
   return (
     <div className='main'>   
       <UpNavigation hide={''} /> 
@@ -21,3 +22,5 @@ export default function Main() {
     </div>
   )
 }
+
+export default Main;

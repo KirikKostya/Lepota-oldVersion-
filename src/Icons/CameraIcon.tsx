@@ -1,9 +1,9 @@
 import React from 'react'
 import { IOnClick } from '../Admin/Update/Interfaces/Interface'
 
-export default function CameraIcon(props: IOnClick) {
+const CameraIcon: React.FC<IOnClick> = (props) => {
 
-  const {onClick} = props;
+  const { onClick } = props;
 
   return (
     <svg 
@@ -24,3 +24,5 @@ export default function CameraIcon(props: IOnClick) {
     </svg>
   )
 }
+
+export default CameraIcon;

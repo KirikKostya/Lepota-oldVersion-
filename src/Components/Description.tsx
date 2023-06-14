@@ -31,9 +31,9 @@ const exemplesOfWorks: IExampleDescription[] = [
     id: 6,
     original:require('../Photos/WorksPictures/BubbleGum.png'),
   }
- ]
+]
 
-export default function Description() {
+const Description: React.FC = () => {
 
   return (
     <div className='descriptionContainer' id='main'>
@@ -45,3 +45,5 @@ export default function Description() {
     </div>
   )
 }
+
+export default Description;

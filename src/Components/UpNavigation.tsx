@@ -14,7 +14,8 @@ import { closeAccount, openAccount, setCountOfOrder } from '../ReduxToolkit/Slic
 interface IUpNavProps{
   hide: string 
 }
-export default function UpNavigation( props: IUpNavProps) {
+
+const UpNavigation: React.FC<IUpNavProps> = (props) => {
   
   const { hide } = props
   
@@ -155,3 +156,5 @@ export default function UpNavigation( props: IUpNavProps) {
     </>
   )
 }
+
+export default UpNavigation;

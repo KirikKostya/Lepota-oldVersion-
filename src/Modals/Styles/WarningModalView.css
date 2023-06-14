@@ -10,9 +10,13 @@
     font-weight: 600;
     color: rgba(0, 0, 0, 0.826);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 .modal-closeBTN{
-    width: 150px !important;
+    width: 60% !important;
     height: 40px !important;
     display: flex;
     align-items: center;

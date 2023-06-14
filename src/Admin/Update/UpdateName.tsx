@@ -5,16 +5,19 @@ import { useDispatch } from 'react-redux';
 import ReactModal from 'react-modal';
 import './Style/UpdateCSS.css'
 import { IUpdateNameProps } from './Interfaces/Interface';
+import { FaChevronLeft } from 'react-icons/fa';
 
-export default function UpdateName(props: IUpdateNameProps) {
+const UpdateName: React.FC<IUpdateNameProps> = (props) => {
     
-    const {isOpen, defaultName, setIsOpen} = props;
+    const {isOpen, defaultName, defaultPrice, setIsOpen} = props;
 
     const [name, setName] = useState<string>(defaultName);
+    const [price, setPrice] = useState<string>(defaultPrice);
+
     const dispatch = useDispatch();
 
     const handlerChange = async() =>{
-        updateName(localStorage.getItem('searchOrderById') || '{}', name, dispatch);
+        updateName(localStorage.getItem('searchOrderById') || '{}', name, price, dispatch);
         setIsOpen(false)
     }
 
@@ -24,12 +27,24 @@ export default function UpdateName(props: IUpdateNameProps) {
         ariaHideApp={false}
         contentLabel="Selected Option"
     >
-        <h2>Изменить название</h2>
-        <input 
-            className='updateInput'
-            onChange={event => setName(event.target.value)} 
-            defaultValue={defaultName}
-        />
+        <h2>
+            <FaChevronLeft
+                style={{width: '10px', marginRight: '10px'}} 
+                onClick={()=>setIsOpen(false)}
+            />
+            Изменить название и цену</h2>
+        <form>
+            <input 
+                className='updateName'
+                onChange={event => setName(event.target.value)} 
+                defaultValue={defaultName}
+                />
+            <input 
+                className='updatePrice'
+                onChange={event => setPrice(event.target.value)} 
+                defaultValue={defaultPrice}
+                />
+        </form>
         <div className='updateBTNS'>
             <button 
                 className='modal-closeBTN'
@@ -37,10 +52,9 @@ export default function UpdateName(props: IUpdateNameProps) {
             >
                 Изменить
             </button>
-            <p
-             onClick={()=>setIsOpen(false)}
-             style={{margin:'0', cursor:'pointer'}}>закрыть</p>
         </div>
     </ReactModal>
   )
 }
+
+export default UpdateName;

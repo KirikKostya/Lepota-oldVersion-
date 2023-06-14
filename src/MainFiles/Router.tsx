@@ -8,7 +8,8 @@ import TypeCatalog from '../CatalogOfWorks/TypeCatalog'
 import AccountActivation from '../Activation/AccountActivation';
 import { Routes, Route, HashRouter} from 'react-router-dom'
 
-export default function Router() {
+const Router: React.FC = () => {
+
   return (
     <HashRouter>
         <Routes>
@@ -23,3 +24,5 @@ export default function Router() {
     </HashRouter>
   )
 }
+
+export default Router;

@@ -2,8 +2,17 @@ import React from 'react'
 import useDrivePicker from 'react-google-drive-picker'
 import CameraIcon from '../Icons/CameraIcon';
 
-export default function Picker({setPhotos, photos, className, style}) {
-    
+interface IPickerProps {
+  setPhotos: React.Dispatch<React.SetStateAction<string[]>> 
+  photos: string[]
+  className: string,
+  style: {},
+}
+
+const Picker: React.FC<IPickerProps> = (props) => {
+  
+  const { setPhotos, photos, className, style } = props;
+
   const [openPicker] = useDrivePicker();  
 
   const handleOpenPicker = () => {
@@ -20,7 +29,7 @@ export default function Picker({setPhotos, photos, className, style}) {
               let newArray = [...photos];
               data.docs.forEach(el => newArray.push(`https://drive.google.com/uc?export=view&id=${el.url.replace('https://drive.google.com/file/d/', '').replace('/view?usp=drive_web', '')}`))
               setPhotos(newArray);
-          },
+          }
       })
   }
 
@@ -37,3 +46,5 @@ export default function Picker({setPhotos, photos, className, style}) {
     </>
   )
 }
+
+export default Picker;

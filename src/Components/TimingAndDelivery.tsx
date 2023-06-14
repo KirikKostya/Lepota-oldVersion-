@@ -29,7 +29,7 @@ const stepsOfDeliver: IStepsOfDelivary[] = [
     }
 ]
 
-export default function TimingAndDelivery() {
+const TimingAndDelivery: React.FC = () => {
     
   return (
     <div className='containerForTimingAndDelivery' id='timingAndDelivery'>
@@ -57,3 +57,5 @@ export default function TimingAndDelivery() {
     </div>
   )
 }
+
+export default TimingAndDelivery;

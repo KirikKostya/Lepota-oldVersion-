@@ -6,7 +6,7 @@ import './Styles/WorkCatalog.css'
 import { ICard } from '../Admin/Update/Interfaces/Interface'
 import { loadingComplate, loadingUncomplate } from '../ReduxToolkit/Slices'
 
-export default function WorkCatalog() {
+const WorkCatalog: React.FC = () => {
   
   const [CARDS, setCARDS] = useState<ICard[]>([])
   
@@ -43,3 +43,5 @@ export default function WorkCatalog() {
     </div>
   )
 }
+
+export default WorkCatalog;

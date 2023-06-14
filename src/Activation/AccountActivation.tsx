@@ -3,10 +3,10 @@ import React, {useState, useEffect} from 'react'
 import Loading from 'react-loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom'
-import ErrorModal from '../Modals/ErrorModal';
-import './Styles/AccountActivation.css'
-import { IInitialState } from '../ReduxToolkit/Interfaces';
+import ActivateModal from '../Modals/ActivateModal';
 import { loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices'
+import { IInitialState } from '../ReduxToolkit/Interfaces';
+import './Styles/AccountActivation.css'
 
 //Success request
 interface QuestionResponseI{
@@ -26,7 +26,8 @@ interface ResponseI{
   status: number
 }
 
-export default function AccountActivation() {
+const AccountActivation: React.FC = ()=> {
+  
     const [link, setLink]  = useSearchParams();
     
     const isLoading = useSelector((state:IInitialState)=>state.isLoading);
@@ -73,7 +74,7 @@ export default function AccountActivation() {
                     height="45px"
                     width="45px" 
                   />
-                  : <ErrorModal 
+                  : <ActivateModal 
                       errorMessage={errorMessage}
                       setErrorMessage={setErrorMessage}
                       activationFunction={activationFunction}
@@ -83,3 +84,4 @@ export default function AccountActivation() {
     </div>
   )
 }
+export default AccountActivation;

@@ -1,9 +1,9 @@
 import React from 'react'
 import { IOnClick } from '../Admin/Update/Interfaces/Interface'
 
-export default function Pensil(props: IOnClick) {
+const Pensil: React.FC<IOnClick> = (props) => {
 
-  const {onClick} = props;
+  const { onClick } = props;
 
   return (
     <svg 
@@ -17,3 +17,5 @@ export default function Pensil(props: IOnClick) {
     </svg>
   )
 }
+
+export default Pensil;

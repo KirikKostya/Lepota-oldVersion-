@@ -13,9 +13,9 @@ interface IMainBascketField{
   requestBasketFunc: ()=>void 
 }
 
-export default function MainBasketField(props: IMainBascketField) {
+const MainBasketField: React.FC<IMainBascketField> = (props) => {
 
-  const { ItemsInBasket, setItemsInBasket, requestBasketFunc }=props;
+  const { ItemsInBasket, setItemsInBasket, requestBasketFunc } = props;
 
   const dispatch = useDispatch()
   
@@ -107,3 +107,5 @@ export default function MainBasketField(props: IMainBascketField) {
     </>
   )
 }
+
+export default MainBasketField;

@@ -3,11 +3,11 @@ import Cookie from '../Icons/Cookie'
 import Cookies from 'js-cookie';
 import './Styles/CookieAlert.css'
 
-export default function CookieAlert() {
+const CookieAlert: React.FC = () => {
   const [closeMSG, setCloseMSG] = useState<string>('');
 
   const toggleStateOfMSG = ():void => {
-    Cookies.set('cookieActivate', true);
+    Cookies.set('cookieActivate', 'true');
     closeMSG === '' ? setCloseMSG('displayNone') : setCloseMSG('')
   }
 
@@ -26,3 +26,5 @@ export default function CookieAlert() {
     </div>
   )
 }
+
+export default CookieAlert;

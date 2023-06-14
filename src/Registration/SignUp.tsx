@@ -14,9 +14,9 @@ interface ISignUpData{
     password: string
     secondPassword: string
 }
-export default function SignUp(props:ISignUpProps) {
+const SignUp: React.FC<ISignUpProps> = (props:ISignUpProps) => {
     
-    const {register, handleSubmit, formState: {errors}, reset} = useForm<ISignUpData>({mode:'onChange'})
+    const { register, handleSubmit, reset, formState: {errors} } = useForm<ISignUpData>({mode:'onChange'});
 
     const [closeEyesStatus, setCloseEyesStatus] = useState<boolean>(true);
     const [closeSecondEyesStatus, setCloseSecondEyesStatus] = useState<boolean>(true);
@@ -126,3 +126,5 @@ export default function SignUp(props:ISignUpProps) {
         </div>
     )
 }
+
+export default SignUp;

@@ -26,7 +26,7 @@ export const getPersonalDate = (dispatch: Dispatch, setList:(data: IProfile)=>vo
   dispatch(loadingComplate());
 }
 
-export default function Profile() {
+const Profile: React.FC = () => {
   
   const [allDataAboutUser, setAllDataAboutUser] = useState<IProfile>(
     {
@@ -108,20 +108,6 @@ export default function Profile() {
       })
     .then(()=>getPersonalDate(dispatch, setAllDataAboutUser))
     .catch(err=>console.log(err))
-  }
-
-  const LOG = () => {
-    console.log(userName, userSurname, userFathername, userAddress, userZipcode, userPhone, userBirthday)
-  }
-
-  const clearAllInput = () =>{
-    setUserName('')
-    setUserSurname('')
-    setUserFathername('')
-    setUserAddress('')
-    setUserZipcode('')
-    setUserPhone('')
-    setUserBirthday('')
   }
 
   useEffect(()=>{
@@ -302,3 +288,5 @@ export default function Profile() {
     </>
   )
 }
+
+export default Profile;

@@ -20,7 +20,7 @@ interface IFilterData{
   deliveStatus: string
 }
 
-export default function ListOfArchive(props:IListOfArchiveProps) {
+const ListOfArchive: React.FC<IListOfArchiveProps> = (props) => {
 
   const { LIST, setList } = props;
 
@@ -222,3 +222,5 @@ export default function ListOfArchive(props:IListOfArchiveProps) {
     </div>
   )
 }
+
+export default ListOfArchive;

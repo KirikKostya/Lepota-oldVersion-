@@ -39,11 +39,12 @@ export const updateMetric = (id: string, metricValue: string, type: string, disp
   })
 }
 
-export const updateName = (id: string, nameValue: string, dispatch: Dispatch) => {
+export const updateName = (id: string, nameValue: string, price:string, dispatch: Dispatch) => {
   dispatch(loadingUncomplate())
   axios.post(`https://api.native-flora.tk/Item/Update`, {
       "id": +id,
-      "name": nameValue 
+      "name": nameValue,
+      "price": price
     }, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
     })

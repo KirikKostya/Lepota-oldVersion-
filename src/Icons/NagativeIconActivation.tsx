@@ -1,6 +1,7 @@
 import React from 'react'
 
-export default function NagativeIconActivation() {
+const NagativeIconActivation: React.FC = () => {
+
   return (
     <svg width="60" 
          height="60" 
@@ -23,3 +24,5 @@ export default function NagativeIconActivation() {
     </svg>
   )
 }
+
+export default NagativeIconActivation;

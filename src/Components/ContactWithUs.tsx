@@ -3,7 +3,7 @@ import TelegramIcon from '../Icons/TelegramIcon'
 import InstagramIcon from '../Icons/InstagramIcon'
 import './Styles/ContactWithUs.css'
 
-export default function ContactWithUs() {
+const ContactWithUs: React.FC = () => {
 
   const [isTelephoneOpen, setIsTelephoneOpen] = useState<boolean>(false);
 
@@ -33,3 +33,5 @@ export default function ContactWithUs() {
   
   )
 }
+
+export default ContactWithUs;

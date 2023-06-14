@@ -3,9 +3,9 @@ import SignUp from './SignUp';
 import LogIn from './LogIn';
 import './Styles/Registration.css'
 
-export default function Regist() {
+const Regist: React.FC = () => {
 
-    const [regist, setRegistr] = useState<boolean>(false);
+  const [regist, setRegistr] = useState<boolean>(false);
     
   return (
     <div className='containerForRegistration'>
@@ -18,3 +18,5 @@ export default function Regist() {
     </div>
   )
 }
+
+export default Regist;

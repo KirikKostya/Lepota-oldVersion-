@@ -1,9 +1,9 @@
 import React from 'react'
 import { IOnClick } from '../Admin/Update/Interfaces/Interface'
 
-export default function CrossIcon(props: IOnClick) {
+const CrossIcon: React.FC<IOnClick> = (props) => {
 
-  const{onClick} = props;
+  const { onClick } = props;
 
   return (
     <svg
@@ -14,3 +14,5 @@ export default function CrossIcon(props: IOnClick) {
     </svg>
   )
 }
+
+export default CrossIcon;

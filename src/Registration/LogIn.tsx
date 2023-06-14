@@ -15,9 +15,10 @@ interface ILoginData{
     login: string
     password: string
 }
-export default function LogIn(props:ILogInProps) {
 
-    const {register, handleSubmit, formState: {errors}, reset} = useForm<ILoginData>({mode:'onChange'})
+const LogIn: React.FC<ILogInProps> = (props:ILogInProps) => {
+
+    const { register, handleSubmit, reset, formState: {errors} } = useForm<ILoginData>({mode:'onChange'})
 
     const [closeEyesStatus, setCloseEyesStatus] = useState<boolean>(true);
     const [buttonStatus, setButtonStatus] = useState<string>('Войти');
@@ -114,3 +115,5 @@ export default function LogIn(props:ILogInProps) {
         </div>
     )
 }
+
+export default LogIn;
