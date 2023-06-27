@@ -1,7 +1,7 @@
 .containerForRegistration{
     width: 100%;
     height: 100vh;
-    background: url('./Registration.png');
+    background: url('../../Photos/Registration.png');
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -13,6 +13,38 @@
     height: 60%;
     border-radius: 5px;
     background-color: rgba(45, 45, 206, 0.728);
+}
+
+/*Help message*/
+.helpMessage{
+    display: none;
+    width: 90%;
+    color: transparent;
+    font-family: 'Montserrat-Medium';
+    font-size: 8pt;
+    text-align: center;
+    cursor: pointer;
+}
+.helpMessage:hover{
+    color: rgba(0, 0, 255, 0.861) ;
+}
+@media screen and (max-width: 890px){
+    .helpMessage{
+        display: inline;
+        color: rgba(0, 0, 255, 0.861) !important;
+        animation: helpMessageAnimation 1s ease forwards;
+    }
+    @keyframes helpMessageAnimation{
+        0%{
+            opacity: 0;
+        }
+        25%{
+            opacity: 0;
+        }
+        100%{
+            opacity: 1;
+        }
+    }
 }
 @media screen and (max-width: 700px){
     .containerForRegistration .fieldEffect{

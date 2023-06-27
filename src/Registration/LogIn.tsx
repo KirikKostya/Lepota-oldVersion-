@@ -7,7 +7,8 @@ import { refreshFunction } from '../MainFiles/App';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import './Styles/SignIn.css';
+import './Styles/LogIn.css';
+import ChangeField from './ChangeField';
 
 
 interface ILogInProps{
@@ -54,67 +55,62 @@ const LogIn: React.FC<ILogInProps> = (props:ILogInProps) => {
     return (
         <div className='containerForSignIn'>
             <div className='signIn'>
-            <h1>Войти</h1>
-              <form className='forInputs' onSubmit={handleSubmit(onSubmit)}>
-                <input 
-                    className='input' 
-                    placeholder='Login' 
-                    autoComplete='off'
-                    {
-                        ...register('login',
-                        {
-                            required: 'Обязательное поле!',
-                            pattern: {
-                                value: /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{1,})$/iu,
-                                message: 'Введите правильный формат Email'
-                            }
-                        })
-                    }
-                />
-                {errors?.login && <span className='statusValidateForm'>{errors.login.message}</span>}
-                <div className='passwordField_SI'>
+                <h1>Войти</h1>
+                <form className='forInputs' onSubmit={handleSubmit(onSubmit)}>
                     <input 
                         className='input' 
-                        placeholder='Password' 
-                        type={`${closeEyesStatus ? 'password' : 'text'}`} 
+                        placeholder='Login' 
                         autoComplete='off'
-                        {...register('password', 
+                        {
+                            ...register('login',
                             {
-                                required: 'Обязательное поле!'
+                                required: 'Обязательное поле!',
+                                pattern: {
+                                    value: /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{1,})$/iu,
+                                    message: 'Введите правильный формат Email'
+                                }
                             })
                         }
                     />
+                    {errors?.login && <span className='statusValidateForm'>{errors.login.message}</span>}
+                    <div className='passwordField_SI'>
+                        <input 
+                            className='input' 
+                            placeholder='Password' 
+                            type={`${closeEyesStatus ? 'password' : 'text'}`} 
+                            autoComplete='off'
+                            {...register('password', 
+                                {
+                                    required: 'Обязательное поле!'
+                                })
+                            }
+                        />
+                        {
+                            closeEyesStatus
+                                ? <CloseEyeIcons onClick={()=>setCloseEyesStatus(false)}/>
+                                    : <OpenEyeIcons onClick={()=>setCloseEyesStatus(true)}/>
+                        }
+                    </div>
+                    {errors?.password && <span className='statusValidateForm'>{errors.password.message}</span>}
+                    {errorMessage && <span className='statusValidateForm'>{errorMessage}</span>}
                     {
-                        closeEyesStatus
-                            ? <CloseEyeIcons onClick={()=>setCloseEyesStatus(false)}/>
-                                : <OpenEyeIcons onClick={()=>setCloseEyesStatus(true)}/>
+                        buttonStatus === 'Войти'
+                            ? <button 
+                                className='signInBTN'
+                            >{buttonStatus}</button>
+                                : <NavLink 
+                                    className='NavLink signInBTN'
+                                    to='/'
+                                    onClick={()=>refreshFunction(dispatch, ()=>checkIsAdmine(dispatch))}>{buttonStatus}</NavLink>
                     }
-                </div>
-                {errors?.password && <span className='statusValidateForm'>{errors.password.message}</span>}
-                {errorMessage && <span className='statusValidateForm'>{errorMessage}</span>}
-                {
-                    buttonStatus === 'Войти'
-                        ? <button 
-                            className='signInBTN'
-                          >{buttonStatus}</button>
-                            : <NavLink 
-                                className='NavLink signInBTN'
-                                to='/'
-                                onClick={()=>refreshFunction(dispatch, ()=>checkIsAdmine(dispatch))}>{buttonStatus}</NavLink>
-                }
-              </form>
-            <p 
-              className='helpMessage_SI'
-              onClick={()=>setRegistr(true)}>
-                РЕГИСТИРОВАТЬСЯ
-            </p>
-        </div>
-            <div className='changeField'>
-                <p>У вас нет аккаунта? Зарегистрируйся!</p>
-                <button 
-                    className='signInChangeBtn' 
-                    onClick={()=>setRegistr(true)}>Регистрация</button>
+                </form>
+                <p 
+                className='helpMessage'
+                onClick={()=>setRegistr(true)}>
+                    РЕГИСТИРОВАТЬСЯ
+                </p>
             </div>
+            <ChangeField paragraph='У вас нет аккаунта? Зарегистрируйся!' btnText='Регистрация' onClick={()=>setRegistr(true)} />
         </div>
     )
 }

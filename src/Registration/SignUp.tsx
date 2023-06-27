@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import ModalView from '../Modals/ModalView';
 import axios from 'axios';
 import './Styles/SignUp.css';
+import ChangeField from './ChangeField';
 
 interface ISignUpProps{
     setRegistr: React.Dispatch<React.SetStateAction<boolean>>
@@ -55,7 +56,7 @@ const SignUp: React.FC<ISignUpProps> = (props:ISignUpProps) => {
     return (
         <div className='containerForSignUp'>
             <div className='signUp'>
-            <h1>Войти</h1>
+            <h1>Регистрация</h1>
               <form className='forInputs' onSubmit={handleSubmit(onSubmit)}>
                 <input 
                     className='input' 
@@ -112,23 +113,20 @@ const SignUp: React.FC<ISignUpProps> = (props:ISignUpProps) => {
                         }
                 </div>
                 {errors?.secondPassword && <span className='statusValidateForm'>{errors.secondPassword.message}</span>}
-                <button className={`signUpBTN`}>
+                <button className='signUpBTN'>
                     Создать аккаунт
                 </button>
               </form>
-            <p 
-              className='helpMessage'
-              onClick={()=>setRegistr(false)}>
-            РЕГИСТИРОВАТЬСЯ
-            </p>
+                <p 
+                className='helpMessage'
+                onClick={()=>setRegistr(false)}>
+                    ВОЙТИ
+                </p>
             </div>
-            <div className='changeField'>
-                <p>Есть аккаунт? Тогда добро пожаловать!</p>
-                <button 
-                className='signInChangeBtn' 
-                onClick={()=>setRegistr(false)}>Войти</button>
-            </div>
-            <ModalView isOpen={isModalOpen} title={<h4><InfoIcon margin='0 5px 0 0'/>Мы отправили вам подтвердительное письмо на почту. Подтвердите что эта почта ваша!</h4>}/>
+            <ChangeField paragraph='Есть аккаунт? Тогда добро пожаловать!' btnText='Войти' onClick={()=>setRegistr(false)}/>
+            <ModalView isOpen={isModalOpen} title={<InfoIcon width='1.25em' height='1.25em' margin='0 5px 0 0'/>}>
+                <h4>Мы отправили вам подтвердительное письмо на почту. Подтвердите что эта почта ваша!</h4>
+            </ModalView>
         </div>
     )
 }

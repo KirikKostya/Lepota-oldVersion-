@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import OrderCardMoreImgs from '../Icons/OrderCardMoreImgs';
 import SimpleImageSlider from 'react-simple-image-slider';
+import Carousel from 'react-material-ui-carousel'
 import CreateKitModal from '../Admin/CreateKitModal';
 import AddVariantIcon from '../Icons/AddVariantIcon';
 import CrossIcon from '../Icons/CrossIcon';
@@ -14,6 +15,8 @@ import CreateVariantModal from '../Admin/CreateVariantModal';
 import ModalView from '../Modals/ModalView';
 import Slider from '../Slider/Slider';
 import './Style/OrderCard.css';
+import { Image } from 'antd';
+import { exemplesOfUsed } from '../Components/AboutKashpo';
 
 
 interface IGalleryItem{
@@ -21,8 +24,8 @@ interface IGalleryItem{
 }
 
 //Makes list from response data
-export const getImages = (images:string[]):IGalleryItem[] => {
-  return images === null
+export const getImages = (images:string[]): IGalleryItem[] => {
+  return images === null || images.length === 0
     ? [{url: require('../Photos/somethingWentWrong.png')}] 
       : images.map(image=>{
           let galleryItem: IGalleryItem = {url: ''};
@@ -98,18 +101,15 @@ const AdmineConstructor: React.FC<IOrderCarsProps> = (props) => {
           <div className='mainContainer' key={order.item.id}>
             <div className='containerForCards'>
               <div className='item-Card'> 
-                <SimpleImageSlider
-                  width={380}
-                  height={330}
-                  navSize={25}
-                  navMargin={0}
-                  style={{background: 'transparent'}}
-                  navStyle={2}
-                  slideDuration={0.7}
-                  images={getImages(order.item.icon)}
-                  showBullets={false}
-                  showNavs={true}
-                />
+                <Carousel className='CRSL' navButtonsAlwaysVisible={true} navButtonsProps={{style: {display: `${order.item.icon.length === 0 ? 'none' : 'block'}`}}}>
+                  {
+                    order.item.icon.length === 0 
+                      ? <Image src={require('../Photos/somethingWentWrong.png')} style={{width: '380px', height: '330px'}}/>
+                        : order.item.icon.map(photo=>(
+                            <Image key={photo} src={photo} style={{width: '380px', height: '330px'}}/>
+                          ))
+                  }
+                </Carousel>
               </div>
             </div>
             <div className='additionalMetrics'>
@@ -192,13 +192,15 @@ const AdmineConstructor: React.FC<IOrderCarsProps> = (props) => {
             <CreateVariantModal isOpen={isOpenAddedVariantModal} setIsOpen={setIsOpenAddedVariantModal} setError={setError} cleanSelectedOptions={()=>cleanSelectedOptions(refInput, refCount)}/>
             <ModalView isOpen={isOpenVarintPhotos}>
               <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                <Slider>
+                <Carousel className='CRSL' navButtonsAlwaysVisible={true} navButtonsProps={{style: {display: `${imagesOfVariant.length === 0 ? 'none' : 'flex'}`}}}>
                   {
-                    imagesOfVariant.map(img=>(
-                      <img key={img.url} src={ img.url } alt='something'/>
-                    ))
+                    imagesOfVariant.length === 0 
+                      ? <Image src={require('../Photos/somethingWentWrong.png')} style={{width: '380px', height: '330px'}}/>
+                        : imagesOfVariant.map(photo=>(
+                            <Image key={photo.url} src={photo.url} style={{width: '380px', height: '330px'}}/>
+                          ))
                   }
-                </Slider>
+                </Carousel>
                 <button 
                     className='modal-closeBTN' 
                     style={{marginTop: '15px'}}

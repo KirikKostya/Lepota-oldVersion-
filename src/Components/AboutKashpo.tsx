@@ -7,7 +7,7 @@ interface IExample{
     tittle: string
 }
 
-const exemplesOfUsed: IExample[] = [
+export const exemplesOfUsed: IExample[] = [
     {
         id: 0,
         img: require('../Photos/FlowersInKashpo.png'),

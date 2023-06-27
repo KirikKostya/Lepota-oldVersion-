@@ -19,6 +19,7 @@
     "react-input-mask": "^2.0.4",
     "react-loading": "^2.0.3",
     "react-loading-icons": "^1.1.0",
+    "react-material-ui-carousel": "^3.4.2",
     "react-modal": "^3.16.1",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.1",

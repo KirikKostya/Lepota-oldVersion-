@@ -14,7 +14,7 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import './Styles/App.css';
 
-export const refreshFunction = async (dispatch: Dispatch, newFunc:()=>void) => {
+export const refreshFunction = async (dispatch: Dispatch, newFunc: ()=>void) => {
   try {
     if(localStorage.getItem('accessToken')){
       await axios.get('https://api.native-flora.tk/Auth/checkToken', {
@@ -22,7 +22,7 @@ export const refreshFunction = async (dispatch: Dispatch, newFunc:()=>void) => {
         headers:{'x-access-token': localStorage.getItem('accessToken')}
       });
     }
-      newFunc()
+      newFunc();
   } catch (err: any) {
     if(err.response.status === 401){
       try {
@@ -30,7 +30,7 @@ export const refreshFunction = async (dispatch: Dispatch, newFunc:()=>void) => {
           withCredentials: true
         });
         localStorage.setItem('accessToken', res.data.data);
-        newFunc()
+        newFunc();
       } catch (error: any) {
         if(error.response.status === 401){
           dispatch(changeRefreshTokenStatus(true));

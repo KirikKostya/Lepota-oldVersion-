@@ -31,7 +31,7 @@ const FullCombinationOfItemById: React.FC<IFullCombinationOfItemByIdProps> = (pr
     useEffect(()=>{ refreshFunction(dispatch, ()=>getAllCombination(id)) }, []);
     
   return (
-    <div style={{maxWidth: '1200px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap'}}>
+    <div className='fullCombinationContainer'>
       {
         cards.map((el: ICard, index: number)=>(
           <CardOfWork key={index} card={el} isAllCombination={true} setAddedOrder={setAddedOrder} setModalView={setModalView}/>

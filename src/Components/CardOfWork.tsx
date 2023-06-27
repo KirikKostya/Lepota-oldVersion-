@@ -37,13 +37,13 @@ const CardOfWork: React.FC<ICardProps> = (props) => {
     .then(res => {
       if(res.status === 200){
         setAddedOrder!(true)
-        setTimeout(()=>setAddedOrder!(false), 2000)
+        setTimeout(()=>setAddedOrder!(false), 1500)
       }
     })
     .catch(err => {
       if(err.response.status === 404){
         setModalView!(true)
-        setTimeout(()=>setModalView!(false), 3000)
+        setTimeout(()=>setModalView!(false), 2000)
       }
     })
     dispatch(loadingComplate())
