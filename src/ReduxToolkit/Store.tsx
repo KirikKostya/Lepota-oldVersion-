@@ -3,7 +3,7 @@ import {
     isAuthorizateReduce, isAdmineReduce, isLoadingReduce, 
     myAccountIsOpenReduce, countOfOrdersReduce, searchOrderByIdReduce,
     refreshTokenIsExpiredReduce, totalSumInConstuctorReduce, variantIdReduce
-} from './Slices'
+} from './Slices';
 
 const store = configureStore({
     reducer: { 
@@ -19,4 +19,4 @@ const store = configureStore({
     }
 })
 
-export default store
+export default store;

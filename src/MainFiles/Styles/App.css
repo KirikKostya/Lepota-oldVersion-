@@ -39,6 +39,8 @@ h1{
     pointer-events: none;
 }
 .spin{
+    width: 100px;
+    height: 100px;
     position:fixed;
     inset: 47%;
     z-index: 99;

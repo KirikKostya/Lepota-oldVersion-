@@ -1,11 +1,13 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react';
+import { complatedAuth, loadingComplate, loadingUncomplate } from '../ReduxToolkit/Slices';
+import { CloseEyeIcons, OpenEyeIcons } from '../Icons/EyesIcons';
+import { checkIsAdmine } from '../Admin/AdmineController';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { CloseEyeIcons, OpenEyeIcons } from '../Icons/EyesIcons'
-import './Styles/SignIn.css'
+import { refreshFunction } from '../MainFiles/App';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import { complatedAuth, loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices'
+import './Styles/SignIn.css';
 
 
 interface ILogInProps{
@@ -93,11 +95,12 @@ const LogIn: React.FC<ILogInProps> = (props:ILogInProps) => {
                 {
                     buttonStatus === 'Войти'
                         ? <button 
-                            className='signInBTN' 
+                            className='signInBTN'
                           >{buttonStatus}</button>
                             : <NavLink 
                                 className='NavLink signInBTN'
-                                to='/'>{buttonStatus}</NavLink>
+                                to='/'
+                                onClick={()=>refreshFunction(dispatch, ()=>checkIsAdmine(dispatch))}>{buttonStatus}</NavLink>
                 }
               </form>
             <p 

@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react';  
 import { IUpdateDescriptionProps } from './Interfaces/Interface';
 import { updateDescription } from '../AdmineController';
 import { refreshFunction } from '../../MainFiles/App'
+import { FaChevronLeft } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import ReactModal from 'react-modal';
-import './Style/UpdateCSS.css'
-import { FaChevronLeft } from 'react-icons/fa';
+import './Style/UpdateCSS.css';
 
 const UpdateDescription: React.FC<IUpdateDescriptionProps> = (props: IUpdateDescriptionProps) => {
     

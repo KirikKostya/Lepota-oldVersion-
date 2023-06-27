@@ -1,14 +1,16 @@
 import React from 'react';
-import SingleSelect from '../DropDowns/SingleSelect';
+import WarningIcon from '../Icons/WarningIcon';
 import { SortByDate, SortByDileverStatus, SortByDileverType } from '../DropDowns/OptionList';
-import { useDispatch, useSelector } from 'react-redux';
-import { refreshFunction } from '../MainFiles/App'
-import { NavLink } from 'react-router-dom';
-import axios from 'axios';
-import './Styles/OrdersArchive.css';
+import { loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices';
 import { IOrderArchiveType } from '../Admin/Update/Interfaces/Interface';
 import { IInitialState } from '../ReduxToolkit/Interfaces';
-import { loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices'
+import { useDispatch, useSelector } from 'react-redux';
+import { refreshFunction } from '../MainFiles/App';
+import { NavLink } from 'react-router-dom';
+import { Empty } from 'antd';
+import SingleSelect from '../DropDowns/SingleSelect';
+import axios from 'axios';
+import './Styles/OrdersArchive.css';
 
 interface IListOfArchiveProps{
   LIST: IOrderArchiveType[], 
@@ -112,8 +114,9 @@ const ListOfArchive: React.FC<IListOfArchiveProps> = (props) => {
           ? <div className='mainListContainer'></div>
             : LIST.length === 0
                 ? <div className='emptyArchive'>
-                    <h1>Ваш архив заказов пуст!</h1>
-                    <h3>Для пополнения архива вы должны создать и отправить нам заказ <NavLink to={'/MyBasket'}>в корзине</NavLink></h3>
+                    <Empty description={<h4><WarningIcon margin='0 5px'/> Ваш архив пуст</h4>} >
+                      Добавить заказ можно<NavLink to={'/MyBasket'}> в корзине </NavLink> !
+                    </Empty>
                   </div>
                   : <div className='mainListContainer'>
                       {

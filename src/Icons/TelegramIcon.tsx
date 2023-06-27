@@ -1,5 +1,5 @@
-import React from 'react'
-import { IOnClick } from '../Admin/Update/Interfaces/Interface'
+import React from 'react';
+import { IOnClick } from '../Admin/Update/Interfaces/Interface';
 
 const TelegramIcon: React.FC<IOnClick> = (props) => {
 

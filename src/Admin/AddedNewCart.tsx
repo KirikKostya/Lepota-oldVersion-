@@ -1,15 +1,15 @@
-import React, {useState} from 'react';
-import CrossIcon from '../Icons/CrossIcon';
+import React, { useState } from 'react';
 import SingleSelect from '../DropDowns/SingleSelect';
-import {IOption, ISelectOption} from './Update/Interfaces/Interface';
-import {OptionsOfMetrics} from '../DropDowns/OptionList'
+import CrossIcon from '../Icons/CrossIcon';
+import { loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices';
+import { IOption, ISelectOption } from './Update/Interfaces/Interface';
+import { OptionsOfMetrics } from '../DropDowns/OptionList';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { refreshFunction } from '../MainFiles/App';
 import { useDispatch } from 'react-redux';
 import Picker from './Picker';
 import axios from 'axios';
 import './Style/AddedNewCart.css'
-import { loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices'
-import { SubmitHandler, useForm } from 'react-hook-form'
 
 //gets value of metric by metric name
 export const getValueByMetricName = (selectedOptions:ISelectOption[], type:string) => {
@@ -28,9 +28,9 @@ export const getValueByMetricName = (selectedOptions:ISelectOption[], type:strin
             return selectedOptions[i].value
         } else if(selectedOptions[i].metric === 'Вес' && type === 'Weight'){
             return selectedOptions[i].value
-        } else {
-            return null
         }
+
+        return null;
     } 
 }
 
@@ -47,7 +47,7 @@ const AddedNewCart: React.FC = () => {
     const [metricsListStep, setMetricsListStep] = useState<string[]>([]);
     const [selectedOptions, setSelectedOptions] = useState<ISelectOption[]>([]);
 
-    const { register, handleSubmit, reset, resetField, formState: {errors} } = useForm<INewItem>();
+    const { register, handleSubmit, reset, formState: {errors} } = useForm<INewItem>();
     const dispatch = useDispatch()
 
     //filter option on select
@@ -106,10 +106,7 @@ const AddedNewCart: React.FC = () => {
   return (
     <div className='addedFieldAdmine'>
         <div className='photoAndDescriptionContainer'>
-            <div 
-                className='listOfSelectedImages' 
-                // style={ { overflowX: makeScroll() } }
-            >
+            <div className='listOfSelectedImages'>
                 {
                     photos.map(photo=>(
                         <img key={photo} 
@@ -121,7 +118,7 @@ const AddedNewCart: React.FC = () => {
                         />
                     ))
                 }
-                <Picker setPhotos={setPhotos} photos={photos} className='addedFileBTN' style={null} />
+                <Picker setPhotos={setPhotos} photos={photos} className='addedFileBTN' />
             </div>
             <div className='descriptionContainer'>
                 <p>Описание:</p>
@@ -191,12 +188,14 @@ const AddedNewCart: React.FC = () => {
                 }
                 <div 
                     className='deleteMetricBtnField'
-                    onClick={():void=>{
+                    onClick={()=>{
                         setMetricsListStep([...metricsListStep, Math.random().toFixed(4)]);
                         setSelectedOptions([...selectedOptions, { id: Math.random().toFixed(2), metric: '', value: '' }])
                     }}
                     style={{display: metricsListStep.length >= 7 ? 'none' : 'block'}}
-                ><button type='button' className='deleteMetricBtn'>Добавить</button></div>
+                >
+                    <button type='button' className='deleteMetricBtn'>Добавить</button>
+                </div>
             </div>
             <div className='createCartField'>
                 <button className='createCartBTN' >Создать</button>

@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from 'react'
-import UpNavigation from '../Components/UpNavigation';
-import ContactWithUs from '../Components/ContactWithUs';
-import AdmineConstructor from './AdmineConstructor';
+import React, { useState, useEffect } from 'react';
 import Pensil from '../Icons/Pensil';
-import UpdatePhotos from '../Admin/Update/UpdatePhotos';
-import UpdateName from '../Admin/Update/UpdateName';
-import UpdateDescription from '../Admin/Update/UpdateDescription';
-import UpdateMetric from '../Admin/Update/UpdateMetric';
-import UpdateVariant from '../Admin/Update/UpdateVariant';
-import { getUnit } from '../Admin/AdmineController';
+import { ICard, IItemOfWork, IOpenUpdateMetric, IVariant } from '../Admin/Update/Interfaces/Interface';
+import { loadingComplate, setTotalSum } from '../ReduxToolkit/Slices';
+import { IInitialState } from '../ReduxToolkit/Interfaces';
 import { useDispatch, useSelector } from 'react-redux';
-import { refreshFunction } from '../MainFiles/App'
+import { getUnit } from '../Admin/AdmineController';
+import { refreshFunction } from '../MainFiles/App';
 import { Link } from 'react-scroll';
+import FullCombinationOfItemById from './FullCombinationOfItemById';
+import UpdateDescription from '../Admin/Update/UpdateDescription';
+import UpdateVariant from '../Admin/Update/UpdateVariant';
+import ContactWithUs from '../Components/ContactWithUs';
+import UpdatePhotos from '../Admin/Update/UpdatePhotos';
+import UpdateMetric from '../Admin/Update/UpdateMetric';
+import UpNavigation from '../Components/UpNavigation';
+import AdmineConstructor from './AdmineConstructor';
+import UpdateName from '../Admin/Update/UpdateName';
 import axios from 'axios';
 import './Style/TypeCatalog.css'
-import { ICard, IItemOfWork, IOpenUpdateMetric, IVariant } from '../Admin/Update/Interfaces/Interface';
-import { IInitialState } from '../ReduxToolkit/Interfaces';
-import { loadingComplate, setTotalSum } from '../ReduxToolkit/Slices'
-import FullCombinationOfItemById from './FullCombinationOfItemById';
 
 
 const TypeCatalog: React.FC = () => {
@@ -31,7 +31,7 @@ const TypeCatalog: React.FC = () => {
   const [isOpenUpdateMetric, setIsOpenUpdateMetric] = useState<IOpenUpdateMetric>({isOpen: false, value: ''});
   const [isOpenUpdateVariant, setIsOpenUpdateVariant] = useState<boolean>(false);
 
-  const order:ICard = JSON.parse(localStorage.getItem('infoAboutTypeOfOrder') || '{}');
+  const order: ICard = JSON.parse(localStorage.getItem('infoAboutTypeOfOrder') || '{}');
 
   //Список товаров по заданному типу
   const [catalogOrders, setCatalogOrders] = useState<IItemOfWork[]>([]);   

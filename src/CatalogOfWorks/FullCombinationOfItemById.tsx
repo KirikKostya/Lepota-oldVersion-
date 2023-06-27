@@ -1,12 +1,13 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
-import { refreshFunction } from '../MainFiles/App'
-import { useDispatch } from 'react-redux'
-import { ICard } from '../Admin/Update/Interfaces/Interface'
-import { loadingComplate, loadingUncomplate } from '../ReduxToolkit/Slices'
-import CardOfWork from '../Components/CardOfWork'
-import ReactModal from 'react-modal'
-import WarningModalView from '../Modals/WarningModalView'
+import { useEffect, useState } from 'react';
+import { refreshFunction } from '../MainFiles/App';
+import { useDispatch } from 'react-redux';
+import { ICard } from '../Admin/Update/Interfaces/Interface';
+import { loadingUncomplate } from '../ReduxToolkit/Slices';
+import CardOfWork from '../Components/CardOfWork';
+import SuccessIcon from '../Icons/SuccessIcon';
+import WarningIcon from '../Icons/WarningIcon';
+import ModalView from '../Modals/ModalView';
+import axios from 'axios';
 
 interface IFullCombinationOfItemByIdProps{
     id: string
@@ -27,9 +28,10 @@ const FullCombinationOfItemById: React.FC<IFullCombinationOfItemByIdProps> = (pr
           .then(res=>setCards(res.data.data))
     }
 
-    useEffect(()=>{ refreshFunction(dispatch, ()=>getAllCombination(id)) }, [])
+    useEffect(()=>{ refreshFunction(dispatch, ()=>getAllCombination(id)) }, []);
+    
   return (
-    <div style={{width: '75%', display: 'flex', alignItems: 'center', flexWrap: 'wrap'}}>
+    <div style={{maxWidth: '1200px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap'}}>
       {
         cards.map((el: ICard, index: number)=>(
           <CardOfWork key={index} card={el} isAllCombination={true} setAddedOrder={setAddedOrder} setModalView={setModalView}/>
@@ -37,12 +39,15 @@ const FullCombinationOfItemById: React.FC<IFullCombinationOfItemByIdProps> = (pr
       }
       {
         addedOrder
-          ? <WarningModalView warningMessageIsOpen={addedOrder} header={'Ваш товар добавлен в корзину!'} />
+          ? <ModalView isOpen={addedOrder}>
+              <h2 className='headerModal-antd'><SuccessIcon />Ваш товар добавлен в корзину!</h2>
+            </ModalView>
             : modalView
                 &&
-              <WarningModalView warningMessageIsOpen={modalView} header={'Такой товар уже есть в корзине'}>
-                <p>Изменить количество товаров можно в корзине</p>
-              </WarningModalView>
+              <ModalView isOpen={modalView}>
+                <h2 className='headerModal-antd'><WarningIcon />Такой товар уже есть в корзине</h2>
+                <h4 className='textModal-antd'>Изменить количество товаров можно в корзине</h4>
+              </ModalView>
       }
     </div>
   )

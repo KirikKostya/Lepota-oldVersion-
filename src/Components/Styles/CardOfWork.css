@@ -7,7 +7,7 @@
     justify-content: center;
     margin: 10px 15px 10px 15px;
     padding: 0 0 5px 0;
-    border-radius: 5px;
+    border-radius: 10px;
     background: rgb(244, 249, 253);
 }
 .card .infoOfCard{
@@ -17,10 +17,36 @@
     align-items: center;
     justify-content: space-between;
 }
-.card .IMG{
+.card .carouselContainer{
     width: 190px;
     height: 180px;
-    border-radius: 5px 5px 0 0;
+    border-radius: 10px;
+}
+.dotsCarousel{
+    width: 100% ;
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.411);
+    padding: 5px 0;
+}
+.dotsCarousel li{
+    width: 12.5px !important;
+    height: 12.5px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+    margin: 0 7.5px !important;
+    background: rgb(255, 255, 255) ;
+}
+li button{
+    background: transparent !important;
+}
+ .slick-dots-bottom{
+    bottom: -34px !important;
+}
+.slick-active{
+    background: #1d78fe !important; 
 }
 .card .nameButton{
     width: 100%;
@@ -67,20 +93,25 @@
     background-color: rgb(245, 57, 88);
     
 }
-
 .addToCartBTN{
-    width: 100%;
+    width: 97%;
     height: 30px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     background-color: #5da6f3bd;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     color: aliceblue;
     font-size: medium;
     font-weight: 400;
     border-radius: 5px;
-    margin-top: 10px;
+    margin-top: 5px;
     cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+    .card{
+        margin: 5px;
+    }
 }

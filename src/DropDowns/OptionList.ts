@@ -1,4 +1,4 @@
-import { IOption } from "../Admin/Update/Interfaces/Interface"
+import { IOption } from "../Admin/Update/Interfaces/Interface";
 
 export const SortByDate:IOption[] = [
     {

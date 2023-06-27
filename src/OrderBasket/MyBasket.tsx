@@ -1,19 +1,18 @@
-import React, {useEffect, useState} from 'react'
-import MainBasketField from './MainBasketField'
-import UpNavigation from '../Components/UpNavigation'
-import ContactWithUs from '../Components/ContactWithUs'
-import Check from './Check'
-import { refreshFunction } from '../MainFiles/App'
-import { useDispatch } from 'react-redux'
-import axios from 'axios'
-import './Styles/MyBasket.css'
-import { ICartItem } from '../Admin/Update/Interfaces/Interface'
-import { loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices'
+import React, { useEffect, useState } from 'react';
+import { loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices';
+import { ICartItem } from '../Admin/Update/Interfaces/Interface';
+import { refreshFunction } from '../MainFiles/App';
+import { useDispatch } from 'react-redux';
+import ContactWithUs from '../Components/ContactWithUs';
+import UpNavigation from '../Components/UpNavigation';
+import MainBasketField from './MainBasketField';
+import Check from './Check';
+import axios from 'axios';
+import './Styles/MyBasket.css';
 
+const MyBasket: React.FC = () => {
 
-const MyBasket:React.FC = () => {
-
-  const [ItemsInBasket, setItemsInBasket] = useState<ICartItem[]>([])
+  const [ItemsInBasket, setItemsInBasket] = useState<ICartItem[]>([]);
 
   const dispatch = useDispatch()
 
@@ -59,4 +58,5 @@ const MyBasket:React.FC = () => {
     </>
   )
 }
-export default MyBasket
+
+export default MyBasket;

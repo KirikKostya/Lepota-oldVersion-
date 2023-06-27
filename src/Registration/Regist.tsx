@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import React, { useState } from 'react';
 import SignUp from './SignUp';
 import LogIn from './LogIn';
 import './Styles/Registration.css'

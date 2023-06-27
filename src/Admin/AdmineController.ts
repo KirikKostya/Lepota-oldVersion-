@@ -1,6 +1,6 @@
-import axios from 'axios'
+import { loadingComplate, loadingUncomplate, isAdmine, isNotAdmine} from '../ReduxToolkit/Slices';
 import { Dispatch } from 'redux';
-import { loadingComplate, loadingUncomplate, isAdmine, isNotAdmine} from '../ReduxToolkit/Slices'
+import axios from 'axios';
 
 export const getUnit = (metricValue: string) => {
   return metricValue === 'Weight' 
@@ -11,13 +11,11 @@ export const getUnit = (metricValue: string) => {
 }
 
 export const checkIsAdmine = async (dispatch: Dispatch) => {
-  // dispatch(loadingUncomplate());
     await axios.get('https://api.native-flora.tk/Auth/IsAdmin', {
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
-      .then((res) => res.data.data === true && dispatch(isAdmine()))
+      .then((res) => res.data.data === true ? dispatch(isAdmine()) : dispatch(isNotAdmine()))
       .catch(() => dispatch(isNotAdmine()));
-  // dispatch(loadingComplate())
 }
 
 export const updateMetric = (id: string, metricValue: string, type: string, dispatch: Dispatch) => {
@@ -34,7 +32,6 @@ export const updateMetric = (id: string, metricValue: string, type: string, disp
     dispatch(loadingComplate())
   })
   .catch(err=>{
-    console.log(err)
     dispatch(loadingComplate())
   })
 }
@@ -53,7 +50,6 @@ export const updateName = (id: string, nameValue: string, price:string, dispatch
     dispatch(loadingComplate())
   })
   .catch(err=>{
-    console.log(err)
     dispatch(loadingComplate())
   })
 }
@@ -71,7 +67,6 @@ export const updateDescription = (id: string, descriptionValue: string, dispatch
     dispatch(loadingComplate())
   })
   .catch(err=>{
-    console.log(err)
     dispatch(loadingComplate())
   })
 }
@@ -89,7 +84,6 @@ export const updatePhotos = (id: string, photos: string[], dispatch: Dispatch) =
     dispatch(loadingComplate())
   })
   .catch(err=>{
-    console.log(err)
     dispatch(loadingComplate())
   })
 }
@@ -122,7 +116,6 @@ export const deleteVariant = (itemId:string, variantId:string, dispatch:Dispatch
     })
   .then(()=>dispatch(loadingComplate()))
   .catch(err=>{
-    console.log(err)
     dispatch(loadingComplate())
   })
 }
@@ -140,7 +133,6 @@ export const updateVariant = (itemId: string, variantId:string, name:string, pri
     })
     .then(()=>dispatch(loadingComplate()))
     .catch(err=>{
-      console.log(err)
       dispatch(loadingComplate())
     })
 }
@@ -158,7 +150,6 @@ export const createKit = (itemId: number, name:string, variants:number[], photos
     })
     .then(()=>dispatch(loadingComplate()))
     .catch(err=>{
-      console.log(err)
       dispatch(loadingComplate())
     })
 }

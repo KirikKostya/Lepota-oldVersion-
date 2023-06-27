@@ -1,14 +1,14 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import CardOfWork from './CardOfWork'
-import { useDispatch } from 'react-redux'
-import axios from 'axios'
-import './Styles/WorkCatalog.css'
-import { ICard } from '../Admin/Update/Interfaces/Interface'
-import { loadingComplate, loadingUncomplate } from '../ReduxToolkit/Slices'
+import React, { useEffect, useMemo, useState } from 'react';
+import { loadingComplate, loadingUncomplate } from '../ReduxToolkit/Slices';
+import { ICard } from '../Admin/Update/Interfaces/Interface';
+import { useDispatch } from 'react-redux';
+import CardOfWork from './CardOfWork';
+import axios from 'axios';
+import './Styles/WorkCatalog.css';
 
 const WorkCatalog: React.FC = () => {
   
-  const [CARDS, setCARDS] = useState<ICard[]>([])
+  const [CARDS, setCARDS] = useState<ICard[]>([]);
   
   const dispatch = useDispatch();
 

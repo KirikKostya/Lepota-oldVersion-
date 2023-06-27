@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import WarningIcon from '../Icons/WarningIcon';
+import BasketIcon from '../Icons/BasketIcon';
+import { changeSearchId, loadingComplate, loadingUncomplate } from '../ReduxToolkit/Slices';
+import { ICard } from '../Admin/Update/Interfaces/Interface';
 import { refreshFunction } from '../MainFiles/App';
+import { Image, Carousel, Button } from 'antd';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import './Styles/CardOfWork.css';
-import { ICard } from '../Admin/Update/Interfaces/Interface';
-import { changeSearchId, loadingComplate, loadingUncomplate } from '../ReduxToolkit/Slices'
-import BasketIcon from '../Icons/BasketIcon';
+import ModalView from '../Modals/ModalView';
 import axios from 'axios';
-import WarningModalView from '../Modals/WarningModalView';
+import './Styles/CardOfWork.css';
+
 
 interface ICardProps{
   card: ICard
@@ -38,7 +41,6 @@ const CardOfWork: React.FC<ICardProps> = (props) => {
       }
     })
     .catch(err => {
-      console.log(err)
       if(err.response.status === 404){
         setModalView!(true)
         setTimeout(()=>setModalView!(false), 3000)
@@ -49,7 +51,7 @@ const CardOfWork: React.FC<ICardProps> = (props) => {
 
   //make examination and return true images from DB-API
   const getImageFromAPI = (photoList: string[]) => {
-    return (photoList === null || photoList == undefined ) 
+    return (photoList === null || photoList == undefined || photoList.length === 0) 
       ? require('../Photos/somethingWentWrong.png')
         : photoList[0]
   }
@@ -57,12 +59,23 @@ const CardOfWork: React.FC<ICardProps> = (props) => {
   return (
     <div className='card'>
         <div className='infoOfCard' key={card.id}>
-          <img src={getImageFromAPI(card.icon)} className='IMG' />
+          {
+            card.icon === null || card.icon.length == 0
+            ? <Image src={getImageFromAPI(card.icon)} width={'190px'} height={'200px'} fallback={require('../Photos/somethingWentWrong.png')}/>
+              : <Carousel className='carouselContainer' easing={'ease-in-out'} dots={{className: 'dotsCarousel'}} >
+                  {
+                    card.icon.map(photo=>(
+                      <Image key={photo} src={photo} width={'190px'} height={'200px'} fallback={require('../Photos/somethingWentWrong.png')}/>
+                    ))
+                  }
+                </Carousel>
+          }
           <div className='nameButton'>
             <h4>{card.name} <span>{card.price} Br</span> </h4>
             {
               isAllCombination
-                ? <button className={`addToCartBTN`}
+                ? <Button type='primary'
+                          className='addToCartBTN'
                           onClick={async ()=>{
                             localStorage.getItem('accessToken')
                               ? refreshFunction(dispatch, ()=>addItemToCart(card)) //Fetch to refresh Token
@@ -71,7 +84,7 @@ const CardOfWork: React.FC<ICardProps> = (props) => {
                     >
                       В корзину
                     <BasketIcon />     
-                  </button>
+                  </Button>
                   : <NavLink 
                       to='/TypeCatalog' 
                       className='catalogBTN' 
@@ -83,12 +96,15 @@ const CardOfWork: React.FC<ICardProps> = (props) => {
                       }}
                     >Подробнее</NavLink>
             }
-          </div>   
-          <WarningModalView warningMessageIsOpen={isWarningOpen} header={'Внимание!'}>
-            Для того чтобы добавить товар в корзину, вам необходимо 
-              <NavLink className={'linkToRegistration'} to={'/Registration'}> войти </NavLink>
-            в аккаунт!
-          </WarningModalView>
+          </div>
+          <ModalView isOpen={isWarningOpen}>
+            <h2 className='headerModal-antd'><WarningIcon/> Внимание!</h2>
+            <h4 style={{width: '95%', textAlign: 'start'}}>
+              Для того чтобы добавить товар в корзину, вам необходимо 
+                <NavLink className={'linkToRegistration'} to={'/Registration'}> войти </NavLink>
+              в аккаунт!
+            </h4>
+          </ModalView>
         </div>
     </div>
   )

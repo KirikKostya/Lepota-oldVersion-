@@ -1,12 +1,12 @@
-import React, {useState} from 'react'
-import { IUpdatePhotosProps } from './Interfaces/Interface'
-import { updatePhotos } from '../AdmineController'
-import { refreshFunction } from '../../MainFiles/App'
-import { useDispatch } from 'react-redux'
-import ReactModal from 'react-modal'
-import Picker from '../Picker'
-import './Style/UpdateCSS.css'
-import { FaChevronLeft } from 'react-icons/fa'
+import React, { useState } from 'react';
+import { IUpdatePhotosProps } from './Interfaces/Interface';
+import { refreshFunction } from '../../MainFiles/App';
+import { updatePhotos } from '../AdmineController';
+import { FaChevronLeft } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
+import ReactModal from 'react-modal';
+import Picker from '../Picker';
+import './Style/UpdateCSS.css';
 
 const UpdatePhotos: React.FC<IUpdatePhotosProps> = (props) => {
     
@@ -44,11 +44,10 @@ const UpdatePhotos: React.FC<IUpdatePhotosProps> = (props) => {
         <div className='listPhotos'>
             {
                 photoList.map((photo, index)=>(
-                    // <p key={index}>{photo}</p>
                     <img key={index} src={photo} alt='photo' className='examplePhoto' onClick={()=>setPhotoList(photoList.filter(item => item !== photo))}/>
                 ))
             }
-            <Picker photos={photoList} setPhotos={setPhotoList} style={styleForPicker} className={undefined}/>
+            <Picker photos={photoList} setPhotos={setPhotoList} style={styleForPicker}/>
         </div>
         <div className='updateBTNS'>
             <button 

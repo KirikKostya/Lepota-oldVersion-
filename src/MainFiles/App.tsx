@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
-import CookieAlert from '../Cookie/CookieAlert';
-import ReactModal from 'react-modal';
-import Loading from 'react-loading';
+import InfoIcon from '../Icons/InfoIcon';
 import Router from './Router';
-import Cookies from 'js-cookie';
-import { useDispatch, useSelector } from 'react-redux';
-import { checkIsAdmine } from '../Admin/AdmineController';
+import { changeRefreshTokenStatus, closeAccount} from '../ReduxToolkit/Slices';
+import { IInitialState } from '../ReduxToolkit/Interfaces';
 import { signOut } from '../MyAccountComponents/MyAccount';
+import { checkIsAdmine } from '../Admin/AdmineController';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
+import CookieAlert from '../Cookie/CookieAlert';
+import ModalView from '../Modals/ModalView';
+import Loading from 'react-loading';
+import Cookies from 'js-cookie';
 import axios from 'axios';
 import './Styles/App.css';
-import { Dispatch } from 'redux';
-import { IInitialState } from '../ReduxToolkit/Interfaces';
-import { changeRefreshTokenStatus, closeAccount} from '../ReduxToolkit/Slices'
-import WarningModalView from '../Modals/WarningModalView';
 
 export const refreshFunction = async (dispatch: Dispatch, newFunc:()=>void) => {
   try {
@@ -43,7 +43,7 @@ export const refreshFunction = async (dispatch: Dispatch, newFunc:()=>void) => {
 }
 
 
-function App() {
+const App: React.FC = () => {
   
   const myAccountIsOpen = useSelector((state:IInitialState)=>state.myAccountIsOpen);
   const refreshTokenIsExpired = useSelector((state:IInitialState)=>state.refreshTokenIsExpired);
@@ -52,10 +52,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() =>{
-    refreshFunction(dispatch, ()=>{
-      localStorage.getItem('accessToken') && checkIsAdmine(dispatch)
-    });
-    // setInterval(()=>console.log(isLoading), 1000)
+    refreshFunction(dispatch, ()=>localStorage.getItem('accessToken') && checkIsAdmine(dispatch));
   }, [])
   
   return (
@@ -73,20 +70,23 @@ function App() {
       }
       <div 
         className={`app ${isLoading && 'blur'}`} 
-        onClick={ ()=> myAccountIsOpen && dispatch(closeAccount()) }
+        onClick={()=> myAccountIsOpen && dispatch(closeAccount())}
       >
         <Router />
-        <WarningModalView warningMessageIsOpen={refreshTokenIsExpired} header={'Приветствуем !'}>
-          <p>Вас долго не было с нами, вам необходимо повторно войти в аккаунт! </p>
-          <button 
-            className='modal-closeBTN' 
-            onClick={()=>{
-              dispatch(changeRefreshTokenStatus(false))
-              signOut(dispatch)
-            }}>Закрыть</button>  
-        </WarningModalView>
+        <ModalView isOpen={refreshTokenIsExpired}>
+            <h2 className='headerModal-antd'><InfoIcon/> Приветствуем !</h2>
+            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+              <h4 style={{width: '95%', textAlign: 'start'}}>Вас долго не было с нами, вам необходимо повторно войти в аккаунт! </h4>
+              <button 
+                className='modal-closeBTN' 
+                onClick={()=>{
+                  dispatch(changeRefreshTokenStatus(false))
+                  signOut(dispatch);
+                }}>Закрыть</button>  
+            </div>
+        </ModalView>
       </div>
-      { !Cookies.get('cookieActivate') && <CookieAlert /> }
+      { Cookies.get('cookieActivate') && <CookieAlert /> }
     </>
   );
 }

@@ -1,12 +1,12 @@
-import React, {useState} from 'react'
-import ReactModal from 'react-modal'
-import Slider from '../Slider/Slider'
-import Picker from './Picker';
+import React, {useState} from 'react';
 import { ICreateVariantProps } from './Update/Interfaces/Interface';
-import { createVariant } from './AdmineController'
+import { createVariant } from './AdmineController';
 import { FaChevronLeft } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
-import './Style/CreateVariantModal.css'
+import Slider from '../Slider/Slider';
+import ReactModal from 'react-modal';
+import Picker from './Picker';
+import './Style/CreateVariantModal.css';
 
 const CreateVariantModal: React.FC<ICreateVariantProps> = (props: ICreateVariantProps) => {
     

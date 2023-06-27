@@ -1,12 +1,12 @@
-import React from 'react'
-import './Styles/Description.css'
+import React from 'react';
+import './Styles/Description.css';
 
 interface IExampleDescription{
   id: number,
   original: string
 }
 
-const exemplesOfWorks: IExampleDescription[] = [
+const examplesOfWorks: IExampleDescription[] = [
   {
     id: 1,
     original:require('../Photos/WorksPictures/candle.png'),
@@ -38,8 +38,8 @@ const Description: React.FC = () => {
   return (
     <div className='descriptionContainer' id='main'>
         {
-          exemplesOfWorks.map(work=>(
-            <img key={work.id} src={work.original} className='slide' />
+          examplesOfWorks.map(work=>(
+            <img key={work.id} src={work.original} className='slide'/>
           ))
         }
     </div>

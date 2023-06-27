@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import TelegramIcon from '../Icons/TelegramIcon'
-import InstagramIcon from '../Icons/InstagramIcon'
-import './Styles/ContactWithUs.css'
+import React, { useState } from 'react';
+import InstagramIcon from '../Icons/InstagramIcon';
+import TelegramIcon from '../Icons/TelegramIcon';
+import './Styles/ContactWithUs.css';
 
 const ContactWithUs: React.FC = () => {
 

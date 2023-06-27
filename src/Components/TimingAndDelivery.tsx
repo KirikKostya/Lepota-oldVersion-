@@ -1,5 +1,5 @@
-import React from 'react'
-import './Styles/TimingAndDelivery.css'
+import React from 'react';
+import './Styles/TimingAndDelivery.css';
 
 interface IStepsOfDelivary{
     id: number,

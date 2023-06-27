@@ -1,12 +1,12 @@
-import React from 'react'
-import { refreshFunction } from '../MainFiles/App';
-import { NavLink } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import './Styles/MyAccount.css'
-import { Dispatch } from 'redux';
+import React from 'react';
+import { loadingComplate, loadingUncomplate, uncomplatedAuth } from '../ReduxToolkit/Slices';
 import { IInitialState } from '../ReduxToolkit/Interfaces';
-import { loadingComplate, loadingUncomplate, uncomplatedAuth} from '../ReduxToolkit/Slices'
+import { useDispatch, useSelector } from 'react-redux';
+import { refreshFunction } from '../MainFiles/App';
+import { NavLink } from 'react-router-dom';
+import { Dispatch } from 'redux';
+import axios from 'axios';
+import './Styles/MyAccount.css';
 
 export const signOut = (dispatch: Dispatch) =>{
   dispatch(loadingUncomplate());

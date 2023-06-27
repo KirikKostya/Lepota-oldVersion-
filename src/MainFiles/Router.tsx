@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 import Main from './Main';
-import Regist from '../Registration/Regist'
-import Profile from '../MyAccountComponents/Profile'
-import MyBasket from '../OrderBasket/MyBasket'
+import Regist from '../Registration/Regist';
+import Profile from '../MyAccountComponents/Profile';
+import MyBasket from '../OrderBasket/MyBasket';
 import OrdersArchive from '../OrderArchive/OrdersArchive';
-import TypeCatalog from '../CatalogOfWorks/TypeCatalog'
+import TypeCatalog from '../CatalogOfWorks/TypeCatalog';
 import AccountActivation from '../Activation/AccountActivation';
-import { Routes, Route, HashRouter} from 'react-router-dom'
+import { Routes, Route, HashRouter } from 'react-router-dom';
 
 const Router: React.FC = () => {
 

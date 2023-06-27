@@ -1,13 +1,13 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { IOrderArchiveType } from '../Admin/Update/Interfaces/Interface.js';
+import { loadingComplate, loadingUncomplate } from '../ReduxToolkit/Slices';
+import { refreshFunction } from '../MainFiles/App';
+import { useDispatch } from 'react-redux';
 import ContactWithUs from '../Components/ContactWithUs';
 import UpNavigation from '../Components/UpNavigation'
-import ListOfArchive from './ListOfArchive'
-import { useDispatch } from 'react-redux';
-import { refreshFunction } from '../MainFiles/App';
+import ListOfArchive from './ListOfArchive';
 import axios from 'axios';
 import './Styles/OrdersArchive.css';
-import { IOrderArchiveType } from '../Admin/Update/Interfaces/Interface.js';
-import { loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices'
 
 
 const OrdersArchive: React.FC = () => {
@@ -35,9 +35,11 @@ const OrdersArchive: React.FC = () => {
   }
 
   const renderListOfArchiveElements = useMemo(()=>{
+    
     return(
       <ListOfArchive LIST={listOfOrdersInArchive} setList={setListOfOrdersInArchive} />
     )
+    
   }, [listOfOrdersInArchive])
 
   useEffect(()=>{    

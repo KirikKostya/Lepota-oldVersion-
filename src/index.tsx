@@ -1,9 +1,9 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import App from './MainFiles/App';
-import store from './ReduxToolkit/Store';
 import reportWebVitals from './Others/reportWebVitals';
+import store from './ReduxToolkit/Store';
+import App from './MainFiles/App';
 import './MainFiles/Styles/index.css';
 
 const root = ReactDOM.createRoot(

@@ -1,12 +1,18 @@
-import axios from 'axios'
-import React, {useState, useEffect} from 'react'
-import Loading from 'react-loading';
+import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useSearchParams } from 'react-router-dom'
-import ActivateModal from '../Modals/ActivateModal';
-import { loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices'
+import { useSearchParams } from 'react-router-dom';
+import { loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices';
 import { IInitialState } from '../ReduxToolkit/Interfaces';
-import './Styles/AccountActivation.css'
+import PositiveIconActivation from '../Icons/PositiveIconActivation';
+import NagativeIconActivation from '../Icons/NagativeIconActivation';
+import InfoIcon from '../Icons/InfoIcon';
+import ErrorIcon from '../Icons/ErrorIcon';
+import WarningIcon from '../Icons/WarningIcon';
+import SuccessIcon from '../Icons/SuccessIcon';
+import ModalView from '../Modals/ModalView';
+import Loading from 'react-loading';
+import axios from 'axios';
+import './Styles/AccountActivation.css';
 
 //Success request
 interface QuestionResponseI{
@@ -74,14 +80,42 @@ const AccountActivation: React.FC = ()=> {
                     height="45px"
                     width="45px" 
                   />
-                  : <ActivateModal 
-                      errorMessage={errorMessage}
-                      setErrorMessage={setErrorMessage}
-                      activationFunction={activationFunction}
-                    />
+                  : <ModalView isOpen={Boolean(errorMessage)} >
+                      <h2 className='headerModal-antd'>
+                        {
+                          errorMessage === 'Такой аккаунт уже активирован!'
+                            ? <InfoIcon />
+                              : errorMessage === 'Такого пользователя не существует!'
+                                ? <ErrorIcon />
+                                  : errorMessage === 'Что-то пошло не так! Проверьте подключение к интернету'
+                                    ? <WarningIcon />
+                                      : <SuccessIcon />
+                        }
+                        {errorMessage}
+                      </h2>
+                      <div className='bodyActivateModal-antd'>
+                        {
+                            errorMessage === 'Такой аккаунт уже активирован!' || errorMessage === 'Вы активировали аккаунт!'
+                                ? <PositiveIconActivation />
+                                      : <NagativeIconActivation />
+                        }
+                        {
+                            errorMessage === 'Такой аккаунт уже активирован!' || errorMessage === 'Вы активировали аккаунт!'
+                                ? <a className='NavLink modal-closeBTN' style={{marginTop: '10px'}} href={'https://kirikkostya.github.io/Lepota/'}>продолжить</a>
+                                    : <button 
+                                        className='modal-closeBTN' 
+                                        style={{marginTop: '10px'}}
+                                        onClick={()=>{
+                                            activationFunction();
+                                            setErrorMessage('');
+                                        }}>повторить</button>
+                        }
+                      </div>
+                    </ModalView>
             }
       </div>
     </div>
   )
 }
+
 export default AccountActivation;

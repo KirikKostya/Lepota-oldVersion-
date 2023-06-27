@@ -5,15 +5,15 @@ import CameraIcon from '../Icons/CameraIcon';
 interface IPickerProps {
   setPhotos: React.Dispatch<React.SetStateAction<string[]>> 
   photos: string[]
-  className: string,
-  style: {},
+  className?: string,
+  style?: {},
 }
 
 const Picker: React.FC<IPickerProps> = (props) => {
   
   const { setPhotos, photos, className, style } = props;
 
-  const [openPicker] = useDrivePicker();  
+  const [ openPicker ] = useDrivePicker();  
 
   const handleOpenPicker = () => {
       openPicker({

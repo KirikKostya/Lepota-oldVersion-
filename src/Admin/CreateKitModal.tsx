@@ -1,15 +1,15 @@
-import React, {useState} from 'react';
-import ReactModal from 'react-modal';
-import Slider from '../Slider/Slider';
-import Picker from './Picker';
+import React, { useState } from 'react';
+import { ICreateKitProps } from './Update/Interfaces/Interface';
 import { FaChevronLeft } from 'react-icons/fa';
 import { createKit } from './AdmineController';
 import { useDispatch } from 'react-redux';
-import { ICreateKitProps } from './Update/Interfaces/Interface';
+import Slider from '../Slider/Slider';
+import ReactModal from 'react-modal';
+import Picker from './Picker';
 
 const CreateKitModal: React.FC<ICreateKitProps> = (props: ICreateKitProps) => {
     
-    const {isOpen, setIsOpen, kitVariants, itemId, selectedVariants} = props;
+    const { isOpen, setIsOpen, kitVariants, itemId, selectedVariants } = props;
 
     const [addedPhotos, setAddedPhotos] = useState<string[]>([]);
     const [kitName, setKitName] = useState<string>('');

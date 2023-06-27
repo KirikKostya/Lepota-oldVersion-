@@ -1,5 +1,5 @@
-import React from 'react'
-import './Styles/AboutKashpo.css'
+import React from 'react';
+import './Styles/AboutKashpo.css';
 
 interface IExample{
     id: number,

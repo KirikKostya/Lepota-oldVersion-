@@ -1,26 +1,25 @@
-import React, {useEffect, useState, useRef} from 'react'
+import React, { useEffect, useState, useRef } from 'react';
 import OrderCardMoreImgs from '../Icons/OrderCardMoreImgs';
 import SimpleImageSlider from 'react-simple-image-slider';
-import VariantPhotosModal from '../Modals/VariantPhotosModal'; 
-import CreateVariantModal from '../Admin/CreateVariantModal';
 import CreateKitModal from '../Admin/CreateKitModal';
 import AddVariantIcon from '../Icons/AddVariantIcon';
-import BasketIcon from '../Icons/BasketIcon';
 import CrossIcon from '../Icons/CrossIcon';
 import Pensil from '../Icons/Pensil';
+import { IOrderCarsProps, IVariant } from '../Admin/Update/Interfaces/Interface';
+import { setTotalSum, setVariantId } from '../ReduxToolkit/Slices'
+import { IInitialState } from '../ReduxToolkit/Interfaces';
 import { deleteVariant } from '../Admin/AdmineController';
 import { useDispatch, useSelector } from 'react-redux';
-import { refreshFunction } from '../MainFiles/App'
-import axios from 'axios';
+import CreateVariantModal from '../Admin/CreateVariantModal';
+import ModalView from '../Modals/ModalView';
+import Slider from '../Slider/Slider';
 import './Style/OrderCard.css';
-import { IOrderCarsProps, IVariant } from '../Admin/Update/Interfaces/Interface';
-import { IInitialState } from '../ReduxToolkit/Interfaces';
-import { setTotalSum, setVariantId } from '../ReduxToolkit/Slices'
 
 
 interface IGalleryItem{
   url: string
 }
+
 //Makes list from response data
 export const getImages = (images:string[]):IGalleryItem[] => {
   return images === null
@@ -191,7 +190,22 @@ const AdmineConstructor: React.FC<IOrderCarsProps> = (props) => {
             </div>
             <CreateKitModal isOpen={isOpenCreateKitModal} setIsOpen={setIsOpenCreateKitModal} kitVariants={kits} itemId={searchOrderById} selectedVariants={selectedVariants}/>
             <CreateVariantModal isOpen={isOpenAddedVariantModal} setIsOpen={setIsOpenAddedVariantModal} setError={setError} cleanSelectedOptions={()=>cleanSelectedOptions(refInput, refCount)}/>
-            <VariantPhotosModal isOpen={isOpenVarintPhotos} setIsOpen={setIsOpenVariantPhotos} IMGS={imagesOfVariant} />
+            <ModalView isOpen={isOpenVarintPhotos}>
+              <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                <Slider>
+                  {
+                    imagesOfVariant.map(img=>(
+                      <img key={img.url} src={ img.url } alt='something'/>
+                    ))
+                  }
+                </Slider>
+                <button 
+                    className='modal-closeBTN' 
+                    style={{marginTop: '15px'}}
+                    onClick={()=>setIsOpenVariantPhotos(false)}
+                >закрыть</button>
+              </div>
+            </ModalView>
           </div>
         ))
       }

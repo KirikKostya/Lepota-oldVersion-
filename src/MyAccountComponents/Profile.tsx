@@ -21,7 +21,7 @@ export const getPersonalDate = (dispatch: Dispatch, setList:(data: IProfile)=>vo
   axios.get('https://api.native-flora.tk/User/GetInfo', {
     headers:{'x-access-token': localStorage.getItem('accessToken')}
   })
-  .then(res=>setList(res.data.data))
+  .then(res=>res.data.data !== null && setList(res.data.data))
   .catch(err=>console.log(err))
   dispatch(loadingComplate());
 }

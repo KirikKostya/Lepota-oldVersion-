@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState } from 'react';
 import InputMask from 'react-input-mask';
 import { IProfile } from '../Admin/Update/Interfaces/Interface';
 
@@ -12,16 +12,13 @@ const PersonalDataInputs: React.FC<IPersonalDataProps> = (props) => {
     const { allDataAboutUser, setPersonalData } = props;
 
     //date about user
-    const [firstName, setfirstName] = useState<string>('');
-    const [userSurname, setUserSurname] = useState<string>('');
-    const [userFathername, setUserFathername] = useState<string>('');
-    const [userAddress, setUserAddress] = useState<string>('');
-    const [userZipCode, setUserZipCode] = useState<string>('');
-    const [userPhone, setUserPhone] = useState<string>('');
-    const [userBirthday, setUserBirthday] = useState<string>('');
-    const [userInst, setUserInst] = useState<string>('');
-    const [userVK, setUserVK] = useState<string>('');
-    const [userTelegram, setUserTelegram] = useState<string>(''); 
+    const [firstName, setfirstName] = useState<string>(allDataAboutUser.firstName);
+    const [userSurname, setUserSurname] = useState<string>(allDataAboutUser.surName);
+    const [userFathername, setUserFathername] = useState<string>(allDataAboutUser.fatherName);
+    const [userAddress, setUserAddress] = useState<string>(allDataAboutUser.address);
+    const [userZipCode, setUserZipCode] = useState<string>(allDataAboutUser.zipCode);
+    const [userPhone, setUserPhone] = useState<string>(allDataAboutUser.phone);
+    const [userBirthday, setUserBirthday] = useState<string>(allDataAboutUser.birthday);
     
   return (
     <>
@@ -64,7 +61,9 @@ const PersonalDataInputs: React.FC<IPersonalDataProps> = (props) => {
             </form>
         </div>
         <div className='saveButton_Prof'>
-            <button onClick={()=>{
+            <button 
+            type='submit'
+            onClick={()=>{
                 setPersonalData({
                     firstName: firstName,
                     surName: userSurname,
@@ -73,9 +72,9 @@ const PersonalDataInputs: React.FC<IPersonalDataProps> = (props) => {
                     zipCode: userZipCode, 
                     phone: userPhone, 
                     birthday: userBirthday,
-                    vk: userVK,
-                    instagram: userInst,
-                    telegram: userTelegram})
+                    vk: '',
+                    instagram: '',
+                    telegram: ''})
                 }}>
             Сохранить
             </button>

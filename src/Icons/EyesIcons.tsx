@@ -1,9 +1,9 @@
-import React from 'react'
-import { IOnClick } from '../Admin/Update/Interfaces/Interface'
+import React from 'react';
+import { IOnClick } from '../Admin/Update/Interfaces/Interface';
 
-export function CloseEyeIcons (props:IOnClick) {
+export const CloseEyeIcons: React.FC<IOnClick> = (props) => {
   
-  const {onClick} = props;
+  const { onClick } = props;
 
   return (
     <svg 
@@ -21,9 +21,9 @@ export function CloseEyeIcons (props:IOnClick) {
   )
 }
 
-export function OpenEyeIcons (props:IOnClick) {
+export const OpenEyeIcons: React.FC<IOnClick> = (props:IOnClick) => {
 
-  const {onClick} = props;
+  const { onClick } = props;
 
   return (
     <svg 
@@ -40,4 +40,4 @@ export function OpenEyeIcons (props:IOnClick) {
     )
 }
 
-export default [CloseEyeIcons, OpenEyeIcons]
+export default [CloseEyeIcons, OpenEyeIcons];

@@ -1,15 +1,15 @@
-import React, {useState} from 'react'
-import { updateName } from '../AdmineController';
+import React, { useState } from 'react'
+import { IUpdateNameProps } from './Interfaces/Interface';
 import { refreshFunction } from '../../MainFiles/App'
+import { updateName } from '../AdmineController';
+import { FaChevronLeft } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import ReactModal from 'react-modal';
 import './Style/UpdateCSS.css'
-import { IUpdateNameProps } from './Interfaces/Interface';
-import { FaChevronLeft } from 'react-icons/fa';
 
 const UpdateName: React.FC<IUpdateNameProps> = (props) => {
     
-    const {isOpen, defaultName, defaultPrice, setIsOpen} = props;
+    const { isOpen, defaultName, defaultPrice, setIsOpen } = props;
 
     const [name, setName] = useState<string>(defaultName);
     const [price, setPrice] = useState<string>(defaultPrice);

@@ -6,7 +6,7 @@ import "./Styles/SingleSelect.css";
 
 const SingleSelect: React.FC<ISingleSelect> = (props) => {
   
-  const {options, placeholder, width, index, selectedOptions, setSelectedOptions, type} = props;
+  const { options, width, index, selectedOptions, setSelectedOptions, type } = props;
   
   const [activeOption, setActiveOption] = useState<string>('');
 

@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-const Cookie: React.FC = () => {
+const CookieIcon: React.FC = () => {
   
   return (
     <svg width="24" height="24" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" style={{margin: '0 10px 0 5px'}} > 
@@ -18,4 +18,4 @@ const Cookie: React.FC = () => {
   )
 }
 
-export default Cookie;
+export default CookieIcon;

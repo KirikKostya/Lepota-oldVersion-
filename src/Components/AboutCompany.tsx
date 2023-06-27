@@ -1,7 +1,8 @@
-import React from 'react'
-import './Styles/AboutCompany.css'
+import React from 'react';
+import './Styles/AboutCompany.css';
 
 const AboutCompany: React.FC = () => {
+  
   return (
     <div className='aboutCompanyContainer'>
         <h1>Наше собственное производство</h1>

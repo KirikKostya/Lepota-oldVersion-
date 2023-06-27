@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { IInitialState } from './Interfaces'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IInitialState } from './Interfaces';
 
 const initialState:IInitialState = {
     isAuthorizate: Boolean(localStorage.getItem('accessToken')),

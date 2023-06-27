@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { getPersonalDate } from '../MyAccountComponents/Profile';
-import { refreshFunction } from '../MainFiles/App'
-import { useDispatch } from 'react-redux';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import SuccessIcon from '../Icons/SuccessIcon';
 import { ICartItem, IProfile } from '../Admin/Update/Interfaces/Interface';
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { getPersonalDate } from '../MyAccountComponents/Profile';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { refreshFunction } from '../MainFiles/App';
+import { useDispatch } from 'react-redux';
+import ModalView from '../Modals/ModalView';
+import axios from 'axios';
 
 interface ICheckProps{
     ItemsInBasket:ICartItem[], 
@@ -27,6 +29,7 @@ const Check: React.FC<ICheckProps> = (props) => {
     const { register, handleSubmit, reset, formState: {errors} } = useForm<IDataForOrder>();
 
     const [isDisabled, setIsDisabled] = useState<boolean>(Boolean(localStorage.getItem('accessToken')));
+    const [successModalOpen, setSuccessModalOpen] = useState<boolean>(false);
 
     const [personalData, setPersonalData] = useState<IProfile>({
         firstName: '',
@@ -73,6 +76,8 @@ const Check: React.FC<ICheckProps> = (props) => {
             if(res.status === 200){
                 requestBasketFunc();
                 refreshFunction(dispatch, ()=>{});
+                setSuccessModalOpen(true);
+                setTimeout(()=>setSuccessModalOpen(false), 2000)
                 reset();
             }
         })
@@ -81,7 +86,7 @@ const Check: React.FC<ICheckProps> = (props) => {
 
     useEffect(()=>{
         getPersonalDate(dispatch, setPersonalData)
-    }, [])
+    }, []);
 
   return (
     <div className='check'>
@@ -201,6 +206,13 @@ const Check: React.FC<ICheckProps> = (props) => {
                 </button>
             </div>
         </form>
+        {
+            successModalOpen
+            &&
+            <ModalView isOpen={successModalOpen}>
+                <h2 className='headerModal-antd'><SuccessIcon/> Заказ успешно оформлен !</h2>
+            </ModalView>
+        }
     </div>
   )
 }

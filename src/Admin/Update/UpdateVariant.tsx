@@ -1,16 +1,16 @@
-import React, {useEffect, useState} from 'react'
-import { updateVariant } from '../AdmineController';
+import React, { useState } from 'react';
+import { IUpdateVariantProps } from './Interfaces/Interface';
 import { refreshFunction } from '../../MainFiles/App'
-import { useDispatch, useSelector } from 'react-redux';
+import { updateVariant } from '../AdmineController';
+import { FaChevronLeft } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 import ReactModal from 'react-modal';
 import Picker from '../Picker';
 import './Style/UpdateCSS.css';
-import { IUpdateVariantProps } from './Interfaces/Interface';
-import { FaChevronLeft } from 'react-icons/fa';
 
 const UpdateVariant: React.FC<IUpdateVariantProps> = (props) => {
     
-    const {isOpen, variant, setIsOpen} = props;
+    const { isOpen, variant, setIsOpen } = props;
 
     const [variantPhotos, setVariantPhotos] = useState<string[]>([...variant.icon]);
     const [variantName, setVariantName] = useState<string>(variant.name);

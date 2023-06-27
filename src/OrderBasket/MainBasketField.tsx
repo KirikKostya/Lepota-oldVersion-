@@ -1,11 +1,10 @@
-import React from 'react'
-import { refreshFunction } from '../MainFiles/App'
-import { useDispatch } from 'react-redux'
-import { NavLink } from 'react-router-dom'
-import axios from 'axios'
-import { ICartItem } from '../Admin/Update/Interfaces/Interface'
-import { Dispatch } from 'redux'
-import { loadingComplate, loadingUncomplate } from '../ReduxToolkit/Slices'
+import React from 'react';
+import { loadingComplate, loadingUncomplate } from '../ReduxToolkit/Slices';
+import { ICartItem } from '../Admin/Update/Interfaces/Interface';
+import { refreshFunction } from '../MainFiles/App';
+import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 interface IMainBascketField{
   ItemsInBasket: ICartItem[], 
@@ -48,9 +47,9 @@ const MainBasketField: React.FC<IMainBascketField> = (props) => {
   const findPhoto = (cart:ICartItem):string => {
     return cart.variants
             ? cart.variants[0].icon[0]
-              : (cart.kit)
+              : cart.kit
                 ? cart.kit.icon[0]
-                  : cart.item.icon[0]
+                  : cart.item.icon[0] || require('../Photos/somethingWentWrong.png')
   }
 
   //gets variants or kit of select cart

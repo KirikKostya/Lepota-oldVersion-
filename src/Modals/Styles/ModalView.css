@@ -1,4 +1,24 @@
-@import url('/src/Fonts/fonts.css');
+@import url('../../Fonts/fonts.css');
+h2, h4{
+    font-family: 'Montserrat-Regular';
+}
+
+.headerModal-antd{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+.textModal-antd{
+    width: 80%;
+    text-align: end;
+}
+.bodyActivateModal-antd{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .modal-header{
     width: 95% !important;
     letter-spacing: 1.2px;

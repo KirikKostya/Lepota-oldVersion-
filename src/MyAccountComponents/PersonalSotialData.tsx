@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react';
 import { IProfile } from '../Admin/Update/Interfaces/Interface';
 
 interface ISotialDataProps{

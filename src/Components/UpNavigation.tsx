@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import MyAccount from '../MyAccountComponents/MyAccount'
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshFunction } from '../MainFiles/App'
@@ -10,6 +10,7 @@ import axios from 'axios';
 import './Styles/UpNavigation.css'
 import { IInitialState } from '../ReduxToolkit/Interfaces';
 import { closeAccount, openAccount, setCountOfOrder } from '../ReduxToolkit/Slices'
+import { Avatar } from 'antd';
 
 interface IUpNavProps{
   hide: string 

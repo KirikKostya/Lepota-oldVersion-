@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
-import { updateMetric } from '../AdmineController';
-import { refreshFunction } from '../../MainFiles/App'
-import { useDispatch } from 'react-redux';
-import ReactModal from 'react-modal'
-import './Style/UpdateCSS.css'
+import React, { useState } from 'react';
 import { IUpdateMetricProps } from './Interfaces/Interface';
+import { refreshFunction } from '../../MainFiles/App'
+import { updateMetric } from '../AdmineController';
 import { FaChevronLeft } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
+import ReactModal from 'react-modal';
+import './Style/UpdateCSS.css';
 
 const UpdateMetric: React.FC<IUpdateMetricProps> = (props: IUpdateMetricProps) => {
 

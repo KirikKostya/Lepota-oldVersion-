@@ -1,10 +1,12 @@
-import React, {useState} from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { CloseEyeIcons, OpenEyeIcons } from '../Icons/EyesIcons'
-import './Styles/SignUp.css'
-import axios from 'axios'
-import { useDispatch } from 'react-redux'
-import { complatedAuth} from '../ReduxToolkit/Slices'
+import React, { useState } from 'react';
+import { CloseEyeIcons, OpenEyeIcons } from '../Icons/EyesIcons';
+import InfoIcon from '../Icons/InfoIcon';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { complatedAuth} from '../ReduxToolkit/Slices';
+import { useDispatch } from 'react-redux';
+import ModalView from '../Modals/ModalView';
+import axios from 'axios';
+import './Styles/SignUp.css';
 
 interface ISignUpProps{
     setRegistr: React.Dispatch<React.SetStateAction<boolean>>
@@ -20,6 +22,7 @@ const SignUp: React.FC<ISignUpProps> = (props:ISignUpProps) => {
 
     const [closeEyesStatus, setCloseEyesStatus] = useState<boolean>(true);
     const [closeSecondEyesStatus, setCloseSecondEyesStatus] = useState<boolean>(true);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
     const [userExist, setUseExist] = useState<string>('');
 
@@ -35,6 +38,8 @@ const SignUp: React.FC<ISignUpProps> = (props:ISignUpProps) => {
               })
           .then(() =>{
                 dispatch(complatedAuth());
+                setIsModalOpen(true);
+                setTimeout(()=>setIsModalOpen(false), 2000);
                 reset()
             })
           .catch(err=>{
@@ -116,13 +121,14 @@ const SignUp: React.FC<ISignUpProps> = (props:ISignUpProps) => {
               onClick={()=>setRegistr(false)}>
             РЕГИСТИРОВАТЬСЯ
             </p>
-        </div>
-        <div className='changeField'>
-            <p>Есть аккаунт? Тогда добро пожаловать!</p>
-            <button 
-              className='signInChangeBtn' 
-              onClick={()=>setRegistr(false)}>Войти</button>
-        </div>
+            </div>
+            <div className='changeField'>
+                <p>Есть аккаунт? Тогда добро пожаловать!</p>
+                <button 
+                className='signInChangeBtn' 
+                onClick={()=>setRegistr(false)}>Войти</button>
+            </div>
+            <ModalView isOpen={isModalOpen} title={<h4><InfoIcon margin='0 5px 0 0'/>Мы отправили вам подтвердительное письмо на почту. Подтвердите что эта почта ваша!</h4>}/>
         </div>
     )
 }
