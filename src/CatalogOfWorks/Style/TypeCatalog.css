@@ -1,12 +1,14 @@
 @import url('/src/Fonts/fonts.css');
 /**/
 .infoContainer{
-    width: 75%;
+    width: 100%;
+    max-width: 1100px;
     display: flex;
     flex-direction: row;
 }
 .infoOrder{
     width: 100%;
+    max-width: 1250px;
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -85,6 +87,7 @@
 /**/
 .containerForTypeCatalog{
     width: 80%;
+    max-width: 1150px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -104,8 +107,8 @@
 }
 /*FullCombination*/
 .fullCombinationContainer{
-    min-width: 1000px;
-    max-width: 1100px;
+    width: 100%;
+    max-width: 1150px;
     display: flex;
     align-items: center;
     justify-content: start;

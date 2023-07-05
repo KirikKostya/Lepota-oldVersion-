@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SingleSelect from '../DropDowns/SingleSelect';
 import CrossIcon from '../Icons/CrossIcon';
 import { loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices';
@@ -10,6 +10,14 @@ import { useDispatch } from 'react-redux';
 import Picker from './Picker';
 import axios from 'axios';
 import './Style/AddedNewCart.css'
+import Modal from 'antd/es/modal/Modal';
+import { Radio, Select } from 'antd';
+import InfoIcon from '../Icons/InfoIcon';
+
+interface INewArray{
+    label: string 
+    value: string 
+}
 
 //gets value of metric by metric name
 export const getValueByMetricName = (selectedOptions:ISelectOption[], type:string) => {
@@ -29,7 +37,6 @@ export const getValueByMetricName = (selectedOptions:ISelectOption[], type:strin
         } else if(selectedOptions[i].metric === 'Вес' && type === 'Weight'){
             return selectedOptions[i].value
         }
-
         return null;
     } 
 }
@@ -43,6 +50,12 @@ const AddedNewCart: React.FC = () => {
     
     const [photos, setPhotos] = useState<string[]>([]);
     const [description, setDesctiption] = useState<string>('');
+    const [isAKit, setIsAKit] = useState<boolean>(false);
+
+    const [parentOptions, setParentOptions] = useState<INewArray[]>([{label: '', value: ''}]);
+    const [parentId, setParentId] = useState<string>('null');
+    const [fullData, setFullData] = useState<INewItem>({name: '', price: ''});
+    const [addedModal, setAddedModal] = useState<boolean>(false);
 
     const [metricsListStep, setMetricsListStep] = useState<string[]>([]);
     const [selectedOptions, setSelectedOptions] = useState<ISelectOption[]>([]);
@@ -59,16 +72,21 @@ const AddedNewCart: React.FC = () => {
         return newArray
     }
 
-    //adds scroll to photo list 
-    const makeScroll = ():string => {
-        return (window.innerWidth > 724 && photos.length >= 7) 
-                || 
-                (window.innerWidth <= 724 && photos.length >= 3) 
-                    ? 'scroll' 
-                        : 'none'
+    const onSubmit: SubmitHandler<INewItem> = (data) => {
+        setFullData(data);
+        setAddedModal(true);
     }
 
-    const onSubmit: SubmitHandler<INewItem> = (data) => {
+    // clears all fields
+    const clearAll = ():void => {
+        setMetricsListStep([]);
+        setDesctiption('');
+        setPhotos([]);
+        reset();
+    }
+
+    const addedCart = (data: INewItem) => {
+        dispatch(loadingUncomplate())
         refreshFunction(dispatch, ()=>{
             dispatch(loadingUncomplate());
             axios.post('https://api.native-flora.tk/Item/Add', {
@@ -84,7 +102,10 @@ const AddedNewCart: React.FC = () => {
                         "Material": getValueByMetricName(selectedOptions, "Material"),
                         "Weight": getValueByMetricName(selectedOptions, "Weight"),
                         "Width":  getValueByMetricName(selectedOptions, "Width"),
-                    }
+                    },
+                    "isAKit": isAKit,
+                    "parentId": parentId,
+                    "type": ''
             }, {
                 headers:{
                     'x-access-token': localStorage.getItem('accessToken')
@@ -94,15 +115,15 @@ const AddedNewCart: React.FC = () => {
             .catch(err=>console.log(err))
             dispatch(loadingComplate())
         })
-    }
-    // clears all fields
-    const clearAll = ():void => {
-        setMetricsListStep([]);
-        setDesctiption('');
-        setPhotos([]);
-        reset();
+        setAddedModal(false);
+        dispatch(loadingComplate())
     }
 
+    useEffect(() => {
+        axios.get(`https://api.native-flora.tk/Item/GetAll`)
+          .then(res=>setParentOptions([{value: 'null', label: 'Новый товар'}, ...res.data.data.map((el: any)=>{ return {value: el.id, label: el.name} }).filter((el:any)=>el.label !== 'Комплекты')]));
+    }, [])
+    
   return (
     <div className='addedFieldAdmine'>
         <div className='photoAndDescriptionContainer'>
@@ -187,20 +208,31 @@ const AddedNewCart: React.FC = () => {
                     ))
                 }
                 <div 
-                    className='deleteMetricBtnField'
+                    className={`deleteMetricBtnField ${metricsListStep.length >= 7 && 'displayNone'}`}
                     onClick={()=>{
                         setMetricsListStep([...metricsListStep, Math.random().toFixed(4)]);
                         setSelectedOptions([...selectedOptions, { id: Math.random().toFixed(2), metric: '', value: '' }])
                     }}
-                    style={{display: metricsListStep.length >= 7 ? 'none' : 'block'}}
                 >
-                    <button type='button' className='deleteMetricBtn'>Добавить</button>
+                    <button type='button' className='deleteMetricBtn' onClick={()=>console.log(metricsListStep.length >= 7 ? 'none' : 'block')}>Добавить</button>
                 </div>
             </div>
             <div className='createCartField'>
                 <button className='createCartBTN' >Создать</button>
             </div>
         </form>
+        <Modal title={<InfoIcon width='1.25em' height='1.25em'/>} open={addedModal} onCancel={()=>setAddedModal(false)} cancelButtonProps={{style: {display: 'none'}}} okText='Создать' onOk={()=>addedCart(fullData)}>
+            <div className='addedModal'>
+                <div>
+                    <h4 style={{margin: '0'}}>Это набор ?</h4>
+                    <Radio.Group onChange={(e)=>setIsAKit(e.target.value)} value={isAKit}>
+                        <Radio value={false}>НЕТ</Radio>
+                        <Radio value={true}>ДА</Radio>
+                    </Radio.Group>
+                </div>
+                <Select defaultValue={'Новый товар'} options={parentOptions} style={{width: '200px'}} onChange={(e)=>setParentId(e)}/>
+            </div>
+        </Modal>
     </div>
   )
 }

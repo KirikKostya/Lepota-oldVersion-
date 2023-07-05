@@ -25,7 +25,8 @@ span{
 }
 /* */
 .mainListContainer{
-    width: 60%;
+    width: 100%;
+    max-width: 1250px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,6 +34,7 @@ span{
 }
 .mainContainerForArhive{
     width: 100%;
+    max-width: 1250px;
     min-height: 90vh;
     display: flex;
     flex-direction: row;

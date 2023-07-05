@@ -1,6 +1,7 @@
 @import url('/src/Fonts/fonts.css');
 .fullContainer{
     width: 100%;
+    max-width: 1250px;
     min-height: 88vh;
     display: flex;
     flex-direction: row;

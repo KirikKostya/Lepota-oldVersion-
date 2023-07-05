@@ -1,6 +1,7 @@
 @import url('/src/Fonts/fonts.css');
 .containerForProfile{
     width: 100%;
+    max-width: 1250px;
     display: flex;
     align-items: start;
     margin: 15px 0;

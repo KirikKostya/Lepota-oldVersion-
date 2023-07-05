@@ -101,7 +101,7 @@ const AdmineConstructor: React.FC<IOrderCarsProps> = (props) => {
           <div className='mainContainer' key={order.item.id}>
             <div className='containerForCards'>
               <div className='item-Card'> 
-                <Carousel className='CRSL' navButtonsAlwaysVisible={true} navButtonsProps={{style: {display: `${order.item.icon.length === 0 ? 'none' : 'block'}`}}}>
+                <Carousel className='CRSL' navButtonsAlwaysVisible={true} navButtonsProps={{style: {display: `${order.item.icon.length === 0 ? 'none' : 'flex'}`}}}>
                   {
                     order.item.icon.length === 0 
                       ? <Image src={require('../Photos/somethingWentWrong.png')} style={{width: '380px', height: '330px'}}/>
