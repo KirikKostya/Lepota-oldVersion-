@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import OrderCardMoreImgs from '../Icons/OrderCardMoreImgs';
-import SimpleImageSlider from 'react-simple-image-slider';
 import Carousel from 'react-material-ui-carousel'
 import CreateKitModal from '../Admin/CreateKitModal';
 import AddVariantIcon from '../Icons/AddVariantIcon';
@@ -13,10 +12,8 @@ import { deleteVariant } from '../Admin/AdmineController';
 import { useDispatch, useSelector } from 'react-redux';
 import CreateVariantModal from '../Admin/CreateVariantModal';
 import ModalView from '../Modals/ModalView';
-import Slider from '../Slider/Slider';
 import './Style/OrderCard.css';
 import { Image } from 'antd';
-import { exemplesOfUsed } from '../Components/AboutKashpo';
 
 
 interface IGalleryItem{
@@ -92,7 +89,7 @@ const AdmineConstructor: React.FC<IOrderCarsProps> = (props) => {
       }
     }
 
-    useEffect(()=>fetchProducts(searchOrderById), [catalogOrders]);
+    useEffect(()=>fetchProducts(searchOrderById), []);
 
   return (
     <>
@@ -101,11 +98,11 @@ const AdmineConstructor: React.FC<IOrderCarsProps> = (props) => {
           <div className='mainContainer' key={order.item.id}>
             <div className='containerForCards'>
               <div className='item-Card'> 
-                <Carousel className='CRSL' navButtonsAlwaysVisible={true} navButtonsProps={{style: {display: `${order.item.icon.length === 0 ? 'none' : 'flex'}`}}}>
+                <Carousel className='CRSL' navButtonsAlwaysVisible={true} navButtonsProps={{style: {display: `${(order.item.icon?.length === 0 || !order.item.icon) ? 'none' : 'flex'}`}}}>
                   {
-                    order.item.icon.length === 0 
+                    (order.item.icon?.length === 0 || !order.item.icon)
                       ? <Image src={require('../Photos/somethingWentWrong.png')} style={{width: '380px', height: '330px'}}/>
-                        : order.item.icon.map(photo=>(
+                        : order.item.icon?.map(photo=>(
                             <Image key={photo} src={photo} style={{width: '380px', height: '330px'}}/>
                           ))
                   }

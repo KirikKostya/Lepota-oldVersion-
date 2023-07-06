@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import WarningIcon from '../Icons/WarningIcon';
 import BasketIcon from '../Icons/BasketIcon';
+import Carousel from 'react-material-ui-carousel'
 import { changeSearchId, loadingComplate, loadingUncomplate } from '../ReduxToolkit/Slices';
 import { ICard } from '../Admin/Update/Interfaces/Interface';
 import { refreshFunction } from '../MainFiles/App';
-import { Image, Carousel, Button } from 'antd';
+import { Image, Button } from 'antd';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import ModalView from '../Modals/ModalView';
@@ -58,11 +59,11 @@ const CardOfWork: React.FC<ICardProps> = (props) => {
 
   return (
     <div className='card'>
-        <div className='infoOfCard' key={card.id}>
+        {/* <div className='infoOfCard'> */}
           {
             card.icon === null || card.icon.length == 0
             ? <Image src={getImageFromAPI(card.icon)} width={'190px'} height={'200px'} fallback={require('../Photos/somethingWentWrong.png')}/>
-              : <Carousel className='carouselContainer' easing={'ease-in-out'} dots={{className: 'dotsCarousel'}} >
+              : <Carousel className='carouselContainer' autoPlay={false} navButtonsAlwaysVisible={true} navButtonsProps={{style: {width: '35px', height: '35px', display: `${card.icon.length === 0 ? 'none' : 'flex'}`}}}>
                   {
                     card.icon.map(photo=>(
                       <Image key={photo} src={photo} width={'190px'} height={'200px'} fallback={require('../Photos/somethingWentWrong.png')}/>
@@ -71,7 +72,7 @@ const CardOfWork: React.FC<ICardProps> = (props) => {
                 </Carousel>
           }
           <div className='nameButton'>
-            <h4>{card.name} <span>{card.price} Br</span> </h4>
+            <h4>{card.name} <span style={{display: `${card.price ? 'inline' : 'none' }`}}>{card.price} Br</span> </h4>
             {
               isAllCombination
                 ? <Button type='primary'
@@ -105,7 +106,7 @@ const CardOfWork: React.FC<ICardProps> = (props) => {
               в аккаунт!
             </h4>
           </ModalView>
-        </div>
+        {/* </div> */}
     </div>
   )
 }

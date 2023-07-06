@@ -43,7 +43,7 @@ const UpdatePhotos: React.FC<IUpdatePhotosProps> = (props) => {
         </h2>
         <div className='listPhotos'>
             {
-                photoList.map((photo, index)=>(
+                photoList?.map((photo, index)=>(
                     <img key={index} src={photo} alt='photo' className='examplePhoto' onClick={()=>setPhotoList(photoList.filter(item => item !== photo))}/>
                 ))
             }

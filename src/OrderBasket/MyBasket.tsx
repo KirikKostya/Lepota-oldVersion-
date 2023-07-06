@@ -26,6 +26,7 @@ const MyBasket: React.FC = () => {
       !res.data.data
         ? setItemsInBasket([])
           : setItemsInBasket(res.data.data.cartItems)
+          console.log(res.data.data.cartItems)
       dispatch(loadingComplate())
     })
   }

@@ -26,7 +26,7 @@ const MainBasketField: React.FC<IMainBascketField> = (props) => {
     }, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}
     })
-    await requestBasketFunc();
+    requestBasketFunc();
     dispatch(loadingComplate());
   }}
 
@@ -46,10 +46,12 @@ const MainBasketField: React.FC<IMainBascketField> = (props) => {
   //find photo
   const findPhoto = (cart:ICartItem):string => {
     return cart.variants
-            ? cart.variants[0].icon[0]
-              : cart.kit
-                ? cart.kit.icon[0]
-                  : cart.item.icon[0] || require('../Photos/somethingWentWrong.png')
+      ? (cart.variants[0].icon?.length === 0 || !cart.variants[0].icon) ? require('../Photos/somethingWentWrong.png') : cart.variants[0].icon[0]
+        : cart.kit
+          ? (cart.kit.icon?.length === 0 || !cart.kit.icon) ? require('../Photos/somethingWentWrong.png') : cart.kit.icon[0]
+            : cart.item
+              ? (cart.item.icon?.length === 0 || !cart.item.icon) ? require('../Photos/somethingWentWrong.png') : cart.item.icon[0]
+                : require('../Photos/somethingWentWrong.png')
   }
 
   //gets variants or kit of select cart
