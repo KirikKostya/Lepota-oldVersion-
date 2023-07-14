@@ -6,6 +6,7 @@ import MyBasket from '../OrderBasket/MyBasket';
 import OrdersArchive from '../OrderArchive/OrdersArchive';
 import TypeCatalog from '../CatalogOfWorks/TypeCatalog';
 import AccountActivation from '../Activation/AccountActivation';
+import AllKits from '../CatalogOfWorks/AllKits';
 import { Routes, Route, HashRouter } from 'react-router-dom';
 
 const Router: React.FC = () => {
@@ -20,6 +21,7 @@ const Router: React.FC = () => {
             <Route path='/OrdersArchive' element={<OrdersArchive />} />
             <Route path='/TypeCatalog' element={<TypeCatalog />} />
             <Route path='/Activation' element={<AccountActivation />} />
+            <Route path='/AllKits' element={<AllKits />} />
         </Routes>
     </HashRouter>
   )

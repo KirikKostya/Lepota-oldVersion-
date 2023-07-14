@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import CardOfWork from './CardOfWork';
 import axios from 'axios';
 import './Styles/WorkCatalog.css';
+import { Empty } from 'antd';
 
 const WorkCatalog: React.FC = () => {
   
@@ -28,7 +29,7 @@ const WorkCatalog: React.FC = () => {
     )
   }, [CARDS]);
 
-  useEffect( getAllItem, []);
+  useEffect(getAllItem, []);
 
   return (
     <div className='catalogContainer' id='catalogOfWorks'>
@@ -39,6 +40,7 @@ const WorkCatalog: React.FC = () => {
         </p>
         <div className='listOfWorks'>
           {renderCarts}
+          <CardOfWork card={{id: 0, name:'Комплекты', price: undefined, icon: [require('../Photos/KITS.png')]}} />
         </div>
     </div>
   )

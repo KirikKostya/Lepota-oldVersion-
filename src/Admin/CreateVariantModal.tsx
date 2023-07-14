@@ -10,7 +10,7 @@ import './Style/CreateVariantModal.css';
 
 const CreateVariantModal: React.FC<ICreateVariantProps> = (props: ICreateVariantProps) => {
     
-    const {isOpen, setIsOpen, setError, cleanSelectedOptions} = props;
+    const {isOpen, setIsOpen, setError, cleanSelectedOptions, fetchProducts} = props;
 
     const [addedPhotos, setAddedPhotos] = useState<string[]>([]);
     const [variantName, setVariantName] = useState<string>('');
@@ -58,7 +58,8 @@ const CreateVariantModal: React.FC<ICreateVariantProps> = (props: ICreateVariant
             className='modal-closeBTN variantBtn' 
             style={{margin: '15px 0 10px 0'}}
             onClick={async()=>{
-                createVariant(localStorage.getItem('searchOrderById') || '{}', variantName, variantPrice, addedPhotos, setError, dispatch);
+                                  fetchProducts(+localStorage.getItem('searchOrderById')!);
+                createVariant(localStorage.getItem('searchOrderById') || '{}', variantName, variantPrice, addedPhotos, setError, dispatch, ()=>fetchProducts(+localStorage.getItem('searchOrderById')!));
                 setIsOpen(false);
                 cleanSelectedOptions()
             }}

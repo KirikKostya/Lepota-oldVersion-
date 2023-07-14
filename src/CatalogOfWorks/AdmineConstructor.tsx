@@ -63,6 +63,7 @@ const AdmineConstructor: React.FC<IOrderCarsProps> = (props) => {
     const [kits, setKits] = useState<number[]>(Array);
     const [nameOfKit, setNameOfKit] = useState<string>('');
     const [listOfPhotos, setListOfPhotos] = useState<string[]>(Array);
+    const [removeBtnTrigger, setRemoveBtnTrigger] = useState<boolean>(false);
 
     //For all selected kits
     const [selectedVariants, setSelectedVariants] = useState<IVariant[]>([]);
@@ -89,7 +90,7 @@ const AdmineConstructor: React.FC<IOrderCarsProps> = (props) => {
       }
     }
 
-    useEffect(()=>fetchProducts(searchOrderById), []);
+    useEffect(()=>fetchProducts(+localStorage.getItem('searchOrderById')!), []);
 
   return (
     <>
@@ -110,7 +111,7 @@ const AdmineConstructor: React.FC<IOrderCarsProps> = (props) => {
               </div>
             </div>
             <div className='additionalMetrics'>
-              <div className={`listOfMitrics ${variants.length===0 && 'empty'}`}>
+              <div className={`listOfMitrics ${ variants.length===0 && 'empty' }`}>
                 <h3 className='headerMetrics'>
                   { isAdmine && <AddVariantIcon onClick={()=>setIsOpenAddedVariantModal(true)} /> }
                   В комплекте может идти:
@@ -124,7 +125,7 @@ const AdmineConstructor: React.FC<IOrderCarsProps> = (props) => {
                               <label
                                 className='metricLabel' 
                                 onChange={(event: any)=>{
-                                  handlerChangeTotalSum(event.target.value, +item.id, item);
+                                  handlerChangeTotalSum(event.target.checked, +item.id, item);
                                 }}>
                                   <input ref={(element:HTMLInputElement) => refInput.current[index] = element } type={'checkbox'} className='checkBox' />
                                   <span>+</span>
@@ -149,9 +150,8 @@ const AdmineConstructor: React.FC<IOrderCarsProps> = (props) => {
                               {
                                 isAdmine 
                                 && 
-                                <CrossIcon onClick={async()=>{
-                                  deleteVariant(localStorage.getItem('searchOrderById')||'{}', item.id, dispatch);
-                                  fetchProducts(searchOrderById)
+                                <CrossIcon onClick={()=>{
+                                  deleteVariant(localStorage.getItem('searchOrderById')!, item.id, dispatch, ()=>fetchProducts(+localStorage.getItem('searchOrderById')!));
                                 }}/>
                               }
                             </div>
@@ -163,9 +163,7 @@ const AdmineConstructor: React.FC<IOrderCarsProps> = (props) => {
                   &&
                   <button className='addKitBTN' onClick={()=>setIsOpenCreateKitModal(true)}>Создать набор</button>
                 }
-                {
-                  error && <sup style={{color: 'red'}}>{error}</sup>
-                }
+                { error && <sup style={{color: 'red'}}>{error}</sup> }
               </div>
               {
                 catalogOrders.map(order=>(
@@ -185,8 +183,8 @@ const AdmineConstructor: React.FC<IOrderCarsProps> = (props) => {
               }
               <button className='addToCartBTN' onClick={()=>setIsOpenUpdatePhotos(true)}>Добавить фотографии</button>
             </div>
-            <CreateKitModal isOpen={isOpenCreateKitModal} setIsOpen={setIsOpenCreateKitModal} kitVariants={kits} itemId={searchOrderById} selectedVariants={selectedVariants}/>
-            <CreateVariantModal isOpen={isOpenAddedVariantModal} setIsOpen={setIsOpenAddedVariantModal} setError={setError} cleanSelectedOptions={()=>cleanSelectedOptions(refInput, refCount)}/>
+            <CreateKitModal isOpen={isOpenCreateKitModal} setIsOpen={setIsOpenCreateKitModal} kitVariants={kits} itemId={+localStorage.getItem('searchOrderById')!} selectedVariants={selectedVariants}/>
+            <CreateVariantModal isOpen={isOpenAddedVariantModal} setIsOpen={setIsOpenAddedVariantModal} setError={setError} cleanSelectedOptions={()=>cleanSelectedOptions(refInput, refCount)} fetchProducts={fetchProducts}/>
             <ModalView isOpen={isOpenVarintPhotos}>
               <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                 <Carousel className='CRSL' navButtonsAlwaysVisible={true} navButtonsProps={{style: {display: `${imagesOfVariant.length === 0 ? 'none' : 'flex'}`}}}>

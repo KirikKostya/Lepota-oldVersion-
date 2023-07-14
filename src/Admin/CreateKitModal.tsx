@@ -56,7 +56,7 @@ const CreateKitModal: React.FC<ICreateKitProps> = (props: ICreateKitProps) => {
         <button 
             className='modal-closeBTN variantBtn' 
             style={{margin: '15px 0 10px 0', color: `${kitName==='' && kitPrice === '' ? "white" : "black"}`, cursor: `${kitName==='' && kitPrice === '' ? 'not-allowed' : 'pointer'}`}}
-            disabled={kitName==='' && kitPrice === ''}
+            disabled={kitName === '' && kitPrice === ''}
             onClick={async()=>{
                 createKit(itemId, kitName || selectedVariants.map(el=>el.name).join(' + ').toLowerCase(), kitVariants, addedPhotos, kitPrice, dispatch);
                 setIsOpen(false)

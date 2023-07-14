@@ -59,7 +59,6 @@ const CardOfWork: React.FC<ICardProps> = (props) => {
 
   return (
     <div className='card'>
-        {/* <div className='infoOfCard'> */}
           {
             card.icon === null || card.icon.length == 0
             ? <Image src={getImageFromAPI(card.icon)} width={'190px'} height={'200px'} fallback={require('../Photos/somethingWentWrong.png')}/>
@@ -87,7 +86,7 @@ const CardOfWork: React.FC<ICardProps> = (props) => {
                     <BasketIcon />     
                   </Button>
                   : <NavLink 
-                      to='/TypeCatalog' 
+                      to={`${card.name !== 'Комплекты' ? '/TypeCatalog' : '/AllKits'}`}
                       className='catalogBTN' 
                       onClick={()=>{
                         dispatch(changeSearchId(card.id));
@@ -106,7 +105,6 @@ const CardOfWork: React.FC<ICardProps> = (props) => {
               в аккаунт!
             </h4>
           </ModalView>
-        {/* </div> */}
     </div>
   )
 }

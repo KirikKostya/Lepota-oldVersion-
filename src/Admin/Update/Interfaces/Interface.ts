@@ -41,7 +41,8 @@ export interface ICreateVariantProps{
     isOpen: boolean, 
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>> 
     setError: (str:string)=>void, 
-    cleanSelectedOptions: ()=>void
+    cleanSelectedOptions: ()=>void,
+    fetchProducts: (num: number)=>void
 }
 export interface IVariant{
     description: string,
@@ -103,7 +104,7 @@ export interface ICard{
     id: number,
     name: string,
     description?: string,
-    price: number,
+    price?: number,
     icon: string[],
     sizes?: ISizes,
     variants?: number[]

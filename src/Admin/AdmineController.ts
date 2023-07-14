@@ -88,7 +88,7 @@ export const updatePhotos = (id: string, photos: string[], dispatch: Dispatch) =
   })
 }
 
-export const createVariant = (itemId: string, Name: string, Price: string, Photos: string[], setError:(str: string)=>void, dispatch:Dispatch)=>{
+export const createVariant = (itemId: string, Name: string, Price: string, Photos: string[], setError:(str: string)=>void, dispatch:Dispatch, fetchVariant: ()=>void)=>{
   dispatch(loadingUncomplate())
   axios.post(`https://api.native-flora.tk/Variant/Add`, {
       "itemId": +itemId,
@@ -98,7 +98,10 @@ export const createVariant = (itemId: string, Name: string, Price: string, Photo
     }, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
     })
-  .then(()=>dispatch(loadingComplate()))
+  .then(()=>{
+    fetchVariant();  
+    dispatch(loadingComplate())
+  })
   .catch(err=>{
     err.response.status === 400 && setError('Такой вариант уже существует!') 
     setTimeout(()=>setError(''), 4000)
@@ -106,7 +109,7 @@ export const createVariant = (itemId: string, Name: string, Price: string, Photo
   })
 }
 
-export const deleteVariant = (itemId:string, variantId:string, dispatch:Dispatch) => {
+export const deleteVariant = (itemId:string, variantId:string, dispatch:Dispatch, fetchVariants: ()=>void) => {
   dispatch(loadingUncomplate())
   axios.post(`https://api.native-flora.tk/Variant/Delete`, {
       "itemId": +itemId,
@@ -114,10 +117,11 @@ export const deleteVariant = (itemId:string, variantId:string, dispatch:Dispatch
     }, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
     })
-  .then(()=>dispatch(loadingComplate()))
-  .catch(err=>{
-    dispatch(loadingComplate())
+  .then(()=>{
+    fetchVariants();
+    dispatch(loadingComplate());
   })
+  .catch(err=> dispatch(loadingComplate()))
 }
 
 export const updateVariant = (itemId: string, variantId:string, name:string, price:string, photos:string[], dispatch:Dispatch) => {
@@ -148,8 +152,12 @@ export const createKit = (itemId: number, name:string, variants:number[], photos
     }, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
     })
-    .then(()=>dispatch(loadingComplate()))
+    .then(res=>{
+      console.log(res)
+      dispatch(loadingComplate())
+    })
     .catch(err=>{
+      console.log(err)
       dispatch(loadingComplate())
     })
 }

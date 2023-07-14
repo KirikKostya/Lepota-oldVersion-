@@ -50,7 +50,6 @@ const TypeCatalog: React.FC = () => {
   const fetchProducts = (OpenID:number) => {
     axios.get(`https://api.native-flora.tk/Item/GetById?id=${OpenID || localStorage.getItem('searchOrderById')}`)
       .then(res=>{
-        console.log(res.data.data)
         setCatalogOrders([res.data.data]);
         setPhotosOfCards(res.data.data.item!.icon);
         isAdmine && localStorage.setItem('variants', JSON.stringify(res.data.data.variants));
