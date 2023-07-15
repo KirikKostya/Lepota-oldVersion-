@@ -3,9 +3,11 @@ import { ICreateKitProps } from './Update/Interfaces/Interface';
 import { FaChevronLeft } from 'react-icons/fa';
 import { createKit } from './AdmineController';
 import { useDispatch } from 'react-redux';
-import Slider from '../Slider/Slider';
+import { Image } from 'antd';
+import Carousel from 'react-material-ui-carousel';
 import ReactModal from 'react-modal';
 import Picker from './Picker';
+import './Style/CreateKit.css';
 
 const CreateKitModal: React.FC<ICreateKitProps> = (props: ICreateKitProps) => {
     
@@ -33,13 +35,13 @@ const CreateKitModal: React.FC<ICreateKitProps> = (props: ICreateKitProps) => {
     >
         {
             addedPhotos.length != 0 
-                ?  <Slider>
-                      {
-                        addedPhotos.map(img=>(
-                            <img key={img} src={ img } alt='something'/>
-                        ))
-                      }
-                    </Slider>
+                ?  <Carousel className='createKitCarousel' autoPlay={false} navButtonsAlwaysVisible={true} navButtonsProps={{style: {width: '35px', height: '35px', display: `${addedPhotos.length <= 1 ? 'none' : 'flex'}`}}}>
+                        {
+                            addedPhotos.map(photo=>(
+                                <Image key={photo} src={photo} width={'100%'} height={'250px'} fallback={require('../Photos/somethingWentWrong.png')}/>
+                            ))
+                        }
+                    </Carousel>
                     : <h2 className='addVariantHeader'>
                         <FaChevronLeft 
                             style={{width: '10px', marginRight: '10px'}} 

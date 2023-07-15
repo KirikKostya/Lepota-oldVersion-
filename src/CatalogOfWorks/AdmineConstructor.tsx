@@ -14,6 +14,7 @@ import CreateVariantModal from '../Admin/CreateVariantModal';
 import ModalView from '../Modals/ModalView';
 import './Style/OrderCard.css';
 import { Image } from 'antd';
+import UpdateVariant from '../Admin/Update/UpdateVariant';
 
 
 interface IGalleryItem{
@@ -37,7 +38,6 @@ const AdmineConstructor: React.FC<IOrderCarsProps> = (props) => {
     catalogOrders,
     fetchProducts,
     variants,
-    setIsOpenUpdateVariant,
     setIsOpenUpdatePhotos
   } = props;
 
@@ -47,7 +47,7 @@ const AdmineConstructor: React.FC<IOrderCarsProps> = (props) => {
 
     //context
     const totalSum_TypeComp = useSelector((state: IInitialState)=>state.totalSumInConstuctor);
-    const searchOrderById = useSelector((state: IInitialState)=>state.searchOrderById);
+    const variantId = useSelector((state: IInitialState)=>state.variantId);
     const isAdmine = useSelector((state: IInitialState)=>state.isAdmine);
     const dispatch = useDispatch();
 
@@ -57,13 +57,14 @@ const AdmineConstructor: React.FC<IOrderCarsProps> = (props) => {
     const [isOpenCreateKitModal, setIsOpenCreateKitModal] = useState<boolean>(false);
     const [isOpenAddedVariantModal, setIsOpenAddedVariantModal] = useState<boolean>(false);
     const [isOpenVarintPhotos, setIsOpenVariantPhotos] = useState<boolean>(false);
+    const [isOpenUpdateVariant, setIsOpenUpdateVariant] = useState<boolean>(false);
+
 
     const [imagesOfVariant, setImagesOfVariant] = useState<IGalleryItem[]>(Array);
 
     const [kits, setKits] = useState<number[]>(Array);
     const [nameOfKit, setNameOfKit] = useState<string>('');
     const [listOfPhotos, setListOfPhotos] = useState<string[]>(Array);
-    const [removeBtnTrigger, setRemoveBtnTrigger] = useState<boolean>(false);
 
     //For all selected kits
     const [selectedVariants, setSelectedVariants] = useState<IVariant[]>([]);
@@ -150,7 +151,7 @@ const AdmineConstructor: React.FC<IOrderCarsProps> = (props) => {
                               {
                                 isAdmine 
                                 && 
-                                <CrossIcon onClick={()=>{
+                                <CrossIcon onClick={async()=>{
                                   deleteVariant(localStorage.getItem('searchOrderById')!, item.id, dispatch, ()=>fetchProducts(+localStorage.getItem('searchOrderById')!));
                                 }}/>
                               }
@@ -167,8 +168,7 @@ const AdmineConstructor: React.FC<IOrderCarsProps> = (props) => {
               </div>
               {
                 catalogOrders.map(order=>(
-                  <div className='containerForHeader_Button' key={order.item.id}>
-                    <h3 className='headerCard'>
+                    <h3 className='headerCard' key={order.item.id}>
                       {order.item.name} 
                       <span className='nameOfKit'>{''}</span>
                       <span>{totalSum_TypeComp} Br</span>
@@ -178,11 +178,15 @@ const AdmineConstructor: React.FC<IOrderCarsProps> = (props) => {
                           setImagesOfVariant(getImages(listOfPhotos))
                         }} />
                     </h3>
-                  </div>
                 ))
               }
               <button className='addToCartBTN' onClick={()=>setIsOpenUpdatePhotos(true)}>Добавить фотографии</button>
             </div>
+            {
+              JSON.parse(localStorage.getItem('variants')!).length != 0
+              && 
+              <UpdateVariant isOpen={isOpenUpdateVariant} variant={JSON.parse(localStorage.getItem('variants')!).filter((el:IVariant)=>+el.id == variantId)[0]} setIsOpen={setIsOpenUpdateVariant} />
+            }
             <CreateKitModal isOpen={isOpenCreateKitModal} setIsOpen={setIsOpenCreateKitModal} kitVariants={kits} itemId={+localStorage.getItem('searchOrderById')!} selectedVariants={selectedVariants}/>
             <CreateVariantModal isOpen={isOpenAddedVariantModal} setIsOpen={setIsOpenAddedVariantModal} setError={setError} cleanSelectedOptions={()=>cleanSelectedOptions(refInput, refCount)} fetchProducts={fetchProducts}/>
             <ModalView isOpen={isOpenVarintPhotos}>

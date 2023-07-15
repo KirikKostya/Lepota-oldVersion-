@@ -24,7 +24,7 @@ const UpdatePhotos: React.FC<IUpdatePhotosProps> = (props) => {
     }
 
     const handlerChange = () => {
-        updatePhotos(localStorage.getItem('searchOrderById') || '', photoList, dispatch);
+        updatePhotos(localStorage.getItem('searchOrderById')!, photoList, dispatch);
         setIsOpen(false);
     }
     

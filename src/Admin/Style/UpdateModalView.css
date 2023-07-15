@@ -1,6 +1,6 @@
 @import url('/src/Fonts/fonts.css');
 .formContainer{
-    width: 70%; 
+    width: 65%; 
     display: flex; 
     align-items: center; 
     justify-content: space-around; 

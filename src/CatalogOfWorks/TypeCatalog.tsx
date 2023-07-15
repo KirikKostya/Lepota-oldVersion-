@@ -29,7 +29,6 @@ const TypeCatalog: React.FC = () => {
   const [isOpenUpdateName, setIsOpenUpdateName] = useState<boolean>(false);
   const [isOpenUpdateDescription, setIsOpenUpdateDescription] = useState<boolean>(false);
   const [isOpenUpdateMetric, setIsOpenUpdateMetric] = useState<IOpenUpdateMetric>({isOpen: false, value: ''});
-  const [isOpenUpdateVariant, setIsOpenUpdateVariant] = useState<boolean>(false);
 
   const order: ICard = JSON.parse(localStorage.getItem('infoAboutTypeOfOrder') || '{}');
 
@@ -38,7 +37,6 @@ const TypeCatalog: React.FC = () => {
 
   //ID типа товаров, по которому нужно делать запрос 
   const searchOrderById = useSelector((state: IInitialState)=>state.searchOrderById);
-  const variantId = useSelector((state: IInitialState)=>state.variantId);
   const isAdmine = useSelector((state: IInitialState)=>state.isAdmine);
   const dispatch = useDispatch();
 
@@ -159,11 +157,6 @@ const TypeCatalog: React.FC = () => {
         </>
       }
       {
-        JSON.parse(localStorage.getItem('variants') || '[]').length != 0
-        && 
-        <UpdateVariant isOpen={isOpenUpdateVariant} variant={JSON.parse(localStorage.getItem('variants')||'{}').filter((el:IVariant)=>+el.id == variantId)[0]} setIsOpen={setIsOpenUpdateVariant} />
-      }
-      {
         isAdmine
           ? 
             <div className='containerForTypeCatalog'>
@@ -171,7 +164,6 @@ const TypeCatalog: React.FC = () => {
                 catalogOrders={catalogOrders}
                 fetchProducts={fetchProducts}
                 variants={JSON.parse(localStorage.getItem('variants')||'[]')}
-                setIsOpenUpdateVariant={setIsOpenUpdateVariant}
                 setIsOpenUpdatePhotos={setIsOpenUpdatePhotos}
               />
             </div>

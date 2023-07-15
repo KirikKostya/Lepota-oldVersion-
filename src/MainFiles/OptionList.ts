@@ -2,35 +2,35 @@ import { IOption } from "../Admin/Update/Interfaces/Interface";
 
 export const SortByDate:IOption[] = [
     {
-        value: 'newOrderds',
+        value: 'Новые',
         label: 'Новые'
     },
     {
-        value: 'oldOrders',
+        value: 'Старые',
         label: 'Старые'
     }
 ]
 export const SortByDileverStatus:IOption[] = [
     {
-        value: 'BeingProcessed',
+        value: 'Принят в обработку',
         label: 'Принят в обработку'
     },
     {
-        value: 'Delivered',
+        value: 'Получен',
         label: 'Получен'
     },
     {
-        value: 'Shipping',
+        value: 'В пути',
         label: 'В пути'
     }
 ]
 export const SortByDileverType:IOption[] = [
     {
-        value: 'newOrderds',
+        value: 'Доставка',
         label: 'Доставка'
     },
     {
-        value: 'oldOrders',
+        value: 'Самовывоз',
         label: 'Самовывоз'
     }
 ]

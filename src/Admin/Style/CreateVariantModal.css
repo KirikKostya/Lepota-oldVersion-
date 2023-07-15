@@ -20,3 +20,8 @@
     padding: 3px;
     font-family: 'Montserrat-Regular';
 }
+.createVariantCarousel{
+    width: 60%;
+    height: 250px;
+    border-radius: 10px;
+}

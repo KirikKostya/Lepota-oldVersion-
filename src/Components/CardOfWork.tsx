@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SuccessIcon from '../Icons/SuccessIcon';
 import WarningIcon from '../Icons/WarningIcon';
 import BasketIcon from '../Icons/BasketIcon';
 import Carousel from 'react-material-ui-carousel'
@@ -16,14 +17,15 @@ import './Styles/CardOfWork.css';
 interface ICardProps{
   card: ICard
   isAllCombination?: boolean
-  setAddedOrder?: React.Dispatch<React.SetStateAction<boolean>> 
-  setModalView?: React.Dispatch<React.SetStateAction<boolean>>
 }
 const CardOfWork: React.FC<ICardProps> = (props) => {
 
-  const { card, isAllCombination, setAddedOrder, setModalView } = props;
+  const { card, isAllCombination } = props;
   
-  const [ isWarningOpen, setIsWarningOpen ] = useState<boolean>(false);
+  const [isWarningOpen, setIsWarningOpen] = useState<boolean>(false);
+  const [successModalState, setSuccessModalState] = useState<boolean>(false);
+  const [errorModalState, setErrorModalState] = useState<boolean>(false);
+
   const dispatch = useDispatch();
 
   const addItemToCart=(card: ICard)=>{
@@ -37,14 +39,14 @@ const CardOfWork: React.FC<ICardProps> = (props) => {
     })
     .then(res => {
       if(res.status === 200){
-        setAddedOrder!(true)
-        setTimeout(()=>setAddedOrder!(false), 1500)
+        setSuccessModalState!(true);
+        setTimeout(()=>setSuccessModalState!(false), 1500);
       }
     })
     .catch(err => {
       if(err.response.status === 404){
-        setModalView!(true)
-        setTimeout(()=>setModalView!(false), 2000)
+        setErrorModalState!(true);
+        setTimeout(()=>setErrorModalState!(false), 2000);
       }
     })
     dispatch(loadingComplate())
@@ -62,7 +64,7 @@ const CardOfWork: React.FC<ICardProps> = (props) => {
           {
             card.icon === null || card.icon.length == 0
             ? <Image src={getImageFromAPI(card.icon)} width={'190px'} height={'200px'} fallback={require('../Photos/somethingWentWrong.png')}/>
-              : <Carousel className='carouselContainer' autoPlay={false} navButtonsAlwaysVisible={true} navButtonsProps={{style: {width: '35px', height: '35px', display: `${card.icon.length === 0 ? 'none' : 'flex'}`}}}>
+              : <Carousel className='carouselContainer' autoPlay={false} navButtonsAlwaysVisible={true} navButtonsProps={{style: {width: '35px', height: '35px', display: `${card.icon.length <= 1 ? 'none' : 'flex'}`}}}>
                   {
                     card.icon.map(photo=>(
                       <Image key={photo} src={photo} width={'190px'} height={'200px'} fallback={require('../Photos/somethingWentWrong.png')}/>
@@ -97,14 +99,23 @@ const CardOfWork: React.FC<ICardProps> = (props) => {
                     >Подробнее</NavLink>
             }
           </div>
-          <ModalView isOpen={isWarningOpen}>
-            <h2 className='headerModal-antd'><WarningIcon/> Внимание!</h2>
-            <h4 style={{width: '95%', textAlign: 'start'}}>
-              Для того чтобы добавить товар в корзину, вам необходимо 
-                <NavLink className={'linkToRegistration'} to={'/Registration'}> войти </NavLink>
-              в аккаунт!
-            </h4>
-          </ModalView>
+        <ModalView isOpen={isWarningOpen}>
+          <h2 className='headerModal-antd'><WarningIcon/> Внимание!</h2>
+          <h4 style={{width: '95%', textAlign: 'start'}}>
+            Для того чтобы добавить товар в корзину, вам необходимо 
+              <NavLink className={'linkToRegistration'} to={'/Registration'}> войти </NavLink>
+            в аккаунт!
+          </h4>
+        </ModalView>
+
+        <ModalView isOpen={successModalState}>
+          <h2 className='headerModal-antd'><SuccessIcon />Ваш товар добавлен в корзину!</h2>
+        </ModalView>
+  
+        <ModalView isOpen={errorModalState}>
+          <h2 className='headerModal-antd'><WarningIcon />Такой товар уже есть в корзине</h2>
+          <h4 className='textModal-antd'>Изменить количество товаров можно в корзине</h4>
+        </ModalView>
     </div>
   )
 }

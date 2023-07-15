@@ -80,7 +80,7 @@ export const updatePhotos = (id: string, photos: string[], dispatch: Dispatch) =
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
     })
   .then(res=>{
-    localStorage.setItem('infoAboutTypeOfOrder', JSON.stringify(res.data.data))
+    localStorage.setItem('infoAboutTypeOfOrder', JSON.stringify(res.data.data));
     dispatch(loadingComplate())
   })
   .catch(err=>{
@@ -98,7 +98,8 @@ export const createVariant = (itemId: string, Name: string, Price: string, Photo
     }, {
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
     })
-  .then(()=>{
+  .then(res=>{
+    console.log(res)
     fetchVariant();  
     dispatch(loadingComplate())
   })
@@ -121,7 +122,9 @@ export const deleteVariant = (itemId:string, variantId:string, dispatch:Dispatch
     fetchVariants();
     dispatch(loadingComplate());
   })
-  .catch(err=> dispatch(loadingComplate()))
+  .catch(err=> {
+    console.log(err)
+    dispatch(loadingComplate())})
 }
 
 export const updateVariant = (itemId: string, variantId:string, name:string, price:string, photos:string[], dispatch:Dispatch) => {
@@ -137,6 +140,7 @@ export const updateVariant = (itemId: string, variantId:string, name:string, pri
     })
     .then(()=>dispatch(loadingComplate()))
     .catch(err=>{
+      console.log(err)
       dispatch(loadingComplate())
     })
 }

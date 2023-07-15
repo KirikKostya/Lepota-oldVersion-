@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import ReactModal from 'react-modal';
 import Picker from '../Picker';
 import './Style/UpdateCSS.css';
+import { Image } from 'antd';
 
 const UpdateVariant: React.FC<IUpdateVariantProps> = (props) => {
     
@@ -27,7 +28,6 @@ const UpdateVariant: React.FC<IUpdateVariantProps> = (props) => {
     }
 
     const handlerChange = async() =>{
-        updateVariant(localStorage.getItem('searchOrderById') || '{}', variant.id, variantName, variantPrice, variantPhotos, dispatch);
         setIsOpen(false)
     }
     
@@ -44,10 +44,24 @@ const UpdateVariant: React.FC<IUpdateVariantProps> = (props) => {
             />
             Изменить вариант
         </h2>
+        {/* <div className='listOfSelectedImages'>
+            {
+                variantPhotos.length != 0
+                &&
+                variantPhotos.map(photo=>(
+                    <Image key={photo} 
+                        src={photo}
+                        width={'100px'} height={'100px'} fallback={require('../../Photos/somethingWentWrong.png')}
+                        onClick={() => setVariantPhotos(variantPhotos.filter(item => item !== photo))}
+                    />
+                ))
+            }
+            <Picker setPhotos={setVariantPhotos} photos={variantPhotos} className='addedFileBTN' />
+        </div> */}
         <div className='formContainer'>
             <input placeholder='Название' onChange={event=>setVariantName(event.target.value)} defaultValue={variant.name}/>
             <input placeholder='Цена' style={{width: '50px'}} type='number' min={'0'} onChange={event=>setVariantPrice(event.target.value)} defaultValue={variant.price}/>
-            <Picker photos={variantPhotos} setPhotos={setVariantPhotos} style={styleForPicker} className={''}/>
+            <Picker photos={variantPhotos} setPhotos={setVariantPhotos} style={styleForPicker} className={undefined}/>
         </div>
         <div className='updateBTNS'>
             <button 

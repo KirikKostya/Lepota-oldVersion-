@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import SingleSelect from '../DropDowns/SingleSelect';
 import CrossIcon from '../Icons/CrossIcon';
+import InfoIcon from '../Icons/InfoIcon';
 import { loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices';
 import { IOption, ISelectOption } from './Update/Interfaces/Interface';
-import { OptionsOfMetrics } from '../DropDowns/OptionList';
+import { OptionsOfMetrics } from '../MainFiles/OptionList';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { refreshFunction } from '../MainFiles/App';
 import { useDispatch } from 'react-redux';
+import { Radio, Select } from 'antd';
+import Modal from 'antd/es/modal/Modal';
 import Picker from './Picker';
 import axios from 'axios';
 import './Style/AddedNewCart.css'
-import Modal from 'antd/es/modal/Modal';
-import { Radio, Select } from 'antd';
-import InfoIcon from '../Icons/InfoIcon';
 
 interface INewArray{
     label: string 
@@ -119,6 +118,13 @@ const AddedNewCart: React.FC = () => {
         dispatch(loadingComplate())
     }
 
+    const handlerChanges = (value: string, index: number) => {
+        if(selectedOptions === undefined || index===undefined || setSelectedOptions===undefined) return
+        let newArray: ISelectOption[] = [...selectedOptions];
+        newArray[index] = {...newArray[index], metric: value, value: ''};
+        setSelectedOptions(newArray);
+    }
+
     useEffect(() => {
         axios.get(`https://api.native-flora.tk/Item/GetAll`)
           .then(res=>setParentOptions([{value: 'null', label: 'Новый товар'}, ...res.data.data.map((el: any)=>{ return {value: el.id, label: el.name} }).filter((el:any)=>el.label !== 'Комплекты')]));
@@ -178,14 +184,7 @@ const AddedNewCart: React.FC = () => {
                 {
                     metricsListStep.map( (el:string, index:number) => (
                         <div className='metric' key={el} >
-                            <SingleSelect
-                                options={filter(OptionsOfMetrics, selectedOptions)}
-                                width={'60%'}
-                                index={index}
-                                selectedOptions={selectedOptions}
-                                setSelectedOptions={setSelectedOptions}
-                                type={'metric'} 
-                            />
+                            <Select onChange={(value: string)=>handlerChanges(value, index)} options={filter(OptionsOfMetrics, selectedOptions)} style={{width: '60%', margin: '5px 0'}} />
                             <input 
                                 className='metricInput' 
                                 type={selectedOptions[index].metric === 'Материалы' ? 'text' : 'number'}

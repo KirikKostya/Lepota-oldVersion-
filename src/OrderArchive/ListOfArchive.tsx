@@ -1,14 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import WarningIcon from '../Icons/WarningIcon';
-import { SortByDate, SortByDileverStatus, SortByDileverType } from '../DropDowns/OptionList';
+import { SortByDate, SortByDileverStatus, SortByDileverType } from '../MainFiles/OptionList';
 import { loadingComplate, loadingUncomplate} from '../ReduxToolkit/Slices';
 import { IOrderArchiveType } from '../Admin/Update/Interfaces/Interface';
 import { IInitialState } from '../ReduxToolkit/Interfaces';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshFunction } from '../MainFiles/App';
 import { NavLink } from 'react-router-dom';
-import { Empty } from 'antd';
-import SingleSelect from '../DropDowns/SingleSelect';
+import { Empty, Select } from 'antd';
 import axios from 'axios';
 import './Styles/OrdersArchive.css';
 
@@ -25,6 +24,10 @@ interface IFilterData{
 const ListOfArchive: React.FC<IListOfArchiveProps> = (props) => {
 
   const { LIST, setList } = props;
+
+  const [date, setDate] = useState<string|null>(null);
+  const [deliveryType, setDeliveryType] = useState<string|null>(null);
+  const [takeStatus, setTakeStatus] = useState<string|null>(null);
 
   const isLoading = useSelector((state:IInitialState)=>state.isLoading);
   const dispatch = useDispatch();
@@ -105,6 +108,31 @@ const ListOfArchive: React.FC<IListOfArchiveProps> = (props) => {
                   : param == 'Delivered'
                     ? {calor: '#00BB40'}
                       : {color: 'black'}
+  }
+
+  const selectHandlerChange = (value: string, setValue: React.Dispatch<React.SetStateAction<string|null>>): void =>{
+    setValue(value);
+    (value === 'Новые')
+      ? localStorage.setItem('filterMetric', JSON.stringify({...JSON.parse(localStorage.getItem('filterMetric')||'{}'), date: 'Новые'}))
+        : (value === 'Старые') 
+          ? localStorage.setItem('filterMetric', JSON.stringify({...JSON.parse(localStorage.getItem('filterMetric')||'{}'), date: 'Старые'}))
+            : (value === 'Доставка')
+              ? localStorage.setItem('filterMetric', JSON.stringify({...JSON.parse(localStorage.getItem('filterMetric')||'{}'), deliveType: 'Доставка'}))
+                : (value === 'Самовывоз')
+                  ? localStorage.setItem('filterMetric', JSON.stringify({...JSON.parse(localStorage.getItem('filterMetric')||'{}'), deliveType: 'Самовывоз'}))
+                    : (value === 'Получен')
+                      ? localStorage.setItem('filterMetric', JSON.stringify({...JSON.parse(localStorage.getItem('filterMetric')||'{}'), deliveStatus: 'Получен'}))
+                        : (value === 'В пути')
+                          ? localStorage.setItem('filterMetric', JSON.stringify({...JSON.parse(localStorage.getItem('filterMetric')||'{}'), deliveStatus: 'В пути'}))
+                            : (value === 'Принят в обработку') 
+                              ? localStorage.setItem('filterMetric', JSON.stringify({...JSON.parse(localStorage.getItem('filterMetric')||'{}'), deliveStatus: 'Принят в обработку'}))
+                                : localStorage.setItem('filterMetric', JSON.stringify({...JSON.parse(localStorage.getItem('filterMetric')||'{}')}))
+  }
+
+  const cleanAllSelect = (): void => {
+    setDate(null);
+    setDeliveryType(null);
+    setTakeStatus(null);
   }
 
   return (
@@ -189,28 +217,13 @@ const ListOfArchive: React.FC<IListOfArchiveProps> = (props) => {
                     </div>
       }
       <div className='filterContainer'>
-        <SingleSelect 
-          options={SortByDate} 
-          placeholder={'Сортировка по дате'}
-          width={'70%'}
-          type={'sorting'}
-        />
-        <SingleSelect 
-          options={SortByDileverType} 
-          placeholder={'Тип доставки'} 
-          width={'70%'}
-          type={'sorting'}
-        />
-        <SingleSelect 
-          options={SortByDileverStatus} 
-          placeholder={'Статус получения'}
-          width={'70%'}
-          type={'sorting'}
-        />
+        <Select value={date} onChange={(value: string)=>selectHandlerChange(value, setDate)} placeholder={'Сортировка по дате'} options={SortByDate} style={{width: '70%', margin: '5px 0'}} listItemHeight={20} listHeight={300}/>
+        <Select value={deliveryType} onChange={(value: string)=>selectHandlerChange(value, setDeliveryType)} placeholder={'Тип доставки'} options={SortByDileverType} style={{width: '70%', margin: '5px 0'}} listItemHeight={20} listHeight={300}/>
+        <Select value={takeStatus} onChange={(value: string)=>selectHandlerChange(value, setTakeStatus)} placeholder={'Статус получения'} options={SortByDileverStatus} style={{width: '70%', margin: '5px 0'}} listItemHeight={20} listHeight={300}/>
         <button 
           className='sortBTN' 
           onClick={() => {
-            refreshFunction(dispatch, ()=>filterArchive(JSON.parse(localStorage.getItem('filterMetric')||'{}')))
+            refreshFunction(dispatch, ()=>filterArchive(JSON.parse(localStorage.getItem('filterMetric')!)))
           }}>Применить фильтр
         </button>
         <span 
@@ -218,7 +231,7 @@ const ListOfArchive: React.FC<IListOfArchiveProps> = (props) => {
           onClick={()=>{
             localStorage.setItem('filterMetric', JSON.stringify({ date: '', deliveType: '', deliveStatus: '' }));
             refreshFunction(dispatch, ()=>filterArchive({ date: '', deliveType: '', deliveStatus: '' }));
-            window.location.reload();
+            cleanAllSelect()
           }}
         >Очистить фильтрацию</span>
       </div>

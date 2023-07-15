@@ -8,17 +8,6 @@ export interface ISelectOption{
     value: string
 }
 
-//SingleSelect
-export interface ISingleSelect{
-    options: IOption[], 
-    placeholder?:string,
-    width:string, 
-    index?:number,
-    selectedOptions?:ISelectOption[], 
-    setSelectedOptions?:React.Dispatch<React.SetStateAction<ISelectOption[]>>, 
-    type:string
-}
-
 //CreateKitModal
 export interface ICreateKitProps{
     isOpen: boolean, 
@@ -133,7 +122,6 @@ export interface IOrderCarsProps{
     catalogOrders: IItemOfWork[]
     fetchProducts: (num:number)=>void
     variants: IVariant[]
-    setIsOpenUpdateVariant: React.Dispatch<React.SetStateAction<boolean>>
     setIsOpenUpdatePhotos: React.Dispatch<React.SetStateAction<boolean>>
 }
 

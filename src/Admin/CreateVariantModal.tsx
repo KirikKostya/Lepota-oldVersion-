@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { ICreateVariantProps } from './Update/Interfaces/Interface';
 import { createVariant } from './AdmineController';
 import { FaChevronLeft } from 'react-icons/fa';
@@ -7,6 +7,8 @@ import Slider from '../Slider/Slider';
 import ReactModal from 'react-modal';
 import Picker from './Picker';
 import './Style/CreateVariantModal.css';
+import { Image } from 'antd';
+import Carousel from 'react-material-ui-carousel';
 
 const CreateVariantModal: React.FC<ICreateVariantProps> = (props: ICreateVariantProps) => {
     
@@ -34,13 +36,13 @@ const CreateVariantModal: React.FC<ICreateVariantProps> = (props: ICreateVariant
     >
         {
             addedPhotos.length != 0 
-                ?  <Slider>
-                      {
-                        addedPhotos.map(img=>(
-                            <img key={img} src={ img } alt='something'/>
-                        ))
-                      }
-                    </Slider>
+                ? <Carousel className='createVariantCarousel' autoPlay={false} navButtonsAlwaysVisible={true} navButtonsProps={{style: {width: '35px', height: '35px', display: `${addedPhotos.length <= 1 ? 'none' : 'flex'}`}}}>
+                    {
+                      addedPhotos.map(photo=>(
+                        <Image key={photo} src={photo} width={'100%'} height={'250px'} fallback={require('../Photos/somethingWentWrong.png')}/>
+                      ))
+                    }
+                  </Carousel>
                     : <h2 className='addVariantHeader'>
                         <FaChevronLeft 
                             style={{width: '10px', marginRight: '10px'}} 
@@ -58,8 +60,7 @@ const CreateVariantModal: React.FC<ICreateVariantProps> = (props: ICreateVariant
             className='modal-closeBTN variantBtn' 
             style={{margin: '15px 0 10px 0'}}
             onClick={async()=>{
-                                  fetchProducts(+localStorage.getItem('searchOrderById')!);
-                createVariant(localStorage.getItem('searchOrderById') || '{}', variantName, variantPrice, addedPhotos, setError, dispatch, ()=>fetchProducts(+localStorage.getItem('searchOrderById')!));
+                createVariant(localStorage.getItem('searchOrderById')!, variantName, variantPrice, addedPhotos, setError, dispatch, ()=>fetchProducts(+localStorage.getItem('searchOrderById')!));
                 setIsOpen(false);
                 cleanSelectedOptions()
             }}
