@@ -35,18 +35,17 @@ export const refreshFunction = async (dispatch: Dispatch, newFunc: ()=>void) => 
         if(error.response.status === 401){
           dispatch(changeRefreshTokenStatus(true));
         } else {
-          console.log('Something went wrong!');
+          alert('Something went wrong!');
         }
       }
     }
   }
 }
 
-
 const App: React.FC = () => {
   
-  const myAccountIsOpen = useSelector((state:IInitialState)=>state.myAccountIsOpen);
   const refreshTokenIsExpired = useSelector((state:IInitialState)=>state.refreshTokenIsExpired);
+  const myAccountIsOpen = useSelector((state:IInitialState)=>state.myAccountIsOpen);
   const isLoading = useSelector((state:IInitialState)=>state.isLoading);
   
   const dispatch = useDispatch();

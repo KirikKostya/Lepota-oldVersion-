@@ -44,8 +44,8 @@ const OrdersArchive: React.FC = () => {
 
   useEffect(()=>{    
     localStorage.setItem('filterMetric', JSON.stringify({ date: '', deliveType: '', deliveStatus: '' }));
-    refreshFunction(dispatch, fetchingAllOrdersInArchive)
-    window.scrollTo(0, 0)
+    refreshFunction(dispatch, fetchingAllOrdersInArchive);
+    window.scrollTo(0, 0);
   }, [])
 
   return (

@@ -34,7 +34,7 @@ const UpdatePhotos: React.FC<IUpdatePhotosProps> = (props) => {
         ariaHideApp={false}
         contentLabel="Selected Option"
     >
-        <h2 onClick={()=>console.log(photos)}>
+        <h2>
             <FaChevronLeft
                 style={{width: '10px', marginRight: '10px'}} 
                 onClick={()=>setIsOpen(false)}

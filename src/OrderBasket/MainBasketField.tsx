@@ -74,7 +74,7 @@ const MainBasketField: React.FC<IMainBascketField> = (props) => {
                 : ItemsInBasket.sort((a,b)=>a.cartItemId - b.cartItemId).map(item=>(
                     <div className='item' key={item.cartItemId}>
                     <img width={55} height={55} src={findPhoto(item)}/>
-                    <h4 onClick={()=>console.log(item)}>{item.item.name}<br/>
+                    <h4>{item.item.name}<br/>
                       <span className={`variant-Kit ${getVariantsOrKit(item) || 'hide'}`}>{` ( ${getVariantsOrKit(item)} ) `}</span>
                     </h4>
                     <span>

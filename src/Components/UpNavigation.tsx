@@ -106,7 +106,7 @@ const UpNavigation: React.FC<IUpNavProps> = (props) => {
                     : setOpenHamburgerMenu('')
 
                 if(localStorage.getItem('accessToken')){
-                  refreshFunction(dispatch,()=>{});
+                  refreshFunction(dispatch, ()=>{});
                 }
             }}>☰</div>
           { myAccountIsOpen && <MyAccount /> }

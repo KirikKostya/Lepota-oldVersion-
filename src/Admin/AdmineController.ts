@@ -99,7 +99,6 @@ export const createVariant = (itemId: string, Name: string, Price: string, Photo
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
     })
   .then(res=>{
-    console.log(res)
     fetchVariant();  
     dispatch(loadingComplate())
   })
@@ -123,7 +122,6 @@ export const deleteVariant = (itemId:string, variantId:string, dispatch:Dispatch
     dispatch(loadingComplate());
   })
   .catch(err=> {
-    console.log(err)
     dispatch(loadingComplate())})
 }
 
@@ -140,7 +138,6 @@ export const updateVariant = (itemId: string, variantId:string, name:string, pri
     })
     .then(()=>dispatch(loadingComplate()))
     .catch(err=>{
-      console.log(err)
       dispatch(loadingComplate())
     })
 }
@@ -157,11 +154,9 @@ export const createKit = (itemId: number, name:string, variants:number[], photos
       headers:{'x-access-token': localStorage.getItem('accessToken')}     
     })
     .then(res=>{
-      console.log(res)
       dispatch(loadingComplate())
     })
     .catch(err=>{
-      console.log(err)
       dispatch(loadingComplate())
     })
 }

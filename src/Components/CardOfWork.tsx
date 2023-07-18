@@ -73,7 +73,7 @@ const CardOfWork: React.FC<ICardProps> = (props) => {
                 </Carousel>
           }
           <div className='nameButton'>
-            <h4>{card.name} <span style={{display: `${card.price ? 'inline' : 'none' }`}}>{card.price} Br</span> </h4>
+            <h4>{card.name} <span className='price' style={{display: `${card.price ? 'inline' : 'none' }`}}>{card.price} Br</span> </h4>
             {
               isAllCombination
                 ? <Button type='primary'
@@ -91,10 +91,10 @@ const CardOfWork: React.FC<ICardProps> = (props) => {
                       to={`${card.name !== 'Комплекты' ? '/TypeCatalog' : '/AllKits'}`}
                       className='catalogBTN' 
                       onClick={()=>{
-                        dispatch(changeSearchId(card.id));
                         localStorage.setItem('searchOrderById', `${card.id}`);
                         localStorage.setItem('infoAboutTypeOfOrder', JSON.stringify(card));
                         refreshFunction(dispatch, ()=>{});
+                        dispatch(changeSearchId(card.id));
                       }}
                     >Подробнее</NavLink>
             }

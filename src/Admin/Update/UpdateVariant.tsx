@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux';
 import ReactModal from 'react-modal';
 import Picker from '../Picker';
 import './Style/UpdateCSS.css';
-import { Image } from 'antd';
 
 const UpdateVariant: React.FC<IUpdateVariantProps> = (props) => {
     
@@ -27,10 +26,6 @@ const UpdateVariant: React.FC<IUpdateVariantProps> = (props) => {
         justifyContent: 'center'
     }
 
-    const handlerChange = async() =>{
-        setIsOpen(false)
-    }
-    
   return (
     <ReactModal
         isOpen={isOpen}
@@ -66,7 +61,12 @@ const UpdateVariant: React.FC<IUpdateVariantProps> = (props) => {
         <div className='updateBTNS'>
             <button 
                 className='modal-closeBTN'
-                onClick={()=>refreshFunction(dispatch, handlerChange) }
+                onClick={()=>{
+                    refreshFunction(dispatch, ()=>{
+                        setIsOpen(false);
+                        updateVariant(localStorage.getItem('searchOrderById')!, variant.id, variantName, variantPrice, variantPhotos, dispatch)});
+                    }
+                }
             >
                 Изменить
             </button>
